@@ -1,0 +1,2189 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!--
+ The contents of this file are subject to the terms
+ of the Common Development and Distribution License
+ (the License). You may not use this file except in
+ compliance with the License.
+ 
+ You can obtain a copy of the license at
+ https://woodstock.dev.java.net/public/CDDLv1.0.html.
+ See the License for the specific language governing
+ permissions and limitations under the License.
+ 
+ When distributing Covered Code, include this CDDL
+ Header Notice in each file and include the License file
+ at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+ If applicable, add the following below the CDDL Header,
+ with the fields enclosed by brackets [] replaced by
+ you own identifying information:
+ "Portions Copyrighted [year] [name of copyright owner]"
+ 
+ Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+-->
+
+<project name="themes" default="all" basedir=".">
+    
+    <tstamp>
+        <format property="BuildNumber" pattern="yyyyMMddHHmm"/>
+    </tstamp>
+
+    <property file="../build.properties"/>
+    <property file="build.properties"/>
+
+    <condition property="theme.name" value="${theme.name}" else="suntheme">
+	<isset property="theme.name"/>
+    </condition>
+    <condition property="js.name" value="${js.name}" else="woodstock">
+	<isset property="js.name"/>
+    </condition>
+
+    <!-- load theme properties files if they exist -->
+
+    <property file="../${theme.name}.properties"/>
+    <property file="${theme.name}.properties"/>
+
+    <!-- default directories -->
+    <property name="dist" value="${basedir}/dist"/>
+    <property name="doc" value="${basedir}/doc"/>
+    <property name="build" value="${basedir}/build"/>
+    <property name="src" value="${basedir}/src"/>
+    <property name="tools" value="${basedir}/../tools"/>
+    <property name="jsdocs" value="${basedir}/jsdocs"/>
+
+    <!-- Building a theme now depends on webui-jsf.jar 
+         In the future it will depend on just the theme implementation
+	 jar, but for now the SPI ThemeService 
+	 SunthemeThemeService implementation
+	 relies on com.sun.webui.theme.ThemeService which is in
+	 webui-jsf.jar -->
+
+    <!-- System globals -->
+    <property name="webui.jar"
+              value="${components.home}/lib/webui-jsf.jar"/>
+    <property name="tools.jar"
+              value="${tools}/woodstock/lib/webui-tools.jar"/>
+    <property name="rhino.jar"
+              value="${tools}/dojo/lib/custom_rhino.jar"/>
+    <property name="jsdoc.dir"
+              value="${tools}/jsdoctoolkit/src"/>
+    <property name="jsdoc.exec"
+              value="${jsdoc.dir}/app/run.js"/>
+    <property name="jsdoc.template"
+              value="${jsdoc.dir}/templates/suntheme"/>
+    <property name="packer.dir" value="${tools}/packer/lib"/>
+    <property name="compressJs.js" value="${tools}/packer/compressJs.js"/>
+
+    <!-- Default values. This build file will always build a "suntheme"
+	 if no ${theme.name} property or ${theme.name}.properties
+	 files are defined in a "${theme.name}.properties" properties
+	 file or from the command line -->
+    
+    <property name="theme.name" value="suntheme"/>
+    <property name="theme.src-dir" value="${src}/${theme.name}"/>
+    <property name="theme.src-package"  value="com.sun.webui.suntheme"/>
+    <property name="theme.package"  value="${js.name}${CacheVersion}.suntheme"/>
+    <property name="theme.build-dir" value="${build}/${theme.name}"/>
+
+    <!-- Derive a package path -->
+    <!-- make basedir a package -->
+    <pathconvert  property="__basedir-pkg__" dirsep="/">
+	<path path="${basedir}"/>
+	<unpackagemapper from="*" to="*"/>
+    </pathconvert>
+
+    <!-- convert the package into a dest file path
+	 and map out the basedir package -->
+    <pathconvert property="theme.package-path" dirsep="/">
+	<path path="${theme.package}"/>
+	<unpackagemapper from="*" to="*"/>
+	<map from="${__basedir-pkg__}/" to=""/>
+    </pathconvert>
+
+    <!-- convert the package into a src file path
+	 and map out the basedir package -->
+    <pathconvert property="theme.src-package-path" dirsep="/">
+	<path path="${theme.src-package}"/>
+	<unpackagemapper from="*" to="*"/>
+	<map from="${__basedir-pkg__}/" to=""/>
+    </pathconvert>
+
+    <property name="theme.build-package-path"
+	location="${theme.build-dir}/${theme.package-path}"/>
+
+    <property name="theme.l10n-dir" value="${basedir}/dist"/>
+    <property name="theme.jar" value="${basedir}/dist/webui-jsf-suntheme.jar"/>
+    <property name="theme.version" value="${ThemeVersion}"/>
+    <property name="theme.css-name" value="_sun4"/>
+    <property name="theme.service-class" value="SunthemeThemeService"/>
+    <property name="theme.service-class-template"
+	value="${theme.src-dir}/${theme.src-package-path}/${theme.service-class}.java"/>    
+    <property name="theme.service-properties-template"
+	value="${theme.src-dir}/${theme.src-package-path}/${theme.name}.properties"/>
+
+    <!-- Not currently documented for cloning -->
+    <property name="theme.master.css" value="css_master.css"/>
+    <property name="theme.master-all.css" value="css_master-all.css"/>
+    <property name="theme.js-name" value="${js.name}"/>
+    <property name="theme.js-module" value="${js.name}${CacheVersion}"/>
+    <property name="theme._bootstrap_.js" value="_base/_bootstrap_.js"/>
+    <property name="theme.bootstrap.js" value="bootstrap.js"/>
+    <property name="theme._dnd_.js" value="_base/_dnd_.js"/>
+    <property name="theme.dnd.js" value="_base/dnd.js"/>
+    <property name="theme.dojo.js" value="_dojo/dojo.js"/>
+    <property name="theme.dojo-dnd.js" value="_dojo/dnd.js"/>
+    <property name="theme.everything.sdoc" value="everything.sdoc"/>
+    <property name="theme.everything-js-files" value="everything-js-files"/>
+    <property name="theme.webui.js" value="webui.js"/>
+    <property name="theme.webui-all.js" value="webui-all.js"/>
+    <property name="theme.webui-jsfx.js" value="webui-jsfx.js"/>
+    <property name="theme.webui-jsfx-all.js" value="webui-jsfx-all.js"/>
+    <property name="theme.webui-xhr.js" value="webui-xhr.js"/>
+    <property name="theme.webui-xhr-all.js" value="webui-xhr-all.js"/>
+    <property name="theme.combined-image" value="combinedImage.png"/>
+    <property name="theme.copyright" value="${doc}/copyright.txt"/>
+    <property name="theme.bootstrap-js-files" value="bootstrap-js-files"/>
+    <property name="theme.dnd-js-files" value="dnd-js-files"/>
+    <property name="theme.webui-js-files" value="webui-js-files"/>
+    <property name="theme.webui-all-js-files" value="webui-all-js-files"/>
+    <property name="theme.webui-jsfx-js-files" value="webui-jsfx-js-files"/>
+    <property name="theme.webui-jsfx-all-js-files"
+	value="webui-jsfx-all-js-files"/>
+    <property name="theme.webui-xhr-js-files" value="webui-xhr-js-files"/>
+    <property name="theme.webui-xhr-all-js-files"
+	value="webui-xhr-all-js-files"/>
+
+    <property name="theme.jar-manifest"
+	value="${theme.build-dir}/META-INF/manifest.mf"/>
+
+    <property name="theme.exclude-js-files" value="exclude-js-files"/>
+    <property name="theme.include-js-files" value="include-js-files"/>
+    <property name="theme.include-jsfx-files" value="include-jsfx-files"/>
+    <property name="theme.include-xhr-files" value="include-xhr-files"/>
+    <property name="theme.js-filter-set" value="js-filter-set"/>
+    <property name="theme.jar-file-set" value="jar-file-set"/>
+
+    <loadfile property="copyright" srcFile="${theme.copyright}"/>
+
+    <!-- L10n properties -->
+    <property name="theme.l10n-build-dir"
+	location="${theme.build-dir}/translatedFiles"/>
+    <property name="theme.l10n-build-package-path"
+        location="${theme.l10n-build-dir}/${theme.package-path}"/>
+
+    <!-- The default filter set for Javascript files. -->
+    <filterset id="js-filter-set">
+        <filter token="JS_NAME" value="${theme.js-name}"/>
+	<filter token="JS_NS" value="${theme.js-module}"/>
+        <filter token="THEME" value="${theme.name}"/>
+	<filter token="THEME_CSS" value="${theme.css-name}"/>
+        <filter token="THEME_PATH" value="/${theme.package-path}"/>
+        <filter token="THEME_VERSION" value="${theme.version}"/>
+    </filterset>
+
+    <!-- The default file set for the theme jar. -->
+    <fileset id="jar-file-set" dir="${theme.build-dir}">
+	<exclude name="${theme.package-path}/${theme.service-class}.java"/>
+	<exclude name="translatedFiles/"/>
+	<exclude name="translatedFiles/**/*"/>
+        <exclude name="**/${theme._bootstrap_.js}"/>
+        <exclude name="**/${theme._dnd_.js}"/>
+    </fileset>
+
+    <!-- The patternsets for the combined javascript files. Additional files may 
+        be included via dependencies. -->
+
+    <!-- The Javascript files that are commonly included. -->
+    <patternset id="include-js-files">
+        <include name="_base/body.js" />
+        <include name="_base/common.js" />
+	<include name="_html/table.js" />
+        <include name="formElements.js" />
+        <include name="json.js" />
+	<include name="widget/anchor.js" />
+	<include name="widget/button.js" />
+	<include name="widget/checkbox.js" />
+        <include name="widget/checkboxGroup.js" />
+	<include name="widget/dropDown.js" />
+	<include name="widget/hiddenField.js" />
+	<include name="widget/hyperlink.js" />
+	<include name="widget/image.js" />
+        <include name="widget/imageButton.js" />
+	<include name="widget/imageHyperlink.js" />
+	<include name="widget/label.js" />
+	<include name="widget/listbox.js" />
+	<include name="widget/passwordField.js" />
+        <include name="widget/resetButton.js" />
+	<include name="widget/radioButton.js" />
+        <include name="widget/radioButtonGroup.js" />
+	<include name="widget/text.js" />
+	<include name="widget/textArea.js" />
+	<include name="widget/textField.js" />
+        <include name="xhr.js" />
+    </patternset>
+
+    <!-- The JSF Extension files that are commonly included. Additional files
+        may be included via dependencies. -->
+    <patternset id="include-jsfx-files">
+	<include name="widget/_jsfx/anchor.js" />
+        <include name="widget/_jsfx/button.js" />
+	<include name="widget/_jsfx/checkbox.js" />
+        <include name="widget/_jsfx/checkboxGroup.js" />
+	<include name="widget/_jsfx/dropDown.js" />
+	<include name="widget/_jsfx/hiddenField.js" />
+	<include name="widget/_jsfx/hyperlink.js" />
+	<include name="widget/_jsfx/image.js" />
+        <include name="widget/_jsfx/imageButton.js" />
+	<include name="widget/_jsfx/imageHyperlink.js" />
+        <include name="widget/_jsfx/label.js" />
+	<include name="widget/_jsfx/listbox.js" />
+	<include name="widget/_jsfx/passwordField.js" />
+        <include name="widget/_jsfx/resetButton.js" />
+	<include name="widget/_jsfx/radioButton.js" />
+        <include name="widget/_jsfx/radioButtonGroup.js" />
+	<include name="widget/_jsfx/text.js" />
+	<include name="widget/_jsfx/textArea.js" />
+	<include name="widget/_jsfx/textField.js" />
+    </patternset>
+
+    <!-- The XHR files that are commonly included. Additional files
+        may be included via dependencies. -->
+    <patternset id="include-xhr-files">
+	<include name="widget/_xhr/anchor.js" />
+        <include name="widget/_xhr/button.js" />
+	<include name="widget/_xhr/checkbox.js" />
+        <include name="widget/_xhr/checkboxGroup.js" />
+	<include name="widget/_xhr/dropDown.js" />
+	<include name="widget/_xhr/hiddenField.js" />
+	<include name="widget/_xhr/hyperlink.js" />
+	<include name="widget/_xhr/image.js" />
+        <include name="widget/_xhr/imageButton.js" />
+	<include name="widget/_xhr/imageHyperlink.js" />
+        <include name="widget/_xhr/label.js" />
+	<include name="widget/_xhr/listbox.js" />
+	<include name="widget/_xhr/passwordField.js" />
+        <include name="widget/_xhr/resetButton.js" />
+	<include name="widget/_xhr/radioButton.js" />
+        <include name="widget/_xhr/radioButtonGroup.js" />
+	<include name="widget/_xhr/text.js" />
+	<include name="widget/_xhr/textArea.js" />
+	<include name="widget/_xhr/textField.js" />
+    </patternset>
+
+    <!-- The files that are commonly excluded. -->
+    <patternset id="exclude-js-files">
+        <exclude name="${theme._dnd_.js}" /> <!-- Temporary build file. -->
+        <exclude name="${theme._bootstrap_.js}" /> <!-- Temporary build file. -->
+        <exclude name="${theme.bootstrap.js}" /> <!-- Generated file. -->
+        <exclude name="_dojo/" /> <!-- Loaded separately. -->
+        <exclude name="_html/calendar.js" /> <!-- Not supported. -->
+        <exclude name="theme/nls/"/>
+	<exclude name="webui.js"/>
+	<exclude name="webui-all.js"/>
+	<exclude name="webui-jsfx.js"/>
+	<exclude name="webui-jsfx-all.js"/>
+	<exclude name="webui-xhr.js"/>
+	<exclude name="webui-xhr-all.js"/>
+    </patternset>
+
+    <!-- exclude files for compression dependencies -->
+    <patternset id="generated-js-files">
+	<exclude name="_dojo/"/>
+	<exclude name="theme/nls/"/>
+	<exclude name="${theme.bootstrap.js}"/>
+	<exclude name="${theme.dnd.js}"/>
+	<exclude name="${theme.webui.js}"/>
+	<exclude name="${theme.webui-all.js}"/>
+	<exclude name="${theme.webui-jsfx.js}"/>
+	<exclude name="${theme.webui-jsfx-all.js}"/>
+	<exclude name="${theme.webui-xhr.js}"/>
+	<exclude name="${theme.webui-xhr-all.js}"/>
+    </patternset>
+
+    <!-- The "compressJavascript" compressed files that need to be
+	 copied, from the cmp-tmp area. These files are not
+	 base62 compressed and that's why they need to be copied
+    -->
+    <patternset id="nobase62-js-files">
+	<include name="${theme.dojo.js}"/>
+	<include name="${theme.dojo-dnd.js}"/>
+	<include name="${theme.bootstrap.js}"/>
+	<include name="${theme.dnd.js}"/>
+	<include name="${theme.webui.js}"/>
+	<include name="${theme.webui-all.js}"/>
+	<include name="${theme.webui-jsfx.js}"/>
+	<include name="${theme.webui-jsfx-all.js}"/>
+	<include name="${theme.webui-xhr.js}"/>
+	<include name="${theme.webui-xhr-all.js}"/>
+    </patternset>
+
+    <!-- "bootstrap.js"
+    Note: This pattern set serves two purposes. First, it is used to create the
+    bootstrap.js file. Second, it is used to prevent files from being included
+    via dojo.require() statements when combining dnd.js and webui*.js. We don't
+    want to duplicate resources that are already available in the bootstrap 
+    file.
+    -->
+    <patternset id="bootstrap-js-files">
+        <include name="${theme._bootstrap_.js}" />
+    </patternset>
+
+    <!-- "dojo.require" files to exclude when combining files -->
+    <patternset id="combined-excludes">
+        <!-- Note: Generated dnd.js file is okay to combine. -->
+        <include name="${theme.bootstrap.js}" />
+	<include name="${theme._bootstrap_.js}" />
+	<include name="${theme._dnd_.js}" />
+	<include name="${theme.dojo.js}"/>
+	<include name="${theme.dojo-dnd.js}"/>
+    </patternset>
+
+    <!-- "dnd.js" -->
+    <patternset id="dnd-js-files">
+	<include name="${theme._dnd_.js}" />
+    </patternset>
+    <!-- "dnd.js exclude set -->
+    <patternset id="dnd-js-exclude">
+	<include name="${theme._bootstrap_.js}" />
+    </patternset>
+
+    <!-- "everything.sdoc" -->
+    <patternset id="everything-js-files">
+        <include name="json.js"/>
+        <include name="widget/*.js"/>
+        <include name="widget/_base/*.js"/>
+    </patternset>
+
+    <!-- "webui.js" -->
+    <patternset id="webui-js-files">
+	<exclude name="widget/_jsfx/**" />
+        <exclude name="widget/_xhr/**" />
+        <patternset refid="${theme.include-js-files}"/>
+	<patternset refid="${theme.exclude-js-files}"/>
+    </patternset>
+
+    <!-- "webui-all.js" -->
+    <patternset id="webui-all-js-files">
+        <include name="**/*.js"/>
+        <exclude name="widget/_jsfx/**" />
+        <exclude name="widget/_xhr/**" />
+	<patternset refid="${theme.exclude-js-files}"/>
+    </patternset>
+
+    <!-- "webui-jsfx.js" -->
+    <patternset id="webui-jsfx-js-files">
+        <patternset refid="${theme.include-js-files}"/>
+        <patternset refid="${theme.include-jsfx-files}"/>
+	<patternset refid="${theme.exclude-js-files}"/>
+    </patternset>
+
+    <!-- "webui-jsfx-all.js" -->
+    <patternset id="webui-jsfx-all-js-files">
+	<include name="**/*.js"/>
+        <exclude name="widget/_xhr/**" />
+        <patternset refid="${theme.exclude-js-files}"/>
+    </patternset>
+
+    <!-- "webui-xhr.js" -->
+    <patternset id="webui-xhr-js-files">
+        <patternset refid="${theme.include-js-files}"/>
+        <patternset refid="${theme.include-xhr-files}"/>
+	<patternset refid="${theme.exclude-js-files}"/>
+    </patternset>
+
+    <!-- "webui-xhr-all.js" -->
+    <patternset id="webui-xhr-all-js-files">
+	<include name="**/*.js"/>
+        <exclude name="widget/_jsfx/**" />
+        <patternset refid="${theme.exclude-js-files}"/>
+    </patternset>
+
+    <!-- use this patternset for the combineJavascript tool
+	 "exclude-set" option when there are no known files to exclude.
+	 Can be any file in the uncompressed directory, except
+	 "bootstrap.js" and "_bootstrap.js"
+    -->
+    <patternset id="bootstrap-excludes">
+	<include name="${theme.dnd.js}"/>
+    </patternset>
+
+    <!-- Public Targets -->
+
+    <!-- ========== all ========== -->
+    <!-- Enable L10n when L10n files are committed. -->
+    <!-- This creates the theme jars for component distribution.-->
+    <!-- Note that that L10n jars must exist for buildL10nJsTheme to succeed
+    -->
+    <target name="all" 
+	depends="buildTheme,buildJsTheme,buildL10nTheme,buildL10nJars,buildL10nJsTheme,jsdoc,sdoc" />
+
+    <!-- Parameters
+	See the default "theme.*" properties above.
+    -->
+    <target name="buildTheme" description="Build a theme.">
+
+        <mkdir dir="${theme.build-package-path}" />
+
+	<!-- copy and substitute params from the "src" to the "build" dir
+	-->
+        <antcall target="_copyThemeFiles-internal_">
+	    <!-- when building, files are copied to the full package path
+	    -->
+	    <param name="_to-dir_" value="${theme.build-package-path}"/>
+	    <param name="_from-dir_" value="${theme.src-dir}"/>
+	    <param name="_filter_" value="true"/>
+	    <param name="_fail-on-error_" value="true"/>
+
+	    <!-- we copy js and css during combining -->
+	    <!-- Set these to true when cloning -->
+	    <param name="_copy-javascript_" value="false"/>
+	    <param name="_copy-css_" value="false"/>
+        </antcall>
+
+        <antcall target="_copyThemeService-internal_">
+	    <param name="_to-dir_" value="${theme.build-package-path}"/>
+	    <param name="_filter_" value="true"/>
+        </antcall>
+
+        <copy todir="${theme.build-dir}/META-INF">
+            <fileset dir="${basedir}/META-INF">
+                <include name="manifest.mf" /> 
+            </fileset>
+            <filterset>
+                <filter token="DATESTAMP" value="${BuildNumber}"/>
+                <filter token="THEME" value="${theme.name}"/>
+                <filter token="FULL_VERSION" value="${FullVersion}"/>
+                <filter token="VERSION" value="${Version}"/>
+		<filter token="SWAED_VERSION" value="${SWAEDVersion}"/>
+                <filter token="THEME_VERSION" value="${theme.version}"/>
+                <filter token="THEME_PACKAGE" value="${theme.package}"/>
+            </filterset>
+        </copy>
+
+        <copy todir="${theme.build-dir}/META-INF">
+            <fileset dir="${basedir}/META-INF">
+                <include name="services/com.sun.webui.theme.ThemeService" /> 
+            </fileset>
+            <filterset>
+                <filter token="THEME_PACKAGE" value="${theme.package}"/>
+                <filter token="THEME_SERVICE_CLASS"
+			value="${theme.service-class}"/>
+            </filterset>
+        </copy>
+
+        <!-- Compile the Theme Service class-->
+        <antcall target="compile-theme-service">
+            <param name="_cmpl-java-src_" 
+		value="${theme.build-package-path}"/>
+            <param name="_cmpl-java-class_" 
+		value="${theme.build-package-path}"/>
+            <param name="_cmpl-dest-dir_" value="${theme.build-dir}"/>
+            <param name="_cmpl-service-class_" value="${theme.service-class}"/>
+        </antcall>
+        
+        <!-- Delete the service java file from the build dir
+	     But deleting the file prevents dependency checking.
+        <delete file="${theme.build-package-path}/${theme.service-class}.java"/>
+	-->
+
+        <!-- Combine CSS -->
+        <antcall target="combineCSS">
+	    <param name="_to-dir_" 
+		value="${theme.build-package-path}/css_uncompressed"/>
+	    <param name="_from-dir_" value="${theme.src-dir}/css"/>
+	    <param name="_files-to-combine_" value="${theme.master.css}"/>
+	    <param name="_combined-file_" 
+		value="${theme.build-package-path}/css_uncompressed/${theme.master-all.css}"/>
+	</antcall>
+
+	<property name="css-src" 
+	    location="${theme.src-dir}${file.separator}css"/>
+        <!-- Compress CSS -->
+        <antcall target="compressCSS">
+	    <param name="_to-dir_" value="${theme.build-package-path}/css"/>
+	    <param name="_from-dir_" 
+		value="${theme.build-package-path}/css_uncompressed"/>
+	</antcall>
+
+        <!-- gzip CSS -->
+        <!-- to and from dir are the same -->
+        <antcall target="gzipCSS">
+	    <param name="_to-dir_" value="${theme.build-package-path}/css"/>
+	    <param name="_from-dir_" value="${theme.build-package-path}/css"/>
+	</antcall>
+
+	<!-- Call combineJavascript once for each of the 
+	     combined javascript files.
+	    theme.webui.js
+	    theme.webui-all.js
+	    theme.webui-jsfx.js
+	    theme.webui-jsfx-all.js
+	    theme.webui-xhr.js
+	    theme.webui-xhr-all.js
+	-->
+	<property name="js-dest-uncmp"
+		location="${theme.build-package-path}/javascript_uncompressed"/>
+	<property name="js-dest-cmp"
+		location="${theme.build-package-path}/javascript"/>
+	<property name="js-src" value="${theme.src-dir}/javascript"/>
+
+	<antcall target="combineJavascript">
+	    <param name="_to-dir_" value="${js-dest-uncmp}"/>
+	    <param name="_from-dir_" value="${js-src}"/>
+	    <param name="_include-set_" value="${theme.webui-js-files}"/>
+            <param name="_exclude-set_" value="combined-excludes"/>
+	    <param name="_combined-file_" 
+		value="${js-dest-uncmp}/${theme.webui.js}"/>
+	</antcall>
+	<antcall target="combineJavascript">
+	    <param name="_to-dir_" value="${js-dest-uncmp}"/>
+	    <param name="_from-dir_" value="${js-src}"/>
+	    <param name="_include-set_"
+		value="${theme.webui-all-js-files}"/>
+            <param name="_exclude-set_" value="combined-excludes"/>
+	    <param name="_combined-file_" 
+		value="${js-dest-uncmp}/${theme.webui-all.js}"/>
+	</antcall>
+	<antcall target="combineJavascript">
+	    <param name="_to-dir_" value="${js-dest-uncmp}"/>
+	    <param name="_from-dir_" value="${js-src}"/>
+	    <param name="_include-set_"
+		value="${theme.webui-jsfx-js-files}"/>
+            <param name="_exclude-set_" value="combined-excludes"/>
+	    <param name="_combined-file_" 
+		value="${js-dest-uncmp}/${theme.webui-jsfx.js}"/>
+	</antcall>
+	<antcall target="combineJavascript">
+	    <param name="_to-dir_" value="${js-dest-uncmp}"/>
+	    <param name="_from-dir_" value="${js-src}"/>
+	    <param name="_include-set_"
+		value="${theme.webui-jsfx-all-js-files}"/>
+            <param name="_exclude-set_" value="combined-excludes"/>
+	    <param name="_combined-file_" 
+		value="${js-dest-uncmp}/${theme.webui-jsfx-all.js}"/>
+	</antcall>
+	<antcall target="combineJavascript">
+	    <param name="_to-dir_" value="${js-dest-uncmp}"/>
+	    <param name="_from-dir_" value="${js-src}"/>
+	    <param name="_include-set_"
+		value="${theme.webui-xhr-js-files}"/>
+            <param name="_exclude-set_" value="combined-excludes"/>
+	    <param name="_combined-file_" 
+		value="${js-dest-uncmp}/${theme.webui-xhr.js}"/>
+	</antcall>
+	<antcall target="combineJavascript">
+	    <param name="_to-dir_" value="${js-dest-uncmp}"/>
+	    <param name="_from-dir_" value="${js-src}"/>
+	    <param name="_include-set_"
+		value="${theme.webui-xhr-all-js-files}"/>
+            <param name="_exclude-set_" value="combined-excludes"/>
+	    <param name="_combined-file_" 
+		value="${js-dest-uncmp}/${theme.webui-xhr-all.js}"/>
+	</antcall>
+
+        <!-- Call combineJavascript once for theme.dnd.js -->
+	<antcall target="combineJavascript">
+	    <param name="_to-dir_" value="${js-dest-uncmp}"/>
+	    <param name="_from-dir_" value="${js-src}"/>
+	    <param name="_include-set_" value="${theme.dnd-js-files}"/>
+            <param name="_exclude-set_" value="dnd-js-exclude"/>
+	    <param name="_combined-file_" 
+		value="${js-dest-uncmp}/${theme.dnd.js}"/>
+	</antcall>
+        
+        <!-- Call combineJavascript once for theme.bootstrap.js -->
+	<antcall target="combineJavascript">
+	    <param name="_to-dir_" value="${js-dest-uncmp}"/>
+	    <param name="_from-dir_" value="${js-src}"/>
+	    <param name="_include-set_" value="${theme.bootstrap-js-files}"/>
+            <param name="_exclude-set_" value="bootstrap-excludes"/>
+	    <param name="_combined-file_" 
+		value="${js-dest-uncmp}/${theme.bootstrap.js}"/>
+	</antcall>
+
+	<!-- Create a temporary directory for the intermediate compressed
+	     "js" files. -->
+	<property name="cmp-tmp" location="${build}${file.separator}cmp-tmp"/>
+	<mkdir dir="${cmp-tmp}"/>
+        <mkdir dir="${cmp-tmp}/_base"/>
+	<mkdir dir="${cmp-tmp}/_dojo"/>
+	<mkdir dir="${cmp-tmp}/_dojo/_firebug"/>
+        <mkdir dir="${cmp-tmp}/_html"/>
+        <mkdir dir="${cmp-tmp}/theme"/>
+	<mkdir dir="${cmp-tmp}/widget"/>
+        <mkdir dir="${cmp-tmp}/widget/_base"/>
+	<mkdir dir="${cmp-tmp}/widget/_jsfx"/>
+        <mkdir dir="${cmp-tmp}/widget/_xhr"/>
+
+        <!-- Compress JavaScript without base62 encoding. -->
+        <antcall target="compressJavascript">
+	    <param name="_to-dir_" value="${js-dest-cmp}"/>
+	    <param name="_from-dir_" value="${js-dest-uncmp}"/>
+	    <param name="_cmp-tmp_" value="${cmp-tmp}"/>
+	</antcall>
+
+        <!-- gzip JavaScript without base62 encoding. -->
+        <antcall target="gzipJavascript">
+	    <param name="_to-dir_" value="${js-dest-cmp}"/>
+	    <param name="_from-dir_" value="${cmp-tmp}"/>
+	    <param name="_js-uncmp-dir_" value="${js-dest-uncmp}"/>
+	</antcall>
+
+	<!-- delete the cmp-tmp dir, we don't need it anymore -->
+	<delete dir="${cmp-tmp}"/>
+
+        <!-- Compress JavaScript with base62 encoding. -->
+        <antcall target="compressJavascriptBase62">
+	    <param name="_to-dir_" value="${js-dest-cmp}"/>
+	    <param name="_from-dir_" value="${js-dest-uncmp}"/>
+	</antcall>
+
+	<antcall target="combineImages"/>
+        <antcall target="createThemeJar"/>
+    </target> 
+
+    <!-- General internal targets -->
+
+    <target name="themejar-uptodate">
+	<uptodate property="themejar-uptodate">
+	    <srcfiles dir="${theme.build-dir}"
+		excludes="translatedFiles/"/>
+	    <mergemapper to="${theme.jar}"/>
+	</uptodate>
+    </target>
+
+    <target name="createThemeJar" depends="themejar-uptodate"
+	    unless="themejar-uptodate">
+
+        <!-- Create the theme jar -->
+	     <!--
+             basedir="${theme.build-dir}"
+	     -->
+	<dirname property="__distdir__" file="${theme.jar}"/>
+        <mkdir dir="${__distdir__}" />
+        <jar destfile="${theme.jar}"
+             manifest="${theme.jar-manifest}">
+	     <fileset refid="${theme.jar-file-set}"/>
+        </jar>
+    </target>
+
+    <!-- ############### L10n targets ######################## -->
+
+    <!-- Requires only the "default" "theme.*" properties 
+	 Sets "l10n-uptodate" if l10n files are up to date with the
+	 l10n build files.
+     -->
+    <target name="l10n-uptodate">
+	<!-- If the build l10n files exist and are newer
+	     than the corresponding l10n properties
+	     files set the l10n-uptodate property.
+	-->
+	<uptodate property="l10n-uptodate">
+	    <srcfiles dir="${theme.src-dir}/translatedFiles"
+		includes="**/*.*"/>
+	    <globmapper from="*"
+		to="${theme.l10n-build-package-path}/*"/>
+	</uptodate>
+    </target>
+
+    <!-- Requires only the "default" "theme.*" properties -->
+
+    <target name="buildL10nTheme" if="build-l10n"
+	    depends="l10n-uptodate"
+	    unless="l10n-uptodate"
+	    description="Build the L10n theme jars.">
+
+	<echo message="Building the L10n theme jars."/>
+
+	<!-- first copy the files to a temporary location 
+	     for filtering and then
+	     from that location via native2ascii to the 
+	     final destination.
+	-->
+	<property name="__l10n-tmp__"
+	    location="${theme.l10n-build-dir}/tmp"/>
+
+        <antcall target="_copyThemeFiles-internal_">
+
+	    <param name="_from-dir_" 
+		value="${theme.src-dir}/translatedFiles" />
+	    <param name="_to-dir_" 
+		value="${__l10n-tmp__}" />
+
+	    <param name="_filter_" value="true"/>
+	    <param name="_copy-javascript_" value="true"/>
+	    <param name="_fail-on-error_" value="false"/>
+
+        </antcall>
+
+	<!-- make the destination directory and all the subdirectories -->
+	<mkdir dir="${theme.l10n-build-package-path}"/>
+	<mkdir dir="${theme.l10n-build-package-path}/css"/>
+	<mkdir dir="${theme.l10n-build-package-path}/messages"/>
+	<mkdir dir="${theme.l10n-build-package-path}/templates"/>
+	<mkdir dir="${theme.l10n-build-package-path}/properties"/>
+
+	<fileset id="n2afiles" dir="${theme.src-dir}/translatedFiles">
+	    <include name="**/*"/>
+	    <depend targetdir="${theme.l10n-build-package-path}">
+		<mapper type="glob" from="*" to="*"/>
+	    </depend>
+	</fileset>
+
+	<!--
+	<pathconvert property="n2alist" refid="n2afiles" pathsep=",">
+	    <map from="${__l10n-tmp__}${file.separator}" to=""/>
+	</pathconvert>
+	-->
+	<pathconvert property="n2alist" refid="n2afiles" pathsep=",">
+	    <map from="${theme.src-dir}/translatedFiles${file.separator}" to=""/>
+	</pathconvert>
+
+	<echo message="Running native2asci for ${n2alist}, it takes several minutes..."/>
+	<!-- JAVA_HOME points to JDK on Mac, to JRE elsewhere. -->
+	<condition property="_jbin_" 
+		value="${java.home}${file.separator}bin"
+		else="${java.home}${file.separator}..${file.separator}bin">
+	    <os family="mac"/>
+	</condition>
+
+	<java jar="${tools.jar}" failonerror="true" fork="true">
+	  <arg value="-native2ascii"/>
+	  <arg value="-sourceDir"/>
+	  <arg value="${theme.l10n-build-dir}/tmp"/>
+	  <arg value="-destDir"/>
+	  <arg value="${theme.l10n-build-package-path}" />
+	  <arg value="-fileList"/>
+	  <arg value="${n2alist}"/>
+          <sysproperty key="jbin" value="${_jbin_}"/>
+	</java>
+
+	<delete dir="${__l10n-tmp__}"/>
+
+    </target>
+
+    <target name="buildL10nJars" if="build-l10n">
+
+	<!-- No way to loop so the fixed set of locales is
+	     de,es,fr,it,ja,ko,pt_BR,sv,zh_CN,zh_HK,zh_TW
+	-->
+	<antcall target="create-l10n-jar">
+	    <param name="_l10n-locale_" value="de"/>
+	</antcall>
+	<antcall target="create-l10n-jar">
+	    <param name="_l10n-locale_" value="es"/>
+	</antcall>
+	<antcall target="create-l10n-jar">
+	    <param name="_l10n-locale_" value="fr"/>
+	</antcall>
+	<antcall target="create-l10n-jar">
+	    <param name="_l10n-locale_" value="it"/>
+	</antcall>
+	<antcall target="create-l10n-jar">
+	    <param name="_l10n-locale_" value="ja"/>
+	</antcall>
+	<antcall target="create-l10n-jar">
+	    <param name="_l10n-locale_" value="ko"/>
+	</antcall>
+	<antcall target="create-l10n-jar">
+	    <param name="_l10n-locale_" value="pt_BR"/>
+	</antcall>
+	<!-- <antcall target="create-l10n-jar">
+	    <param name="_l10n-locale_" value="sv"/>
+	</antcall> -->
+	<antcall target="create-l10n-jar">
+	    <param name="_l10n-locale_" value="zh_CN"/>
+	</antcall>
+	<antcall target="create-l10n-jar">
+	    <param name="_l10n-locale_" value="zh_HK"/>
+	</antcall>
+	<antcall target="create-l10n-jar">
+	    <param name="_l10n-locale_" value="zh_TW"/>
+	</antcall>
+    </target>
+
+    <target name="l10n-jar-uptodate">
+	<l10n-jar-name locale="${_l10n-locale_}" property="__l10n-jar__"/>
+	<uptodate property="l10n-jar-uptodate">
+	    <srcfiles dir="${theme.l10n-build-dir}"
+	    includes="**/*_${_l10n-locale_}.properties"
+		excludes="META-INF/MANIFEST.MF,**/nls/"/>
+	    <mergemapper to="${__l10n-jar__}"/>
+	</uptodate>
+    </target>
+
+    <!--
+	Parameters
+
+	_l10n-locale_ - the locale jar to create
+
+	Assumes properties
+
+	basedir - used to file manifest template
+	theme.name - used to build manifest
+	theme.version - used to build manifest
+	theme.jar - used to derive jar name and destination dir.
+	theme.l10n-build-dir
+	theme.package-path
+	FullVersion - used to build manifest
+	Version - used to build manifest
+
+    -->
+    <target name="create-l10n-jar"
+	    if="build-l10n"
+	    depends="l10n-jar-uptodate"
+	    unless="l10n-jar-uptodate"
+	    description="Create an l10n theme jar.">
+
+	<!-- create a manifest file -->
+	<copy tofile="${theme.l10n-build-dir}/META-INF/MANIFEST.MF"
+		overwrite="true">
+	    <fileset dir="${basedir}/META-INF">
+		<include name="l10n-manifest.mf" /> 
+	    </fileset>
+	    <filterset>
+		<filter token="LANG" value="${_l10n-locale_}"/>
+		<filter token="THEME" value="${theme.name}"/>
+		<filter token="FULL_VERSION" value="${FullVersion}"/>
+		<filter token="VERSION" value="${Version}"/>
+		<filter token="THEME_VERSION" value="${theme.version}"/>
+	    </filterset>
+	</copy>
+
+	<l10n-jar-name locale="${_l10n-locale_}" property="l10n-jar"/>
+	<jar destfile="${l10n-jar}"
+	    basedir="${theme.l10n-build-dir}"
+	    includes="${theme.package-path}/**/*_${_l10n-locale_}.*"
+	    manifest="${theme.l10n-build-dir}/META-INF/MANIFEST.MF">
+	</jar>
+
+    </target>
+
+    <!-- Right now the only files with native encodings are the
+	 messages.properties files.
+    -->
+    <macrodef name="supported-locales">
+	<attribute name="refid" default="_msg-based_"/>
+	<attribute name="property" default="supported-locales"/>
+	<sequential>
+	    <fileset id="_msg-based_"
+		    dir="${theme.src-dir}/translatedFiles/messages">
+		<include name="*.properties"/>
+	    </fileset>
+	    <pathconvert property="@{property}" pathsep="," refid="@{refid}">
+		<chainedmapper>
+		    <flattenmapper/>
+		    <regexpmapper 
+			from="messages_([a-zA-Z][a-zA-Z].*)\.properties" 
+			to="\1" handledirsep="yes"/>
+		</chainedmapper>
+	    </pathconvert>
+	</sequential>
+    </macrodef>
+
+    <macrodef name="l10n-jar-name">
+	<attribute name="property" default="l10n-jar"/>
+	<attribute name="locale"/>
+	<sequential>
+	    <dirname property="__dest-dir__" file="${theme.jar}"/>
+	    <mkdir dir="${__dest-dir__}" />
+	    <basename property="__base-name__" 
+		file="${theme.jar}" suffix=".jar"/>
+	    <property name="@{property}" 
+		location="${__dest-dir__}/${__base-name__}_@{locale}.jar"/>
+	</sequential>
+    </macrodef>
+
+    <target name="buildL10nJsTheme">
+
+        <ant antfile="build-js-theme.xml" 
+	    target="buildL10nJsTheme" inheritAll="false">
+	    <property name="_js-from-dir_" value="${theme.src-dir}"/>
+	    <property name="_js-to-dir_" value="${theme.build-dir}"/>
+	    <property name="_js-theme-name_" value="${theme.name}"/>
+	    <property name="_js-webui-jar_" value="${webui.jar}"/>
+	    <property name="_js-theme-jar_" value="${theme.jar}"/>
+	    <property name="_js-theme-package_" value="${theme.package}"/>
+	    <property name="_js-l10n-dir_" value="${theme.l10n-dir}"/>
+	 </ant>
+
+    </target>
+
+    <!-- ################## CSS targets ##################### -->
+
+    <!-- Set the "css-uptodate" property  if ${_combined-file_}" is 
+	 newer than "${_from-dir_}/*.css"
+    -->
+    <target name="css-uptodate">
+	<uptodate property="css-uptodate">
+	    <srcfiles dir="${_from-dir_}"
+		includes="*.css"/>
+	    <mergemapper to="${_combined-file_}"/>
+	</uptodate>
+    </target>
+
+    <!-- Parameters
+
+	_to-dir_ - the destination directory for css files
+	_from-dir_ - the source directory of the css files.
+	_files-to-combine_ - the comma separated list of files to combine.
+			In this case it is a list of files that contain
+			"import" statements.
+	_combined-file_ - the combined css file.
+
+	This also copies and filters CSS files from
+	"${_from-dir_}" to "${_to-dir_}".
+
+	Expects the following globals to be set.
+       
+        ${theme.copyright}
+        ${tools.jar}
+    -->
+    <target name="combineCSS" depends="css-uptodate"
+	    unless="css-uptodate">
+
+	<mkdir dir="${_to-dir_}"/>
+
+	<delete file="${_combined-file_}"/>
+
+	<!-- Copy and filter files -->
+	<copy todir="${_to-dir_}">
+	    <fileset dir="${_from-dir_}">
+              <exclude name="**/CVS/**" />
+	    </fileset>
+            <filterset>
+                <filter token="THEME_CSS" value="${theme.css-name}"/>
+            </filterset>
+	</copy>
+
+	<java jar="${tools.jar}" failonerror="true" fork="true">
+	  <arg value="-combineCSS"/>
+          <arg value="-copyrightFile"/>
+          <arg value="${theme.copyright}"/>
+	  <arg value="-fileList"/>
+	  <arg value="${_files-to-combine_}"/>
+	  <arg value="-outFile"/>
+	  <arg value="${_combined-file_}"/>
+	  <arg value="-sourceDir"/>
+	  <arg value="${_to-dir_}"/>
+          <arg value="-verbose"/>
+	</java>
+    </target>
+
+    <!-- Set the compressed-css-uptodate property if
+	"${_from-dir_}/**/*.css" files are newer than 
+	"${_to-dir_}/**/*.css"
+    -->
+    <target name="compressed-css-uptodate">
+	<uptodate property="compressed-css-uptodate">
+	    <srcfiles dir="${_from-dir_}" 
+		includes="**/*.css"/>
+	    <mapper type="glob" from="*" to="${_to-dir_}/*"/>
+	</uptodate>
+    </target>
+
+    <!-- Parameters
+
+	_to-dir_ - root of the destination for compressed files
+	_from-dir_ - the source of the uncompressed and
+	             filtered css files.
+
+        Comment out build-compressCSS in the build.properties file if you
+        don't want to compress when modifying JavaScript files
+
+	To simplify the dependency checking it is expected that
+	there are files in "${_from-dir_}", so either "combineJavascript"
+	or "copyJavascript" should have been called.
+
+	Expects the following globals to be set.
+
+        ${copyright}
+        ${tools.jar}
+    -->
+    <target name="compressCSS" if="build-compressCSS"
+            depends="compressed-css-uptodate" unless="compressed-css-uptodate">
+
+	<mkdir dir="${_to-dir_}"/>
+
+	<!-- Use property location to overcome issues with
+	     Windows paths and pathconvert.
+	-->
+	<property name="__from-dir-loc__" location="${_from-dir_}"/>
+	<property name="__to-dir-loc__" location="${_to-dir_}"/>
+
+	<pathconvert property="__files-to-compress__" pathsep=",">
+	    <fileset dir="${__from-dir-loc__}">
+		<depend targetdir="${__to-dir-loc__}">
+		    <mapper type="glob" from="*" to="*"/>
+		</depend>
+	    </fileset>
+	    <mapper type="glob" 
+		from="${__from-dir-loc__}${file.separator}*" to="*"/>
+	</pathconvert>
+
+        <!-- Call compress CSS tool. -->
+	<java jar="${tools.jar}" failonerror="true" fork="true">
+	  <arg value="-compressCSS"/>
+          <arg value="-copyrightFile"/>
+          <arg value="${theme.copyright}"/>
+	  <arg value="-sourceDir"/>
+	  <arg value="${__from-dir-loc__}"/>
+	  <arg value="-destDir"/>
+	  <arg value="${__to-dir-loc__}"/>
+	  <arg value="-fileList"/>
+	  <arg value="${__files-to-compress__}"/>
+	  <arg value="-verbose"/>
+	</java>
+
+    </target>
+
+    <target name="gzipcss-uptodate" >
+        <uptodate property="gzipcss-uptodate">
+            <srcfiles dir="${_from-dir_}">
+		<include name="*.css"/>
+		<exclude name="*.css.gz"/>
+	    </srcfiles>
+            <mapper type="glob" from="*.css" to="${_to-dir_}/*.css.gz"/>
+        </uptodate>
+    </target>
+        
+    <target name="gzipCSS" if="build-gzipCSS" 
+            depends="gzipcss-uptodate" unless="gzipcss-uptodate">
+
+	<mkdir dir="${_to-dir_}"/>
+
+	<!-- Use property location to overcome issues with
+	     Windows paths and pathconvert. These are simply
+             local copies of the paths that have been formatted
+             to work within all environments including windows.
+	-->
+	<property name="__from-dir-loc__" location="${_from-dir_}"/>
+	<property name="__to-dir-loc__" location="${_to-dir_}"/>
+	
+	<pathconvert property="__files-to-compress__" pathsep=",">
+	    <fileset dir="${__from-dir-loc__}">
+		<exclude name="*.css.gz"/>
+		<depend targetdir="${__to-dir-loc__}">
+		    <mapper type="glob" from="*.css" to="*.css.gz"/>
+		</depend>
+	    </fileset>
+	    <mapper type="glob" 
+		from="${__from-dir-loc__}${file.separator}*" to="*"/>
+	</pathconvert>
+
+        <!-- Call gzip tool. -->
+        <java jar="${tools.jar}" failonerror="true" fork="true">
+	  <arg value="-gzipFiles"/>
+	  <arg value="-sourceDir"/>
+	  <arg value="${__from-dir-loc__}"/>
+	  <arg value="-fileList"/>
+	  <arg value="${__files-to-compress__}"/>
+	  <arg value="-destDir"/>
+	  <arg value="${__to-dir-loc__}"/>
+	  <arg value="-verbose"/>
+	</java>
+    </target>
+
+    <!-- #############  Javascript targets ################### -->
+
+    <!-- Sets the "javascript-uptodate" property if
+	 files in "${_from-dir_}/**/*.js" are older than files in
+	 "${_to-dir_}/**/*.js". 
+
+	 Assumes properties
+
+	 _to-dir_ - destinatiotn directory of "**/*.js" files
+	 _from-dir_ - source directory of "**/*.js" files
+    -->
+    <target name="javascript-uptodate">
+	<uptodate property="javascript-uptodate">
+	    <srcfiles dir="${_from-dir_}" includes="**/*.js"/>
+	    <mapper type="glob" from="*" to="${_to-dir_}/*"/>
+	</uptodate>
+    </target>
+
+    <!-- Copy and filter all javascript files to "${_to-dir_}"
+	 from "${_from-dir_}" if the "javascript-uptodate" property is set.
+
+	 Parameters
+
+	 _to-dir_ - destination directory of "**/*.js"
+	 _from-dir_ - source directory of "**/*.js"
+
+	Assumes
+
+	${theme.js-filter-set} used to filter js files.
+    -->
+    <target name="copyJavascript" depends="javascript-uptodate"
+	    unless="javascript-uptodate">
+
+	<mkdir dir="${_to-dir_}"/>
+
+	<!-- Note that copy only copies files if outdated.
+	     This allows "javascript_uncompressed" for example
+	     to be used for dependency checking when compressing files.
+	-->
+	<!-- Copy and filter javascript files into _to-dir_ -->
+	<copy todir="${_to-dir_}">
+	    <fileset dir="${_from-dir_}">
+		<exclude name="**/CVS/**"/>
+	    </fileset>
+	    <filterset refid="${theme.js-filter-set}"/>
+	</copy>
+    </target>
+
+    <!-- Set the combined-js-uptodate property if
+	"${_combined-file_}" is newer than "${_from-dir_}/**/*.js"
+    -->
+    <target name="combined-js-uptodate" depends="copyJavascript">
+	<uptodate property="combined-js-uptodate">
+	    <srcfiles dir="${_from-dir_}" includes="**/*.js"
+		excludes="theme/nls/"/>
+	    <mergemapper to="${_combined-file_}"/>
+	</uptodate>
+    </target>
+
+    <!--  Create the combined file ${_combined-file_}.
+
+	Parameters
+
+	_to-dir_ - root of the destination for combined files
+	_from-dir_ - the source of the javascipt files.
+			   This directory will be written into.
+	_include-set_ - the patternset refid defining the files to combine.
+        _exclude-set_ - the patternset refid defining the files to exclude.
+	_combined-file_ - the combined js file.
+
+	Expects the following globals to be set.
+       
+        ${theme.copyright}
+        ${theme.js-module}
+        ${tools.jar}
+    -->
+    <target name="combineJavascript" depends="combined-js-uptodate" 
+            unless="combined-js-uptodate"
+	    description="Create a combined javascript file.">
+
+	<echo message="Combining ${_combined-file_}"/>
+        <delete file="${_combined-file_}"/>
+
+	<!-- create a "location" for portability -->
+	<property name="__from-dir-loc__"
+		location="${_to-dir_}"/>
+	<pathconvert property="__files-to-combine__" pathsep=",">
+	    <fileset dir="${__from-dir-loc__}">
+		<patternset refid="${_include-set_}"/>
+	    </fileset>
+	    <mapper type="glob" 
+		from="${__from-dir-loc__}${file.separator}*" to="*"/>
+	</pathconvert>
+	<pathconvert property="__files-to-exclude__" pathsep=",">
+	    <fileset dir="${__from-dir-loc__}">
+		<patternset refid="${_exclude-set_}"/>
+	    </fileset>
+	    <mapper type="glob" 
+		from="${__from-dir-loc__}${file.separator}*" to="*"/>
+	</pathconvert>
+
+        <!-- Call combine JavaScript tool. -->
+	<java jar="${tools.jar}" failonerror="true" fork="true">
+	  <arg value="-combineJS"/>
+          <arg value="-copyrightFile"/>
+          <arg value="${theme.copyright}"/>
+	  <arg value="-excludeFileList"/>
+	  <arg value="${__files-to-exclude__}"/>
+	  <arg value="-fileList"/>
+	  <arg value="${__files-to-combine__}"/>
+	  <arg value="-modulePrefix"/>
+	  <arg value="${theme.js-module}"/>
+	  <arg value="-outFile"/>
+          <arg value="${_combined-file_}"/>
+	  <arg value="-sourceDir"/>
+	  <arg value="${__from-dir-loc__}"/>
+          <arg value="-verbose"/>
+	</java>
+    </target>
+
+    <!-- Set the combined-sdoc-uptodate property if
+	"${_combined-file_}" is newer than "${_from-dir_}/**/*.js"
+    -->
+    <target name="combined-sdoc-uptodate" depends="copyJavascript">
+	<uptodate property="combined-sdoc-uptodate">
+	    <srcfiles dir="${_from-dir_}" includes="json.js,widget/*.js,widget/_base/*.js"/>
+	    <mergemapper to="${_combined-file_}"/>
+	</uptodate>
+    </target>
+
+    <!--  Create the combined file ${_combined-file_}.
+
+	Parameters
+
+	_to-dir_ - root of the destination for combined files
+	_from-dir_ - the source of the javascipt files.
+			   This directory will be written into.
+	_include-set_ - the patternset refid defining the files to combine.
+        _exclude-set_ - the patternset refid defining the files to exclude.
+	_combined-file_ - the combined js file.
+
+	Expects the following globals to be set.
+       
+        ${theme.copyright}
+        ${tools.jar}
+    -->
+    <target name="combineSdoc" depends="combined-sdoc-uptodate"
+            unless="combined-sdoc-uptodate" 
+            description="Create a combined sdoc file.">
+
+	<echo message="Combining sdoc file: ${_combined-file_}"/>
+        <delete file="${_combined-file_}"/>
+
+	<!-- create a "location" for portability -->
+	<property name="__from-dir-loc__"
+		location="${_to-dir_}"/>
+	<pathconvert property="__files-to-combine__" pathsep=",">
+	    <fileset dir="${__from-dir-loc__}">
+		<patternset refid="${_include-set_}"/>
+	    </fileset>
+	    <mapper type="glob" 
+		from="${__from-dir-loc__}${file.separator}*" to="*"/>
+	</pathconvert>
+
+        <!-- Call combine sdoc tool. -->
+	<java jar="${tools.jar}" failonerror="true" fork="true">
+	  <arg value="-combineSdoc"/>
+          <arg value="-copyrightFile"/>
+          <arg value="${theme.copyright}"/>
+	  <arg value="-fileList"/>
+	  <arg value="${__files-to-combine__}"/>
+	  <arg value="-outFile"/>
+          <arg value="${_combined-file_}"/>
+	  <arg value="-sourceDir"/>
+	  <arg value="${__from-dir-loc__}"/>
+          <arg value="-verbose"/>
+	</java>
+    </target>
+
+    <!-- Note that this dependency check agains ".js" files
+	 in "_to-dir_" will be comparing against base62
+	 compressed files, since the first pass compressed files
+	 are created in "_cmp-tmp_". But this is ok since 
+	 changed sources will be a later date than any compressed file.
+    -->
+    <!-- Set the compressed-js-uptodate property if
+	"${_to-dir_}/**/*.js" files are newer than 
+	"${_from-dir_}/**/*.js"
+    -->
+    <target name="compressed-js-uptodate">
+	<uptodate property="compressed-js-uptodate">
+	    <srcfiles dir="${_from-dir_}">
+		<exclude name="**/*.js.gz"/>
+		<exclude name="*.js.gz"/>
+		<include name="**/*.js"/>
+		<include name="*.js"/>
+		<patternset refid="generated-js-files"/>
+	    </srcfiles>
+	    <mapper type="glob" from="*" to="${_to-dir_}/*"/>
+	</uptodate>
+    </target>
+
+    <!-- Parameters
+
+	_to-dir_ - root of the destination for compressed files
+	_from-dir_ - the source of the uncompressed and
+	             filtered javascript files.
+	_cmp-tmp_ - a intermediate location to place first pass
+		    compressed files in.
+
+        Comment out build-compressJS in the build.properties file if you
+        don't want to compress when modifying JavaScript files
+
+	To simplify the dependency checking it is expected that
+	there are files in "${_from-dir_}", so either "combineJavascript"
+	or "copyJavascript" should have been called.
+
+	Expects the following globals to be set.
+
+        ${rhino.jar}
+        ${copyright}
+        ${tools.jar}
+    -->
+    <target name="compressJavascript" if="build-compressJS" 
+            depends="compressed-js-uptodate" unless="compressed-js-uptodate">
+
+	<mkdir dir="${_to-dir_}"/>
+
+	<!-- Use property location to overcome issues with
+	     Windows paths and pathconvert.
+	-->
+	<property name="__from-dir-loc__" location="${_from-dir_}"/>
+	<property name="__to-dir-loc__" location="${_to-dir_}"/>
+
+	<!-- Note that this dependency check agains ".js" files
+	     in "__to-dir-loc__" will be comparing against base62
+	     compressed 
+	-->
+	<!-- Make sure to exclude the nls, and dojo. -->
+	<pathconvert property="__files-to-compress__" pathsep=",">
+	    <fileset dir="${__from-dir-loc__}">
+		<exclude name="**/nls/"/>
+                <exclude name="_dojo/_firebug/"/>
+		<depend targetdir="${__to-dir-loc__}">
+		    <mapper type="glob" from="*" to="*"/>
+		</depend>
+	    </fileset>
+	    <mapper type="glob" 
+		from="${__from-dir-loc__}${file.separator}*" to="*"/>
+	</pathconvert>
+
+        <!-- Call Shrink Safe tool. -->
+	<java jar="${tools.jar}" failonerror="true" fork="true">
+	  <arg value="-compressJS"/>
+          <arg value="-copyrightFile"/>
+          <arg value="${theme.copyright}"/>
+	  <arg value="-sourceDir"/>
+	  <arg value="${__from-dir-loc__}"/>
+	  <arg value="-destDir"/>
+	  <arg value="${_cmp-tmp_}"/>
+	  <arg value="-fileList"/>
+	  <arg value="${__files-to-compress__}"/>
+	  <arg value="-rhinoJar"/>
+	  <arg value="${rhino.jar}"/>
+	  <arg value="-verbose"/>
+	</java>
+
+	<!-- Since we are not base62 compressing the combined files
+	     we need to copy them to the dest dir. -->
+        <copy todir="${__to-dir-loc__}">
+	    <fileset dir="${_cmp-tmp_}">
+		<patternset refid="nobase62-js-files"/>
+	    </fileset>
+	</copy>
+                
+    </target>
+
+    <!-- Set the gzip-js-uptodate property if
+	"${_to-dir_}/**/*.js.gz" files are newer than 
+	"${_js-uncmp-dir_}/**/*.js"
+    -->
+    <target name="gzip-js-uptodate">
+	<uptodate property="gzip-js-uptodate">
+	    <srcfiles dir="${_js-uncmp-dir_}">
+		<include name="**/*.js"/>
+		<include name="*.js"/>
+		<patternset refid="generated-js-files"/>
+	    </srcfiles>
+	    <mapper type="glob" from="*.js" to="${_to-dir_}/*.js.gz"/>
+	</uptodate>
+    </target>
+
+    <!-- Parameters
+
+	_to-dir_ - root of the destination for compressed files
+	_from-dir_ - the source of the uncompressed and
+	             filtered javascript files.
+	_js-uncmp-dir_ - the source files for the dependency check.
+
+        Comment out build-compressJS in the build.properties file if you
+        don't want to compress when modifying JavaScript files
+
+	To simplify the dependency checking it is expected that
+	there are files in "${_from-dir_}", so either "combineJavascript"
+	or "copyJavascript" should have been called.
+
+	Expects the following globals to be set.
+
+        ${tools.jar}
+    -->
+    <target name="gzipJavascript" if="build-gzipJS" 
+            depends="gzip-js-uptodate" unless="gzip-js-uptodate">
+	<!-- Use property location to overcome issues with
+	     Windows paths and pathconvert.
+	-->
+	<property name="__from-dir-loc__" location="${_from-dir_}"/>
+	<property name="__to-dir-loc__" location="${_to-dir_}"/>
+
+	<!-- Make sure to exclude the nls, dojo and combined files. -->
+	<pathconvert property="__files-to-compress__" pathsep=",">
+	    <fileset dir="${__from-dir-loc__}">
+                <exclude name="_dojo/_firebug/"/>
+		<depend targetdir="${__to-dir-loc__}">
+		    <mapper type="glob" from="*.js" to="*.js.gz"/>
+		</depend>
+	    </fileset>
+	    <mapper type="glob" 
+		from="${__from-dir-loc__}${file.separator}*" to="*"/>
+	</pathconvert>
+    
+        <!-- Call gzip tool. -->
+        <java jar="${tools.jar}" failonerror="true" fork="true">
+	  <arg value="-gzipFiles"/>
+	  <arg value="-sourceDir"/>
+	  <arg value="${__from-dir-loc__}"/>
+	  <arg value="-fileList"/>
+	  <arg value="${__files-to-compress__}"/>
+	  <arg value="-destDir"/>
+	  <arg value="${__to-dir-loc__}"/>
+	  <arg value="-verbose"/>
+        </java>
+    </target>
+
+    <!-- Set the compressed-js-base62-uptodate property if
+	"${_to-dir_}/**/*.js" files are newer than 
+	"${_from-dir_}/**/*.js"
+    -->
+    <target name="compressed-js-base62-uptodate">
+	<uptodate property="compressed-js-base62-uptodate">
+	    <srcfiles dir="${_from-dir_}">
+		<include name="**/*.js"/>
+		<include name="*.js"/>
+		<patternset refid="generated-js-files"/>
+	    </srcfiles>
+            <mapper type="glob" from="*" to="${_to-dir_}/*"/>
+	</uptodate>
+    </target>
+
+    <!-- Parameters
+
+	_to-dir_ - root of the destination for compressed files
+	_from-dir_ - the source of the uncompressed and
+	             filtered javascript files.
+
+        Comment out build-compressJS-base62 in the build.properties file if you
+        don't want to compress when modifying JavaScript files
+
+	To simplify the dependency checking it is expected that
+	there are files in "${_from-dir_}", so either "combineJavascript"
+	or "copyJavascript" should have been called.
+
+	Expects the following globals to be set.
+
+        ${compressJs.js}
+        ${packer.dir}
+        ${rhino.jar}
+        ${theme.copyright}
+        ${tools.jar}
+    -->
+    <target name="compressJavascriptBase62" if="build-compressJS-base62"
+            depends="compressed-js-base62-uptodate" 
+	    unless="compressed-js-base62-uptodate">
+
+	<mkdir dir="${_to-dir_}"/>
+
+	<!-- Use property location to overcome issues with
+	     Windows paths and pathconvert.
+	-->
+	<property name="__from-dir-loc__" location="${_from-dir_}"/>
+	<property name="__to-dir-loc__" location="${_to-dir_}"/>
+
+	<!-- Make sure to exclude the nls, dojo and combined files. -->
+	<pathconvert property="__files-to-compress__" pathsep=",">
+	    <fileset dir="${__from-dir-loc__}">
+		<exclude name="**/nls/"/>
+                <exclude name="_dojo/"/>
+                <exclude name="${theme.bootstrap.js}"/>
+                <exclude name="${theme.dnd.js}"/>
+                <exclude name="${theme.webui.js}"/>
+                <exclude name="${theme.webui-all.js}"/>
+                <exclude name="${theme.webui-jsfx.js}"/>
+                <exclude name="${theme.webui-jsfx-all.js}"/>
+                <exclude name="${theme.webui-xhr.js}"/>
+                <exclude name="${theme.webui-xhr-all.js}"/>
+		<depend targetdir="${__to-dir-loc__}">
+		    <mapper type="glob" from="*" to="*"/>
+		</depend>
+	    </fileset>
+	    <mapper type="glob" 
+		from="${__from-dir-loc__}${file.separator}*" to="*"/>
+	</pathconvert>
+
+        <!-- Call Packer tool. -->
+        <java jar="${rhino.jar}" failonerror="true" fork="true">
+          <arg value="${compressJs.js}"/>
+          <arg value="-base62"/>
+	  <arg value="-copyrightFile"/>
+          <arg value="${theme.copyright}"/>
+	  <arg value="-destDir"/>
+	  <arg value="${__to-dir-loc__}"/>
+	  <arg value="-fileList"/>
+	  <arg value="${__files-to-compress__}"/>
+	  <arg value="-packerDir"/>
+	  <arg value="${packer.dir}"/>
+          <arg value="-shrink"/>
+	  <arg value="-sourceDir"/>
+	  <arg value="${__from-dir-loc__}"/>
+	  <arg value="-verbose"/>
+	</java>
+    </target>
+
+    <target name="buildJsTheme"
+	description="Build Javascript theme files.">
+
+	<!-- See build-js-theme.xml for parameters to its target -->
+        <!-- call build-js-theme.xml to build the javascript theme -->
+        <ant antfile="build-js-theme.xml" 
+	    target="buildJsTheme" inheritAll="false">
+	    <property name="_js-to-dir_" value="${theme.build-dir}"/>
+	    <property name="_js-theme-name_" value="${theme.name}"/>
+	    <property name="_js-webui-jar_" value="${webui.jar}"/>
+	    <property name="_js-theme-jar_" value="${theme.jar}"/>
+	    <property name="_js-theme-package_" value="${theme.package}"/>
+	 </ant>
+    </target>
+
+    <!-- Set the jsdoc-uptodate property if
+	"${_to-dir_}/index.html" is newer than "${_from-dir_}/**/*.js"
+    -->
+    <target name="jsdoc-uptodate">
+	<uptodate property="jsdoc-uptodate">
+	    <srcfiles dir="${theme.build-package-path}/javascript_uncompressed"
+		includes="**/*.js"
+		excludes="theme/nls/,_dojo/,${theme.bootstrap.js},${theme.dnd.js},${theme.webui.js},${theme.webui-all.js},${theme.webui-jsfx.js},${theme.webui-jsfx-all.js}${theme.webui-xhr.js},${theme.webui-xhr-all.js}"/>
+	    <mergemapper to="${jsdocs}/index.html"/>
+	</uptodate>
+    </target>
+
+    <!-- Parameters
+
+        Comment out build-jsdoc in the build.properties file if you
+        don't want jsDoc to build when modifying JavaScript files
+
+	To simplify the dependency checking it is expected that
+	there are files in "${_from-dir_}", so either "combineJavascript"
+	or "copyJavascript" should have been called.
+
+	Expects Global "${rhino.jar}" to be set.
+
+        ${jsdoc.dir}
+        ${jsdoc.exec}
+        ${jsdoc.template}
+	${rhino.jar}
+        ${theme.bootstrap.js}
+        ${theme.dnd.js}
+        ${theme.webui.js}
+        ${theme.webui-all.js}
+        ${theme.webui-jsfx.js}
+        ${theme.webui-jsfx-all.js}
+        ${theme.webui-xhr.js}
+        ${theme.webui-xhr-all.js}
+    -->
+    <target name="jsdoc" if="build-jsdoc" depends="jsdoc-uptodate"
+	    unless="jsdoc-uptodate">
+
+	<property name="_to-dir_" value="${jsdocs}"/>
+	<property name="_from-dir_" 
+		value="${theme.build-package-path}/javascript_uncompressed"/>
+
+	<mkdir dir="${_to-dir_}"/>
+
+	<!-- Use property location to overcome issues with
+	     Windows paths and pathconvert.
+	-->
+	<property name="__from-dir-loc__" location="${_from-dir_}"/>
+	<property name="__to-dir-loc__" location="${_to-dir_}"/>
+
+	<!-- Make sure to exclude the nls, dojo, and combined files. -->
+	<pathconvert property="__files-to-doc__" pathsep=" ">
+	    <fileset dir="${__from-dir-loc__}">
+		<exclude name="**/nls/"/>
+                <exclude name="_dojo/"/>
+                <exclude name="${theme.bootstrap.js}"/>
+                <exclude name="${theme.dnd.js}"/>
+                <exclude name="${theme.webui.js}"/>
+                <exclude name="${theme.webui-all.js}"/>
+                <exclude name="${theme.webui-jsfx.js}"/>
+                <exclude name="${theme.webui-jsfx-all.js}"/>
+                <exclude name="${theme.webui-xhr.js}"/>
+                <exclude name="${theme.webui-xhr-all.js}"/>
+		<depend targetdir="${__to-dir-loc__}">
+		    <mapper type="glob" from="*" to="*"/>
+		</depend>
+	    </fileset>
+	    <mapper type="glob" from="*" to="*"/>
+	</pathconvert>
+
+        <!-- Call JsDoc toolkit. -->
+	<java jar="${rhino.jar}" failonerror="true" fork="true">
+          <sysproperty key="jsdoc.dir" value="${jsdoc.dir}"/>
+          <arg value="${jsdoc.exec}"/>
+	  <arg value="-d=${_to-dir_}"/>
+	  <arg value="-t=${jsdoc.template}"/>
+          <arg value="-A"/>
+          <arg value="-v"/>
+          <arg value="${build-jsdoc-private}"/>
+          <arg line="${__files-to-doc__}"/>
+	</java>
+
+        <!-- Filter splash page. -->
+        <copy todir="${_to-dir_}" overwrite="true">
+            <fileset dir="${jsdoc.template}">
+                <include name="index.html" />
+                <include name="splash.html" />
+            </fileset>
+            <filterset refid="${theme.js-filter-set}"/>
+        </copy>
+
+        <!-- JsDoc doesn't link source files correctly for subdirectories,
+             so we'll just remove them for now. 
+        -->
+        <delete>
+            <fileset dir="${_to-dir_}" includes="**/*.src.html"/>
+        </delete>
+    </target>
+
+    <!-- Parameters
+
+        Comment out build-sdoc in the build.properties file if you
+        don't want sDoc to build when modifying JavaScript files
+
+	To simplify the dependency checking it is expected that
+	there are files in "${_from-dir_}", so either "combineJavascript"
+	or "copyJavascript" should have been called.
+
+	Expects Global "${rhino.jar}" to be set.
+
+	${rhino.jar}
+    -->
+    <target name="sdoc" if="build-sdoc">
+
+	<property name="_js-dest-uncmp_"
+		location="${theme.build-package-path}/javascript_uncompressed"/>
+	<property name="_js-dest-cmp_"
+		location="${theme.build-package-path}/javascript"/>
+	<property name="_js-src_" value="${theme.src-dir}/javascript"/>
+
+        <!-- Call combine sdoc once for theme.everything.sdoc.
+             This file should not be included with the compressed JavaScript. -->
+	<antcall target="combineSdoc">
+	    <param name="_to-dir_" value="${_js-dest-uncmp_}"/>
+	    <param name="_from-dir_" value="${_js-src_}"/>
+	    <param name="_include-set_" value="${theme.everything-js-files}"/>
+	    <param name="_combined-file_" value="${_js-dest-uncmp_}/${theme.everything.sdoc}"/>
+	</antcall>
+
+        <!-- Create empty sdoc files to prevent NB editor from reading js files. -->
+        <touch file="${_js-dest-cmp_}/${theme.everything.sdoc}"/>
+        <touch file="${_js-dest-cmp_}/_base/${theme.everything.sdoc}"/>        
+	<touch file="${_js-dest-cmp_}/_dojo/${theme.everything.sdoc}"/>
+	<touch file="${_js-dest-cmp_}/_dojo/_firebug/${theme.everything.sdoc}"/>
+        <touch file="${_js-dest-cmp_}/_html/${theme.everything.sdoc}"/>
+        <touch file="${_js-dest-cmp_}/theme/${theme.everything.sdoc}"/>
+	<touch file="${_js-dest-cmp_}/widget/${theme.everything.sdoc}"/>
+        <touch file="${_js-dest-cmp_}/widget/_base/${theme.everything.sdoc}"/>
+	<touch file="${_js-dest-cmp_}/widget/_jsfx/${theme.everything.sdoc}"/>
+        <touch file="${_js-dest-cmp_}/widget/_xhr/${theme.everything.sdoc}"/>
+
+        <!-- Create empty sdoc files to prevent NB editor from reading js files. -->
+        <touch file="${_js-dest-uncmp_}/${theme.everything.sdoc}"/>
+        <touch file="${_js-dest-uncmp_}/_base/${theme.everything.sdoc}"/>        
+	<touch file="${_js-dest-uncmp_}/_dojo/${theme.everything.sdoc}"/>
+	<touch file="${_js-dest-uncmp_}/_dojo/_firebug/${theme.everything.sdoc}"/>
+        <touch file="${_js-dest-uncmp_}/_html/${theme.everything.sdoc}"/>
+        <touch file="${_js-dest-uncmp_}/theme/${theme.everything.sdoc}"/>
+	<touch file="${_js-dest-uncmp_}/widget/${theme.everything.sdoc}"/>
+        <touch file="${_js-dest-uncmp_}/widget/_base/${theme.everything.sdoc}"/>
+	<touch file="${_js-dest-uncmp_}/widget/_jsfx/${theme.everything.sdoc}"/>
+        <touch file="${_js-dest-uncmp_}/widget/_xhr/${theme.everything.sdoc}"/>
+    </target>
+
+    <!-- ################ theme service targets ################# -->
+
+    <!-- Parameters defined in compile-theme-service
+	_cmpl-java-src_
+	_cmpl-java-class_
+	_cmpl-dest-dir_
+	_cmpl-serice-class_
+    -->
+    <target name="theme-service-uptodate">
+        <uptodate property="theme-service-uptodate"
+	  srcfile="${_cmpl-java-src_}/${_cmpl-service-class_}.java"
+	  targetfile="${_cmpl-java-class_}/${_cmpl-service-class_}.class"/>
+    </target>
+
+    <!-- Parameters
+
+	_cmpl-java-src_
+	_cmpl-dest-dir_
+	_cmpl-service-class_
+
+	Expects Global ${debug}, and ${webui.jar}
+    -->
+    <target name="compile-theme-service"
+            unless="theme-service-uptodate"
+	    depends="theme-service-uptodate">
+        
+        <javac srcdir="${_cmpl-java-src_}" 
+               destdir="${_cmpl-dest-dir_}" deprecation="false"
+               debug="${debug}"
+               optimize="${debug}"
+               source="1.5" target="1.5">
+            <compilerarg line="-Xmaxwarns 1000"/>
+            <classpath>
+                <pathelement path="${webui.jar}"/>
+            </classpath>
+        </javac>
+        
+    </target>
+
+    <!-- Parameters
+
+	See "theme.*" clone properties.
+
+	Javascript files are always copied when creating a clone.
+	Unless there are special requirements for the ThemeService properties
+	file and ThemeService implementation do not set the
+	_clone-service-properties-template_ and _clone-service-class-template_.
+	They will default to META-INF/services/suntheme.properties and
+	META-INF/services/SunthemeThemeService.java.
+
+	Once the theme is cloned, you can build it as necessary.
+	But the properties used to clone the theme must be in effect.
+    -->
+
+    <target name="cloneTheme">
+	<!-- Fail if the clone already exists -->
+	<fail message="A theme clone named src/${theme.name} already exists you must manually delete it to create one of that name.">
+
+	    <condition>
+		<or>
+		    <and>
+			<available property="__clone-exists__" type="dir"
+				file="${theme.clone-dir}/${theme.name}"/>
+			<isset property="${theme.clone-overwrite}"/>
+			<isfalse value="${theme.clone-overwrite}"/>
+		    </and>
+		    <and>
+			<available property="__clone-exists__" type="dir"
+				file="${theme.clone-dir}/${theme.name}"/>
+			<not>
+			    <isset property="${theme.clone-overwrite}"/>
+			</not>
+		    </and>
+		</or>
+	    </condition>
+	</fail>
+
+        <echo message="Cloning Theme ${theme.name} from ${theme.clone-src-dir}"/>
+        
+	<condition property="__clone-filter__"
+		value="${theme.filter}" else="false">
+	    <isset property="theme.clone-filter"/>
+	</condition>
+
+	<!-- For the default cloning we will not filter and not
+	     overwrite. Not filtering allows diff's with the source
+	     of the clone. We will also create a parallel tree
+	     under src without the "build" package path. -->
+
+        <antcall target="_copyThemeFiles-internal_">
+	    <param name="_to-dir_" value="${theme.clone-dir}" />
+	    <param name="_from-dir_" value="${theme.clone-src-dir}" />
+	    <param name="_filter_" value="${__clone-filter__}"/>
+	    <param name="_copy-javascript_" value="true"/>
+	    <param name="_copy-css_" value="true"/>
+	    <param name="_fail-on-error_" value="true"/>
+        </antcall>
+
+        <antcall target="_copyThemeFiles-internal_">
+
+	    <param name="_to-dir_" 
+		value="${theme.clone-dir}/translatedFiles" />
+	    <param name="_from-dir_" 
+		value="${theme.clone-src-dir}/translatedFiles" />
+
+	    <param name="_filter_" value="${__clone-filter__}"/>
+	    <param name="_copy-javascript_" value="true"/>
+	    <param name="_copy-css_" value="true"/>
+	    <param name="_fail-on-error_" value="false"/>
+
+        </antcall>
+
+        <antcall target="_copyThemeService-internal_">
+	    <param name="_to-dir_" 
+		value="${theme.clone-dir}/${theme.package-path}" />
+	    <param name="_filter_" value="${__clone-filter__}"/>
+        </antcall>
+        
+    </target> 
+
+    <!-- TARGETS FOR INTERNAL USE ONLY -->
+
+    <!--  Copies themes files from
+
+	${_from-dir_}/messages		${_to-dir_}/messages
+	${_from-dir_}/properties   to	${_to-dir_}/properties
+	${_from-dir_}/templates		${_to-dir_}/templates
+    	${_from-dir_}/images		${_to-dir_}/images
+	${_from-dir_}/css		${_to-dir_}/css
+
+	Javascript files are conditionally copied
+
+	${_from-dir_}/javascript	to	${_to-dir_}/javascript
+
+	if ${_copy-javascript_} is true.
+
+	Use this target to clone or copy files to a build location.
+	If "${_filter_}" is true filtering happens on the copy.
+	Otherwise files are copied as is. For cloning it should be
+	set to false.
+    
+	Parameters
+
+	_to-dir__ - The destination directory
+	_from-dir__ - The root of the source files to copy
+	_filter__ - If "true" then files are filtered as they are copied,
+		   if "false" or not set, then files are just copied.
+	_copy-javascript_ - If "true" javascript files are copied as is. If
+		       false javascript files are not copied. This is to
+		       accommodate cloning and building. When cloning
+		       _copy-javascript_ should be true, and false when 
+		       building.
+	_copy-css_ - If "true" css files are copied as is. If
+		       false css files are not copied. This is to
+		       accommodate cloning and building. When cloning
+		       _copy-css_ should be true, and false when 
+		       building.
+	_fail-on-error_ - passed to the copy task's "failonerror"
+			     attribute.
+    -->
+    <target name="_copyThemeFiles-internal_">
+
+        <mkdir dir="${_to-dir_}" />
+
+	<!-- images and messages can be copied as is -->
+
+        <copy todir="${_to-dir_}/images"
+		failonerror="${_fail-on-error_}">
+            <fileset dir="${_from-dir_}/images">
+                <exclude name="**/CVS/**" /> 
+            </fileset>
+        </copy>
+
+	<copy todir="${_to-dir_}/messages"
+		failonerror="${_fail-on-error_}">
+	    <fileset dir="${_from-dir_}/messages">
+		<exclude name="**/CVS/**" /> 
+	    </fileset>
+	</copy>
+	<!-- We need to include an empty "_en" properties file for
+	     properties files that can have variants.
+	     This is because the fallback is "messages" or "style"
+	     etc. properties files without variants. However
+	     in a JSF environment where a "default" language must
+	     be configured, an "_en" variant must exist since all
+	     ResourceBundle requests will have "language1" as the
+	     JSF default and "language2" as the server locale.
+	     See the javadoc for ResourceBundle.getBundle for the
+	     meaning of "language1" and "language2".
+	     See below where the other "known" *.properties files
+	     are handled.
+	-->
+        <antcall target="_touch-fallback-properties_">
+	    <param name="_prop-file_" value="messages"/>
+	    <param name="_prop-dir_" value="${_to-dir_}/messages"/>
+	    <param name="_touch-prop-file_" value="touch-messages"/>
+	</antcall>
+
+	<!-- templates, css files, styles, stylesheet, properties files
+	     must be filtered if ${_filter_} is true.
+	     -->
+	<filterset id="_css-name-filter_">
+	    <filter token="THEME_CSS" value="${theme.css-name}"/>
+	</filterset>
+
+	<condition property="__css-name-filter__"
+		value="_css-name-filter_" else="null-filter">
+	    <istrue value="${_filter_}"/>
+	</condition>
+
+        <copy todir="${_to-dir_}/templates"
+		failonerror="${_fail-on-error_}">
+	    <fileset dir="${_from-dir_}/templates">
+		<exclude name="**/CVS/**" /> 
+	    </fileset>
+            <filterset refid="${__css-name-filter__}"/>
+        </copy>
+
+	<!-- the null css fileset 
+	  It must have a "dir" so exclude all files
+	-->
+	<fileset id="null-css-fileset" dir="${_from-dir_}/css">
+	    <exclude name="**/CVS/**" />
+	    <exclude name="**/*.css" />
+	    <exclude name="*.css" />
+	</fileset>
+
+	<fileset id="_css-fileset_" dir="${_from-dir_}/css">
+	    <exclude name="**/CVS/**" />
+	</fileset>
+
+	<condition property="__css-fileset__"
+		value="_css-fileset_" else="null-css-fileset">
+	    <istrue value="${_copy-css_}"/>
+	</condition>
+
+	<copy todir="${_to-dir_}/css"
+		failonerror="${_fail-on-error_}">
+            <fileset refid="${__css-fileset__}"/>
+            <filterset refid="${__css-name-filter__}"/>
+	</copy>
+
+	<filterset id="_theme-filter_">
+            <filter token="JS_NAME" value="${theme.js-name}"/>
+	    <filter token="JS_NS" value="${theme.js-module}"/>
+            <filter token="THEME" value="${theme.name}"/>
+	    <filter token="THEME_PATH" value="/${theme.package-path}"/>
+            <filter token="THEME_VERSION" value="${theme.version}"/>
+	</filterset>
+
+	<condition property="__theme-filter__"
+		value="_theme-filter_" else="null-filter">
+	    <istrue value="${_filter_}"/>
+	</condition>
+
+        <copy todir="${_to-dir_}/properties"
+		failonerror="${_fail-on-error_}">
+            <fileset dir="${_from-dir_}/properties">
+                <include name="*.properties" />
+            </fileset>
+            <filterset refid="${__theme-filter__}"/>
+            <filterset refid="${__css-name-filter__}"/>
+        </copy>
+
+	<!-- Assume we know what the properties/*.properties files are -->
+        <antcall target="_touch-fallback-properties_">
+	    <param name="_prop-file_" value="styles"/>
+	    <param name="_prop-dir_" value="${_to-dir_}/properties"/>
+	    <param name="_touch-prop-file_" value="touch-styles"/>
+	</antcall>
+        <antcall target="_touch-fallback-properties_">
+	    <param name="_prop-file_" value="stylesheets"/>
+	    <param name="_prop-dir_" value="${_to-dir_}/properties"/>
+	    <param name="_touch-prop-file_" value="touch-stylesheets"/>
+	</antcall>
+        <antcall target="_touch-fallback-properties_">
+	    <param name="_prop-file_" value="javascript"/>
+	    <param name="_prop-dir_" value="${_to-dir_}/properties"/>
+	    <param name="_touch-prop-file_" value="touch-javascript"/>
+	</antcall>
+        <antcall target="_touch-fallback-properties_">
+	    <param name="_prop-file_" value="images"/>
+	    <param name="_prop-dir_" value="${_to-dir_}/properties"/>
+	    <param name="_touch-prop-file_" value="touch-images"/>
+	</antcall>
+        <antcall target="_touch-fallback-properties_">
+	    <param name="_prop-file_" value="templates"/>
+	    <param name="_prop-dir_" value="${_to-dir_}/properties"/>
+	    <param name="_touch-prop-file_" value="touch-templates"/>
+	</antcall>
+
+	<!-- the null js fileset 
+	  It must have a "dir" so exclude all files
+	-->
+	<fileset id="null-js-fileset" dir="${_from-dir_}/javascript">
+	    <exclude name="**/CVS/**" />
+	    <exclude name="**/*.js" />
+	    <exclude name="*.js" />
+	</fileset>
+
+	<fileset id="_js-fileset_" dir="${_from-dir_}/javascript">
+	    <exclude name="**/CVS/**" />
+	</fileset>
+
+	<condition property="__js-fileset__"
+		value="_js-fileset_" else="null-js-fileset">
+	    <istrue value="${_copy-javascript_}"/>
+	</condition>
+
+	<copy todir="${_to-dir_}/javascript"
+		failonerror="${_fail-on-error_}">
+            <fileset refid="${__js-fileset__}"/>
+            <filterset refid="${__theme-filter__}"/>
+	</copy>
+
+    </target>
+
+    <target name="touch-propfile">
+	<available property="${_touch-prop-file_}" type="file"
+	    file="${_prop-dir_}/${_prop-file_}.properties"/>
+    </target>
+
+    <target name="_touch-fallback-properties_" 
+	    depends="touch-propfile" if="${_touch-prop-file_}">
+	<mkdir dir="${_prop-dir_}"/>
+	<touch file="${_prop-dir_}/${_prop-file_}_en.properties"/>
+    </target>
+	    
+    <!-- Set "${theme-service-templates-uptodate}" if the template file
+	 and the service java file is up to date
+
+	 _to-dir_
+
+	 is a parameter to _copyThemeService-internal_ or defined
+	 in that target.
+    -->
+    <target name="theme-service-templates-uptodate">
+	<uptodate property="props"
+	     srcfile="${theme.service-properties-template}"
+	     targetfile="${_to-dir_}/${theme.name}.properties"/>
+	<uptodate property="javafile"
+	     srcfile="${theme.service-class-template}"
+	     targetfile="${_to-dir_}${theme.service-class}.java"/>
+	<condition property="theme-service-templates-uptodate">
+	    <and>
+	       <isset property="props"/>
+	       <isset property="javafile"/>
+	    </and>
+	</condition>
+    </target>
+
+    <!--
+	Use this target to clone or copy theme service
+	files to a build location.
+	If "${_filter_}" is true filtering happens on the copy.
+	Otherwise files are copied as is. For cloning it should be
+	set to false.
+    
+	Parameters
+
+	_to-dir__ - The destination directory
+	_filter__ - If "true" then files are filtered as they are copied,
+		   if "false" or not set, then files are just copied.
+
+	Service files are copied as
+
+	${theme.service-class-template} to
+	  ${_to-dir_}/${theme.package-path}/${theme.service-class}.java
+	${theme.service-properties-template} to
+	  ${_to-dir_}/${theme-package-path}/${theme.name}.properties
+
+	If "${theme.service-class-template}" or 
+	${theme.service-properties-template} does not exist
+	${basedir}/META-INF/services/SunthemeThemeService.java" and
+	${basedir}/META-INF/services/suntheme.properties"> are copied
+	respectively.
+
+    -->
+    <target name="_copyThemeService-internal_"
+		depends="theme-service-templates-uptodate"
+		unless="theme-service-templates-uptodate">
+
+        <mkdir dir="${_to-dir_}" />
+
+	<!-- ThemeService java class file and properties file
+	     are derived from templates, and must be filtered
+	     if ${_filter_} is true.
+	     -->
+
+	<!-- Filtersets for copying the theme service files -->
+	<filterset id="_theme-service-filter_">
+	    <filter token="THEME" value="${theme.name}"/>
+	    <filter token="THEME_VERSION" value="${theme.version}"/>
+	    <filter token="THEME_PACKAGE" value="${theme.package}"/>
+	    <filter token="THEME_SERVICE_CLASS" value="${theme.service-class}"/>
+	</filterset>
+
+	<condition property="__servicefilter__"
+		value="_theme-service-filter_" else="null-filter">
+	    <istrue value="${_filter_}"/>
+	</condition>
+
+	<!-- filter out the package path if it exists in _to-dir_ -->
+	<!--
+	<property name="_to-dir-pkg-path_"
+	    location="${_to-dir_}/${theme.package-path}"/>
+
+	<condition property="__to-dir__"
+	    value="${_to-dir_}" 
+		else="${_to-dir-pkg-path_}">
+	    <contains string="${_to-dir_}" 
+		substring="${theme.package-path}"/>
+	</condition>
+	-->
+
+	<!-- set the default ThemeService templates -->
+	<condition property="_service-class-template_"
+		value="${theme.service-class-template}"
+		else="${basedir}/META-INF/services/SunthemeThemeService.java">
+	    <available property="_have-class-template_" type="file"
+		    file="${theme.service-class-template}"/>
+	</condition>
+	<condition property="_service-properties-template_"
+		value="${theme.service-properties-template}"
+		else="${basedir}/META-INF/services/suntheme.properties">
+	    <available property="_have-properties-template_" type="file"
+		file="${theme.service-properties-template}"/>
+	</condition>
+
+	<condition property="_prop-copy-warning_"
+		value="Warning: copying ${_service-properties-template_}"
+		else ="">
+	    <istrue value="${_have-properties-template_}"/>
+	</condition>
+	<condition property="_class-copy-warning_"
+		value="Warning: copying ${_service-class-template_}"
+		else ="">
+	    <istrue value="${_have-class-template_}"/>
+	</condition>
+	<echo message="${_class-copy-warning_}" level="debug"/>
+	<echo message="${_prop-copy-warning_}" level="debug"/>
+
+        <!-- create the SPI theme properties files from template-->
+        <copy file="${_service-properties-template_}"
+	   tofile="${_to-dir_}/${theme.name}.properties">
+            <filterset refid="${__servicefilter__}"/>
+        </copy>
+        
+        <!-- Create the SPI Theme Service java file 
+	     And always filter the tokens -->
+        <copy file="${_service-class-template_}"
+	    tofile="${_to-dir_}/${theme.service-class}.java">
+            <filterset refid="_theme-service-filter_"/>
+        </copy> 
+
+    </target>
+
+    <!-- If the combinedImage file is newer than any image file and
+	 the images.properties file, set "images-uptodate".
+    -->
+    <target name="images-uptodate">
+	 <uptodate property="images-uptodate">
+	    <srcfiles dir="${theme.src-dir}"
+		includes="images/**/*,properties/images.properties"/>
+	    <mergemapper 
+	    to="${theme.build-package-path}/images/other/${theme.combined-image}"/>
+	 </uptodate>
+    </target>
+
+    <target name="combineImages" if="build-combineImages"
+	    depends="images-uptodate" unless="images-uptodate" 
+	    description="Combine images.">
+
+	<java jar="${tools.jar}" failonerror="true" fork="true">
+	  <arg value="-Djava.awt.headless=true"/>
+	  <arg value="-combineImages"/>
+	  <arg value="-sourceDir"/>
+	  <arg value="${theme.build-dir}"/>
+	  <arg value="-imageFile"/>
+	  <arg value="${theme.build-package-path}/images/other/${theme.combined-image}"/>
+	  <arg value="-imagePropertyFile"/>
+	  <arg value="${theme.build-package-path}/properties/images.properties"/>
+	  <arg value="-outFile"/>
+	  <arg value="${theme.build-package-path}/properties/images.properties"/>
+	</java>
+
+    </target>
+
+    <!-- the null filterset -->
+    <filterset id="null-filter"/>
+
+    <!-- noop target -->
+    <target name="noop"/>
+
+    <target name="clean">
+        <delete dir="${build}" />
+        <delete dir="${dist}" />
+	<delete dir="${theme.build-dir}"/>
+	<delete file="${theme.jar}"/>
+        <delete dir="${jsdocs}" />
+    </target>
+
+</project>

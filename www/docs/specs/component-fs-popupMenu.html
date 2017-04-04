@@ -1,0 +1,1819 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Project Woodstock - Component FS Popup Menu</title>
+  <meta name="COPYRIGHT" content="">
+  <style type="text/css"> 
+/* <![CDATA[ */
+@import url(../../browser-uispec.css);
+.style2 {font-size: 18pt}
+  </style>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+</head>
+<body style="background-color: rgb(255, 255, 255);">
+<div class="MstDiv">
+<table class="MstTblBot" title="" border="0" cellpadding="0"
+ cellspacing="0" width="100%">
+  <tbody>
+    <tr>
+      <td class="MstTdTtl">
+      <div class="MstDivTtl">
+      <div class="Mst1TtlTxt">Project Woodstock</div>
+      </div>
+      <div class="Mst1SecDiv"> <span class="Mst1SecTxt style2">Component
+Functional Spec Popup menu<br>
+      </span></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<table class="Mst2Tbl" style="width: 1244px; height: 9505px;" title=""
+ border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td> <br>
+      <h2 style="font-weight: bold;"><a name="1.0"></a>1.0 Component
+Overview</h2>
+      <h3><span style="font-weight: bold;"><a name="1.1"></a>1.1
+Document Revision History</span></h3>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Revision</span></td>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Date</span></td>
+            <td style="width: 50%; text-align: center;"><span
+ style="font-weight: bold;">Synopsis</span></td>
+            <td style="width: 20%; text-align: center;"><span
+ style="font-weight: bold;">Author</span></td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">0.1</td>
+            <td style="text-align: center;">05/28/2007</td>
+            <td style="text-align: left;">Initial Draft</td>
+            <td style="text-align: center;">Venkatesh Babu</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; text-align: center;">0.2<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">06/08/2007<br>
+            </td>
+            <td style="vertical-align: top;">Update name of the
+component and architecture along with review comments from Bob<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Venkatesh
+Babu<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; text-align: center;">&nbsp;0.3<br>
+            </td>
+            <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp; &nbsp;&nbsp;
+06/19/2007<br>
+            </td>
+            <td style="vertical-align: top; text-align: left;">Update
+the spec with
+latest arch<br>
+            </td>
+            <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Venkatesh Babu<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; text-align: center;">0.4<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">09/04/2007<br>
+            </td>
+            <td style="vertical-align: top;">Updated with the latest
+arch <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Venkatesh
+Babu<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 style="font-weight: bold;"><a name="1.2"></a>1.2 Component
+Description<br>
+      </h3>
+      <div style="margin-left: 40px;">The popup menu component
+displays a menu which contains a list of actions that can be invoked by
+clicking on it.<br>
+      </div>
+      <h3><a name="1.3"></a>1.3 Component Purpose<br>
+      </h3>
+      <div style="margin-left: 40px;">The component is intended to be
+used in cases where there can be more
+than one possible action related to a particular event of a component
+(such as clicking an hyperlink.) In such cases, invoking the particular
+event on the component will open the popup menu which shows the list
+of possible actions that can be performed for that particular event.<br>
+      <br>
+      </div>
+      <h3 style="font-weight: bold;"><a name="1.4"></a>1.4 Relevant
+Documents</h3>
+      <ul>
+        <li><a
+ href="http://xdesign.sfbay/projects/swaed-working/Popup_Menu.htm">Popup
+Menu UI spec</a><br>
+          <a
+ href="http://xdesign.sfbay/projects/next-generation-web-app/tables/NextGenTables-Spec.html#interaction_actions"><span></span></a></li>
+        <li><a
+ href="http://xdesign.sfbay/projects/next-generation-web-app/tables/NextGenTables-Spec.html#interaction_actions">Sections
+3.3 and 3.6 of Next-gen table</a></li>
+        <li><a target="_blank"
+ href="http://sleepyhead.india:8080/code-review/www/docs/specs/ajax-architecture-spec.html">Ajax
+Architecture for Woodstock JavaServer Faces</a></li>
+        <li><a
+ href="http://xdesign.sfbay.sun.com/people/prasant/swaed/accordionmenu.html">Accordion
+Spec</a></li>
+      </ul>
+      <h3><a name="1.5"></a>1.5 Definition of Terms</h3>
+      <div style="margin-left: 40px;">
+      <div style="margin-left: 40px;">
+      <ul>
+        <li>event - Any onXXX javascript action that has the ability to
+generate an event.</li>
+        <li>popup menu - The specified menu that shows up when
+clicking the concerned component.</li>
+        <li>options - The list of available actions in the popup menu.<br>
+        </li>
+        <li>HTML template - The file used to define HTML tags
+associated with a component</li>
+        <li>In-line JavaScript - JavaScript used to instantiate a <span
+ style="font-style: italic;">Dojo
+Widget</span>, located anywhere (i.e., in-line) in the rendered HTML
+page<br>
+        </li>
+        <li>JSF - JavaServer Faces</li>
+        <li>JSF component - The JSF <code>UIComponent</code>
+compliment to a <span style="font-style: italic;">JSP tag</span> and <span
+ style="font-style: italic;">JSF renderer</span></li>
+        <li>JSF facet - A facet is a subcomponent that has a specific
+purpose defined by its parent container<br>
+        </li>
+        <li>JSF renderer - The JSF <code>Renderer</code> compliment to
+a <span style="font-style: italic;">JSP
+tag</span> and <span style="font-style: italic;">JSF component</span><br>
+        </li>
+        <li>JSON - JavaScript Object Notation (i.e., object literals)
+defined using braces ({}) that contain a
+set of comma separated key value pairs</li>
+        <li>JSP tag - The JSF <code>UIComponentELTag</code> or <code>UIComponentELBodyTag</code>
+compliment
+to a <span style="font-style: italic;">JSF component</span>
+and <span style="font-style: italic;">JSF renderer</span><br>
+        </li>
+        <li>Subcomponent - A child component used to render a <span
+ style="font-style: italic;">complex component</span></li>
+        <li>Widget - Entity consisting of <span
+ style="font-style: italic;">widget JavaScript</span> and <span
+ style="font-style: italic;">CSS</span>, not necessarily based on the
+Dojo toolkit<span style="font-style: italic;"><br>
+          </span></li>
+        <li>Widget JavaScript - The JavaScript used to populate an <span
+ style="font-style: italic;">HTML template</span> and/or update
+component properties</li>
+        <li>Contents - JSON Array which contain JSON objects of sub
+components to be displayed inside the widget<br>
+        </li>
+        <li>Widget renderer - The <span style="font-style: italic;">JSF
+renderer</span> used to output <span style="font-style: italic;">in-line
+JavaScript</span> for
+instantiating a <span style="font-style: italic;">Dojo Widget</span></li>
+      </ul>
+      </div>
+      </div>
+      <h2><a name="2.0"></a>2.0 Requirements, goals, and assumptions</h2>
+      <h3><a name="2.1"></a>2.1 Requirements</h3>
+      <div style="margin-left: 40px;">
+      <ul>
+      </ul>
+      </div>
+      <h3><a name="2.1.1"></a>2.1.1 UI requirements</h3>
+      <div style="margin-left: 40px;"><a
+ href="http://xdesign.sfbay/projects/next-generation-web-app/tables/NextGenTables-Spec.html#interaction_actions">Sections
+3.3 and 3.6 of Next-gen table</a><br>
+      <a
+ href="http://xdesign.sfbay.sun.com/people/prasant/swaed/accordionmenu.html">Accordion
+Spec</a><br>
+      <br>
+      </div>
+      <h3><a name="2.1.2"></a>2.1.2 Functional requirements</h3>
+      <div style="margin-left: 40px;">
+      <ul>
+        <li>The popup menu component shall be able to associate
+itself with any component that can generate events.</li>
+        <li>The popup menu shall show a list of available actions
+associated with the particular event.</li>
+        <li>It should be possible to update the contents of the menu
+client side.</li>
+        <li>The options available in the menu when clicked can either
+generate an asynchronous request or submit the form.<br>
+        </li>
+        <li>The options present for each action can be either in an
+enabled state or in a disabled state.</li>
+        <li>The options available for a menu can be grouped based on
+some common functionalities.</li>
+      </ul>
+      <div style="margin-left: 40px;"> </div>
+      </div>
+      <h3><a name="2.1.3"></a>2.1.3 Performance requirements</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.1.4"></a>2.1.4 Browser, platform requirements</h3>
+      <ul>
+        <li>The table of supported <a href="../SupportedBrowers.htm">Browsers</a>.</li>
+        <li>The table of supported <a href="../SupportedContainers.htm">Containers</a>.</li>
+      </ul>
+      <h3><a name="2.1.5"></a>2.1.5 Special requirements</h3>
+      <div style="margin-left: 40px;">N/A.</div>
+      <h3><a name="2.2"></a>2.2 Requirements Not Met</h3>
+      <div style="margin-left: 40px;">N/A.</div>
+      <h3><a name="2.3"></a>2.3 Assumptions</h3>
+      <div style="margin-left: 40px;">N/A.</div>
+      <h3><a name="2.4"></a>2.4 Goals</h3>
+      <div style="margin-left: 40px;">N/A.</div>
+      <h3><a name="2.5"></a>2.5 Non-goals</h3>
+      <div style="margin-left: 40px;">N/A.</div>
+      <h2><a name="3.0"></a>3.0 Component Usage</h2>
+      <div style="margin-left: 40px;">
+      <p><span style="font-weight: bold;">3.1 Creating the popup menu</span><br>
+      </p>
+      <p>The &lt;webuijsf:menu&gt; custom JSP tag shall be used to
+create a&nbsp; menu. This menu will contain options which can be
+grouped together based on some common functionality. The &nbsp; menu
+uses the "items" attribute to specify the available options. The
+value specified for the options attribute can be either an array, Map
+or Collection whose members are all subclasses of the
+com.sun.webui.jsf.Option class. <br>
+      </p>
+      <p>Here is an example of how the popup menu can be created.<br>
+      </p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;webuijsf:menu
+id="popup1" items="#{popUp.optionItems}"
+selected="#{popUp.selectedItem}"&nbsp;&nbsp; /&gt;<br>
+      <br>
+Where the input to the options attribute could look something like this:<br>
+public class PopUp {<br>
+      <br>
+&nbsp;&nbsp;&nbsp; private Option OptionItems[]; <br>
+&nbsp;&nbsp;&nbsp; private Option groupOptions[];<br>
+&nbsp;&nbsp;&nbsp; private OptionGroup group;<br>
+&nbsp;&nbsp;&nbsp; private String text="initial text";<br>
+&nbsp;&nbsp;&nbsp; public PopUp() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OptionItems = new Option[5];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OptionItems[0] = new
+Option("One", "one");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OptionItems[1] = new
+Option("Two", "two");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OptionItems[2] = new
+Option("Three", "three");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OptionItems[4] = new
+Option("Five", "five");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+OptionItems[1].setImage("/images/dice1.gif");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; groupOptions = new Option[2];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; groupOptions[0] = new
+Option("SubOpt1", "SubOpt1");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; groupOptions[1] = new
+Option("SubOpt2", "SubOpt2");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; group = new OptionGroup();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; group.setValue("Group1");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; group.setLabel("Group1");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+group.setOptions(groupOptions);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OptionItems[3] = group;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; public Option[] getOptionItems() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return this.OptionItems;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp;&nbsp; public void setOptionItems(Option[] OptionItems)
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.OptionItems =
+OptionItems;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; public String getSelectedItem() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return this.text;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; public void setSelectedItem(String text) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.text = text;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+      <br>
+      </div>
+      <div style="margin-left: 40px;">
+      <p>The above mentioned code will create a popupMenu widget on
+the client side. The JSON properties output on the client side will
+look something like this:<br>
+      </p>
+      <br>
+      <pre style="white-space: -moz-pre-wrap;">&lt;script type="text/javascript"&gt;<br>webui.&lt;theme&gt;.widget.common.replaceFragment({<br>    "submitForm": false,<br>    "formId": "form1",<br>    "templatePath": "/&lt;appname&gt;/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/popupMenu.html",<br>    "_widgetType": "webui.&lt;theme&gt;:popupMenu",<br>    "visible": false,<br>    "_module": "webui.&lt;theme&gt;.widget.popupMenu",<br>    "id": "form1:popup1",<br>    "options": [<br>        {<br>            "group": false,<br>            "value": "One",<br>            "label": "one",<br>            "disabled": false,<br>            "separator": false<br>        },<br>        {<br>            "group": false,<br>            "value": "Two",<br>            "label": "two",<br>            "disabled": false,<br>            "separator": false,<br>            "image": "&lt;span id=\"j_id3\"&gt;&lt;\/span&gt;\n&lt;script type=\"text/javascript\"&gt;\nwebui.&lt;theme&gt;.widget.common.replaceFragment({\n    \"_widgetType\": \"webui.&lt;theme&gt;:image\",\n    \"templatePath\": \"/&lt;appname&gt;/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/image.html\",\n    \"height\": 10,\n    \"visible\": true,\n    \"border\": 0,\n    \"src\": \"/&lt;appname&gt;/images/dice1.gif\",\n    \"_module\": \"webui.&lt;theme&gt;.widget.image\",\n    \"id\": \"j_id3\"\n});\n&lt;\/script&gt;\n"<br>        },<br>        {<br>            "group": false,<br>            "value": "Three",<br>            "label": "three",<br>            "disabled": false,<br>            "separator": false<br>        },<br>        {<br>            "group": true,<br>            "value": "Group1",<br>            "label": "Group1",<br>            "disabled": false,<br>            "separator": false,<br>            "options": [<br>                {<br>                    "group": false,<br>                    "value": "SubOpt1",<br>                    "label": "SubOpt1",<br>                    "disabled": false,<br>                    "separator": false<br>                },<br>                {<br>                    "group": false,<br>                    "value": "SubOpt2",<br>                    "label": "SubOpt2",<br>                    "disabled": false,<br>                    "separator": false<br>                }<br>            ]<br>        },<br>        {<br>            "group": false,<br>            "value": "Five",<br>            "label": "five",<br>            "disabled": false,<br>            "separator": false<br>        }<br>    ]<br>});<br>&lt;/script&gt;</pre>
+      <span style="font-weight: bold;">3.2 Invoking the popup menu</span><br>
+      <br>
+The widgets created using the above mentioned custom JSP tags are not
+related to any other widgets present in the page.What this means is
+that, any widget present<br>
+on the page can invoke them and make use of them. When the widget is
+created in the html page, its style is set to hidden by default. Hence,
+none of the popup <br>
+menu widgets that are present in the page are visible when the page is
+first rendered. If a widget present in the form wants to show a pop-up
+menu, it can invoke the<br>
+"open" method of the popupMenu widget. <br>
+      <br>
+For example, an hyperlink component can display the above created popup
+menu component when it is clicked as follows.<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;webuijsf:hyperlink
+text="Click here to open menu" onMouseDown="displayMenu(event);return
+false;" onClick="return false;"
+actionExpression="hyperlinkPage"/&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&lt;script type="text/javascript"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; function displayMenu(event) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+document.getElementById("form1:popup1").open(event);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&lt;/script&gt;<br>
+      <br>
+The popup menu will close by<br>
+-&nbsp; Selecting one of the options present in the menu<br>
+- Clicking outside the menu anywhere on the page<br>
+- Opening another menu on the page.<br>
+      <br>
+The popupMenu widget exposes a function called "getSelectedOption"
+which will return the value of the selected option.<br>
+      <br>
+Note: &lt;appname&gt; - the name of the web application name.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;theme&gt; - The
+name of the theme used.<br>
+      <br>
+      <span style="font-weight: bold;">3.3 Submitting an selected
+option to
+the server.</span><br>
+      <br>
+When an option is selected on the popupMenu, then it sets a value on
+the widget which can be accessed by invoking
+domElement.getSelectedOption.<br>
+This gives the value of the selected element on the client side.The
+popupMenu does&nbsp; not submit the selected value to the server by
+default.<br>
+The application can inform the server of the selected value either by<br>
+      <br>
+      <pre> i) <span style="font-weight: bold;">Use domNode.submit()</span> :- The popupMenu element has a submit() function set on its dom. Invoking this function<br>    will cause the popupMenu widget to send an asynchronous request to the server and cause the popupMenu component<br>    to update itself. The popupMenu widget in this case, appends an attribute called value to the dynamic faces<br>    request made. The <code>com.sun.webui.jsf.renderkit.ajax.PopupMenuRenderer</code> will in this case look for <br>    this particular value and update itself accordingly.<br><br>	ex:<br>        &lt;webuijsf:popupMenu id="popup1" items="#{popUp.optionItems}" selected="#{popUp.selectedItem}" <br>		 onChange="setTimeout('changeEvent();', 0);"/&gt;<br>	&lt;script type="text/javascript"&gt;<br>        function changeEvent() {<br>            document.getElementById("form1:popup1").submit();<br>        }<br>	&lt;/script&gt;<br><br> ii) <span
+ style="font-weight: bold;">Set the submitForm attribute to true</span>:- This will cause the popupMenu component to submit the form whenever an<br>    option is selected in the menu. All the elements in the form will be submitted and all the components present<br>    in the form will go through the normal JSF processing lifecycle. <br>    The popupMenu widget in this case will submit the value of the selected option similar to the way the hyperlink widget<br>    submits the form. It will append the selected value as a request parameter with the key being the client id of <br>    the popupMenu appended with a "_submittedValue" suffix.<span
+ style="font-family: verdana,helvetica,arial,sans-serif;"><br>	<br>	ex:<br><br>        &lt;webuijsf:menu id="popup1" immediate="true" items="#{popUp.optionItems}" selected="#{popUp.selectedItem}"  submitForm="true"/&gt;<br><br><br><span
+ style="font-weight: bold;">3.4 Accessing the selected option on the server</span><br><br>The menu component uses its own event mechanism to publish selected values  for the menu. This is similar to the "ActionSource" components<br>which publish events for other components to listen for. There exists an eventListenerExpression similar to your actionListenerExpression which<br>can be bound to a method which takes an ValueEvent as an argument. This ValueEvent object contains the menu's selected value.<br><br>If you want to navigate to a different page using this particular value, then use the eventExpression (also similar to the actionE</span>xpression)<br>attribute for defining navigation rules.<br><br><span
+ style="font-family: verdana,helvetica,arial,sans-serif;"> You can also set the "Phase Id" during which the particular event should be broadcasted.<br>Use the "phaseId" attribute for doing this and pass on a valid Phase Identifier as an argument for this attribute.<br><br>Here is a code snippet as to how a text field would update its value when a menu submits a selected value (through asynchronous refresh/form submit)<br><br>    /**<br>     * EventListener which goes through the selected value and updates<br>     * the text field with the selected option.<br>     *<br>     * @param ve The ValueEvent<br>     */<br>    public void selectOption(com.sun.webui.jsf.event.ValueEvent ve) {<br>	// Get the selected outcome from the ValueEvent.<br>        String outcome = ve.getSelectedOption().toString();<br>        matchOption(outcome, getOptionItems());<br>    }<br>    <br>    /**<br>     * Match the outcome of the selected item to the matching option.<br>     * set the textfield's value to this option's label.<br>     * @param outcome The selected menu item.<br>     * @param options The options in the menu<br>     */<br>    private void matchOption(String outcome, Option[] options) {<br>        for (int i=0; i&lt;options.length; i++) {<br>          if (options[i].getValue().equals(outcome)) {            <br>              this.text = options[i].getLabel();<br>              break;<br>          }<br>          if (options[i] instanceof OptionGroup) {<br>              matchOption(outcome, ((OptionGroup)options[i]).getOptions());<br>          }<br>          <br>        }              <br>    }<br></span></pre>
+      </div>
+      <h2><a name="4.0"></a>4.0 Component Interfaces</h2>
+      <span style="font-weight: bold;"></span><span
+ style="font-weight: bold;"></span><br>
+      <br>
+      <h3><a name="4.1"></a>4.1 Exported interfaces table</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Interface Name<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Classification<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Reference<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 40%;">
+            <p>Comments<br>
+            </p>
+            </th>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">menuBase.js<br>
+            </td>
+            <td style="vertical-align: top;">Public<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">Base javascript for the
+menu component<br>
+            </td>
+          </tr>
+          <tr>
+            <td>popupMenu.js</td>
+            <td>Public<br>
+            </td>
+            <td>Section 4.5</td>
+            <td>Javascript file for this component<br>
+            </td>
+          </tr>
+          <tr>
+            <td>com.sun.webui.jsf.component.Menu.java<br>
+            </td>
+            <td>Public<br>
+            </td>
+            <td>Section 4.3</td>
+            <td>JSF component class</td>
+          </tr>
+          <tr>
+            <td>common.js<br>
+            </td>
+            <td>Private<br>
+            </td>
+            <td>Section 4.10<br>
+            </td>
+            <td>Utility script for widgets<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.widget.MenuRenderer.java<br>
+            </td>
+            <td style="vertical-align: top;">Private<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">Widget renderer for the
+component.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.ajax.MenuRenderer.java<br>
+            </td>
+            <td style="vertical-align: top;">Private<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">Ajax renderer for the
+component.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.model.Option.java<br>
+            </td>
+            <td style="vertical-align: top;">Public<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">Model class that is used
+to represent an option.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.model.OptionGroup.java<br>
+            </td>
+            <td style="vertical-align: top;">Public<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">Model class that
+represents a group of options.<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3><a name="4.2"></a>4.2 Imported interfaces</h3>
+      <div style="margin-left: 40px;"><br>
+      </div>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Interface Name<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Classification<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Reference<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 40%;">
+            <p>Comments<br>
+            </p>
+            </th>
+          </tr>
+          <tr>
+            <td>jsf-api.jar</td>
+            <td>Standard</td>
+            <td>JSR 127</td>
+            <td>JSF components API library, version 1.1</td>
+          </tr>
+          <tr>
+            <td>dojo-0.4.3.jar<br>
+            </td>
+            <td>Standard<br>
+            </td>
+            <td>dojotoolkit.org<br>
+            </td>
+            <td>the dojo toolkit library<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">json-2.jar<br>
+            </td>
+            <td style="vertical-align: top;">Standard<br>
+            </td>
+            <td style="vertical-align: top;"><font size="-1"><span
+ class="a">www.<b>json</b>.org</span></font> </td>
+            <td style="vertical-align: top;">The json library<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">prototype-1.5.0.jar<br>
+            </td>
+            <td style="vertical-align: top;">Standard<br>
+            </td>
+            <td style="vertical-align: top;"><font size="-1"><span
+ class="a">www.<b>prototype</b>js.org/</span></font> </td>
+            <td style="vertical-align: top;">The prototype javascript
+library<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <h3><a name="4.3"></a>4.3 Component interfaces</h3>
+      <br>
+      <br>
+      <div style="margin-left: 40px;">
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"><b>Constructor
+Summary</b></font></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td><code><b>Menu</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a
+new instance of Menu The constructor also sets the appropriate renderer
+type and instantiates the valueTypeEvaluator.</td>
+          </tr>
+        </tbody>
+      </table>
+<!-- ========== METHOD SUMMARY =========== -->&nbsp; <a
+ name="method_summary"><!-- --></a>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"> <b>Method
+Summary</b></font></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getFamily</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the
+family this component belongs to.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getHtmlTemplate</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get
+alternative HTML template to be used by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+            <td><code><b>getItems</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies
+the items that the web application user can choose from.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnChange</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the element value of this component is changed.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnClick</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse click occurs over this component.The
+popupMenu element has a function called getSelectedOption which can be
+invoked by onClick function handlers to know which option has been
+selected.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnDblClick</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse double click occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnKeyDown</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user presses down on a key while the component
+has focus.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnKeyPress</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user presses and releases a key while the
+component has focus.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnKeyUp</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user releases a key while the component has
+focus.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnMouseDown</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user presses a mouse button while the mouse
+pointer is on the component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnMouseMove</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user moves the mouse pointer while over the
+component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnMouseOut</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse out movement occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnMouseOver</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user moves the mouse pointer into the boundary
+of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnMouseUp</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user releases a mouse button while the mouse
+pointer is on the component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;Option[]</code></font></td>
+            <td><code><b>getOptionsArray</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Processes
+the component's SelectItems.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getRendererType</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the
+appropriate renderer type.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getStyle</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS
+style(s) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getStyleClass</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS style
+class(es) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+            <td><code><b>isSubmitForm</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When the
+submitForm attribute is set to true, the form is immediately submitted
+when the user changes the selection in the menu.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+            <td><code><b>isVisible</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>processDecodes</b>(javax.faces.context.FacesContext&nbsp;context)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specialized
+decode behavior on top of that provided by the superclass.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>restoreState</b>(javax.faces.context.FacesContext&nbsp;_context,
+java.lang.Object&nbsp;_state)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+            <td><code><b>saveState</b>(javax.faces.context.FacesContext&nbsp;_context)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save the
+state of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setHtmlTemplate</b>(java.lang.String&nbsp;htmlTemplate)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set
+alternative HTML template to be used by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setId</b>(java.lang.String&nbsp;id)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The
+component identifier for this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setItems</b>(java.lang.Object&nbsp;items)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies
+the items that the web application user can choose from.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnChange</b>(java.lang.String&nbsp;onChange)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user releases a mouse button while the mouse
+pointer is on the component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnClick</b>(java.lang.String&nbsp;onClick)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse click occurs over this component.The Menu
+element has a function called getSelectedOption which can be invoked by
+onClick function handlers to know which option has been selected.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnDblClick</b>(java.lang.String&nbsp;onDblClick)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse double click occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnKeyDown</b>(java.lang.String&nbsp;onKeyDown)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user presses down on a key while the component
+has focus.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnKeyPress</b>(java.lang.String&nbsp;onKeyPress)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user presses and releases a key while the
+component has focus.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnKeyUp</b>(java.lang.String&nbsp;onKeyUp)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user releases a key while the component has
+focus.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnMouseDown</b>(java.lang.String&nbsp;onMouseDown)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user presses a mouse button while the mouse
+pointer is on the component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnMouseMove</b>(java.lang.String&nbsp;onMouseMove)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user moves the mouse pointer while over the
+component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnMouseOut</b>(java.lang.String&nbsp;onMouseOut)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse out movement occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnMouseOver</b>(java.lang.String&nbsp;onMouseOver)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user moves the mouse pointer into the boundary
+of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnMouseUp</b>(java.lang.String&nbsp;onMouseUp)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user releases a mouse button while the mouse
+pointer is on the component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setRendered</b>(boolean&nbsp;rendered)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+rendered attribute to indicate whether the HTML code for the component
+should be included in the rendered HTML page.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setStyle</b>(java.lang.String&nbsp;style)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS
+style(s) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setStyleClass</b>(java.lang.String&nbsp;styleClass)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS style
+class(es) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setSubmitForm</b>(boolean&nbsp;submitForm)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When the
+submitForm attribute is set to true, the form is immediately submitted
+when the user changes the selection in the menu.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setVisible</b>(boolean&nbsp;visible)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+          </tr>
+        </tbody>
+      </table>
+&nbsp;<a
+ name="methods_inherited_from_class_com.sun.webui.jsf.component.EventSourceImpl"><!-- --></a>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableSubHeadingColor" bgcolor="#eeeeff">
+            <th align="left"><b>Methods inherited from class
+com.sun.webui.jsf.component.EventSourceImpl</b></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td><code>addEventListener, broadcast, getEventExpression,
+getEventListenerExpression, getEventListeners, getPhaseId, isImmediate,
+processEventExpression, queueEvent, removeEventListener,
+setEventExpression, setEventListenerExpression, setImmediate, setPhaseId</code></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <span style="font-weight: bold;"></span><span
+ style="font-weight: bold;"><br>
+      <br>
+      </span><br>
+      </div>
+      <h3><a name="4.4"></a>4.4 Tag interfaces</h3>
+      <div style="margin-left: 40px;"><br>
+      </div>
+      <br>
+      <table border="1" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <td colspan="5"><font size="+2"><b>Attributes</b></font></td>
+          </tr>
+          <tr>
+            <td><b>Name</b></td>
+            <td><b>Required</b></td>
+            <td><b>Request-time</b></td>
+            <td><b>Type</b></td>
+            <td><b>Description</b></td>
+          </tr>
+          <tr valign="top">
+            <td>binding</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> A ValueExpression that resolves to the UIComponent
+that corresponds to this tag. This binding allows the Java bean that
+contains the UIComponent to manipulate the UIComponent, its properties,
+and its children. </td>
+          </tr>
+          <tr valign="top">
+            <td>submitForm</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>When the submitForm attribute is set to true, the form
+is immediately submitted when the user changes the selection in the
+menu.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseDown</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user presses a mouse
+button while the mouse pointer is on the component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onDblClick</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when a mouse double click occurs
+over this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onKeyPress</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user presses and
+releases a key while the component has focus.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseOut</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when a mouse out movement occurs
+over this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>rendered</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Use the rendered attribute to indicate whether the
+HTML code for the component should be included in the rendered HTML
+page. If set to false, the rendered HTML page does not include the HTML
+for the component. If the component is not rendered, it is also not
+processed on any subsequent form submission. </td>
+          </tr>
+          <tr valign="top">
+            <td>id</td>
+            <td>false</td>
+            <td>true</td>
+            <td><code>java.lang.String</code></td>
+            <td><i>No Description</i></td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseOver</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user moves the mouse
+pointer into the boundary of this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>htmlTemplate</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Alternative HTML template to be used by this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onKeyUp</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user releases a key
+while the component has focus.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseMove</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user moves the mouse
+pointer while over the component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseUp</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user releases a mouse
+button while the mouse pointer is on the component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>styleClass</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>CSS style class(es) to be applied to the outermost HTML
+element when this component is rendered.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>items</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Specifies the items that the web application user can
+choose from. The value must be one of an array, Map or Collection whose
+members are all subclasses of<code>com.sun.webui.jsf.model.Option</code>.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onChange</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the element value of this
+component is changed.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>style</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>CSS style(s) to be applied to the outermost HTML element
+when this component is rendered.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>visible</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Use the visible attribute to indicate whether the
+component should be viewable by the user in the rendered HTML page. If
+set to false, the HTML code for the component is present in the page,
+but the component is hidden with style attributes. By default, visible
+is set to false, so HTML for the component HTML is rendered but the
+menu is not visible to user. Note that, even If the component is not
+visible, it can still be processed on subsequent form submissions
+because the HTML is present.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onKeyDown</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user presses down on a
+key while the component has focus.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onClick</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when a mouse click occurs over
+this component.The Menu element has a function called getSelectedOption
+which can be invoked by onClick function handlers to know which option
+has been selected. This will return the name of the option that was
+clicked.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>immediate</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>The immediate flag.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>phaseId</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> The <code>PhaseId</code> in which events should be
+broadcast. The default is <code>PhaseId.INVOKE_APPLICATION</code> or <code>PhaseId.ANY</code>
+if <code>isImmediate</code> returns <code>true</code> </td>
+          </tr>
+          <tr valign="top">
+            <td>eventListenerExpression</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>The EventListenerExpression attribute is used to specify
+a method to handle an menu event that is triggered when this component
+is activated by the user. The EventListenerExpression attribute value
+must be a JavaServer Faces EL expression that resolves to a method in a
+backing bean. The method must take a single parameter that is an event,
+and its return type must be <code>void</code>. The class that defines
+the method must implement the <code>java.io.Serializable</code>
+interface or <code>javax.faces.component.StateHolder</code> interface.
+            </p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>eventExpression</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>The MethodExpression that, when invoked, yields a
+literal outcome value.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <h3><a name="4.4.1"></a>4.4.1 Individual tag attributes
+descriptions</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="4.5"></a>4.5 Javascript interfaces</h3>
+      <span style="font-weight: bold;"></span><br>
+      <div style="margin-left: 40px;">
+      <div style="margin-left: 40px;">
+      <table
+ style="text-align: left; width: 1159px; height: 734px; margin-left: auto; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td
+ style="vertical-align: top; font-weight: bold; font-style: italic;">Interface
+name</td>
+            <td
+ style="vertical-align: top; font-weight: bold; font-style: italic;">Type<br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold; font-style: italic;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">webui.@THEME@.widget.popupMenu<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Used for instantiating the
+widget<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.setProps</td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Use this function to
+change any of the following supported
+properties: <br>
+            <ul>
+              <li>charset</li>
+              <li>className</li>
+              <li>dir</li>
+              <li>formId<br>
+              </li>
+              <li>id</li>
+              <li>lang</li>
+              <li>options<br>
+              </li>
+              <li>onClick</li>
+              <li>onChange<br>
+              </li>
+              <li>onDblClick</li>
+              <li>onKeyDown</li>
+              <li>onKeyPress</li>
+              <li>onKeyUp</li>
+              <li>onMouseDown</li>
+              <li>onMouseOut</li>
+              <li>onMouseOver</li>
+              <li>onMouseUp</li>
+              <li>onMouseMove</li>
+              <li>style</li>
+              <li>submitForm<br>
+              </li>
+              <li>title</li>
+              <li>visible</li>
+            </ul>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.setProps<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Store the properties of
+the element on the widget node.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.getProps<br>
+            </td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Get all the properties of
+the popup menu that are set <br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.getProps<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Get the properties of the
+popup menu widget. this is used by domNode.getProps function<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.getClassName<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Return the style class to
+be applied to the popup menu widget.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.open<br>
+            </td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Displays the popupMenu at
+the
+specified co ordinates which are passed on as arguments to the function.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.open<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Displays the popup menu at
+the
+specified co ordinates which are passed on as arguments to the
+function. This is used by the domNode.displayMenu function.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.getSelectedValue<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Returns the option that
+has been selected by the user. Used by the domNode.getSelectedOption
+function.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.getSelectedValue<br>
+            </td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Returns the option that
+has been selected by the user.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.setSelectedValue<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Sets the selected option.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.addOption<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Adds the specified options
+to the popupMenu.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.setOptionNodeProps<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Sets the text and image of
+the widget(if present) on the node.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.submit<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Asynchronously submits the
+widget.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.submit<br>
+            </td>
+            <td style="vertical-align: top;">public.<br>
+            </td>
+            <td style="vertical-align: top;">Public function for
+asynchronously submitting the widget.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.submitPopupMenuForm<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Submit the form if the
+submitForm attribute is set to true.<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <span style="font-weight: bold;"></span><br>
+      <br>
+      <br>
+      <br>
+      <br>
+      </div>
+      </div>
+      <h3><a name="4.6"></a>4.6 Theme resources keys</h3>
+      <h3><a name="4.6.1"></a>4.6.1 Style selectors</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">MenuDiv@THEME_CSS<br>
+            </td>
+            <td style="vertical-align: top;">Style to be applied for
+the outer div for menu <br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">Menu@THEME_CSS@<br>
+            </td>
+            <td style="vertical-align: top;">Style applied for the
+menu's "ul" element<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">NoMenuItemWidget@THEME_CSS@<br>
+            </td>
+            <td style="vertical-align: top;">Style applied if there is
+no image for the menu.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">NoMenuItemSubmenu@THEME_CSS@<br>
+            </td>
+            <td style="vertical-align: top;">Style applied if there
+arent sub menus for the particular menu.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">MenuItemSeparator@THEME_CSS@<br>
+            </td>
+            <td style="vertical-align: top;">Separator style for the
+menu<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">iehover@THEME_CSS@<br>
+            </td>
+            <td style="vertical-align: top;">IE fix where div cannot be
+hovered.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">MenuItems@THEME_CSS@<br>
+            </td>
+            <td style="vertical-align: top;">Applied for the menu items
+style.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">MenuItem@THEME_CSS@<br>
+            </td>
+            <td style="vertical-align: top;">Style applied for a
+particular menu item.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">MenuItemWidget@THEME_CSS@<br>
+            </td>
+            <td style="vertical-align: top;">Style applied if there is
+an image along with the menu option<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">MenuItemLabel@THEME_CSS@<br>
+            </td>
+            <td style="vertical-align: top;">Style applied for the
+enabled menu item label text<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">MenuItemDisabled@THEME_CSS@<br>
+            </td>
+            <td style="vertical-align: top;">Style applied for the
+disabled menu item label text.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">MenuOptGroupHeader@THEME_CSS@<br>
+            </td>
+            <td style="vertical-align: top;">Style applied for a menu
+option that represents a group.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">MenuShadow@THEME_CSS@<br>
+            </td>
+            <td style="vertical-align: top;">Style that gives a shadow
+effect for the menu<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.6.2"></a>4.6.2 Image resources</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.6.3"></a>4.6.3 Javascript resources</h3>
+      <br>
+      <table
+ style="width: 1227px; text-align: left; margin-left: 40px; margin-right: auto; height: 126px;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;javascript/widget/menuBase.js<br>
+            </td>
+            <td style="vertical-align: top;">Base javascript for the
+popupMenu widget<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/popupMenu.js
+            </td>
+            <td style="vertical-align: top;">Javascript containing the
+popup menu widget resources<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/common.js</td>
+            <td style="vertical-align: top;">Javascript containing the
+common files for the widgets<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/widgetBase.js</td>
+            <td style="vertical-align: top;">Base javascript file for
+all widgets.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/jsfx/popupMenu.js<br>
+            </td>
+            <td style="vertical-align: top;">Javascript file for ajax
+requests.<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.6.4"></a>4.6.4 Template resources</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/templates/popupMenu.html
+            </td>
+            <td style="vertical-align: top;">The template file for the
+popupMenu widget </td>
+          </tr>
+        </tbody>
+      </table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Note: The
+&lt;theme&gt; tag is
+intended to be replaced with the theme
+name
+(e.g., suntheme).
+      <h3><a name="4.6.5"></a>4.6.5 Other resources</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.6.6"></a>4.6.6 Localized message keys</h3>
+      <div style="margin-left: 40px;"><br>
+      </div>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.7"></a>4.7 Component Extensibility</h3>
+      <div style="margin-left: 40px;">TBD</div>
+      <h2><a name="5.0"></a>5.0 - Creator Design Time Support</h2>
+      <h3><a name="5.1"></a>5.1 Design-time Behavior</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A default menu has to
+be created each time a menu component is dragged and dropped on to the
+designer surface. Using the items attribute, a developer shall be able
+to bind the options to the menu using the visual value binding tool.
+The default menu that is created when the menu is initially dragged and
+dropped on to the surface shall contain a dummy list of options such as
+"item1, item2, item3" etc.. After the options has been bound, the
+menu's list of options shall change to "abc abc ..." to show that there
+has been some data entered for the menu. This is similar to the
+behavior of list family of items. The visible attribute of the menu
+shall be set to true during design time to enable the developer to
+configure the menu.<br>
+      <br>
+      <h3><a name="5.2"></a>5.2 Design-time Classes and Interfaces</h3>
+      <div style="margin-left: 40px;">
+      <table
+ style="width: 1193px; text-align: left; margin-left: 40px; margin-right: auto; height: 52px;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/renderkit/html/MenuDesignTimeRenderer.java<br>
+            </td>
+            <td style="vertical-align: top;">Designtime renderer class
+for the popupMenu component.<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <h3><a name="5.3"></a>5.3 Localized message keys</h3>
+      <div style="margin-left: 40px;">Define message resource keys and
+expected message content.&nbsp; Exact message text is not
+required.&nbsp; <br>
+      </div>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="5.4"></a>5.4 Dependencies </h3>
+      <div style="margin-left: 40px;">N/A<br>
+      </div>
+      <h2><a name="6.0"></a>6.0 Component Dependencies</h2>
+      <h3><a name="6.1"></a>6.1 Component class dependencies</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="6.2"></a>6.2 Javascript dependencies</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N/A<br>
+      <br>
+      <h3><a name="6.3"></a>6.3 Infrastructure dependencies</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N/A<br>
+      <br>
+      <h3><a name="6.4"></a>6.4 Design time dependencies</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N/A<br>
+      <br>
+      <h2><a name="7.0"></a>7.0 - A11Y, I18n, Compliance, Debugging<br>
+      </h2>
+      <h3><a name="7.1"></a>7.1 Accessibility (A11Y)</h3>
+      <div style="margin-left: 40px;">The menu shall be accessible
+without the help of a mouse. The user shall be able to open the menu
+using the "shift+F10" key sequence. Opening this menu<br>
+causes the default focus to be set on the first option item in the
+menu. Using the up and down arrow keys will enable the user to traverse
+through the<br>
+various menu options. Pressing the enter key on a particular menu
+option shall cause that menu option to be selected and the menu will
+close. The focus will<br>
+be on the item that invoked the menu. Pressing "Esc" key also will
+cause the menu to close and focus to return on the invokee.<br>
+      </div>
+      <h3><a name="7.2"></a>7.2 Internationalization (I18N)</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h3><a name="7.3"></a>7.3 Level of XHTML Compliance</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h3><a name="7.4"></a>7.4 Javascript Compliance</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h3><a name="7.5"></a>7.5 Debugging</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h2><a name="8.0"></a>8.0 Component High level design</h2>
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+8.1 JSF Component class</span><br>
+      <br>
+      <div style="margin-left: 40px;">The Menu component uses the
+EventSource interface for delivering the selected value of the menu to
+the application. The EventSource interface defines a minimal component
+interface to provide an application with simple GUI events. These GUI
+events reflect "gestures" made by the user, such as selecting a menu
+option, or any action that results in a reqeust value representing that
+action submitted in a request either by&nbsp; "form.submit" or an
+XmlHttpRequest. <br>
+The MenuRenderer queues an ValueEvent if the submitted value matches
+one found in the option items.The ValueEvent object which inherits from
+the FacesEvent class contains the selected value of the menu component.
+This object will be passed on as an argument to the method bound to
+EventListenerExpression attribute. To obtain the selected value, the
+developer needs to have a method binding to this attribute and extract
+the value from this value binding. The EventExpression interface
+evaluates the method binding assigned to it and performs the page
+navigation if needed by invoking the NavigationHandler.<br>
+A PhaseId can also be set for the menu component which will instruct
+when the menu should actually broadcast the value event. This will be
+useful in cases where the menu's value should be processed irrespective
+of state of other components, such as an immediate required text field.
+      <br>
+      <br>
+      <span style="font-weight: bold;">8.2 JSF Renderer class</span><br>
+      <br>
+Like other components, there are two renderers, one for normal requests
+and one for asynchronous requests. Unlike other components, the way the
+decode method functions<br>
+differs depending on the way the request is received by the component.
+If its a normal request ( a full fledged http request), then the client
+side widget will have appended<br>
+the selected option to the request parameter. Hence, the decode method
+will take the value out of the request parameter map and apply it as
+the submittedValue of the component.<br>
+      <br>
+On the other hand, if the request is an ajax request, then the value
+will be included in the ajax request sent by the widget. Hence the
+decode method will now look for the <br>
+"xjson" property which is a JSON object in the request parameter map.
+It will then read out the value corresponding to the "value" key in the
+JSON object and update the <br>
+component correspondingly.<br>
+      </div>
+      <h2><a name="9.0"></a>9.0 Issues</h2>
+      <div style="margin-left: 40px;">- None<br>
+      </div>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

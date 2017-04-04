@@ -1,0 +1,90 @@
+/**
+ * The contents of this file are subject to the terms
+ * of the Common Development and Distribution License
+ * (the License). You may not use this file except in
+ * compliance with the License.
+ *
+ * You can obtain a copy of the license at
+ * https://woodstock.dev.java.net/public/CDDLv1.0.html.
+ * See the License for the specific language governing
+ * permissions and limitations under the License.
+ *
+ * When distributing Covered Code, include this CDDL
+ * Header Notice in each file and include the License file
+ * at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+ * If applicable, add the following below the CDDL Header,
+ * with the fields enclosed by brackets [] replaced by
+ * you own identifying information:
+ * "Portions Copyrighted [year] [name of copyright owner]"
+ *
+ * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+ */
+
+{
+    "name": "accordion",
+    "type": "@JS_NAME@",
+    "version": "@JS_VERSION@",
+    "jmakiVersion": "1.8",
+    "description": "Woodstock accordion widget.",
+    "args": [
+        {"className": {
+                "type": "STRING",
+                "description": "CSS selector.",
+                "defaultValue": ""}},
+        {"collapseAllImage": {
+                "type": "OBJECT",
+                "description": "Image associated with collapse all icon.",
+                "defaultValue": {"src": "image_url"}}},
+        {"expandAllImage": {
+                "type": "OBJECT",
+                "description": "Image associated with expand all icon.",
+                "defaultValue": {"src": "image_url"}}},
+        {"isRefreshIcon": {
+                "type": "BOOLEAN",
+                "description": "If true, the refresh icon should be set.",
+                "defaultValue": false}},
+        {"multipleSelect": {
+                "type": "BOOLEAN",
+                "description": "If true, multiple tabs can be selected.",
+                "defaultValue": false}},
+        {"refreshImage": {
+                "type": "OBJECT",
+                "description": "Image associated with refresh icon.",
+                "defaultValue": {"src": "image_url"}}},
+        {"style": {
+                "type": "STRING",
+                "description": "Specify style rules inline.",
+                "defaultValue": ""}},
+        {"toggleControls": {
+                "type": "BOOLEAN",
+                "description": "If true, expand and collapse icons should be set.",
+                "defaultValue": false}},
+        {"visible": {
+                "type": "BOOLEAN",
+                "description": "Hide or show element.",
+                "defaultValue": true}}
+    ],
+    "value": {
+      "required": true,
+      "type": "OBJECT",
+      "defaultValue": {"items": [
+           {"id": "tab1", "label": "Tab 1", "content": "Tab 1 content", "selected": true}
+           ]},
+      "description": "Simple accordion with one tab."
+    },
+    "config": {
+        "type": {
+            "id": "@JS_NAME@",
+            "libs": [
+                "@JS_PATH@/bootstrap.js",
+                "@JS_PATH@/webui.js"
+            ],
+            "resources": [ "@JS_LIBPATH@" ] 
+        } 
+    },
+   "topicInfo": {
+        "type": "publish",
+        "topicName": "/@JS_NS@/accordion/onSelect",
+        "description": "Published when a tab is selected."
+    }
+}

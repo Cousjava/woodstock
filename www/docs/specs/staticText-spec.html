@@ -1,0 +1,1299 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <!--
+      The contents of this file are subject to the terms
+      of the Common Development and Distribution License
+      (the License).  You may not use this file except in
+      compliance with the License.
+      
+      You can obtain a copy of the license at
+      https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      See the License for the specific language governing
+      permissions and limitations under the License.
+      
+      When distributing Covered Code, include this CDDL
+      Header Notice in each file and include the License file
+      at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      If applicable, add the following below the CDDL Header,
+      with the fields enclosed by brackets [] replaced by
+      you own identifying information:
+      "Portions Copyrighted [year] [name of copyright owner]"
+      
+      Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+    -->
+<title>Project Woodstock - StaticText Component FS</title>
+<style type="text/css"> 
+/* <![CDATA[ */
+@import url(../../browser-uispec.css);
+.style2 {font-size: 18pt}
+  </style>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+</head>
+<body style="background-color: rgb(255, 255, 255);">
+<div class="MstDiv">
+<table class="MstTblBot" title="" border="0" cellpadding="0"
+ cellspacing="0" width="100%">
+  <tbody>
+    <tr>
+      <td class="MstTdTtl">
+      <div class="MstDivTtl">
+      <div class="Mst1TtlTxt">Project Woodstock</div>
+      </div>
+      <div class="Mst1SecDiv"> <span class="Mst1SecTxt style2">Component
+Functional Spec - StaticText<br>
+      </span></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<table title="" style="width: 100%;" class="Mst2Tbl" border="0"
+ cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td> <br>
+      <h2 style="font-weight: bold;"><a name="1.0"></a>1.0 Component
+Overview</h2>
+      <h3><span style="font-weight: bold;"><a name="1.1"></a>1.1
+Document Revision History</span></h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: auto; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Revision</span></td>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Date</span></td>
+            <td style="width: 50%; text-align: center;"><span
+ style="font-weight: bold;">Synopsis</span></td>
+            <td style="width: 20%; text-align: center;"><span
+ style="font-weight: bold;">Author</span></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; text-align: center;">1.0<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">04/18/2007<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Initial
+draft<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Animesh
+Sahay<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 style="font-weight: bold;"><a name="1.2"></a>1.2 Component
+Description<br>
+      </h3>
+      <div style="margin-left: 40px;">StaticText component renders
+itself
+using client side renderer (widget renderer). Client side staticText
+widget
+is used to render staticText component.<br>
+      </div>
+      <h3><a name="1.3"></a>1.3 Component Purpose</h3>
+      <div style="margin-left: 40px;">The component still maintains its
+original purpose However the new client side rendering will
+enable updating staticText component client side.<br>
+      </div>
+      <h3 style="font-weight: bold;"><a name="1.4"></a>1.4 Relevant
+Documents</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+ target="_blank"
+ href="https://woodstock.dev.java.net/docs/specs/ajax-architecture-spec.html">Ajax
+Architecture for Woodstock JavaServer Faces</a>
+      <h3><a name="1.5"></a>1.5 Definition of Terms</h3>
+      <div style="margin-left: 40px;">
+      <ul>
+        <li>HTML template - The file used to define HTML tags
+associated with a component</li>
+        <li>In-line JavaScript - JavaScript used to instantiate a <span
+ style="font-style: italic;">Dojo
+Widget</span>, located anywhere (i.e., in-line) in the rendered HTML
+page<br>
+        </li>
+        <li>JSF - JavaServer Faces</li>
+        <li>JSF component - The JSF <code>UIComponent</code>
+compliment to a <span style="font-style: italic;">JSP tag</span> and <span
+ style="font-style: italic;">JSF renderer</span></li>
+        <li>JSF facet - A facet is a subcomponent that has a specific
+purpose defined by its parent container<br>
+        </li>
+        <li>JSF renderer - The JSF <code>Renderer</code> compliment to
+a <span style="font-style: italic;">JSP
+tag</span> and <span style="font-style: italic;">JSF component</span><br>
+        </li>
+        <li>JSON - JavaScript Object Notation (i.e., object literals)
+defined using braces ({}) that contain a
+set of comma separated key value pairs</li>
+        <li>JSP tag - The JSF <code>UIComponentELTag</code> or <code>UIComponentELBodyTag</code>
+compliment
+to a <span style="font-style: italic;">JSF component</span>
+and <span style="font-style: italic;">JSF renderer</span><br>
+        </li>
+        <li>Subcomponent - A child component used to render a <span
+ style="font-style: italic;">complex component</span></li>
+        <li>Widget - Entity consisting of <span
+ style="font-style: italic;">widget JavaScript</span> and <span
+ style="font-style: italic;">CSS</span>, not necessarily based on the
+Dojo toolkit<span style="font-style: italic;"><br>
+          </span></li>
+        <li>Widget JavaScript - The JavaScript used to populate an <span
+ style="font-style: italic;">HTML template</span> and/or update
+component properties</li>
+        <li>Contents - JSON Array which contain JSON objects of sub
+components to be displayed inside the widget<br>
+        </li>
+        <li>Widget renderer - The <span style="font-style: italic;">JSF
+renderer</span> used to output <span style="font-style: italic;">in-line
+JavaScript</span> for
+instantiating a <span style="font-style: italic;">Dojo Widget</span></li>
+      </ul>
+      </div>
+      <h2><a name="2.0"></a>2.0 Requirements, goals, and assumptions</h2>
+      <h3><a name="2.1"></a>2.1 Requirements</h3>
+      <h3><a name="2.1.1"></a>2.1.1 UI requirements</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+N/A<br>
+      <h3><a name="2.1.2"></a>2.1.2 Functional requirements</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+N/A<br>
+      <h3><a name="2.1.3"></a>2.1.3 Performance requirements</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.1.4"></a>2.1.4 Browser, platform requirements</h3>
+      <ul>
+        <li>The table of supported <a
+ href="https://woodstock.dev.java.net/docs/SupportedBrowers.htm">Browsers</a>.</li>
+        <li>The table of supported <a
+ href="https://woodstock.dev.java.net/docs/SupportedContainers.htm">Containers</a>.</li>
+      </ul>
+      <h3><a name="2.1.5"></a>2.1.5 Special requirements</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.2"></a>2.2 Requirements Not Met</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.3"></a>2.3 Assumptions</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.4"></a>2.4 Goals</h3>
+      <div style="margin-left: 40px;">N/A.</div>
+      <h3><a name="2.5"></a>2.5 Non-goals</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h2><a name="3.0"></a>3.0 Component Usage</h2>
+Woodstock components can be used
+in a few different ways. The most
+typical way to use a component is with the <span
+ style="font-style: italic;">JSP tag</span>. To
+include an staticText component in the JSP page, the web app developer
+will
+include a tag like this.<br>
+      <br>
+      <div style="margin-left: 40px;"><code>&lt;webuijsf:staticText
+id="statictext1" text="some text to display" /&gt;</code><br>
+      <br>
+      </div>
+Using
+the <span style="font-style: italic;">JSP tag</span>, all the <span
+ style="font-style: italic;">in-line
+JavaScript</span> necessary to generate a <span
+ style="font-style: italic;">Dojo widget</span> is automatically output
+in the rendered HTML page. This includes the name of the desired
+widget, any
+localized and themed properties required to populate the <span
+ style="font-style: italic;">HTML template</span>,
+and any JavaScript files (e.g., <span style="font-style: italic;">widget
+JavaScript</span>) necessary to support the <span
+ style="font-style: italic;">Dojo Widget</span>. However,
+a <span style="font-style: italic;">Dojo Widget</span> can also be
+represented by the following JavaScript. This
+JavaScript makes the Woodstock component available to web app
+developers who cannot, or do not want to, use the JSP and/or JSF
+frameworks.<br>
+      <br>
+Note that any one of the key-value pairs of properties below can
+contain more key-value pairs, possibly used by subcomponents.<br>
+      <br>
+      <code>dojo.require("webui.</code><code>&lt;theme&gt;</code><code>.widget.staticText");</code><code><br>
+webui.</code><code>&lt;theme&gt;</code><code>.widget.common.createWidget({<br>
+&nbsp;&nbsp;&nbsp; _widgetType: "webui.</code><code>&lt;theme&gt;</code><code>:staticText",<br>
+      </code><code>&nbsp;&nbsp;&nbsp; templatePath": "/</code><code>&lt;appname&gt;</code><code>/theme/com/sun/webui/jsf/</code><code>&lt;theme&gt;</code><code>/templates/staticText.html",</code><code><br>
+&nbsp;&nbsp;&nbsp; </code><code>id: "form1:staticText1",<br>
+&nbsp;&nbsp;&nbsp; value: "some text to display",<br>
+&nbsp;&nbsp;&nbsp; escape:&nbsp; true <br>
+});</code><code></code><code></code><br>
+      <br>
+      <span style="color: rgb(51, 51, 255);"><span
+ style="color: rgb(0, 0, 0);" &gt;use="" the="">When the component is
+rendered, a DOM object corresponding to the
+component is created. To manipulate the component on the client side,
+you may invoke functions on the DOM object. With reference to the DOM
+id, to change the text client side, invoke <code>document.getElementById(id).setProps({value:
+"My Text"})</code>.<br>
+      </span></span><br>
+      <h2><a name="4.0"></a>4.0 Component Interfaces</h2>
+      <h3><a name="4.1"></a>4.1 Exported interfaces table</h3>
+      <div style="margin-left: 40px;"><br>
+      </div>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Interface Name<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Classification<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Reference<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 40%;">
+            <p>Comments<br>
+            </p>
+            </th>
+          </tr>
+          <tr>
+            <td>staticText.js<br>
+            </td>
+            <td>committed</td>
+            <td>Section 4.5</td>
+            <td>Javascript file for this component</td>
+          </tr>
+          <tr>
+            <td>StaticText.java<br>
+            </td>
+            <td>committed</td>
+            <td>Section 4.3</td>
+            <td>JSF component class</td>
+          </tr>
+          <tr>
+            <td>common.js<br>
+            </td>
+            <td>Private<br>
+            </td>
+            <td>Section 4.10<br>
+            </td>
+            <td>Utility script for all client side widgets<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">StaticTextRenderer.java<br>
+            </td>
+            <td style="vertical-align: top;">Private<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">JSF renderer which outputs
+JSON properties for the Field widget.<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3><a name="4.2"></a>4.2 Imported interfaces</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Interface Name<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Classification<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Reference<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 40%;">
+            <p>Comments<br>
+            </p>
+            </th>
+          </tr>
+          <tr>
+            <td>jsf-api.jar</td>
+            <td>Standard</td>
+            <td>JSR 127</td>
+            <td>JSF components API library, version 1.1</td>
+          </tr>
+          <tr>
+            <td>dojo-0.4.2.jar<br>
+            </td>
+            <td>Standard<br>
+            </td>
+            <td>dojotoolkit.org<br>
+            </td>
+            <td>the dojo toolkit library<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">json-2.jar<br>
+            </td>
+            <td style="vertical-align: top;">Standard<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The json library<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">prototype-1.5.0.jar<br>
+            </td>
+            <td style="vertical-align: top;">Standard<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The prototype javascript
+library<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3><a name="4.3"></a>4.3 Component interfaces</h3>
+      <div style="margin-left: 40px;"><!-- ======== START OF CLASS DATA ======== -->
+      <h2><font size="-1">com.sun.webui.jsf.component</font> <br>
+Class StaticText</h2>
+      <pre>java.lang.Object<br>  <img
+ src="../../java_net/woodstock/webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by ">javax.faces.component.UIComponent<br>      <img
+ src="../../java_net/woodstock/webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by ">javax.faces.component.UIComponentBase<br>          <img
+ src="../../java_net/woodstock/webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by ">javax.faces.component.UIOutput<br>              <img
+ src="../../java_net/woodstock/webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by "><b>com.sun.webui.jsf.component.StaticText</b>
+      </pre>
+      <dl>
+        <dt><b>All Implemented Interfaces:</b> </dt>
+        <dd>javax.faces.component.StateHolder,
+javax.faces.component.ValueHolder</dd>
+      </dl>
+      <hr>
+      <dl>
+        <dt>
+          <pre>public class <b>StaticText</b><dt>extends javax.faces.component.UIOutput</dt></pre>
+        </dt>
+      </dl>
+      <p>The StaticText component is used to display text that is not
+interactive in the rendered HTML page. </p>
+      <hr>
+      <p><!-- =========== FIELD SUMMARY =========== --> <a
+ name="field_summary"><!-- --></a></p>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left">
+            <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+              <tbody>
+                <tr class="TableHeadingColor" bgcolor="#ccccff">
+                  <th colspan="2" align="left"><font size="+2"><b>Field
+Summary</b></font></th>
+                </tr>
+              </tbody>
+            </table>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableSubHeadingColor" bgcolor="#eeeeff">
+            <th align="left"><b></b><br>
+            </th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td>
+            <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+              <tbody>
+                <tr class="TableSubHeadingColor" bgcolor="#eeeeff">
+                  <th align="left"><b>Fields inherited from class
+javax.faces.component.UIOutput</b></th>
+                </tr>
+                <tr class="TableRowColor" bgcolor="white">
+                  <td><code>COMPONENT_FAMILY, COMPONENT_TYPE</code></td>
+                </tr>
+              </tbody>
+            </table>
+&nbsp; <br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== --><a
+ name="constructor_summary"><!-- --></a>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"> <b>Constructor
+Summary</b></font></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td><a
+ href="file:///space/java_net/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/HiddenField.html#HiddenField%28%29"><code></code></a><b>StaticText</b>()
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Construct a new <code>StaticText</code>.</td>
+          </tr>
+        </tbody>
+      </table>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== --><a name="method_summary"><!-- --></a><br>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"><b>Method
+Summary</b></font></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getFamily</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the
+family for this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getHtmlTemplate</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get
+alternative HTML template to be used by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnClick</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse click occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnDblClick</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse double click occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnMouseDown</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user presses a mouse button while the mouse
+pointer is on the component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnMouseMove</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user moves the mouse pointer while over the
+component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnMouseOut</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse out movement occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnMouseOver</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user moves the mouse pointer into the boundary
+of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnMouseUp</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user releases a mouse button while the mouse
+pointer is on the component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getStyle</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS
+style(s) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getStyleClass</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS style
+class(es) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+            <td><code><b>getText</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The text to
+be displayed for this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getToolTip</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the
+value of the title attribute for the HTML element.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+            <td><code><b>getValue</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;javax.el.ValueExpression</code></font></td>
+            <td><code><b>getValueExpression</b>(java.lang.String&nbsp;name)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the <code>ValueExpression</code>
+stored for the specified name (if any), respecting any property aliases.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+            <td><code><b>isEscape</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Escape the
+html text so it won't be interpreted by the browser as HTML</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+            <td><code><b>isVisible</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>restoreState</b>(javax.faces.context.FacesContext&nbsp;_context,
+java.lang.Object&nbsp;_state)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Restore the
+state of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+            <td><code><b>saveState</b>(javax.faces.context.FacesContext&nbsp;_context)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save the
+state of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setConverter</b>(javax.faces.convert.Converter&nbsp;converter)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The
+converter attribute is used to specify a method to translate native
+property values to String and back for this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setEscape</b>(boolean&nbsp;escape)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Escape the
+html text so it won't be interpreted by the browser as HTML</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setHtmlTemplate</b>(java.lang.String&nbsp;htmlTemplate)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set
+alternative HTML template to be used by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setId</b>(java.lang.String&nbsp;id)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The
+component identifier for this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnClick</b>(java.lang.String&nbsp;onClick)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse click occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnDblClick</b>(java.lang.String&nbsp;onDblClick)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse double click occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnMouseDown</b>(java.lang.String&nbsp;onMouseDown)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user presses a mouse button while the mouse
+pointer is on the component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnMouseMove</b>(java.lang.String&nbsp;onMouseMove)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user moves the mouse pointer while over the
+component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnMouseOut</b>(java.lang.String&nbsp;onMouseOut)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse out movement occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnMouseOver</b>(java.lang.String&nbsp;onMouseOver)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user moves the mouse pointer into the boundary
+of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnMouseUp</b>(java.lang.String&nbsp;onMouseUp)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user releases a mouse button while the mouse
+pointer is on the component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setRendered</b>(boolean&nbsp;rendered)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+rendered attribute to indicate whether the HTML code for the component
+should be included in the rendered HTML page.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setStyle</b>(java.lang.String&nbsp;style)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS
+style(s) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setStyleClass</b>(java.lang.String&nbsp;styleClass)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS style
+class(es) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setText</b>(java.lang.Object&nbsp;text)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The text to
+be displayed for this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setToolTip</b>(java.lang.String&nbsp;toolTip)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the
+value of the title attribute for the HTML element.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setValueExpression</b>(java.lang.String&nbsp;name,
+javax.el.ValueExpression&nbsp;binding)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the <code>ValueExpression</code>
+stored for the specified name (if any), respecting any property aliases.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setVisible</b>(boolean&nbsp;visible)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+          </tr>
+        </tbody>
+      </table>
+&nbsp; <br>
+      </div>
+      <h3><a name="4.4"></a>4.4 Tag interfaces</h3>
+      <div style="margin-left: 40px;">
+      <table border="1" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <td colspan="5"><font size="+2"><b>Attributes</b></font></td>
+          </tr>
+          <tr>
+            <td><b>Name</b></td>
+            <td><b>Required</b></td>
+            <td><b>Request-time</b></td>
+            <td><b>Type</b></td>
+            <td><b>Description</b></td>
+          </tr>
+          <tr valign="top">
+            <td>binding</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> A ValueExpression that resolves to the UIComponent
+that corresponds to this tag. This binding allows the Java bean that
+contains the UIComponent to manipulate the UIComponent, its properties,
+and its children. </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseDown</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user presses a mouse
+button while the mouse pointer is on the component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>toolTip</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Sets the value of the title attribute for the HTML
+element. The specified text will display as a tooltip if the mouse
+cursor hovers over the HTML element.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onDblClick</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when a mouse double click occurs
+over this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>converter</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> The converter attribute is used to specify a method to
+translate native property values to String and back for this component.
+The converter attribute value must be one of the following:
+            <ul>
+              <li>A JavaServer Faces EL expression that resolves to a
+backing bean or bean property that implements the <code>javax.faces.converter.Converter</code>
+interface; or </li>
+              <li>the ID of a registered converter (a String).</li>
+            </ul>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseOut</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when a mouse out movement occurs
+over this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>rendered</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Use the rendered attribute to indicate whether the
+HTML code for the component should be included in the rendered HTML
+page. If set to false, the rendered HTML page does not include the HTML
+for the component. If the component is not rendered, it is also not
+processed on any subsequent form submission. </td>
+          </tr>
+          <tr valign="top">
+            <td>escape</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Escape the html text so it won't be interpreted by the
+browser as HTML</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>id</td>
+            <td>false</td>
+            <td>true</td>
+            <td><code>java.lang.String</code></td>
+            <td><i>No Description</i></td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseOver</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user moves the mouse
+pointer into the boundary of this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>htmlTemplate</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Alternative HTML template to be used by this
+component. </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseMove</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user moves the mouse
+pointer while over the component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseUp</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user releases a mouse
+button while the mouse pointer is on the component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>styleClass</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>CSS style class(es) to be applied to the outermost HTML
+element when this component is rendered.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>text</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>The text to be displayed for this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>style</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>CSS style(s) to be applied to the outermost HTML element
+when this component is rendered.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>visible</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Use the visible attribute to indicate whether the
+component should be viewable by the user in the rendered HTML page. If
+set to false, the HTML code for the component is present in the page,
+but the component is&nbsp; with style attributes. By default, visible
+is set to true, so HTML for the component HTML is included and visible
+to the user. If the component is not visible, it can still be processed
+on subsequent form submissions because the HTML is present.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onClick</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when a mouse click occurs over
+this component.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <br>
+      <h3><a name="4.5"></a>4.5 Javascript interfaces</h3>
+      <div style="margin-left: 40px;">
+      <table
+ style="text-align: left; width: 100%; height: 100%; margin-left: auto; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td
+ style="vertical-align: top; font-weight: bold; font-style: italic;">Interface
+name</td>
+            <td
+ style="vertical-align: top; font-weight: bold; font-style: italic;">Type<br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold; font-style: italic;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">webui.@THEME@.widget.staticText<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Used for instantiating the
+widget<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">webui.@THEME@.widget.jsfx.staticText</td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Used for handling ajax
+request/response</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.setProps</td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Use this function to
+change any of the following supported
+properties:<br>
+            <ul>
+            </ul>
+            <span style="color: rgb(51, 51, 255);"><span
+ style="color: rgb(0, 0, 0);" &gt;use="" the="">
+            <ul>
+              <li>className</li>
+              <li>dir</li>
+              <li>escape</li>
+              <li>id</li>
+              <li>lang</li>
+              <li>onClick</li>
+              <li>onDblClick</li>
+              <li>onMouseDown</li>
+              <li>onMouseMove</li>
+              <li>onMouseOut</li>
+              <li>onMouseOver</li>
+              <li>onMouseUp</li>
+              <li>style</li>
+              <li>title</li>
+              <li>value</li>
+              <li>visible</li>
+            </ul>
+            </span></span>
+            <ul>
+            </ul>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.setProps<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Store the properties of
+the element on the widget node.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.getProps<br>
+            </td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Use this function to get
+widget properties. Please see <code>setProps()</code>
+function for a list of supported properties.&nbsp; </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.getProps<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Get the properties of
+the&nbsp; widget. this is used by domNode.getProps function<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.refresh</td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Use this function to
+asynchronously refresh the component.<br>
+            <ul>
+              <li>execute: Comma separated string containing a list of
+client
+ids against which the <code>execute</code> portion of the request
+processing lifecycle must be run.</li>
+            </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+Note:&nbsp;&nbsp; i) domNode over here refers to the html dom element <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ii) widget refers to
+the&nbsp; widget<br>
+      </div>
+      <h3><a name="4.6"></a>4.6 Theme resources keys</h3>
+N/A<br>
+      <h3><a name="4.6.1"></a>4.6.1 Style selectors</h3>
+NA<br>
+      <br>
+      <h3><a name="4.6.2"></a>4.6.2 Image resources</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.6.3"></a>4.6.3 Javascript resources</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/staticText.js
+            </td>
+            <td style="vertical-align: top;">Javascript containing the
+staticText widget resources<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/common.js</td>
+            <td style="vertical-align: top;">Javascript containing the
+common files for the widgets<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/jsfx/staticText.js</td>
+            <td style="vertical-align: top;">Javascript for the
+staticText
+widget. </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Note: The
+&lt;theme&gt; tag is
+intended to be replaced with the theme
+name
+(e.g., suntheme).<br>
+      <h3><a name="4.6.4"></a>4.6.4 Template resources</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/templates/staticText.html
+            </td>
+            <td style="vertical-align: top;">The template file for the
+staticText widget<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Note: The
+&lt;theme&gt; tag is
+intended to be replaced with the theme
+name
+(e.g., suntheme).<br>
+      <h3><a name="4.6.5"></a>4.6.5 Other resources</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.6.6"></a>4.6.6 Localized message keys</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.7"></a>4.7 Component Extensibility</h3>
+      <div style="margin-left: 40px;">
+      <pre><indicator>N/A<br></indicator></pre>
+      <br>
+      </div>
+      <h2><a name="5.0"></a>5.0 - Creator Design Time Support</h2>
+      <h3><a name="5.1"></a>5.1 Design-time Behavior</h3>
+      <div style="margin-left: 40px;">The staticText component will
+continue to use the existing&nbsp; html renderer for design time
+behavior. Hence there will not be any change in the existing design
+time behavior.<br>
+      </div>
+      <h3><a name="5.2"></a>5.2 Design-time Classes and Interfaces</h3>
+      <div style="margin-left: 40px;">N/A </div>
+      <h3><a name="5.3"></a>5.3 Localized message keys</h3>
+      <div style="margin-left: 40px;"><br>
+      </div>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="5.4"></a>5.4 Dependencies </h3>
+      <div style="margin-left: 40px;">N/A </div>
+      <h2><a name="6.0"></a>6.0 Component Dependencies</h2>
+      <div style="margin-left: 40px;"><br>
+      </div>
+      <h3><a name="6.1"></a>6.1 Component class dependencies</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="6.2"></a>6.2 Javascript dependencies</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N/A<br>
+      <br>
+      <h3><a name="6.3"></a>6.3 Infrastructure dependencies</h3>
+      <ul>
+        <li>&nbsp;The new client side staticText component depends on
+the dojo infrastructure for rendering.<br>
+        </li>
+      </ul>
+      <h3><a name="6.4"></a>6.4 Design time dependencies</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+N/A<br>
+      <br>
+      <h2><a name="7.0"></a>7.0 - A11Y, I18n, Compliance, Debugging<br>
+      </h2>
+      <h3><a name="7.1"></a>7.1 Accessibility (A11Y)</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h3><a name="7.2"></a>7.2 Internationalization (I18N)</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h3><a name="7.3"></a>7.3 Level of XHTML Compliance</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; See "Woodstock
+components
+functional specification"
+      <h3><a name="7.4"></a>7.4 Javascript Compliance</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h3><a name="7.5"></a>7.5 Debugging</h3>
+      <div style="margin-left: 40px;">
+      <ul>
+      </ul>
+See "Woodstock components
+functional specification"
+      <ul>
+      </ul>
+      </div>
+      <h2><a name="8.0"></a>8.0 Component High level design</h2>
+      <div style="margin-left: 40px;">
+      <h3>8.1 Client side widget</h3>
+The client side staticText widget makes use of the fillInTemplate
+function to generate a template based widget. The staticText widget
+first
+registers the
+setProps function on its widget in the fillInTemplate function
+and then makes a call to setProps function which sets the properties
+common to the staticText widget. A getProps() is also registered in
+the
+fillInTemplate which is used to retrieve attribute values which
+setProps() function uses. <br>
+      <br>
+      <h3>8.2 JSF Renderer</h3>
+StaticText renderer out puts all the required properties which is used
+by staticText widget to render component.<br>
+      <br>
+      </div>
+      <h2><a name="9.0"></a>9.0 Issues</h2>
+      <div style="margin-left: 40px;">N/A</div>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

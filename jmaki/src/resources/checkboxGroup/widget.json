@@ -1,0 +1,97 @@
+/**
+ * The contents of this file are subject to the terms
+ * of the Common Development and Distribution License
+ * (the License). You may not use this file except in
+ * compliance with the License.
+ *
+ * You can obtain a copy of the license at
+ * https://woodstock.dev.java.net/public/CDDLv1.0.html.
+ * See the License for the specific language governing
+ * permissions and limitations under the License.
+ *
+ * When distributing Covered Code, include this CDDL
+ * Header Notice in each file and include the License file
+ * at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+ * If applicable, add the following below the CDDL Header,
+ * with the fields enclosed by brackets [] replaced by
+ * you own identifying information:
+ * "Portions Copyrighted [year] [name of copyright owner]"
+ *
+ * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+ */
+
+{
+    "name": "checkboxGroup",
+    "type": "@JS_NAME@",
+    "version": "@JS_VERSION@",
+    "jmakiVersion": "1.8",
+    "description": "Woodstock checkboxGroup widget.",
+    "args": [
+      {"align": {
+         "type": "STRING",
+         "description": "Alignment of image input.",
+         "defaultValue": "right"}},
+      {"className": {
+         "type": "STRING",
+         "description": "CSS selector.",
+         "defaultValue": ""}},
+      {"columns": {
+         "type": "INT",
+         "description": "Number of columns in which to display checkboxes.",
+         "defaultValue": 1}},
+      {"dir": {
+         "type": "STRING",
+         "description": "Specifies the directionality of text.",
+         "defaultValue": "ltr"}},
+      {"disabled": {
+         "type": "BOOLEAN",
+         "description": "Disable element.",
+         "defaultValue": false}},
+      {"label": {
+         "type": "OBJECT",
+         "description": "Label for the checkbox group",
+         "defaultValue": {value: 'Checkbox Group'}}},
+      {"lang": {
+         "type": "STRING",
+         "description": "Specifies the language of attribute values.",
+         "defaultValue": ""}},
+      {"name": {
+         "type": "STRING",
+         "description": "Common name for submitting checkbox values in the group.",
+         "defaultValue": "cbgrp1"}},
+      {"style": {
+         "type": "STRING",
+         "description": "Specify style rules inline.",
+         "defaultValue": ""}},
+      {"tabIndex": {
+         "type": "INT",
+         "description": "Position in tabbing order.",
+         "defaultValue": -1}},
+      {"title": {
+         "type": "STRING",
+         "description": "Provides a title for element.",
+         "defaultValue": "Checkbox group"}},
+      {"visible": {
+         "type": "BOOLEAN",
+         "description": "Hide or show element.",
+         "defaultValue": true}}
+    ],
+    "value": {
+      "required": true,
+      "type": "ARRAY",
+      "defaultValue":[
+          {"label": {"value": "Checkbox 1"}, "value": "cb1", "checked": false}
+          ]},
+      "description": "Array of checkbox widgets in the checkbox group."
+    },
+    "config": {
+      "type": {
+        "id": "@JS_NAME@",
+        "libs": [
+            "@JS_PATH@/bootstrap.js",
+            "@JS_PATH@/webui.js"
+        ],
+        "resources": [ "@JS_LIBPATH@" ]
+        }
+    }
+}

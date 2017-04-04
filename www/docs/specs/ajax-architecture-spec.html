@@ -1,0 +1,1219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <!--
+      The contents of this file are subject to the terms
+      of the Common Development and Distribution License
+      (the License).  You may not use this file except in
+      compliance with the License.
+      
+      You can obtain a copy of the license at
+      https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      See the License for the specific language governing
+      permissions and limitations under the License.
+      
+      When distributing Covered Code, include this CDDL
+      Header Notice in each file and include the License file
+      at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      If applicable, add the following below the CDDL Header,
+      with the fields enclosed by brackets [] replaced by
+      you own identifying information:
+      "Portions Copyrighted [year] [name of copyright owner]"
+      
+      Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+    -->
+<title>Project Woodstock - Ajax Arch Spec</title>
+<style type="text/css"> 
+/* <![CDATA[ */
+@import url(../../browser-uispec.css);
+.style2 {font-size: 18pt}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body bgcolor="#FFFFFF">
+
+<div align="right" class="security-text"><a href="#skipnav" title="Skip Navigation Links"></a></div>
+<div class="MstDiv">
+  <table class="MstTblBot" width="100%" border="0" cellpadding="0" cellspacing="0" title="">
+
+    <tr>
+      <td class="MstTdTtl"><div class="MstDivTtl">
+          <div class="Mst1TtlTxt">Project Woodstock</div>
+        </div>
+        <div class="Mst1SecDiv"> <span class="Mst1SecTxt style2">Ajax Architecture for Project Woodstock Components</span></div></td>
+    </tr>
+  </table>
+</div>
+
+<table border="0" cellpadding="0" cellspacing="0" class="Mst2Tbl" style="width: 100%;" title="">
+  <tbody>
+    <tr>
+      <td>
+	  <br>
+            <h2><a name="1.0"></a>1.0 Description</h2>
+            <div style="margin-left: 40px;">This document refers to the architecture that provides Ajax capability for Project Woodstock JavaServer Faces components. The Project Woodstock components are implemented using the JavaServer Faces 1.2 framework and adhere to version 4 of the Web Application Guidelines (coming soon).<br>
+            <br>
+            Note: This document assumes the reader has basic knowledge of HTML, JavaScript, JavaServer Pages, JavaServer Faces, Dojo, JSON, and Dynamic Faces. If not, please see the relevant documents before reading on.<br>
+        </div>
+            <h3><a name="1.1"></a><span style="font-weight: bold;">1.1 Document Revision History</span><br>
+            </h3>
+            <table style="width: 95%; text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+              <tbody>
+                <tr>
+                  <td style="width: 15%; text-align: center;"><span style="font-weight: bold;">Revision</span></td>
+                  <td style="width: 15%; text-align: center;"><span style="font-weight: bold;">Date</span></td>
+                  <td style="width: 50%; text-align: center;"><span style="font-weight: bold;">Synopsis</span></td>
+                  <td style="width: 20%; text-align: center;"><span style="font-weight: bold;">Author</span></td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">1.0<br>
+                  </td>
+                  <td style="text-align: center;">07/14/2006</td>
+                  <td style="text-align: left;">Initial Draft</td>
+                  <td style="text-align: center;">Dan Labrecque
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top; text-align: center;">1.1<br>
+                  </td>
+                  <td style="vertical-align: top; text-align: center;">07/25/2006<br>
+                  </td>
+                  <td style="vertical-align: top;">Updated with initial review feedback.
+                  </td>
+                  <td style="vertical-align: top; text-align: center;">Dan Labrecque</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top; text-align: center;">1.2<br>
+                  </td>
+                  <td style="vertical-align: top; text-align: center;">07/31/2006</td>
+                  <td style="vertical-align: top;">Moved example into separate document. </td>
+                  <td style="vertical-align: top; text-align: center;">Dan Labrecque
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top; text-align: center;">1.3<br>
+                  </td>
+                  <td style="vertical-align: top; text-align: center;">12/01/2006<br>
+                  </td>
+                  <td style="vertical-align: top;">Modified DynaFaces project name to Dynamic Faces<br>
+                  </td>
+                  <td style="vertical-align: top; text-align: center;">Dan Labrecque
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top; text-align: center;">1.4<br>
+                  </td>
+                  <td style="vertical-align: top; text-align: center;">02/15/2007<br>
+                  </td>
+                  <td style="vertical-align: top;">Updated to reflect source code in Woodstock repository<br>
+                  </td>
+                  <td style="vertical-align: top; text-align: center;">Dan Labrecque
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top; text-align: center;">1.5<br>
+                  </td>
+                  <td style="vertical-align: top; text-align: center;">03/28/2007<br>
+                  </td>
+                  <td style="vertical-align: top;">Added more examples to section 7.4<br>
+                  </td>
+                  <td style="vertical-align: top; text-align: center;">Dan Labrecque
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <h3 style="font-weight: bold;"><a name="1.2"></a>1.2 Relevant Documents</h3>
+            <ul>
+              <li><a target="_blank" href="http://developer.mozilla.org/en/docs/Accessible_DHTML">Accessible DHTML</a></li>
+              <li><a target="_blank" href="http://www.adaptivepath.com/publications/essays/archives/000385.php">Ajax: A New Approach to Web Applications</a></li>
+              <li><a target="_blank" href="ajax-architecture-example.html">Ajax Architecture Example for Project Woodstock Components</a></li>
+              <li><a target="_blank" href="http://wiki.java.net/bin/view/Javatools/CustomComponentLibraries">Component Authoring Guide</a></li>
+              <li><a href="http://jupiter.czech.sun.com/wiki/view/Creator/DesignerRulesForComponentAuthors" target="_blank">Designer Rules For Component Authors</a></li>
+              <li><a target="_blank" href="http://www.dojotoolkit.org/">Dojo Toolkit</a> and <a target="_blank" href="http://dojo.jot.com/WikiHome/PerformanceTuning">Performance Tuning</a></li>
+              <li><a target="_blank" href="https://jsf-extensions.dev.java.net/">JavaServer Faces Extensions Dynamic Updating (Dynamic Faces)</a></li>
+              <li><a target="_blank" href="http://docs.sun.com/source/816-6408-10/contents.htm">JavaScript</a></li>
+              <li><a target="_blank" href="http://jcp.org/en/jsr/detail?id=252">JSF components API library, version 1.2 - JSR 252</a></li>
+              <li><a target="_blank" href="http://www.json.org/">JSON</a></li>
+              <li><a target="_blank" href="http://www.w3.org/TR/html401/">HTML 4.01 Specification</a></li>
+              <li><a href="ThemeFS.html">Theme Functional Specification</a></li>
+              <li>Web Application Guidelines - Version 4.0 (coming soon) </li>
+            </ul>
+            <h3><a name="1.3"></a>1.3 Definition of Terms
+            </h3>
+            <ul>
+              <li>Ajax - Asynchronous JavaScript + XML</li>
+              <li>Ajax renderer - The <span style="font-style: italic;">JSF renderer</span> used obtain data asynchronously, via the Dynamic Faces framework, for updating <span style="font-style: italic;">Dojo widgets</span> during an Ajax request</li>
+              <li>Component - Entity consisting of a <span style="font-style: italic;">JSP tag</span>, <span style="font-style: italic;">JSF component</span>, <span style="font-style: italic;">JSF renderer</span>, JavaScript, CSS, <span style="font-style: italic;">Dojo Widget</span>, and <span style="font-style: italic;">HTML Template</span></li>
+              <li>Complex component - A component which uses one or more subcomponents for a specific purpose</li>
+              <li>CSS - Cascading Style Sheet</li>
+              <li>Design-time renderer - The <span style="font-style: italic;">JSF renderer</span> used to output partial HTML for the Creator IDE</li>
+              <li>Dojo - Open source JavaScript toolkit</li>
+              <li>Dojo widget - A <span style="font-style: italic;">widget</span> based on the Dojo toolkit, also consisting an <span style="font-style: italic;">HTML template</span> and <span style="font-style: italic;">event listener JavaScript</span><span style="font-style: italic;"></span></li>
+              <li>Dynamic Faces - JavaServer Faces Extensions Dynamic Updating framework extending the capability of the JavaServer Faces specification<span style="font-style: italic;"></span></li>
+              <li>Dynamic Faces JavaScript - The JavaScript library used to send and receive Ajax requests</li>
+              <li>Dynamic Faces life cycle - The JSF life cycle used to process one or more sub views</li>
+              <li>Dynamic Faces view root - The JSF view root used to process the JSF life cycle</li>
+              <li>Event listener JavaScript - Default Ajax functionality invoked when the <span style="font-style: italic;">Dojo widget</span> publishes an event</li>
+              <li>HTML template - The file used to define HTML tags associated with a component</li>
+              <li>In-line JavaScript - JavaScript used to instantiate a <span style="font-style: italic;">Dojo Widget</span>, located anywhere (i.e., in-line) in the rendered HTML page</li>
+              <li>JSF - JavaServer Faces</li>
+              <li>JSF component - The JSF <code>UIComponent</code> compliment to a <span style="font-style: italic;">JSP tag</span> and <span style="font-style: italic;">JSF renderer</span></li>
+              <li>JSF facet - A facet is a subcomponent that has a specific purpose defined by its parent container</li>
+              <li>JSF renderer - The JSF <code>Renderer</code> compliment to a <span style="font-style: italic;">JSP tag</span> and <span style="font-style: italic;">JSF component</span></li>
+              <li>JSON - JavaScript Object Notation (i.e., object literals) defined using braces ({}) that contain a set of comma separated key value pairs</li>
+              <li>JSP tag - The JSF <code>UIComponentELTag</code> or <code>UIComponentELBodyTag</code> compliment to a <span style="font-style: italic;">JSF component</span> and <span style="font-style: italic;">JSF renderer</span></li>
+              <li>Subcomponent - A child component used to render a <span style="font-style: italic;">complex component</span></li>
+              <li>sjwuic - Sun Java Web User Interface Components</li>
+              <li>webui - The <span style="font-style: italic;"></span>JavaScript namespace used for Woodstock components</li>
+              <li>Widget - Entity consisting of <span style="font-style: italic;">widget JavaScript</span> and <span style="font-style: italic;">CSS</span>, not necessarily based on the Dojo toolkit</li>
+              <li>Widget JavaScript - The JavaScript used to populate an <span style="font-style: italic;">HTML template</span> and/or update component properties</li>
+              <li>Widget renderer - The <span style="font-style: italic;">JSF renderer</span> used to output <span style="font-style: italic;">in-line JavaScript</span> for instantiating a <span style="font-style: italic;">Dojo Widget</span></li>
+            </ul>
+            <h3><a name="1.4"></a>1.4 High Level Design<br>
+            </h3>
+            <div style="margin-left: 40px;">A component is typically made up of a couple parts; <span style="font-style: italic;">JSF component</span>, <span style="font-style: italic;">JSF renderer</span>, and <span style="font-style: italic;">JSP tag</span>. In earlier versions of Project Woodstock, components are tightly bound to the server-side framework and a <span style="font-style: italic;">JSP tag</span> or <span style="font-style: italic;">JSF renderer</span> was used to generate HTML markup. This meant that migrating from JATO to JSF required a considerable rewrite of the existing tag library; however, the HTML remained relatively consistent between releases. Moving the fragmented HTML markup from the <span style="font-style: italic;">JSF renderer</span> to an <span style="font-style: italic;">HTML template</span> allows components to be completely rendered client-side. And if the JSF framework is ever replaced, the library does not need to be completely rewritten. This helps make Woodstock components available to a larger group of web app developers who cannot, or do not want to, use JSP and/or JSF. Thus, web<span style="font-style: italic;"></span> app developers may (eventually) be able to choose their own server-side framework.<br>
+            <br>
+            A <span style="font-style: italic;">Dojo widget</span> is also made up of a couple parts; <span style="font-style: italic;">CSS</span>, <span style="font-style: italic;"></span><span style="font-style: italic;">HTML template</span>, <span style="font-style: italic;"></span>and <span style="font-style: italic;">widget JavaScript</span>. In Project Woodstock, the <span style="font-style: italic;">HTML template</span> is used to define all the HTML tags, associated with a component, to be rendered client-side. The <span style="font-style: italic;">CSS</span> is used to specify style definitions associated with the <span style="font-style: italic;">HTML template</span>. And the <span style="font-style: italic;">widget JavaScript</span> file is used to populate the <span style="font-style: italic;">HTML template</span> with <span style="font-style: italic;">CSS</span> and other component properties. One of these properties (e.g., <code>onMouseOver</code>, <code>onClick</code>, etc.) may also be used to publish a Dojo event for custom Ajax implementations to listen for. For example, an auto-validate text field may publish a Dojo event when ever the user generates a <code>onBlur</code> event (e.g., when tabbing out of a text field). However, the <span style="font-style: italic;">widget JavaScript</span> file does not make any references to code or URLs dealing with JSP, JSF, and/or Dynamic Faces. <br>
+            <br>
+            In this design, there are two more pieces indirectly related to the <span style="font-style: italic;">Dojo widget</span>; <span style="font-style: italic;">in-line JavaScript</span> and<span style="font-style: italic;"> event listener JavaScript</span>. The<span style="font-style: italic;"> in-line JavaScript</span> is simply used to provide component properties and instantiate a <span style="font-style: italic;">Dojo widget</span>. The <span style="font-style: italic;">event listener JavaScript</span> is used solely to implement default Ajax functionality using the Dynamic Faces framework. The default Ajax implementation is intentionally written separately from the <span style="font-style: italic;">widget JavaScript</span> file so that web app developers may provide their own custom Ajax implementations, instead of being dependent on JSP, JSF, and/or Dynamic Faces. (A web app developer may want to implement a Shale Remoting solution, for example.) However, the <span style="font-style: italic;">event listener JavaScript</span> typically references the <span style="font-style: italic;">Dynamic Faces JavaScript</span> library whenever a Dojo event is published, ultimately sending an Ajax request to the server. The <span style="font-style: italic;">in-line JavaScript</span>, <span style="font-style: italic;"></span><span style="font-style: italic;">event listener JavaScript</span>, and <span style="font-style: italic;">widget JavaScript</span> are all output in the rendered page by the <span style="font-style: italic;">widget renderer</span>.<br>
+            <br>
+            In addition to the <span style="font-style: italic;">widget renderer</span>, there are two other render kits used; the <span style="font-style: italic;">Ajax renderer</span> and <span style="font-style: italic;">design-time renderer</span> (not shown in the life cycle diagram below). In this design, the <span style="font-style: italic;">widget renderer</span> is used only to output <span style="font-style: italic;">in-line JavaScript&nbsp;</span> to instantiate a <span style="font-style: italic;">Dojo Widget</span>. (The <span style="font-style: italic;">widget renderer</span> is invoked when the JSP page is first created or whenever the JSP page is refreshed by the user.) Since client-side rendering is used, a <span style="font-style: italic;">design-time renderer</span> will also be needed until the Creator IDE supports JavaScript. (The <span style="font-style: italic;">design-time renderer</span> maintains visual fidelity, but does not implement client-side functionality.) The <span style="font-style: italic;">Ajax renderer</span> is used solely to obtain data asynchronously, via the Dynamic Faces framework, for updating <span style="font-style: italic;">Dojo widgets</span> during an Ajax request.<br>
+            <br>
+            The Dynamic Faces framework extends the capability of the JavaServer Faces specification, including support for using Ajax and JSF. The concept behind Dynamic Faces is to expose the JSF request processing life cycle to components, enabling them to use Ajax to interact with the JSF view. This is accomplished using the <span style="font-style: italic;">Dynamic Faces JavaScript</span> library and JSF life cycle extension. The <span style="font-style: italic;">Dynamic Faces life cycle</span> allows component developers to decide which parts of the view need to be refreshed, processing the life cycle over one or more sub views. The server will return data, output only by rendered views, to the <span style="font-style: italic;">Dynamic Faces JavaScript</span> library and the <span style="font-style: italic;">event listener JavaScript</span> will dynamically update <span style="font-style: italic;">Dojo Widget</span> properties appropriately.<br>
+            <br>
+            Note that instead of using Dynamic Faces, a JSF phase listener could be used to obtain data asynchronously. However, JSF phase listeners are expensive and are invoked for all requests, regardless if the component is used on the page or not. Unlike the Dynamic Faces approach, where the JSF life cycle is only processed over one or more sub views, phase listeners also require the entire <span style="font-style: italic;">JSF component</span> tree to be decoded. Shale Remoting is another approach used to obtain data asynchronously; however, Shale does not provide access to the <span style="font-style: italic;">JSF component</span> tree. In this design, only specified sub views of the <span style="font-style: italic;">JSF component</span> tree are decoded and the <span style="font-style: italic;">Ajax renderer</span> always has access to the <span style="font-style: italic;">JSF component</span> tree. Thus, the <span style="font-style: italic;">Ajax renderer</span> can obtain data directly from <span style="font-style: italic;">JSF component</span> APIs.<br>
+            <br>
+            Selectively decoding the <span style="font-style: italic;">JSF component</span> tree, by processing one or more sub views, has other benefits as well. For example, if a component performs a form submit while there is a required text field elsewhere in the page, a validation exception may be thrown. To avoid this scenario, previous versions of Project Woodstock required the use of the "virtual form" concept. When a page is submitted, all request parameters external to the virtual form are set to null. When the required text field's request parameter is null, the validation exception is avoided because the component is never decoded. In this scenario, the same request parameters must be restored before the page is rendered, again. However, using the Dynamic Faces approach, none of this logic is necessary because the required text field will never run through the life cycle.<br>
+            </div>
+            <h3><a name="1.6"></a>1.6 Life Cycle<br>
+            </h3>
+            <div style="margin-left: 40px;">
+              <div style="text-align: center;"><img src="lifecycle.gif" alt="Life Cycle Diagram" width="409" height="553" style="width: 414px; height: 558px;"><br>
+                  <span style="font-style: italic;">Orange: Implemented by component developer</span><br>
+              <span style="font-style: italic;"></span><span style="font-style: italic;">Green: Implemented by web app developer</span><span style="font-style: italic;"></span><br style="font-style: italic;">
+              <span style="font-style: italic;">Yellow: Implemented by JSF-Extensions<br>
+              <br>
+            </span></div>
+            </div>
+            <span style="font-weight: bold;"><br>
+            </span>
+            <div style="margin-left: 40px;">Staring with the <span style="font-style: italic;">Web App</span> block, this description will attempt to walk through the life cycle diagram shown above. The web application contains two main pieces relevant to this design; a managed bean and JSP page. The managed bean typically contains properties bound to component attributes, defined in the JSP page, via value and method expressions. (Although components and properties can be defined via Java, this description assumes that components are defined in the JSP page, using <span style="font-style: italic;">JSP tags</span>.) Further, each <span style="font-style: italic;">JSP tag</span> is associated with a specific component which defines the JSF component tree hierarchy and ultimately, the overall HTML page layout. <br>
+            <br>
+            Once the <span style="font-style: italic;">JSF component</span> tree has been initialized (i.e., when the browser requests a page for the first time) or reconstituted (e.g., when the browser refreshes or submits a page), the component may obtain managed bean properties via value expressions or invoke an action via a method expression. However, what is more relevant to the <span style="font-style: italic;">JSF component</span>, in this design, is how the component selects the appropriate render kit.<span style="font-weight: bold;"></span> Using the Dynamic Faces API, the <span style="font-style: italic;">JSF component</span> determines if it is dealing with an Ajax request. If not an Ajax request, because it is the first time a page is displayed or the JSP page is being refreshed by the user, the <span style="font-style: italic;">widget renderer</span> is always selected by default.<br>
+            <br>
+            The <span style="font-style: italic;">widget renderer</span> will always output <span style="font-style: italic;">in-line JavaScript</span> necessary to instantiate a <span style="font-style: italic;">Dojo widget</span>. This includes localized and themed properties required to populate the <span style="font-style: italic;">HTML template</span> <span style="font-style: italic;"></span>and any <span style="font-style: italic;">widget JavaScript</span> (i.e., using dojo.require()<span style="font-style: italic;"></span>) necessary to support the <span style="font-style: italic;">Dojo widget</span>. Once the browser has loaded the requested page, the <span style="font-style: italic;">in-line JavaScript</span> is evaluated and Dojo invokes the <code>fillInTemplate</code> function defined by the <span style="font-style: italic;">widget JavaScript</span> file. Before exiting this function, the <span style="font-style: italic;">widget JavaScript </span>may also assign a JavaScript event (e.g., <code>onMouseOver</code>, <code>onClick</code>, etc.) used to publish a Dojo event for custom Ajax implementations to listen for.<br>
+            <br>
+            If the <span style="font-style: italic;">Dojo widget</span> also supports Ajax features, and the <code>ajaxify</code> attribute (see section 4.4.1) of the <span style="font-style: italic;">JSP tag</span> is set to <code>true</code> (the default), then the <span style="font-style: italic;">widget renderer</span> will also include the <span style="font-style: italic;">event listener JavaScript</span> file in the page. The default <span style="font-style: italic;">event listener JavaScript </span>implementation automatically subscribes to the event published by the <span style="font-style: italic;">Dojo Widget</span>, simply by including the <span style="font-style: italic;">event listener JavaScript</span> file anywhere in the page. However, if the web app developer wants to override Ajax functionality, the <code>ajaxify</code> attribute of the <span style="font-style: italic;">JSP tag</span> is set to <code>false</code>. This will prevent the default <span style="font-style: italic;">event listener JavaScript</span> from being output in the rendered HTML page. Although, the <span style="font-style: italic;">Dojo Widget</span> will continue to publish Dojo events, this essentially disables Ajax functionality.<br>
+            <br>
+            Alternatively, a web app developer can instantiate the <span style="font-style: italic;">Dojo Widget</span> without using the <span style="font-style: italic;">JSP tag</span> via JavaScript. However, if a web app developer does not use the <span style="font-style: italic;">JSP tag</span>, then the <span style="font-style: italic;">widget renderer</span> will not be invoked. Therefore, the <span style="font-style: italic;">in-line JavaScript</span> will not be output in the rendered HTML page automatically. This means that the web app developer must add the <span style="font-style: italic;">in-line JavaScript</span> used to instantiate the <span style="font-style: italic;">Dojo Widget</span> and provide component properties required to populate the <span style="font-style: italic;">HTML template</span>. However, for the rest of this description, it is assumed that the <span style="font-style: italic;">event listener JavaScript</span> has been included in the page.<br>
+            <br>
+            After the <span style="font-style: italic;">Dojo Widget</span> has been rendered in the HTML page, the <span style="font-style: italic;">event listener JavaScript</span> (if any) simply waits for a Dojo event to be published. As an example, consider an auto-validate text field where a user enters a value, then tabs out of the text field. In this design, a Dojo event is published whenever a JavaScript <code>onBlur</code> event occurs. Since this Ajax functionality makes use of the Dojo event handling system, any JavaScript implementation can listen for this particular Dojo event. However, since the <span style="font-style: italic;">widget renderer</span> included the <span style="font-style: italic;">event listener JavaScript</span> in the rendered HTML page by default, it automatically subscribes to the Dojo event when the JavaScript was evaluated.<br>
+            <br>
+            When the <span style="font-style: italic;">event listener JavaScript</span> hears the Dojo event, it invokes an API of the <span style="font-style: italic;">Dynamic Faces JavaScript</span> library. The <span style="font-style: italic;">Dynamic Faces JavaScript</span> library sends an Ajax request to the server, and the specified sub view (i.e., <span style="font-style: italic;">JSF component</span> ID) is processed over the <span style="font-style: italic;">Dynamic Faces life cycle</span>. (Parameters also include a JavaScript call back function to be invoked when the <span style="font-style: italic;">Dynamic Faces JavaScript</span> receives the Ajax response from the server.) In this design, all JSF life cycle phases are processed over the <span style="font-style: italic;">JSF component</span> (i.e., sub view) which generated the Ajax request; however, only specific <span style="font-style: italic;">JSF components</span> are decoded. The Apply Request Values, Validation, and Model Update phases are processed similarly to the default JSF life cycle, except these phases are only run over a specific sub view(s).<br>
+            <br>
+            After the <span style="font-style: italic;">JSF component</span> tree has been reconstituted, the <span style="font-style: italic;">JSF component</span> may once again obtain managed bean properties via value expressions or invoke an action via method expression. However, since the <span style="font-style: italic;">JSF component</span> is now dealing with an Ajax request, the <span style="font-style: italic;">Ajax renderer</span> is selected. The <span style="font-style: italic;">Ajax renderer</span> gathers data from the associated <span style="font-style: italic;">JSF component</span> and adds properties to a JSON object. As each sub view is rendered, for the one or more specified sub views, the <span style="font-style: italic;">Dynamic Faces life cycle</span> encapsulates the output using XML <code>markup</code> elements. The XML markup is ultimately output to the JSF <code>ResponseWriter</code> and a response is sent back to the client.<br>
+            <br>
+            When the Ajax response is received by the browser, the <span style="font-style: italic;">Dynamic Faces JavaScript</span> parses the XML markup from the response. The default Dynamic Faces implementation expects to replace the <code>innerHTML</code> property of a div tag with the content of the XML <code>markup</code> element; however, the <span style="font-style: italic;">event listener JavaScript</span> defines a call back function to override this feature. In this design, the <span style="font-style: italic;">Ajax renderer</span> outputs JSON containing key-value pairs of component properties for updating the <span style="font-style: italic;">Dojo widget</span>. Instead of replacing all the HTML associated with a rendered component, properties are selectively updated on an existing DOM node. <br>
+            <br>
+            For each XML <code>markup</code> element found, the <span style="font-style: italic;">Dynamic Faces JavaScript</span> will invoke the given JavaScript call back function with the sub view ID and data provided in the XML <code>markup</code> element. Typically, there will be only one XML <code>markup</code> element associated with the <span style="font-style: italic;">JSF component</span> (i.e., sub view) used to generate the Ajax request; thus, handling multiple sub views is left to the component developer. The <span style="font-style: italic;">Dynamic Faces life cycle</span> also includes an XML <code>state</code> element containing an encoded client state string (i.e., the state of the entire <span style="font-style: italic;">JSF component</span> tree). However, client state is maintained by the <span style="font-style: italic;">Dynamic Faces JavaScript</span>.<br>
+            <br>
+            When the <span style="font-style: italic;">event listener JavaScript</span> call back function is invoked, the data provided in the XML <code>markup</code> element must be evaluated. Due to security issues, this string is evaluated using the JSON JavaScript parser from JSON.org. (A JSON parser will only recognize JSON text and is much safer than using the standard JavaScript <code>eval</code> function.) Once the JSON object has been created, properties can be obtained and the associated widget is updated. The <span style="font-style: italic;">Dojo widget</span> is updated via a JavaScript function, defined in the <span style="font-style: italic;">widget JavaScript</span> file, where an HTML element ID and JSON object are provided as parameters.<br>
+            <br>
+            Whenever a <span style="font-style: italic;">Dojo widget</span> is updated, properties are also updated for any associated <span style="font-style: italic;">subcomponents</span>. For example, the error and required images associated with a label component shall be updated in addition to the label. (That is, if the proper key-value pairs of properties are provided.) Further, before exiting the <span style="font-style: italic;">event listener JavaScript</span> call back function, a Dojo event may be published for custom implementations to listen for. In the case of an auto-validate text field, a web app developer could subscribe to this particular Dojo event in order to update a label and alert components upon a validation error. This is possible because the associated HTML element ID and JSON object (possibly containing validation messages) are provided when the Dojo event is published. </div>
+            <h2><a name="2.0"></a>2.0 Requirements, goals, and assumptions</h2>
+            <h3><a name="2.1"></a>2.1 Requirements (required)</h3>
+            <ul>
+              <li><font face="Thorndale" size="3">Create a version of Project Woodstock to run on systems without a processor. Currently, systems in this category must emulate Project Woodstock, producing a slightly different look and feel. Not using a true Project Woodstock implementation makes it more difficult to implement branding updates.</font></li>
+              <li>HTML layout shall be moved from <span style="font-style: italic;">JSF renderers</span> to <span style="font-style: italic;">HTML templates</span>.</li>
+              <li>Widget rendering shall be done client-side, instead of server-side <span style="font-style: italic;">JSF renderers</span> to generate HTML.<br>
+              </li>
+            </ul>
+            <h3><a name="2.1.1"></a>2.1.1 UI Design requirements (required, can be link)</h3>
+            <ul>
+              <li>Currently, there are no specific UI Design requirements as to the functionality of the Ajax in general.</li>
+            </ul>
+            <h3><a name="2.1.2"></a>2.1.2 Functional requirements (required)</h3>
+            <ul>
+              <li>Ajax architecture must support a variety of runtime environments; particularly Portlet, JSF, JSP and for service processors.<br>
+              </li>
+            </ul>
+            <h3><a name="2.1.3"></a>2.1.3 Performance requirements (optional)</h3>
+            <ul>
+              <li>Should not introduce a large memory footprint.</li>
+              <li>Should not overly impede startup performance.</li>
+            </ul>            <div style="margin-left: 40px;">Although component properties can be obtained at any time using Ajax, too many requests can be a performance drain on the server. Numerous requests are already made for supporting files output in the rendered HTML page such as JavaScript includes, <span style="font-style: italic;">CSS</span> links, images, etc. Therefore, localized and themed component properties shall be output as <span style="font-style: italic;">in-line JavaScript</span> when the JSP page is rendered. Since the <span style="font-style: italic;">widget renderer</span> has access to the <span style="font-style: italic;">JSF component</span> during the JSF render response phase, all the information required to render a <span style="font-style: italic;">Dojo Widget</span> is available to be output then and there. Therefore, Ajax requests are not necessary to retrieve initialization data. The <span style="font-style: italic;">in-line JavaScript</span>, <span style="font-style: italic;">CSS</span>,<span style="font-style: italic;"> event listener JavaScript</span>, and <span style="font-style: italic;">widget JavaScript</span> are all expected to be output in the rendered page by the <span style="font-style: italic;">widget renderer</span>.<br>
+            </div>
+            <div style="margin-left: 40px;"><br>
+            In some cases, performance is directly related to the size of the file being downloaded. For example, there appears to be a performance hit whenever loading Dojo for the first time due to its large JavaScript file size. To speed up the download, the web server should have "Cache-content" set so the browser doesn't try to reload JavaScript files during every request. In addition, web server compression (mod_deflate on apache) should be used. There are currently two Dojo JavaScript files available; <code>dojo.js</code> and <code>dojo.js.uncompressed.js</code>. Using the compressed version greatly speeds up download time. To speed up the download even further, a custom version of Dojo can be built containing only the modules needed by the <span style="font-style: italic;">Dojo Widgets</span> in use. Note that many <span style="font-style: italic;">Dojo Widgets</span> reference an <span style="font-style: italic;">HTML template</span> file, downloaded by XMLHTTP, and <span style="font-style: italic;"></span>cannot be cached. Further, since Dojo searches all nodes on the page (i.e., for dojoType tags) to see if they are <span style="font-style: italic;">Dojo Widgets</span>, download time is proportional to the number of nodes in the page. This can be avoided by turning off parsing using the djConfig.parseWidget="false" flag. For more information, see <a target="_blank" href="http://dojo.jot.com/WikiHome/PerformanceTuning">Performance Tuning</a> on the Jotspot Wiki.<br>
+            </div>
+            <h3><a name="2.1.4"></a>2.1.4 Browser, platform requirements</h3>
+            <ul>
+              <li>The table of supported <a href="../SupportedBrowers.htm">Browsers</a>.</li>
+              <li>The table of supported <a href="../SupportedContainers.htm">Containers</a>.</li>
+            </ul>        
+        <h3><a name="2.1.5"></a>2.1.5 Special requirements (optional)</h3>
+            <ul>
+              <li><span style="font-style: italic;">Dojo widgets</span> shall not be dependent on the underlying JSF framework.</li>
+              <li><span style="font-style: italic;">Widget JavaScript</span> shall not include any references to server-side frameworks such as Dynamic Faces, JSP, or JSF.</li>
+              <li>Default Ajax functionality shall be included in the page via a JavaScript file, separate from <span style="font-style: italic;">widget JavaScript</span>.</li>
+              <li>Ajax functionality may be implemented using any server-side framework (e.g., Dynamic Faces, Shale Remoting, etc.).</li>
+              <li>Default Ajax functionality shall be disabled when the <code>ajaxify</code> <span style="font-style: italic;">JSP tag</span> attribute is set to <code>false</code>.</li>
+              <li>Ajax functionality shall be enabled if and only if <span style="font-style: italic;">event listener JavaScript</span> has been included in the page.</li>
+            </ul>
+            <h3><a name="2.2"></a>2.2 Requirements Not Met (required, if you are not meeting a requirement)</h3>
+            <ul>
+              <li>TBD</li>
+            </ul>
+            <h3><a name="2.3"></a>2.3 Assumptions (optional)</h3>
+            <ul>
+              <li>The Dojo toolkit shall be used to create template based widgets.</li>
+              <li>Dojo publish/subscribe event system shall be used to listen to Ajax based events.</li>
+              <li>JSON shall be used to define client-side widget properties.</li>
+              <li>Dynamic Faces shall be used as the interface for transferring data to and from client-side widgets.</li>
+              <li>A <span style="font-style: italic;">JSF renderer</span> shall be used to obtain data during an Ajax request.</li>
+              <li>The <span style="font-style: italic;">JSF component</span> shall set the renderer type for Ajax, Dojo, and design-time render kits.</li>
+              <li>The locale does not change during Ajax requests.</li>
+            </ul>
+            <h3><a name="2.4"></a>2.4 Goals (optional)</h3>
+            <ul>
+              <li><span style="font-style: italic;">Dojo widgets</span> shall support web applications that are not based on JSF or JSP.</li>
+              <li>Web app developers may plug-in their own custom JavaScript to override Ajax functionality.</li>
+              <li>Web app developers may turn off Ajax based functionality.</li>
+            </ul>
+            <h3>2.5 Non-goals (optional)</h3>
+            <ul>
+              <li>Support tags to instantiate a <span style="font-style: italic;">Dojo Widget</span> instead of using JavaScript.</li>
+            </ul>
+            <h2><a name="3.0"></a>3.0 Component Usage</h2>
+            <div style="margin-left: 40px;">Project Woodstock components can be used in a few different ways. The most typical way to use a component is with the <span style="font-style: italic;">JSP tag</span>. For example, to include an image in the JSP page, the web app developer will include a tag like this.<br>
+            <br>
+            <div style="margin-left: 40px;"><code>&lt;webuijsf:image id="image1" icon="LABEL_INVALID_ICON" /&gt;</code><br>
+              <br>
+            </div>
+            Using the <span style="font-style: italic;">JSP tag</span>, all the <span style="font-style: italic;">in-line JavaScript</span> necessary to generate a <span style="font-style: italic;">Dojo widget</span> is automatically output in the rendered HTML page. This includes the name of the desired widget, any localized and themed properties required to populate the <span style="font-style: italic;">HTML template</span>, and any JavaScript files (e.g., <span style="font-style: italic;">widget JavaScript</span>) necessary to support the <span style="font-style: italic;">Dojo Widget</span>. However, a <span style="font-style: italic;">Dojo Widget</span> can also be represented by the following JavaScript. This JavaScript makes the Project Woodstock component available to web app developers who cannot, or do not want to, use the JSP and/or JSF frameworks.<br>
+            <br>
+            Note that any one of the key-value pairs of properties below can contain more key-value pairs, possibly used by subcomponents.<br>
+            <div style="margin-left: 40px;"><br>
+                <code>dojo.require("webui.</code><code>&lt;theme&gt;</code><code>.widget.image");</code><code><br>
+              webui.</code><code>&lt;theme&gt;</code><code>.widget.common.createWidget({<br>
+&nbsp;&nbsp;&nbsp; _widgetType: "webui.</code><code>&lt;theme&gt;</code><code>:image",<br>
+              </code><code>&nbsp;&nbsp;&nbsp; templatePath": "/</code><code>&lt;appname&gt;</code><code>/theme/com/sun/webui/jsf/</code><code>&lt;theme&gt;</code><code>/templates/image.html",</code><code><br>
+&nbsp;&nbsp;&nbsp; width: 11,<br>
+&nbsp;&nbsp;&nbsp; height: 14,<br>
+&nbsp;&nbsp;&nbsp; visible: true,<br>
+&nbsp;&nbsp;&nbsp; src: "/&lt;appname&gt;/theme/com/sun/web/ui/&lt;theme&gt;/images/alerts/error_small.gif",<br>
+&nbsp;&nbsp;&nbsp; alt: "Error",<br>
+&nbsp;&nbsp;&nbsp; id: "form1:label3:label3_error"<br>
+              });<br>
+            </code><code></code><code></code> </div>
+            <br>
+            Alternatively, this component can also be represented by a Dojo tag in an HTML page. Although, supporting this as a feature is not a goal and parsing the page for widgets is turned off by default using <code>djConfig.parseWidgets="false"</code>.<br>
+            <br>
+            <code>&nbsp;&nbsp;&nbsp; &lt;webui.&lt;theme&gt;:image<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; _widgetType: "webui.&lt;theme&gt;:image",<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; templatePath": "/&lt;appname&gt;/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/image.html",<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; width: 11,<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; height: 14,<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; visible: true,<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; src: "/&lt;appname&gt;/theme/com/sun/web/ui/&lt;theme&gt;/images/alerts/error_small.gif",<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; alt: "Error",<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; id: "form1:label3:label3_error"&gt;</code><br>
+            <br>
+            Web app developers may also continue to define components and properties via a managed bean as shown below. In this scenario, the component will behave similarly as if a <span style="font-style: italic;">JSP tag</span> were used. That is, the <span style="font-style: italic;">in-line JavaScript</span>, necessary to instantiate a <span style="font-style: italic;">Dojo Widget</span>, is automatically output in the page by the <span style="font-style: italic;">widget renderer</span>.<br>
+            <br>
+            <div style="margin-left: 40px;"><code>public class ImageBean {<br>
+&nbsp;&nbsp;&nbsp; private Image img = null;<br>
+              <br>
+&nbsp;&nbsp;&nbsp; public Image getImage() {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; if (img == null) {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; img = new Image();<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; img.setWidth(11);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; img.setHeight(14);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; img.setAlt("Error");<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; img.setSrc(</code><code>"/</code><code>&lt;appname&gt;</code><code>/theme/com/sun/web/ui/&lt;theme&gt;/images/alerts/error_small.gif"</code><code>);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; return img;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+              <br>
+&nbsp;&nbsp;&nbsp; public void setImage(Image img) {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; this.img = img;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+              }<br>
+            </code> </div>
+            <br>
+            Note that the above example assumes the <code>binding</code> attribute of a <span style="font-style: italic;">JSP tag</span> is used. For example:<br>
+            <br>
+            <div style="margin-left: 40px;"><code>&lt;webuijsf:image id="image1" </code><code>binding="#{myBean.image}" /&gt;</code><br>
+            </div>
+            </div>
+            <h2>4.0 Component Interfaces</h2>
+            <h3><a name="4.1"></a>4.1 Exported interfaces table (Required, Prelim)<br>
+            </h3>
+            <table style="width: 95%; margin-left: auto; margin-right: auto; text-align: left;" border="1" cellpadding="2" cellspacing="2">
+              <tbody>
+                <tr>
+                  <th style="vertical-align: top; width: 30%;"> <p>Interface Name<br>
+                  </p></th>
+                  <th style="vertical-align: top;"> <p>Classification<br>
+                  </p></th>
+                  <th style="vertical-align: top;"> <p>Reference<br>
+                  </p></th>
+                  <th style="vertical-align: top;"> <p>Comments<br>
+                  </p></th>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top; width: 30%;">com.sun.webui.jsf.component.&lt;name&gt;</td>
+                  <td style="vertical-align: top;">Unstable</td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">The interface for Ajax based components<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com.sun.webui.jsf.component.Widget</td>
+                  <td style="vertical-align: top;">Unstable</td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">The interface indicating component is rendered client-side<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.ajax.&lt;name&gt;Renderer</td>
+                  <td style="vertical-align: top;">Unstable</td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">The interface for Ajax rendering</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.html.&lt;name&gt;Renderer</td>
+                  <td style="vertical-align: top;">Unstable</td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">The interface for design-time rendering and older HTML renderers<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.widget.&lt;name&gt;Renderer</td>
+                  <td style="vertical-align: top;">Unstable</td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">The interface for widget rendering</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.widget.RendererBase</td>
+                  <td style="vertical-align: top;">Unstable </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">The interface for common widget rendering methods<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com.sun.webui.jsf.taglib.&lt;name&gt;Tag</td>
+                  <td style="vertical-align: top;">Unstable</td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">The interface for <span style="font-style: italic;">JSP tags</span><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4" rowspan="1" style="vertical-align: top;"><span style="font-weight: bold;">component-type and renderer-type faces-config.xml parameters</span><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com.sun.webui.jsf.&lt;name&gt;<br>
+                  </td>
+                  <td style="vertical-align: top;">Unstable </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">The name used to define the component-type<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com.sun.webui.jsf.ajax.&lt;name&gt;</td>
+                  <td style="vertical-align: top;">Unstable</td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">The name used to define the renderer-type for ajax rendering</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com.sun.webui.jsf.html.&lt;name&gt;<br>
+                  </td>
+                  <td style="vertical-align: top;">Unstable </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">The name used to define the renderer-type for design-time rendering<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com.sun.webui.jsf.widget.&lt;name&gt;</td>
+                  <td style="vertical-align: top;">Unstable </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">The name used to define the renderer-type for widget rendering</td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+            <div style="margin-left: 40px;">Note: The &lt;name&gt; tag is intended to be replaced with the <span style="font-style: italic;">JSP tag</span> name. </div>
+            <h3><a name="4.2"></a>4.2 Imported interfaces (Required, Final)<br>
+            </h3>
+            <table style="width: 95%; margin-left: auto; margin-right: auto; text-align: left;" border="1" cellpadding="2" cellspacing="2">
+              <tbody>
+                <tr>
+                  <th style="vertical-align: top; width: 20%;"> <p>Interface Name<br>
+                  </p></th>
+                  <th style="vertical-align: top; width: 20%;"> <p>Classification<br>
+                  </p></th>
+                  <th style="white-space: nowrap; vertical-align: top;"> <p>Reference<br>
+                  </p></th>
+                  <th style="vertical-align: top; width: 40%;"> <p>Comments<br>
+                  </p></th>
+                </tr>
+                <tr>
+                  <td>javax.faces.*</td>
+                  <td>Standard</td>
+                  <td><a target="_blank" href="http://jcp.org/en/jsr/detail?id=252">JSR 252</a></td>
+                  <td>JavaServer Faces 1.2</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">javax.servlet.jsp.*<br>
+                  javax.servlet.jsp.tagext.*<br>
+                  javax.servlet.jsp.el.*</td>
+                  <td style="vertical-align: top;">Standard</td>
+                  <td style="vertical-align: top;"><a target="_blank" href="http://jcp.org/en/jsr/detail?id=245">JSR 245</a></td>
+                  <td style="vertical-align: top;">JavaServer Pages 2.1</td>
+                </tr>
+                <tr>
+                  <td>javax.servlet.*<br>
+                  javax.servlet.http.* </td>
+                  <td>Standard<br>
+                  </td>
+                  <td><a target="_blank" href="http://jcp.org/en/jsr/detail?id=154">JSR 154</a><br>
+                  </td>
+                  <td>Java Servlet 2.4<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">org.json.*<br>
+                  </td>
+                  <td style="vertical-align: top;">Unstable </td>
+                  <td style="vertical-align: top;"><a target="_blank" href="http://www.json.org/java/index.html">JSON in Java</a><br>
+                  </td>
+                  <td style="vertical-align: top;">JSON, version TBD<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com.sun.faces.extensions.avatar.*<br>
+                  com.sun.faces.extensions.common.*<br>
+                  </td>
+                  <td style="vertical-align: top;">Unstable</td>
+                  <td style="vertical-align: top;"><a target="_blank" href="https://jsf-extensions.dev.java.net/nonav/mvn/ajax/apidocs/index.html">Javadoc</a></td>
+                  <td style="vertical-align: top;">JSF-Extensions, snapshot 0.1</td>
+                </tr>
+                <tr style="font-weight: bold;">
+                  <td colspan="4" rowspan="1" style="vertical-align: top;">Servlet web.xml init parameters</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">javax.faces.LIFECYCLE_ID </td>
+                  <td style="vertical-align: top;">Unstable<br>
+                  </td>
+                  <td style="vertical-align: top;"><a target="_blank" href="https://jsf-extensions.dev.java.net/slides/dynafaces-advanced.odp">Advanced Dynamic Faces</a><br>
+                  </td>
+                  <td style="vertical-align: top;">Identifies the Dynamic Faces life cycle to use for this web application<br>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+            <h3><a name="4.3"></a>4.3 Component interfaces (Required, Prelim)<br>
+            </h3>
+            <div style="margin-left: 40px;">com.sun.webui.jsf.component.&lt;name&gt;.java<br>
+            com.sun.webui.jsf.component.Widget.java<br>
+            com.sun.webui.jsf.renderkit.ajax.&lt;name&gt;Renderer.java<br>
+            com.sun.webui.jsf.renderkit.html.&lt;name&gt;Renderer.java<br>
+            com.sun.webui.jsf.renderkit.widget.&lt;name&gt;Renderer.java<br>
+            com.sun.webui.jsf.renderkit.widget.RendererBase.java<br>
+            com.sun.webui.jsf.taglib.&lt;name&gt;Tag.java<br>
+            <br>
+            Note: The &lt;name&gt; tag is intended to be replaced with the <span style="font-style: italic;">JSP tag</span> name.<br>
+            </div>
+            <h3><a name="4.4"></a>4.4 Tag interfaces (required, Prelim)</h3>
+            <h3><a name="4.4.1"></a>4.4.1 Individual tag attributes descriptions (optional)</h3>
+            <div style="margin-left: 40px;">ajaxify - Sets a flag indicating that Ajax functionality is enabled, if applicable.<br>
+            <br>
+            Note: The <code>ajaxify</code> attribute has a different meaning than an <code>auto-validate</code> attribute for a text field, for example. If <code>auto-validate</code> is true, a text field may publish an event whenever a user tabs out of the field, indicating that input needs to be validated. If <code>ajaxify</code> is false, the validation event will still be published, but the default Ajax implementation will not be included in the page. Although the input will no longer be validated automatically, this allows web app developers to replace the default Ajax implementation with their own Shale Remoting solution, for example. </div>
+            <h3><a name="4.5"></a>4.5 JavaScript interfaces (required, Prelim)<br>
+            </h3>
+            <table style="width: 95%; margin-left: auto; margin-right: auto; text-align: left;" border="1" cellpadding="2" cellspacing="2">
+              <tbody>
+                <tr>
+                  <th style="vertical-align: top;"> <p>Interface Name<br>
+                  </p></th>
+                  <th style="vertical-align: top;"> <p>Classification<br>
+                  </p></th>
+                  <th style="vertical-align: top;"> <p>Reference<br>
+                  </p></th>
+                  <th style="vertical-align: top;"> <p>Comments<br>
+                  </p></th>
+                </tr>
+                <tr>
+                  <td style="width: 30%;">webui.&lt;theme&gt; </td>
+                  <td style="width: 10%;">Unstable</td>
+                  <td style="width: 10%;"><br>
+                  </td>
+                  <td>The interface for all webui resources<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">webui.&lt;theme&gt;.widget.&lt;name&gt;</td>
+                  <td style="vertical-align: top;">Unstable</td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">The interface for individual widgets</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">webui.&lt;theme&gt;.widget.jsfx.&lt;name&gt;</td>
+                  <td style="vertical-align: top;">Unstable</td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">The interface for Ajax resources based on JSF Extensions (Dynamic Faces)<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">webui.&lt;theme&gt;.widget.shale.&lt;name&gt;</td>
+                  <td style="vertical-align: top;">Unstable</td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">The interface for Ajax resources based on Shale Remoting (if applicable)<br>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+            <div style="margin-left: 40px;">Note: The &lt;name&gt; tag is intended to be replaced with the <span style="font-style: italic;">JSP tag</span> name. The &lt;theme&gt; tag is intended to be replaced with the current theme name and version number.<br>
+            </div>
+            <h3><a name="4.6"></a>4.6 Theme resources keys (required, Final)<br>
+            </h3>
+            <table style="width: 95%; margin-left: auto; margin-right: auto; text-align: left;" border="1" cellpadding="2" cellspacing="2">
+              <tbody>
+                <tr>
+                  <th style="vertical-align: top;"> <p>Interface Name<br>
+                  </p></th>
+                  <th style="vertical-align: top;"> <p>Classification<br>
+                  </p></th>
+                  <th style="vertical-align: top;"> <p>Reference<br>
+                  </p></th>
+                  <th style="vertical-align: top;"> <p>Comments<br>
+                  </p></th>
+                </tr>
+                <tr>
+                  <td style="width: 30%;"> ThemeJavascript.DOJO</td>
+                  <td style="width: 10%;">Unstable</td>
+                  <td style="width: 10%;"><br>
+                  </td>
+                  <td>The path to the JavaScript file containing Dojo functions </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">ThemeJavascript.JSON</td>
+                  <td style="vertical-align: top;">Unstable</td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">The path to the JavaScript file containing JSON functions</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">ThemeJavascript.JSFX<br>
+                  </td>
+                  <td style="vertical-align: top;">Unstable</td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">The path to the JavaScript file containing JSF Extensions functions </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">ThemeJavascript.MODULE_PATH</td>
+                  <td style="vertical-align: top;">Unstable</td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">The path to module resources </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">ThemeJavascript.MODULE_PREFIX</td>
+                  <td style="vertical-align: top;">Unstable</td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">The module to prefix to all resources</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">ThemeJavascript.PROTOTYPE</td>
+                  <td style="vertical-align: top;">Unstable</td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">The path to the JavaScript file containing Prototype functions</td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+            <h3><a name="4.6.1"></a>4.6.1 Style selectors</h3>
+            <div style="margin-left: 40px;">N/A</div>
+            <h3><a name="4.6.2"></a>4.6.2 Image resources</h3>
+            <div style="margin-left: 40px;">N/A</div>
+            <h3><a name="4.6.3"></a>4.6.3 JavaScript resources<br>
+            </h3>
+            <table style="margin-left: auto; margin-right: auto; width: 95%; text-align: left;" border="1" cellpadding="2" cellspacing="2">
+              <tbody>
+                <tr>
+                  <td style="vertical-align: top;"><span style="font-weight: bold;">JavaScript Resources</span><br>
+                  </td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold;">Comments</span><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/__package__.js</td>
+                  <td style="vertical-align: top;">Dojo package declaration for <code>webui.&lt;theme&gt;</code></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/common.js</td>
+                  <td style="vertical-align: top;">JavaScript containing common resources</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/props.js</td>
+                  <td style="vertical-align: top;">JavaScript containing property resources</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/&lt;name&gt;.js</td>
+                  <td style="vertical-align: top;">JavaScript containing HTML resources<code></code></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/__package__.js</td>
+                  <td style="vertical-align: top;">Dojo package declaration for <code>webui.&lt;theme&gt;.widget</code></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/common.js </td>
+                  <td style="vertical-align: top;">JavaScript containing common widget resources<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/props.js</td>
+                  <td style="vertical-align: top;">JavaScript containing widget property resources</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/&lt;name&gt;.js </td>
+                  <td style="vertical-align: top;">JavaScript containing widget resources </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/jsfx/__package__.js</td>
+                  <td style="vertical-align: top;">Dojo package declaration for <code>webui.&lt;theme&gt;.widget.jsfx</code></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/jsfx/&lt;name&gt;.js </td>
+                  <td style="vertical-align: top;">Ajax resources based on JavaServer Extensions (Dynamic Faces)<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                      <code></code></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><span class="attribute-value">META-INF/com_sun_faces_ajax.js</span><span class="attribute-value"></span></td>
+                  <td style="vertical-align: top;">JavaServer Extensions resources<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><span class="attribute-value">META-INF/prototype/prototype.js</span></td>
+                  <td style="vertical-align: top;">JavaScript containing Prototype resources</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><span class="attribute-value">META-INF/json/json.js</span></td>
+                  <td style="vertical-align: top;">JavaScript containing JSON resources</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><span class="attribute-value">META-INF/dojo/</span>dojo-0.4.1-ajax/dojo.js</td>
+                  <td style="vertical-align: top;">JavaScript containing Dojo resources</td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+            <div style="margin-left: 40px;">Note: The &lt;name&gt; tag is intended to be replaced with the <span style="font-style: italic;">JSP tag</span> name. The &lt;theme&gt; tag is intended to be replaced with the theme name (e.g., suntheme).<br>
+            </div>
+            <h3><a name="4.6.4"></a>4.6.4 Other resources<br>
+            </h3>
+            <table style="width: 95%; margin-left: auto; margin-right: auto; text-align: left;" border="1" cellpadding="2" cellspacing="2">
+              <tbody>
+                <tr>
+                  <td style="vertical-align: top;"><span style="font-weight: bold;">Template Resources</span></td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold;">Comments</span></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/css/&lt;name&gt;.css</td>
+                  <td style="vertical-align: top;">The CSS file name<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/templates/&lt;name&gt;.html</td>
+                  <td style="vertical-align: top;">The HTML template name for individual widgets</td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+            <div style="margin-left: 40px;">Note: The &lt;name&gt; tag is intended to be replaced with the <span style="font-style: italic;">JSP tag</span> name.<br>
+            <span style="font-weight: bold;"></span></div>
+            <h3><a name="4.6.5"></a>4.6.5 Localized message keys<br>
+            </h3>
+            <h3><a name="4.7"></a>4.7 Component Extensibility</h3>
+            <div style="margin-left: 40px;"><span style="font-style: italic;">Dojo Widgets</span> shall be available to web app developers who cannot, or do not want to, use the JSP and/or JSF frameworks. This is achieved by allowing web app developers to turn off and/or override default Ajax functionality which may be dependent on JSP, JSF, and/or Dynamic Faces. In order to turn off default Ajax functionality, the <code>ajaxify</code> attribute of the <span style="font-style: italic;">JSP tag</span> is set to <code>false</code>. Alternatively, a web app developer can instantiate the <span style="font-style: italic;">Dojo Widget</span> via JavaScript without using the <span style="font-style: italic;">JSP tag</span>. In either case, the <span style="font-style: italic;">widget renderer</span> will not output the default <span style="font-style: italic;">event listener JavaScript</span> used for default Ajax functionality.<br>
+            <br>
+            In this design, the default <span style="font-style: italic;">event listener JavaScript </span>implementation automatically subscribes to a <span style="font-style: italic;">Dojo Widget</span> event. For example, an auto-validate text field may publish a Dojo event when ever the user generates a <code>onBlur</code> event (e.g., when tabbing out of a text field). The following JavaScript is evaluated simply by including the <span style="font-style: italic;">event listener JavaScript</span> file anywhere in the page. Although the <span style="font-style: italic;">Dojo Widget</span> will continue to publish Dojo events, omitting the <span style="font-style: italic;">event listener JavaScript</span> file essentially disables default Ajax functionality. To specify custom Ajax functionality, web app developers will subscribe to Dojo widget events similar to the JavaScript shown below.<br>
+            <br>
+            <div style="margin-left: 40px;"><code>// Listen to an Ajax event.</code><br>
+                <code>dojo.event.topic.subscribe(webui.&lt;theme&gt;.widget.textField.validation.beginEventTopic, webui.</code><code>&lt;theme&gt;.</code><code>widget.jsfx.textField, "validate");<br>
+            </code><code> </code></div>
+            </div>
+            <div style="margin-left: 40px;"><br>
+            </div>
+            <div style="margin-left: 40px;">The component may also be extensible by allowing <span style="font-style: italic;">HTML templates</span> to be overridden. Thus, modifications to the HTML layout can be done without changing the associated component code. For example, the Project Woodstock add/remove component could be changed such that the HTML layout appears vertically instead of horizontal.<br>
+            <br>
+            The&nbsp;<span style="font-style: italic;"></span><span style="font-style: italic;">JSF component</span> will continue to support <span style="font-style: italic;">JSF facets</span>. This allows developers to add their own action buttons to a table or progress bar layout, for example.<br>
+            <br>
+            In addition to supporting the above features, <span style="font-style: italic;">JSF components</span> are expected to be them able. See the <a target="_blank" href="ThemeFS.html">Theme Functional Specification</a>.<br>
+            <br>
+            TBD: Similar to <span style="font-style: italic;">HTML templates</span>, it is possible to split CSS style sheets into separate files for each component. There is some debate over this approach; however, it could allow web app developers to replace CSS using an <code>cssTemplate</code> attribute of a <span style="font-style: italic;">JSP tag</span>. (That is, providing the same CSS style selectors are also used in the associated <span style="font-style: italic;">HTML template</span>.) This would help web app developers create components more easily because selectors do not need to be merged into an existing CSS style sheet. However, it may not be as easy to create a new theme considering the number of files produced. For example, it may be easier if all the color selectors used in a theme are located in one file, while all the layout selectors are located in another file.<br>
+            </div>
+            <h2><a name="5.0"></a>5.0 - NetBeans Visual Web Pack Design Time Support (required, Prelim)</h2>
+            <h3><a name="5.1"></a>5.1 Design-time Behavior</h3>
+            <div style="margin-left: 40px;">There are a few rules to follow when writing tool friendly <span style="font-style: italic;">JSF components</span>. See the <a target="_blank" href="http://wiki.java.net/bin/view/Javatools/CustomComponentLibraries">Component Authoring Guide</a> and <a href="http://jupiter.czech.sun.com/wiki/view/Creator/DesignerRulesForComponentAuthors" target="_blank">Designer Rules For Component Authors</a><span style="text-decoration: underline;"> </span>documents for guidelines.</div>
+            <h3><a name="5.2"></a>5.2 Design-time Classes and Interfaces</h3>
+            <div style="margin-left: 40px;">Components supporting client-side, <span style="font-style: italic;">Dojo Widgets</span> will not output HTML as done with traditional server-side rendering. Therefore, a <span style="font-style: italic;">design-time renderer</span> is required for the Creator IDE. Although the <span style="font-style: italic;">design-time renderer</span> will not implement client-side functionality, it must maintain visual fidelity. For example, users cannot click on an icon button to toggle a table panel open in the Creator IDE. Therefore, it is not necessary for the <span style="font-style: italic;">design-time renderer</span> to output JavaScript to support this functionality.</div>
+            <h3><a name="5.3"></a>5.3 Localized message keys</h3>
+            <div style="margin-left: 40px;">N/A</div>
+            <h3><a name="5.4"></a>5.4 Dependencies </h3>
+            <div style="margin-left: 40px;">N/A</div>
+            <h2><a name="6.0"></a>6.0 Component Dependencies</h2>
+            <h3><a name="6.1"></a>6.1 Component class dependencies</h3>
+            <div style="margin-left: 40px;">N/A</div>
+            <h3><a name="6.2"></a>6.2 JavaScript dependencies</h3>
+            
+            <ul>
+              <li>Dojo shall be used to create <span style="font-style: italic;">HTML template</span> based widgets. </li>
+              <li>Dojo's subscribe/publish event system shall be used to communicate with widgets and JavaScript code.</li>
+              <li>Dynamic Faces shall be used to handle an Ajax based requests.</li>
+              <li>Prototype shall be used to support IE in order to use JavaScript in innerHTML.JSON shall be used to parse object literals (i.e., used when transferring data via Ajax).</li>
+        </ul>
+            <h3><a name="6.3"></a>6.3 Infrastructure dependencies</h3>
+            
+            <ul>
+              <li>JSF 1.2 is required by Dynamic Faces to properly locate JSF sub views.</li>
+            </ul>
+            
+            <h3><a name="6.4"></a>6.4 Design time dependencies</h3>
+            <div style="margin-left: 40px;">N/A</div>
+            <h2><a name="7.0"></a>7.0 - Accessibility, Internationalization, Compliance, JavaScript (required)</h2>
+            <h3><a name="7.1"></a>7.1 Accessibility (A11Y)</h3>
+            <div style="margin-left: 40px;">Applications developed using Project Woodstock components must be 508 compliant. To this end, we need to ensure that Project Woodstock components themselves are designed to be accessible and that we provide interfaces that enable 508-compliance where ever possible. See the Mozilla Development Center for more information regarding <a target="_blank" href="http://developer.mozilla.org/en/docs/Accessible_DHTML">accessible DHTML</a>.<br>
+            <br>
+            All components should include the following attributes where applicable:<br>
+            <ul>
+              <li>Provide alternate description (via the <code>alt, title or </code><code>long desc</code> attribute) for non-text elements, such as images.</li>
+              <li>Provide <code>caption</code> and <code>summary</code> attributes for data tables.</li>
+              <li>Use HTML tags whenever possible for represent page structure. For example, use the <code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>, etc. tags to indicate a page title or heading.</li>
+              <li>Use <code>title</code> attributes for disabled form elements only if it conveys some additional information. Assistive technologies are able to detect disabled form elements.</li>
+              <li>Use <code>title</code> attributes only if they convey information that is not already available otherwise. For example, do not simply echo a button label in the <code>title</code> attribute. Use the <code>title</code> attribute for URLs.</li>
+            </ul>
+            At a page level, provide the following:
+            <ul>
+              <li>A means to set the initial focus on a page or pop-up window.</li>
+              <li>A way to set the tab order on a page.</li>
+              <li>A way to indicate language changes whenever multiple languages are displayed in a page (for example, the copyright text).</li>
+              <li>A way to indicate that the session is about to timeout and allow a user to prolong the timeout.</li>
+              <li>A way to indicate errors, including the offending fields, in the page title. Assistive technologies are able to detect changes in the page title.</li>
+              <li>A way to better handle focus management by addressing 2 key issues:</li>
+              <ul>
+                <li>Provide a way to save and restore focus and scroll position when a page reloads.</li>
+                <li>Provide a way to scroll to the top of a page whenever an alert is shown and set the viewing focus to the alert displayed</li>
+              </ul>
+            </ul>
+            <br>
+            Other design considerations to be aware of are:<br>
+            <ul>
+              <li>DHTML is inherently inaccessible. All components that are built primarily from DHTML must render content that is completely keyboard navigable.</li>
+              <li>Whenever possible use style sheets for page layout, instead of tables.</li>
+              <li>Ensure that all elements of a component are fully keyboard navigable.</li>
+              <li>Tab navigation should flow from one group of related elements to the next so the user can maintain context.</li>
+              <li>Only client-side image maps may be used within a component. Server-side image maps are not accessible.</li>
+              <li>Descriptive names should be used for all JavaScript methods to indicate the purpose of the method.</li>
+              <li>Descriptive names should be used for frame sets and frames to indicate their purpose, including the location of a frame, when applicable.</li>
+            </ul>
+            </div>
+            <h3><a name="7.2"></a>7.2 Internationalization (I18N)</h3>
+            <div style="margin-left: 40px;">As with previous Project Woodstock releases, the JSF framework provides a sufficient i18n scheme for JSP localizing applications. APIs are available to manipulate the locale of the current view, supporting server-side i18n. And the JSF core library provides tags for loading resource bundles and assigning localized properties via the JSP page. For example:<br>
+&nbsp;<br>
+            <div style="margin-left: 40px;"><code>&lt;html&gt; </code><br>
+                <code>&nbsp;&nbsp;&nbsp; &lt;%@ taglib uri="http://java.sun.com/jsf/core" prefix="f" %&gt; </code><br>
+              <code>&nbsp;&nbsp;&nbsp; &lt;%@ taglib uri="http://java.sun.com/jsf/html" prefix="h" %&gt; </code><br>
+              <code>&nbsp;&nbsp;&nbsp; &lt;f:view&gt; </code><br>
+              <code>&nbsp;&nbsp;&nbsp; &lt;head&gt; </code><br>
+              <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;f:loadBundle basename="com.sun.web.ui.resources.Resources" var="msgs"/&gt; </code><br>
+              <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;title&gt; </code><br>
+              <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;h:outputText value="#{msgs.windowTitle}"/&gt; </code><br>
+              <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;/title&gt; </code><br>
+              <code>&nbsp;&nbsp;&nbsp; &lt;/head&gt; </code><br>
+              <code>&nbsp;&nbsp;&nbsp; ... </code><br>
+              <code>&lt;/html&gt;</code><br>
+            </div>
+            <br>
+            To retrieve server-side resource strings in the JSF framework, the current locale is retrieved from the current view and passed to a resource bundle obtained using the Java API. In JSF, the locale of the current view is obtained through JSF's <code>UIViewRoot</code> which is retrieved statically via <code>FacesContext</code>. This functionality is available via Wookstock's <code>MessageUtil</code> class, but it is shown below for completeness.<br>
+            <br>
+            <div style="margin-left: 40px;"><code>FacesContext context = FacesContext.getCurrentInstance();</code><br>
+              <code>UIViewRoot viewRoot = context.getViewRoot();</code><br>
+              <code>Locale locale = viewRoot.getLocale();</code></div>
+            <div style="margin-left: 40px;"><code>ClassLoader loader = Thread.currentThread().getContextClassLoader();</code></div>
+            <div style="margin-left: 40px;"><code>ResourceBundle bundle = ResourceBundle.getBundle(bundleName, locale, loader);</code></div>
+            <div style="margin-left: 40px;"><code>String message = bundle.getString("key");</code><br>
+            </div>
+            <br>
+            Although optional, an application may supply a default resource bundle in a configuration file. For example:<br>
+            <br>
+            <div style="margin-left: 40px;"><code>&lt;faces-config&gt;</code><br>
+                <code>&nbsp;&nbsp;&nbsp; &lt;application&gt;</code><br>
+                <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;message-bundle&gt;com.sun.web.ui.resources.Resources&lt;/message-bundle&gt;</code><br>
+                <code>&nbsp;&nbsp;&nbsp; &lt;/application&gt;</code><br>
+                <code>&nbsp;&nbsp;&nbsp; ...</code><br>
+                <code>&lt;/faces-config&gt;</code><br>
+            </div>
+            <br>
+            The following code snippet retrieves the default bundle.<br>
+            <br>
+            <div style="margin-left: 40px;"><code>Application app = context.getApplication;</code><br>
+              <code>String appBundleName = app.getResourceBundle();</code><br>
+            </div>
+            <br>
+            Retrieving server-side resource strings in the JSF framework can be done at anytime. However, once the browser has retrieved the JSP page, the locale is cached in the session and typically does not change. If the user changes the browser locale and refreshes the page, JSF essentially ignores the new locale. However, locales can be changed manually by setting the <code>UIViewRoot</code> locale value through <code>FacesContext</code>. It is expected that the locale may change if the page is re-rendered, but not during an Ajax request. If the locale were to change, during an Ajax request, the rendered HTML page may display text from multiple locales.<br>
+            <br>
+            Although component properties can be obtained at any time using Ajax, localized component properties shall be output as <span style="font-style: italic;">in-line JavaScript</span> when the JSP page is rendered. Since the <span style="font-style: italic;">widget renderer</span> has access to the <span style="font-style: italic;">JSF component</span> during the JSF render response phase, all the information required to render a <span style="font-style: italic;">Dojo Widget</span> is available to be output then and there. The <span style="font-style: italic;">widget renderer</span> will always be able to retrieve localized values from components each time the page is rendered; however, this may not be possible for the <span style="font-style: italic;">Ajax renderer</span>. This is because the <code>f:loadBundle</code> tag, from in JSF 1.1, initializes the localized resource bundle via the <code>doStartTag</code> method of <code>LoadBundleTag</code>.<br>
+            <br>
+            Since the <code>f:loadBundle</code> tag has no associated <span style="font-style: italic;">JSF component</span> or <span style="font-style: italic;">JSF renderer</span>, the code required to initialize the resource bundle will never be invoked during an Ajax request. This is because the <span style="font-style: italic;">Dynamic Faces life cycle</span> only processes objects in the <span style="font-style: italic;">JSF component</span> tree, not tags defined in a JSP page. Thus, the resource bundle will not be initialized and localized resources cannot be retrieved. Apparently, this problem has been fixed in JSF 1.2; however, it has not been confirmed with Project Woodstock. In the mean time, best practice is to output all localized properties when the JSP page is rendered via the <span style="font-style: italic;">Ajax renderer</span>.<br>
+            <br>
+            Note: In addition to the <code>f:loadBundle</code> fix in JSF 1.2, the Shale core library includes a managed bean definition and corresponding custom property resolver that may alleviate this i18n <code></code> issue.<br>
+            </div>
+            <h3><a name="7.3"></a>7.3 Level of XHTML Compliance</h3>
+            
+            <div style="margin-left: 40px;">Since <span style="font-style: italic;">widgets</span> are rendered client-side using JavaScript, <span style="font-style: italic;">HTML templates</span> are not expected to be fully XHTML compliant. For example, <span style="font-style: italic;">HTML templates</span> may contain Dojo Attach points and Web Accessibility Initiative (WAI) attributes. Thus, only the rendered page is expected to pass an XHTML validator. However, imported interfaces must not introduce XHTML compliance issues.</div>
+            <h3><a name="7.4"></a>7.4 JavaScript</h3>
+            <h3><a name="7.4.1"></a>7.4.1 Client-side Updating<br>
+            </h3>
+            <div style="margin-left: 40px;">When populating the HTML template, properties are set by invoking a function, named setProps. Not only is this used by the widget's <code>fillInTemplate</code> function, but web app developers can make use of it as well. The <code>setProps</code> function provides a single API common between all widgets. There is no need to provide APIs such as the button's <code>doClick</code> function in order to encapsulate brand functionality. <br>
+            <br>
+            Since an object literal array is used as the function argument, properties can be added or subtracted as needed without ever changing the function signature. (Web app developers can set one or multiple properties using the same function.) This also hides the fact that underlying elements may be enclosed by a <code>span</code> tag -- no need to provide APIs such as the field's <code>getInputElement</code> function. And if branding changes the underlying functionality (e.g., a <code>span</code> tag is added/removed), we can encapsulate those changes when properties are set.<br>
+            <br>
+            When ever the <code>setProps</code> function is called, given properties are saved on the associated DOM node using a variable, named <code>_props</code>. (New properties always override older ones.) This allows the widget to be updated later on by a web app developer or other widgets. For example, if a widget is set as a mini button, we may need to know other properties to determine which style to apply.<br>
+            <br>
+            Note that private functions and properties are prefixed with "_" as a best practice convention.<br>
+            <br>
+            <code>&nbsp;&nbsp;&nbsp; webui.@THEME@.widget.button = function() {</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.fillInTemplate = function() {</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // Set public functions.<br>
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.domNode.setProps = webui.@THEME@.widget.button.setProps;</code><br>
+            <code></code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Set properties.</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.domNode.setProps({</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; disabled: (this.disabled != null) ? this.disabled : false,</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; id: this.id,</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mini: (this.mini != null) ? this.mini : false,</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; primary: (this.primary != null) ? this.primary : false,</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; visible: this.visible,</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; });</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</code><br>
+            <code>&nbsp;&nbsp;&nbsp; }<br>
+            </code><code><br>
+            </code> <code>&nbsp;&nbsp;&nbsp; /**</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp; * This function is used to set widget properties with the</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp; * following Object literals.</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp; *</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp; * &lt;ul&gt;</code><br>
+            <code></code><code></code><code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp; &lt;li&gt;disabled&lt;/li&gt;</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp; &lt;li&gt;id&lt;/li&gt;</code><code></code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp; &lt;li&gt;mini&lt;/li&gt;</code><code></code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp; &lt;li&gt;primary&lt;/li&gt;</code><code></code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp; &lt;li&gt;visible&lt;/li&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp; ...<br>
+            </code><code>&nbsp;&nbsp;&nbsp;&nbsp; * &lt;/ul&gt;</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp; *</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp; * @param props Key-Value pairs of properties.</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp; */</code><br>
+            <code>&nbsp;&nbsp;&nbsp; webui.@THEME@.widget.button.setProps = function(props) {</code><br>
+            <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ...</code><br>
+            <code>&nbsp;&nbsp;&nbsp; }</code><br>
+            </div>
+            <h3><a name="7.4.2"></a>7.4.2 Properties</h3>
+            <div style="margin-left: 40px;">Errors can occur when JavaScript includes and default properties are not added to the page when needed. As an example, consider a widget which supports a <span style="font-style: italic;">JSF facet</span>. This <span style="font-style: italic;">JSF facet</span> not only renders an HTML button, but JavaScript to initialize button properties. If the button only renders JavaScript includes and default properties once per request, this can be a problem for other buttons in the page. It may not be possible for the widget to add the HTML to the DOM before other buttons attempt to initialize. Thus, a JavaScript error may thrown because the includes and default properties were not available during initialization.<br>
+            <br>
+            To avoid this problem, JavaScript includes and default component properties are not output directly in the page. Instead, themed CSS selectors and other properties are added to an <code>props.js</code> file in each module. Using <code>dojo.require()</code> avoids JavaScript errors by ensuring that all properties are included in the page before they are ever referenced. (Dynamic component properties are output via a JSON object when instantiateing widgets.) For example, <code>widget/props.js</code> includes the following button properties.<br>
+            <br>
+            <code>&nbsp;&nbsp;&nbsp; webui.@THEME@.widget.props = {</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Button properties.</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; button: {</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; primaryClassName: "Btn1@THEME_CSS@",</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; primaryDisabledClassName: "Btn1Dis@THEME_CSS@",</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; primaryHovClassName: "Btn1Hov@THEME_CSS@",</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; primaryMiniClassName: "Btn1Mni@THEME_CSS@",</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; primaryMiniHovClassName: "Btn1MniHov@THEME_CSS@",</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; primaryMiniDisabledClassName: "Btn1MniDis@THEME_CSS@",</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...</code><br>
+            </div>
+            <h3><a name="7.4.3"></a>7.4.3 Debugging</h3>
+            <div style="margin-left: 40px;">When using <code>dojo.require()</code> for a file that is not already loaded, the resource is fetched using using an xmlhttprequest and loaded into the JavaScript runtime environment using an <code>eval()</code> statement. When the file is <code>eval()</code>'ed, <code>dojo.require()</code> calls will occur, and those then recursively load any further dependencies (those which are not already loaded). Unfortunately, Mozilla and Firefox are unable to locate a line of code loaded by <code>dojo.require()</code> due to a flaw in the way <code>eval()</code> debugging hooks are implemented in Spidermonkey.<br>
+            <br>
+            When you set Dojo's <code>debugAtAllCosts</code> property to true, the file is still fetched using xmlhttprequest but it is not <code>eval()</code>'ed. Instead, each of the required javascript filenames is added into a list of pending files that need to be loaded (the list is in order so that dependent files are loaded in the correct order). When you then call <code>dojo.writeIncludes()</code>, script tags are appended with src attributes set to the js files that need to be loaded. The script tags cause the files to be loaded by the browser - files loaded this way are understood by debuggers much better than when the files are <code>eval()</code>'ed.<br>
+            <br>
+            To enable debugging more conveniently, set the debug attribute of the Project Woodstock head tag to true. The head tag will set Dojo's isDebug and <code>debugAtAllCosts</code> properties are set to true. And since all <code>dojo.require()</code> statements must precede <code>dojo.writeIncludes()</code>, the head tag will output wildcards for each module. In this scenario, the <code>__package__.js</code> files are configured to include all JavaScript files when Dojo's isDebug property is true. This ensures that all JavaScript files continue to be available in order to debug the page. Currently, the __package__.js file has the following debug entries:<br>
+            <br>
+            <div style="margin-left: 40px;"><code>// For debugging only, obtain all module resources before invoking</code><br>
+              <code>// dojo.hostenv.writeIncludes(). This will ensure that JavaScript</code><br>
+              <code>// files are accessible to JavaScript debuggers.</code><br>
+              <code>dojo.requireIf(djConfig.isDebug, "webui.@THEME@.widget.button");</code><br>
+              <code>dojo.requireIf(djConfig.isDebug, "webui.@THEME@.widget.progressBar");</code><br>
+              <code>dojo.requireIf(djConfig.isDebug, "webui.@THEME@.widget.table2");</code><br>
+              <code>dojo.requireIf(djConfig.isDebug, "webui.@THEME@.widget.image");</code><br>
+              <code>dojo.requireIf(djConfig.isDebug, "webui.@THEME@.widget.table2RowGroup");</code><br>
+              <code>dojo.requireIf(djConfig.isDebug, "webui.@THEME@.widget.label");</code><br>
+              <code>dojo.requireIf(djConfig.isDebug, "webui.@THEME@.widget.staticText");</code><br>
+              <code>...</code></div>
+            <br>
+            If you just need to debug one or two known files, then you can just include those specific files using script tags after dojo.js. For example:<br>
+            <br>
+            <code>&nbsp;&nbsp;&nbsp; &lt;script type="text/javascript" src="/dojo.js"&gt;&lt;/script&gt;</code><br>
+            <code>&nbsp;&nbsp;&nbsp; &lt;script type="text/javascript" src="/example/theme/com/sun/webui/jsf/suntheme/javascript/widget/button.js"&gt;&lt;/script&gt;</code><br>
+            <br>
+            Note that <code>debugAtAllCosts</code> may have unobvious side-effects - you should only use it if you are actually debugging.<br>
+            </div>
+            <h3><a name="7.4.4"></a>7.4.4 Namespaces</h3>
+            <div style="margin-left: 40px;">Widgets are combined into groups called namespaces. All the widgets built into Dojo are in the <code>dojo</code> namespace, but Project Woodstock widgets are defined in the <code>webui.&lt;theme&gt;</code> namespace. For example, <code>webui.&lt;theme&gt;:button</code> is used to create a Project Woodstock button which is unrelated to the button object built into Dojo, called <code>dojo:Button</code>.<br>
+            <br>
+            Note that the Project Woodstock namespace is versioned, using the current theme name, to allow multiple component set on the same page (e.g., in a portal environment). For the next major release, the namespace may be <code>webui.suntheme5</code>, for example.</div>
+            <div style="margin-left: 40px;"> </div>
+            <h3><a name="7.4.5"></a>7.4.5 Modules</h3>
+            <div style="margin-left: 40px;">The Project Woodstock JavaScript code is arranged in logical units called modules. (Modules can also be called namespaces, except that has a special meaning for Dojo widgets). This provides a structure much like Java packages where import statements are used. For example, the <code>webuijsf.suntheme.widget.button</code> module contains functions such as <code>webui.&lt;theme&gt;.widget.button.setProps()</code>.<br>
+            <br>
+            If the module prefix is defined as:<br>
+            <br>
+            <code>&nbsp;&nbsp;&nbsp; dojo.hostenv.setModulePrefix("webui.&lt;theme&gt;", "/&lt;appname&gt;/theme/com/sun/webui/jsf/&lt;theme&gt;/javascript");</code><br>
+            <br>
+            the line:<br>
+            <br>
+            <code>&nbsp;&nbsp;&nbsp; dojo.require("webui.&lt;theme&gt;.widget.button");</code><br>
+            <br>
+            will include the file widget/button.js, which in turn defines functions in the <code>webui.&lt;theme&gt;.widget.button</code> module. And if the <code>webui.&lt;theme&gt;.widget</code> module does not exist when the file is loaded, it will be created.<br>
+            <br>
+            Note: Modules are no longer named using webuijsf since widgets will not be dependent on the JSF framework.<br>
+            </div>
+            <h3><a name="7.4.6"></a>7.4.6 Resources</h3>
+            <div style="margin-left: 40px;">A JavaScript file is also known as a resource. A single JavaScript file should never define multiple modules. Further, each file should have exactly one line at the top defining the name of the resource. This tells Dojo that the file has been loaded successfully. For example:<br>
+            <br>
+            <code>&nbsp; dojo.provide("webui.&lt;theme&gt;.widget.button");</code><br>
+            </div>
+            <h3><a name="7.4.7"></a>7.4.7 Wildcards</h3>
+            <div style="margin-left: 40px;">There is a wildcard include, such as <code>dojo.require("webui.&lt;theme&gt;.widget.*")</code>. However, this does not necessarily include everything under the <code>webui.&lt;theme&gt;.widget</code> module - Dojo is very selective here. In fact, this particular statement will only include the <code>widget/common.js</code> and <code>widget/props.js</code> files - only what is commonly used by the widget module. There is an <code>__package__.js</code> file that actually defines which files are included for the wildcard. This file can also be configured to include different files for debugging - this is described in section 7.4.11.<br>
+            <br>
+            As an example, consider the widget/button.js file. In order to instantiate the button widget, the following statement must be output in the page.<br>
+            <br>
+            <code>&nbsp;&nbsp;&nbsp; dojo.require("webui.&lt;theme&gt;.widget.button");</code><br>
+            <br>
+            This will include the file widget/button.js, which contains two more dependencies.<br>
+            <br>
+            <code>&nbsp;&nbsp;&nbsp; dojo.require("webui.&lt;theme&gt;.*");</code><br>
+            <code>&nbsp;&nbsp;&nbsp; dojo.require("webui.&lt;theme&gt;.widget.*");</code><br>
+            <br>
+            The first wildcard will include the <code>__package__.js</code> file which contains will include multiple files common to all pages. This is because the button widget makes function calls in other modules. We could have been more selective and only included <code>webui.&lt;theme&gt;.common</code>; however, these files are typically included in each page, regardless.<br>
+            <br>
+            <code>&nbsp;&nbsp;&nbsp; dojo.kwCompoundRequire({</code><br>
+            <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; common: [</code><br>
+            <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "webui.&lt;theme&gt;.props",</code><br>
+            <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; "webui.&lt;theme&gt;.cookie",</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; "webui.&lt;theme&gt;.browser",</code><br>
+            <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "webui.&lt;theme&gt;.body",</code><br>
+            <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; "webui.&lt;theme&gt;.common",</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; "webui.&lt;theme&gt;.formElements"]</code><br>
+            <code>&nbsp;&nbsp;&nbsp; });</code><br>
+            <br>
+            The next <code>__package__.js</code> file includes a couple files common to only the widget module, but necessary for the button.<br>
+            <br>
+            <code>&nbsp;&nbsp;&nbsp; dojo.kwCompoundRequire({</code><br>
+            <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; common: [</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; "webui.&lt;theme&gt;.widget.props",</code><br>
+            <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "webui.&lt;theme&gt;.widget.common"]</code><br>
+            <code>&nbsp;&nbsp;&nbsp; });</code><br>
+            </div>
+            <h3><a name="7.4.8"></a>7.4.8 Build-time</h3>
+            <div style="margin-left: 40px;">During build time, JavaScript files are parsed for <code>@THEME@</code> and <code>@THEME_CSS@</code> tags. The <code>@THEME@</code> tag is replaced with a full theme name, while <code>@THEME_CSS@</code> tags are replaced with a shorter theme name, typically used in .css files. Thus, the <code>webui.@THEME@.widget</code> module may be replaced by <code>webui.&lt;theme&gt;.widget</code>. And the <code>Btn1@THEME_CSS@</code> selector may be replaced with <code>Btn1_sun4</code>.<br>
+            </div>
+            <h3><a name="7.4.9"></a>7.4.9 Instantiating Widgets<br>
+            </h3>
+            <div style="margin-left: 40px;">When a renderer outputs JavaScript to instantiate a widget, it also outputs a span tag. The span tag is a temporary place holder that allows widgets to positioned properly in a web page. Without this temporary tag, widgets can appear out of order when mixed with other HTML. Since the span tag uses the same id as the widget, the tag can easily be replaced with the DOM node generated by the widget. The <code>webui.&lt;theme&gt;.widget.common</code> module has a commonly used function, named <code>createWidget()</code>, for just this purpose.<br>
+            <br>
+            <code>&nbsp;&nbsp;&nbsp; webui.&lt;theme&gt;.widget.common.createWidget({</code><br>
+            <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; "_widgetType": "webui.&lt;theme&gt;:button",</code><br>
+            <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; ...</code><br>
+            <code>&nbsp;&nbsp;&nbsp; });</code><br>
+            </div>
+            <h3><a name="7.4.10"></a>7.4.10 Widget &amp; HTML Fragments<br>
+            </h3>
+            <div style="margin-left: 40px;">Although widgets are rendered client-side, they can still use component children and JSF facets. In some cases, these children are widgets themselves and render JSON properties. However, due to the limited size of the widget library, most components simply render HTML strings. When dealing with a JSON object, a new widget is created and added to the DOM as a child node. However, when dealing with large HTML strings, they are added to the DOM via an innerHTML property. Unfortunately, IE does not evaluate JavaScript also contained in HTML strings. <br>
+            <br>
+            As a solution, the Prototype library is used to strip script fragments, set innerHTML property, and eval scripts using a timeout. (The timeout is used to ensure that HTML tags have been added to the DOM before evaluating JavaScript.) Using the <code>webui.&lt;theme&gt;.widget.common.addFragment()</code> function ensures that both JSON properties and HTML strings are handled properly.<br>
+            <br>
+            Note that widgets should not set the <code>innerHTML</code> property directly. Eventually, even static text may be ported to a widget. Thus, it would be good coding practice to always use the <code>addFragment()</code> function and avoid any future breakage.<br>
+            <br>
+            <code>&nbsp;&nbsp;&nbsp; webui.@THEME@.widget.button.setProps = function(props) {</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Save properties for later updates.</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (this._props) {</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Object.extend(this._props, props); // Override existing values, if any.</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this._props = props;</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</code><br>
+            <code></code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Set DOM node properties.</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; webui.@THEME@.widget.common.setCoreProperties(this, props);</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; webui.@THEME@.widget.common.setJavaScriptProperties(this, props);</code><br>
+            <code></code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (props.alt) { this.setAttribute("alt", props.alt); }</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (props.align) { this.setAttribute("align", props.align); }</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (props.disabled != null) { this.disabled = props.disabled; }</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...</code><br>
+            <code></code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Set contents.</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (props.contents) {</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; webui.@THEME@.widget.common.addFragment(this, props.contents);</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</code><br>
+            <code>&nbsp;&nbsp;&nbsp; }</code><br>
+            </div>
+            <h3><a name="7.4.11"></a>7.4.11 Best practices</h3>
+            <div style="margin-left: 40px;">Use object hierarchies to organize JavaScript objects and avoid global variables. In JavaScript there is potential for global object names to collide. JavaScript does not provide package names like Java; however, you can still use object hierarchies to organize JavaScript objects. This convention prevents naming collisions because only a single global variable (i.e., <code>webui</code>) is required. In the example below, the JavaScript objects are set as properties of the parent object.<br>
+            <br>
+            Note that the &lt;theme&gt; tag below is intended to be replaced by the current theme name and version number. Versioning the JavaScript library is particularly important in a portal environment when multiple component versions are used by different portlets. For example, branding may have changed the underlying functionallity or styles associated with a particular component; thus, backward compatibility may not be possible. To ensure components continue to behave as expected and display the correct CSS styles for the theme, the JavaScript library is versioned for each major release.<br>
+            <br>
+            <div style="margin-left: 40px;"><code>var </code><code>webui = {}</code><code></code><br>
+              <code></code><br>
+              <code>// webui.</code><code>&lt;theme&gt;.</code><code>common namespace.</code><br>
+              <code>webui.</code><code>&lt;theme&gt;</code><code>.common = {<br>
+&nbsp;&nbsp;&nbsp; props: "Some Value",<br>
+              <br>
+              </code><code>&nbsp;&nbsp;&nbsp; setVisible: function(obj, visible) {</code><br>
+              <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; ...</code><br>
+              <code>&nbsp;&nbsp;&nbsp; },</code><br>
+              <code></code><code>&nbsp;&nbsp;&nbsp; removeClassName: function(obj, className) {</code><br>
+              <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; ...</code><br>
+              <code>&nbsp;&nbsp;&nbsp; },</code><br>
+              <code></code><code>&nbsp;&nbsp;&nbsp; addClassName: function(obj, className) {</code><br>
+              <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; ...</code><br>
+              <code>&nbsp;&nbsp;&nbsp; },</code><br>
+              <code></code><code>&nbsp;&nbsp;&nbsp; splitClassNames: function(obj) {</code><br>
+              <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; ...</code><br>
+              <code>&nbsp;&nbsp;&nbsp; }</code><br>
+              <code>}</code><br>
+            </div>
+            <div style="margin-left: 40px;"> </div>
+            <br>
+            Use the prototype property to define shared behavior and to extend objects. The prototype property is a language feature of JavaScript and the property is available on all objects. Property resolution in JavaScript is designed to look at the value the prototype property, if a property is not found in the current object. If the value of the object defined as the prototype object does not contain the property, the value of its prototype property is examined. Prototype property chains (hierarchies) are often used to provide inheritance in JavaScript objects. The following example shows how behavior can be added to an existing object using the prototype property.<br>
+            <br>
+            <div style="margin-left: 40px;"><code>var webui = {}<br>
+                  <br>
+              webui.</code><code>&lt;theme&gt;.</code><code>version = function() {<br>
+&nbsp;&nbsp;&nbsp; this.major = 0;<br>
+&nbsp;&nbsp;&nbsp; this.minor = 1;<br>
+&nbsp;&nbsp;&nbsp; this.patch = 0;<br>
+&nbsp;&nbsp;&nbsp; this.flag = "";<br>
+              }<br>
+              <br>
+              webui.</code><code>&lt;theme&gt;.</code><code>version.prototype.toString = function() {<br>
+&nbsp;&nbsp;&nbsp; return this.major + "." + this.minor + "." + this.patch + this.flag;<br>
+              }<br>
+              <br>
+              var v = new webui.version();<br>
+              alert(v.toString());</code><br>
+            </div>
+            <br>
+            Use object literals as flexible function parameters. Object literals are objects defined using braces ({}) that contain a set of comma separated key-value pairs much like a map in Java. The example below shows an object literal which contains a string, number, and array of strings. Object literals are very useful in that they can be used generically for passing in arguments to a function. Further, the function signature does not change if you choose to require more properties in a JavaScript function.<br>
+            <br>
+            <div style="margin-left: 40px;"><code>{key1: "stringValue", key2: 2, key3: ['blue','green','yellow']}</code><br>
+            </div>
+            <br>
+            This means that the following JavaScript:<br>
+            <br>
+            <div style="margin-left: 40px;"><code>var requiredImage = new Image();</code><br>
+              <code>image.setWidth(7);</code><br>
+              <code>image.setHeight(14);</code><code></code><code></code><br>
+              <code>image.setSrc("...theme/com/sun/web/ui/&lt;theme&gt;/images/other/required.gif");</code><code></code><br>
+              <code>image.setId("form1:image2");</code><br>
+              <code></code><br>
+              <code>var errorImage = new Image();</code><br>
+              <code>image.setWidth(7);</code><br>
+              <code>image.setHeight(14);</code><code></code><br>
+              <code>image.setSrc("...theme/com/sun/web/ui/&lt;theme&gt;/images/other/error.gif");</code><br>
+              <code>image.setId("form1:image2");</code><br>
+              <br>
+              <code></code> <code>var label = new Label();</code><br>
+              <code></code><code>label.setValue("This is a label");</code><code></code><br>
+              <code>label.setId("form1:label");</code><br>
+              <code>label.setHtmlFor("form1:field");</code><br>
+              <code>label.setRequiredImage(requiredImage);</code><br>
+              <code>label.setErrorImage(errorImage);</code><code></code><br>
+            </div>
+            <br>
+            can be represented by just one JavaScript function call using an array of object literals. Again, if additional properties are added or removed, the function signature doe snot need to change. For example:<br>
+            <br>
+            <code>webui.</code><code>&lt;theme&gt;.</code><code>widget.label.setProps(</code><br>
+            <code></code><code>&nbsp;&nbsp;&nbsp; "id": "form1:label",</code><br>
+            <code></code><code></code><code>&nbsp;&nbsp;&nbsp; "htmlFor": "form1:field",</code><br>
+            <code>&nbsp;&nbsp;&nbsp; "value": "This is a label",</code><br>
+            <code></code><code>&nbsp;&nbsp;&nbsp; "requiredImage": {</code><br>
+            <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; "width": 11,</code><br>
+            <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; "height": 14,</code><br>
+            <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; "src": "/&lt;appname&gt;/theme/com/sun/web/ui/</code><code>&lt;theme&gt;</code><code>/images/alerts/error_small.gif",</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "id": "form1:image2"</code><br>
+            <code>&nbsp;&nbsp;&nbsp; },</code><br>
+            <code>&nbsp;&nbsp;&nbsp; "errorImage": {</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "width": 11,</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "height": 14,</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; "src": "/&lt;appname&gt;/theme/com/sun/web/ui/&lt;theme&gt;/images/alerts/error_small.gif",</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "id": "form1:image2"</code><br>
+            <code>&nbsp;&nbsp;&nbsp; }</code><br>
+            <code>);</code></div>
+            <div style="margin-left: 40px;"> </div>
+            <h2><a name="8.0"></a>8.0 Example<br>
+            </h2>
+            <div style="margin-left: 40px;">The <a target="_blank" href="ajax-architecture-example.html">Ajax Architecture Example for Project Woodstock JavaServer Faces Components</a> document demonstrates an auto-validate <a href="https://woodstock.dev.java.net/files/documents/6231/54436/ajax-architecture-example.tar.Z">example app</a> which implemnts a text field, alert, label, and image widgets. (Many implementation details not covered in the high level design are described here; thus, it is strongly recommended that component developers also read this document and run the example.) Not only do these widgets follow the architecture described above, but it shows how a web app developer can establish a relationship between widgets in order to update multiple locations of a page without a refresh. For example, if a text field value is found to be invalid, the alert, label, and various images are all updated at the same time.<br>
+            <br>
+            In this example, a credit card number is validated when ever the user tabs out of the text field or clicks elsewhere in the page. Since AJAX is used to asynchronously validate the user's entry, the page does not need to be re-rendered. Instead, only a couple places in the page shall be selectively updated. For example, if the user's entry is found to be invalid, the text field label changes from black to red and an error icon is shown next to the label. In addition, an error message is displayed at the top of the page via an in-line alert. However, if the user then enters a valid number, the text field label changes from red to black and the error icon is hidden. Further, the error message, displayed at the top of the page, is removed. For example:<br>
+            <br>
+            <div style="text-align: center;"><img src="invalid.gif" alt="" width="402" height="210" style="width: 402px; height: 210px;"><br>
+            </div>
+            <br>
+            Note: There are now components in the Project Woodstock tag library which implement this architecture; progressBar, table2, and button. The progressBar has been officially released with Project Woodstock 4.0 while the other components are still in the prototype phase.<br>
+        </div>
+            <h2><a name="9.0"></a>9.0 Issues</h2>
+            <ul>
+              <li>The f:loadBundle tag of JSF 1.1 does not have a component; thus, cannot retrieve i18n values during an Ajax request.</li>
+              <li>The <code>ajaxify</code> attribute may not be the best <span style="font-style: italic;">JSP tag</span> attribute name for default Ajax functionality.</li>
+              <li>Do we use separate css files for each widget?</li>
+              <li>What happens when component developers use their own custom JSF <code>ResponseWriter</code>?</li>
+              <li>WAI (Web Accessibility Initiative) attributes are not XHTML compliant, but does it matter for an HTML template?<br>
+              </li>
+      </ul></td>
+    </tr>
+  </tbody>
+</table>
+</BODY>
+</HTML>

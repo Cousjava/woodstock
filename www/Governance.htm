@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Project Woodstock - Governance</title>
+    <!--
+      The contents of this file are subject to the terms
+      of the Common Development and Distribution License
+      (the License).  You may not use this file except in
+      compliance with the License.
+      
+      You can obtain a copy of the license at
+      https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      See the License for the specific language governing
+      permissions and limitations under the License.
+      
+      When distributing Covered Code, include this CDDL
+      Header Notice in each file and include the License file
+      at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      If applicable, add the following below the CDDL Header,
+      with the fields enclosed by brackets [] replaced by
+      you own identifying information:
+      "Portions Copyrighted [year] [name of copyright owner]"
+      
+      Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+    -->
+<link href="browser-uispec.css" type="text/css" rel="stylesheet">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style type="text/css">
+<!--
+.style19 {font-size: 16pt}
+-->
+</style>
+</head>
+<body bgcolor="#FFFFFF">
+<script src="js/uispec_js.js" type="text/javascript"></script>
+<div align="right" class="security-text"><a href="#skipnav" title="Skip Navigation Links"></a></div>
+<div class="MstDiv">
+  <table class="MstTblBot" width="100%" border="0" cellpadding="0" cellspacing="0" title="">
+
+    <tr>
+      <td class="MstTdTtl"><div class="MstDivTtl">
+          <div class="Mst1TtlTxt">Project Woodstock - Governance</div>
+        </div>
+        <div class="Mst1SecDiv"> <a href="index.html"><font color=#FFFFFF>Home Page</a> &gt; <strong>Project Woodstock Roles &amp; Governance </strong></div></td>
+    </tr>
+  </table>
+</div>
+
+<table id="Layout">
+  <tbody>
+    <tr>
+      <td id="Content"><div class="Format"></div></td>
+    </tr>
+  </tbody>
+</table>
+Project Woodstock has a very flat, lightweight governance structure. Decisions are made in public discussion on public mailing lists. There are few formal roles--an individual's word carries weight in accordance with their contribution to the project. Decisions are made by consensus, rather than voting--most decisions are of interest only to members of the community who will be affected by it. The combination of public mailing lists and consensus ensures that any person who could be affected by a decision both finds out about it, and has a voice in the discussion.<br>
+<h3>Roles and Responsibilities</h3>
+<p>There are quite a few ways to participate in the Project Woodstock community, and not all of them involve contributing source code to the project! Simply using the Project Woodstock components, participating on mailing lists, or filing bug reports or enhancement requests is an incredibly valuable form of participation. </p>
+<p>If one were to break down the forms of participation in Project Woodstockinto a set of roles, the result would look something like this: Users, Contributors, Committers, Maintainers, and Project Lead.</p>
+<p><b>Users</b> </p>
+<p>Users are the people who use the components to develop web applications. Users are using the software, reporting bugs, making feature requests and suggestions. This is by far the most important category of people. Without users, there is no reason for the project.</p>
+<p><i>How to become one:</i> Download the Project Woodstock components and use them to build an application. The Example application will give you some simple use cases on how to incorporate the web components into your application.</p>
+<p><b>Contributors</b></p>
+<p>Contributors are individuals who contribute to Project Woodstock, but do not have CVS write access to the source tree. Contributions can be in the form of source code patches, new code, or bug reports, but could also include web site content like articles, FAQs, or screenshots. </p>
+<p>A contributor who has sent in solid, useful source code patches on a project can be elevated to committer status by the maintainer. </p>
+<p>Integration of a Contributors' submissions is at the discretion of the project maintainer, but this is an iterative, communicative process. Note that for code to be integrated, a completed Sun Contribution Agreement (SCA) is required from each contributor. See the <a href="#SCA_Policy">SCA policy</a> for info. </p>
+<p><i>How to become one:</i> Contribute in any of the ways described above: either code, examples, web site updates, tests, bugs, and patches. If you're interested in becoming a Committer to the source base, get the sources to Project Woodstock, make an improvement or fix a bug, and send that code to the <a href="mailto:dev@woodstock.java.net">developers mailing list</a> or attach it to the bug report in <a href="https://woodstock.dev.java.net/servlets/ProjectIssues">IssueZilla</a>. </p>
+<p><b>Committers</b></p>
+<p>Developers have CVS write access to the source tree, either for the individual modules they are working on, or in some cases global write permissions everywhere in CVS. </p>
+<p>A developer must complete and send in a Sun Contributor Aggreement form to commit code. See the <a href="#SCA_Policy">SCA policy</a> for info. </p>
+<p>Rules for how to commit, once you have commit access, may vary by module. Be sure to check with the module maintainer before you start making changes.</p>
+<p><i>How to become one:</i> Submit some patches via email. After you have submitted patches that have been accepted and intergrated over a period of time you can ask the maintainer of the module  for commit access. The maintainer will seek consensus before granting Committer access, but their decisions are final.</p>
+<p><b>Maintainers</b> </p>
+<p>Each module has one maintainer, who has check-in permissions (either for that module or globally), and "manages" a group of <i>Committers</i>. They are responsible for merging contributors' patches, bug fixes, and new code from the development branch of the source tree into the stable branch. Maintainers are responsible for making sure that these contributions do not break the build. </p>
+<p>The Maintainer is also responsible for checking that everyone who contributes code has submitted a SCA. See the <a href="#SCA_Policy">SCA policy</a> for info. </p>
+<p>A Maintainer is responsible for their module (accessible using CVS), and for granting check-in privileges to contributors. They also act as the gate keeper of the module, helping to ensure quality across the build.</p>
+<p><i>How to become one:</i> </p>
+<ul>
+  <li>
+    <p>Start a module (you need to have been a committer for some time and written some working code on your project to do this, you'll also need to talk to the Project Lead).</p>
+  </li>
+  <li>
+    <p>Have responsibility for that module handed over to you from the current Maintainer of an existing module.</p>
+  </li>
+  <li>
+    <p>Take over an abandoned project--sometimes someone starts something, but for one reason or another can't continue to work on it. If it's interesting to you, volunteer! </p>
+  </li>
+</ul>
+<p><b>Project Lead</b></p>
+<p>Project Woodstock has an overall Project Lead. This Project Lead is currently appointed by Sun. This person is responsible for managing the entire project, helping to create policies by consensus that ensure global quality.<br>
+</p>
+<h3><a name="SCA_Policy"></a>SCA Policy</h3>
+<p>The first step to contibuting code or submitting a patch is to sign and return <a href="http://www.sun.com/software/opensource/sca.pdf">Sun's Contributor Agreement (SCA)</a>.&nbsp; There is also a <a href="http://www.sun.com/software/opensource/contributor_agreement.jsp">FAQ</a> on the SCA.</p>
+<p>Please print the Sun's Contributor Agreement form out, fill in all the necessary detail, and return it. <br>
+  <br>
+  <span style="font-family: monospace;"> </span>Via fax:<br>
+  Number is 1-408-715-2540<br>
+  <br>
+  Via mail to:<br>
+  Eric Renaud <br>
+  Sun Microsystems, Inc.<br>
+  4120 Network Circle, USCA 12-105<br>
+  Santa Clara, CA 95054<br>
+  <br>
+  Via e-mail for scanned files: <a class="moz-txt-link-abbreviated" href="mailto:sun_ca@sun.com">sun_ca@sun.com</a><br>
+</p>
+<p>
+</BODY>
+</HTML>

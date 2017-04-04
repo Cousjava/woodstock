@@ -1,0 +1,1760 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <!--
+      The contents of this file are subject to the terms
+      of the Common Development and Distribution License
+      (the License).  You may not use this file except in
+      compliance with the License.
+      
+      You can obtain a copy of the license at
+      https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      See the License for the specific language governing
+      permissions and limitations under the License.
+      
+      When distributing Covered Code, include this CDDL
+      Header Notice in each file and include the License file
+      at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      If applicable, add the following below the CDDL Header,
+      with the fields enclosed by brackets [] replaced by
+      you own identifying information:
+      "Portions Copyrighted [year] [name of copyright owner]"
+      
+      Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+    -->
+<title>Project Woodstock - Hyperlink Component FS</title>
+<style type="text/css"> 
+/* <![CDATA[ */
+@import url(../../browser-uispec.css);
+.style2 {font-size: 18pt}
+  </style>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+</head>
+<body style="background-color: rgb(255, 255, 255);">
+<div class="MstDiv">
+<table class="MstTblBot" title="" border="0" cellpadding="0"
+ cellspacing="0" width="100%">
+  <tbody>
+    <tr>
+      <td class="MstTdTtl">
+      <div class="MstDivTtl">
+      <div class="Mst1TtlTxt">Project Woodstock</div>
+      </div>
+      <div class="Mst1SecDiv"> <span class="Mst1SecTxt style2">Component
+Functional Spec - Hyperlink<br>
+      </span></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<table class="Mst2Tbl" style="width: 100%;" title="" border="0"
+ cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td> <br>
+      <h2 style="font-weight: bold;"><a name="1.0"></a>1.0 Component
+Overview</h2>
+      <h3><span style="font-weight: bold;"><a name="1.1"></a>1.1
+Document Revision History</span></h3>
+      <table
+ style="width: 95%; text-align: left; margin-left: auto; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Revision</span></td>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Date</span></td>
+            <td style="width: 50%; text-align: center;"><span
+ style="font-weight: bold;">Synopsis</span></td>
+            <td style="width: 20%; text-align: center;"><span
+ style="font-weight: bold;">Author</span></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; text-align: center;">1.0<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">04/03/2007<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Initial
+draft<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Venkatesh
+Babu<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; text-align: center;">1.1<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">04/04/2007<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Change
+references of Anchor2 component to Anchor component<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Venkatesh
+babu<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; text-align: center;">1.2<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">04/09/2007<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Incorporate
+review comments from Rick, new functional spec template<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Venkatesh
+Babu<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; text-align: center;">1.3<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">05/08/2007<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Incorporate
+review comments and functionality changes<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Venkatesh
+Babu<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; text-align: center;">1.4<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">05/28/2007<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Incorporate
+changes in hyperlink renderer<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Venkatesh
+Babu<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 style="font-weight: bold;"><a name="1.2"></a>1.2 Component
+Description<br>
+      </h3>
+      <div style="margin-left: 40px;">The hyperlink JSF component now
+renders itself with the help of a client side renderer instead of an
+html renderer. This means that there will exist a client side hyperlink
+widget for rendering the hyperlink component. </div>
+      <h3><a name="1.3"></a>1.3 Component Purpose</h3>
+      <div style="margin-left: 40px;">The Hyperlink component does not
+introduce any new functionality or interfaces. The
+com.sun.webui.jsf.renderkit.widget.HyperlinkRenderer renders the
+Hyperlink component
+as a javascript dojo widget which allows developer to control its
+behavior on the client.</div>
+      <h3 style="font-weight: bold;"><a name="1.4"></a>1.4 Relevant
+Documents</h3>
+      <div style="margin-left: 40px;"><a target="_blank"
+ href="ajax-architecture-spec.html">Ajax
+Architecture for Woodstock JavaServer Faces</a></div>
+      <h3><a name="1.5"></a>1.5 Definition of Terms</h3>
+      <ul>
+        <li>HTML template - The file used to define HTML tags
+associated with a component</li>
+        <li>In-line JavaScript - JavaScript used to instantiate a <span
+ style="font-style: italic;">Dojo
+Widget</span>, located anywhere (i.e., in-line) in the rendered HTML
+page<br>
+        </li>
+        <li>JSF - JavaServer Faces</li>
+        <li>JSF component - The JSF <code>UIComponent</code>
+compliment to a <span style="font-style: italic;">JSP tag</span> and <span
+ style="font-style: italic;">JSF renderer</span></li>
+        <li>JSF facet - A facet is a subcomponent that has a specific
+purpose defined by its parent container<br>
+        </li>
+        <li>JSF renderer - The JSF <code>Renderer</code> compliment to
+a <span style="font-style: italic;">JSP
+tag</span> and <span style="font-style: italic;">JSF component</span><br>
+        </li>
+        <li>JSON - JavaScript Object Notation (i.e., object literals)
+defined using braces ({}) that contain a
+set of comma separated key value pairs</li>
+        <li>JSP tag - The JSF <code>UIComponentELTag</code> or <code>UIComponentELBodyTag</code>
+compliment
+to a <span style="font-style: italic;">JSF component</span>
+and <span style="font-style: italic;">JSF renderer</span><br>
+        </li>
+        <li>Subcomponent - A child component used to render a <span
+ style="font-style: italic;">complex component</span></li>
+        <li>Widget - Entity consisting of <span
+ style="font-style: italic;">widget JavaScript</span> and <span
+ style="font-style: italic;">CSS</span>, not necessarily based on the
+Dojo toolkit<span style="font-style: italic;"><br>
+          </span></li>
+        <li>Widget JavaScript - The JavaScript used to populate an <span
+ style="font-style: italic;">HTML template</span> and/or update
+component properties</li>
+        <li>Contents - JSON Array which contain JSON objects of sub
+components to be displayed inside the widget<br>
+        </li>
+        <li>Widget renderer - The <span style="font-style: italic;">JSF
+renderer</span> used to output <span style="font-style: italic;">in-line
+JavaScript</span> for
+instantiating a <span style="font-style: italic;">Dojo Widget</span></li>
+      </ul>
+      <div style="margin-left: 40px;">
+      <div style="margin-left: 40px;"> </div>
+      </div>
+      <h2><a name="2.0"></a>2.0 Requirements, goals, and assumptions</h2>
+      <h3><a name="2.1"></a>2.1 Requirements</h3>
+      <h3><a name="2.1.1"></a>2.1.1 UI requirements</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.1.2"></a>2.1.2 Functional requirements</h3>
+      <div style="margin-left: 40px;">
+      <ul>
+        <li>The widget should support the disabled attribute which if
+set to true should not allow the hyperlink to be clicked.</li>
+        <li>The hyperlink widget shall submit the form or navigate to
+the specified url if the hyperlink
+is clicked and if the widget is not in the disabled state.<br>
+        </li>
+        <li>The hyperlink JSF component shall continue to support the
+actionExpression and the url attribute with the url attribute taking
+preference over the actionExpression attribute, if specified.</li>
+      </ul>
+      </div>
+      <h3><a name="2.1.3"></a>2.1.3 Performance requirements</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.1.4"></a>2.1.4 Browser, platform requirements</h3>
+      <ul>
+        <li>The table of supported <a href="../SupportedBrowers.htm">Browsers</a>.</li>
+        <li>The table of supported <a href="../SupportedContainers.htm">Containers</a>.</li>
+      </ul>
+      <h3><a name="2.1.5"></a>2.1.5 Special requirements</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.2"></a>2.2 Requirements Not Met</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.3"></a>2.3 Assumptions</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.4"></a>2.4 Goals</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.5"></a>2.5 Non-goals</h3>
+      <div style="margin-left: 40px;">N/A.</div>
+      <h2><a name="3.0"></a>3.0 Component Usage</h2>
+      <div style="margin-left: 40px;">
+      <div style="margin-left: 40px;">The hyperlink component can be
+used in a JSP tag the following way.<br>
+      <span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+&nbsp;&lt;webuijsf:hyperlink&nbsp; id="hyperlinktest2"&nbsp;
+text="Click me" actionExpression="#{HyperlinkBean.success}"/&gt;</span>
+      <br>
+      <br>
+Using
+the <span style="font-style: italic;">JSP tag</span>, all the <span
+ style="font-style: italic;">in-line
+JavaScript</span> necessary to generate a <span
+ style="font-style: italic;">Dojo widget</span> is automatically output
+in the rendered HTML page. This includes the name of the desired
+widget, any
+localized and themed properties required to populate the <span
+ style="font-style: italic;">HTML template</span>,
+and any JavaScript files (e.g., <span style="font-style: italic;">widget
+JavaScript</span>) necessary to support the <span
+ style="font-style: italic;">Dojo Widget</span>.<br>
+      </div>
+      <br>
+&nbsp;
+Note
+that either the actionExpression or the url attribute can be used
+for page navigation. More information on
+how the hyperlink works with the url and the actionExpression<br>
+&nbsp; attributes specified can be found at <a
+ href="../../../../../ctp-spec/hyperlink-spec-new.html#8.0">section
+8.0</a> <br>
+      <br>
+&nbsp; For the hyperlink component that was created using the above
+mentioned custom JSP tag, the inline javascript that is output will
+look like:<code></code><code></code><code></code> <code></code> <span
+ style="font-family: monospace;"></span><span
+ style="font-family: monospace;"><br>
+      </span>
+      <pre style="margin-left: 40px;" id="line213">dojo.require('webui.&lt;theme&gt;.widget.*');<br>webui.&lt;theme&gt;.widget.common.createWidget({<br>    "contents": ["Click me"],<br>    "formId": "form1",<br>    "templatePath": "/&lt;appname&gt;/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/anchor.html",<br>    "_widgetType": "webui.&lt;theme&gt;:hyperlink",<br>    "params": [],<br>    "disabled": false,<br>    "visible": true,<br>    "_modules": ["webui.&lt;theme&gt;.widget.hyperlink"],<br>    "id": "form1:hyperlinktest2"<br>});</pre>
+      <br>
+      <br>
+      <div style="margin-left: 40px;">The hyperlink widget can be
+updated in the following way:<br>
+      </div>
+      <ul>
+        <ul>
+          <li>Get an handle to to the hyperlink dom node<br>
+            <code>var domNode =&nbsp;
+document.getElementById("form1:link1")</code></li>
+          <li>Use the getProps function that is available on the dom
+node
+to obtain all the properties that are set on that particular dom
+element.</li>
+          <code>&nbsp;var props = domNode.getProps(); // returns a json
+object.</code><br>
+          <code> </code> <li>Use the setProps function to specify the
+properties to be
+updated for the particular component as a json object.<br>
+            <code>&nbsp;domNode.setProps({disabled:true});</code></li>
+        </ul>
+      </ul>
+      <div style="margin-left: 80px;">Note: &lt;appname&gt; is replaced
+by the application name.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;theme&gt; tag is
+replaced by the theme name.<br>
+      </div>
+      <h3> <a name="3.1"></a>3.1 Updating the component Asynchronously
+      </h3>
+The hyperlink component also
+supports asynchronous updates. For example you could update the text of
+the component asynchronously the following way.<br>
+This example uses a text field whose value is bound to a backing bean.
+The hyperlink component's text value is also bound to the same backing
+bean. <br>
+When an user enters text in the text field, the corresponding text will
+be updated in the hyperlink. <br>
+      <br>
+Here is how the code looks like.<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:hyperlink id="hyperlink7"&nbsp;
+text="#{HyperlinkBean.dynamicText}" url="http://google.com"/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;br/&gt;&lt;br/&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:textField id="textField1" onKeyUp="refreshHyperlink();"
+text="#{HyperlinkBean.dynamicText}"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+label="Enter new text"/&gt;&lt;br/&gt;&nbsp;&nbsp; <br>
+      <br>
+Note that the textField's onKeyUp attribute refers the refreshHyperlink
+javascript function.<br>
+This function will invoke the "refresh" function that is located on the
+html hyperlink element's dom.<br>
+The argument that is passed to the refresh function would be the client
+id of the text field.<br>
+Hence the javascript function would look something like this.<br>
+      <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+&lt;script type="text/javascript"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+function refreshHyperlink() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Get text to refresh.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+var domNode = document.getElementById("form1:hyperlink7");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+domNode.refresh("form1:textField1"); // Update text field value and
+refresh.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/script&gt;<br>
+      <br>
+By default, the hyperlink component's ajax functionality is set to
+true.
+i.e. the ajaxify attribute of the hyperlink component returns true by
+default.<br>
+You can turn off the ajax functionality by setting the ajaxify
+attribute to false while creating the hyperlink component.<br>
+      <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;webuijsf:hyperlink id="hyperlink7"&nbsp;
+ajaxify="false" text="#{HyperlinkBean.dynamicText}"
+url="http://google.com"/&gt;<br>
+      <br>
+The above created hyperlink component will not exhibit any ajax
+functionality.<br>
+      </div>
+      <h2><a name="4.0"></a>4.0 Component Interfaces</h2>
+      <h3><a name="4.1"></a>4.1 Exported interfaces table</h3>
+      <div style="margin-left: 40px;"><br>
+      </div>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Interface Name<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Classification<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Reference<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 40%;">
+            <p>Comments<br>
+            </p>
+            </th>
+          </tr>
+          <tr>
+            <td>javascript/widget/hyperlink.js</td>
+            <td>committed</td>
+            <td>Section 4.5</td>
+            <td>Javascript file for this component</td>
+          </tr>
+          <tr>
+            <td>javascript/widget/anchor.js </td>
+            <td>Committed</td>
+            <td>Refer 4.5 in anchor spec.<br>
+            </td>
+            <td>Javascript file for Anchor widget. Hyperlink widget
+makes use of the common functionalities provided by the anchor widget.<br>
+            </td>
+          </tr>
+          <tr>
+            <td>javascript/widget/jsfx/anchor.js </td>
+            <td>Private<br>
+            </td>
+            <td><br>
+            </td>
+            <td>Javascript file for ajax requests.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.component.Hyperlink.java</td>
+            <td style="vertical-align: top;">Comitted<br>
+            </td>
+            <td style="vertical-align: top;">4.3<br>
+            </td>
+            <td style="vertical-align: top;">JSF component class<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">javascript/widget/common.js</td>
+            <td style="vertical-align: top;">Public<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">Utility file for all
+widget classes.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.widget.HyperlinkRenderer.java</td>
+            <td style="vertical-align: top;">Private<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">Widget renderer for
+Hyperlink component.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.ajax.HyperlinkRenderer.java</td>
+            <td style="vertical-align: top;">Private<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">Ajax renderer for
+Hyperlink component.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.html.HyperlinkRenderer.java</td>
+            <td style="vertical-align: top;">Private<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">DesignTime renderer for
+Hyperlink component<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.widget.AnchorRendererBase.java</td>
+            <td style="vertical-align: top;">Private<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">An abstract renderer class
+which acts as a base class for Hyperlink's widget renderer.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3><a name="4.2"></a>4.2 Imported interfaces</h3>
+      <div style="margin-left: 40px;"><br>
+      </div>
+      <br>
+      <div style="margin-left: 40px;">
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Interface Name<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Classification<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Reference<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 40%;">
+            <p>Comments<br>
+            </p>
+            </th>
+          </tr>
+          <tr>
+            <td>jsf-api.jar</td>
+            <td>Standard</td>
+            <td>JSR 127</td>
+            <td>JSF components API library, version 1.1</td>
+          </tr>
+          <tr>
+            <td>dojo-0.4.1-ajax.jar<br>
+            </td>
+            <td>Standard<br>
+            </td>
+            <td>dojotoolkit.org<br>
+            </td>
+            <td>the dojo toolkit library<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">json.jar<br>
+            </td>
+            <td style="vertical-align: top;">Standard<br>
+            </td>
+            <td style="vertical-align: top;"><font size="-1"><span
+ class="a">www.<b>json</b>.org</span></font> </td>
+            <td style="vertical-align: top;">The json library<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">prototype-1.5.0.jar<br>
+            </td>
+            <td style="vertical-align: top;">Standard<br>
+            </td>
+            <td style="vertical-align: top;"><font size="-1"><span
+ class="a">www.<b>prototype</b>js.org/</span></font> </td>
+            <td style="vertical-align: top;">The prototype javascript
+library<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <br>
+      <h3><a name="4.3"></a>4.3 Component interfaces</h3>
+      <div style="margin-left: 40px;">
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"> <b>Constructor
+Summary</b></font></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td><code><b>Hyperlink</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default
+constructor.</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"> <b>Method
+Summary</b></font></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getFamily</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the
+family for this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getFocusElementId</b>(javax.faces.context.FacesContext&nbsp;context)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the
+id of an HTML element suitable to receive the focus.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getHtmlTemplate</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get
+alternative HTML template to be used by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getLabeledElementId</b>(javax.faces.context.FacesContext&nbsp;context)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the
+absolute ID of an HTML element suitable for use as the value of an HTML
+LABEL element's <code>for</code> attribute.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnBlur</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when this element loses focus.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnClick</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse click occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnDblClick</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse double click occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnFocus</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when this component receives focus.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnKeyDown</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user presses down on a key while the component
+has focus.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnKeyPress</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user presses and releases a key while the
+component has focus.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnKeyUp</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user releases a key while the component has
+focus.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnMouseDown</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user presses a mouse button while the mouse
+pointer is on the component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnMouseMove</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user moves the mouse pointer while over the
+component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnMouseOut</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse out movement occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnMouseOver</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user moves the mouse pointer into the boundary
+of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnMouseUp</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user releases a mouse button while the mouse
+pointer is on the component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getPrimaryElementID</b>(javax.faces.context.FacesContext&nbsp;context)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Deprecated.</b>&nbsp;&nbsp;</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getShape</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The shape
+of the hot spot on the screen (for use in client-side image maps).</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getStyle</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS
+style(s) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getStyleClass</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS style
+class(es) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;int</code></font></td>
+            <td><code><b>getTabIndex</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position of
+this element in the tabbing order of the current document.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getTarget</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The
+resource at the specified URL is displayed in the frame that is
+specified with the target attribute.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+            <td><code><b>getText</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The text to
+be displayed for the hyperlink.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getToolTip</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the
+value of the title attribute for the HTML element.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getType</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The MIME
+content type of the resource specified by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getUrl</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Absolute,
+relative, or context relative (starting with "/") URL to the resource
+selected by this hyperlink.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getUrlLang</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The
+language code of the resource designated by this hyperlink.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+            <td><code><b>getValue</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Flag
+indicating that activation of this component by the user is not
+currently permitted.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;javax.el.ValueExpression</code></font></td>
+            <td><code><b>getValueExpression</b>(java.lang.String&nbsp;name)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the <code>ValueExpression</code>
+stored for the specified name (if any), respecting any property aliases.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getWidgetType</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the
+type of widget represented by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+            <td><code><b>isDisabled</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Flag
+indicating that activation of this component by the user is not
+currently permitted.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+            <td><code><b>isVisible</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>restoreState</b>(javax.faces.context.FacesContext&nbsp;_context,
+java.lang.Object&nbsp;_state)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Restore the
+state of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+            <td><code><b>saveState</b>(javax.faces.context.FacesContext&nbsp;_context)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save the
+state of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setDisabled</b>(boolean&nbsp;disabled)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Flag
+indicating that activation of this component by the user is not
+currently permitted.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setHtmlTemplate</b>(java.lang.String&nbsp;htmlTemplate)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set
+alternative HTML template to be used by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnBlur</b>(java.lang.String&nbsp;onBlur)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when this element loses focus.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnClick</b>(java.lang.String&nbsp;onClick)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse click occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnDblClick</b>(java.lang.String&nbsp;onDblClick)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse double click occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnFocus</b>(java.lang.String&nbsp;onFocus)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when this component receives focus.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnKeyDown</b>(java.lang.String&nbsp;onKeyDown)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user presses down on a key while the component
+has focus.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnKeyPress</b>(java.lang.String&nbsp;onKeyPress)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user presses and releases a key while the
+component has focus.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnKeyUp</b>(java.lang.String&nbsp;onKeyUp)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user releases a key while the component has
+focus.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnMouseDown</b>(java.lang.String&nbsp;onMouseDown)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user presses a mouse button while the mouse
+pointer is on the component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnMouseMove</b>(java.lang.String&nbsp;onMouseMove)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user moves the mouse pointer while over the
+component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnMouseOut</b>(java.lang.String&nbsp;onMouseOut)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse out movement occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnMouseOver</b>(java.lang.String&nbsp;onMouseOver)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user moves the mouse pointer into the boundary
+of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnMouseUp</b>(java.lang.String&nbsp;onMouseUp)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user releases a mouse button while the mouse
+pointer is on the component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setShape</b>(java.lang.String&nbsp;shape)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The shape
+of the hot spot on the screen (for use in client-side image maps).</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setStyle</b>(java.lang.String&nbsp;style)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS
+style(s) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setStyleClass</b>(java.lang.String&nbsp;styleClass)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS style
+class(es) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setTabIndex</b>(int&nbsp;tabIndex)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position of
+this element in the tabbing order of the current document.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setTarget</b>(java.lang.String&nbsp;target)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The
+resource at the specified URL is displayed in the frame that is
+specified with the target attribute.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setText</b>(java.lang.Object&nbsp;text)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The text to
+be displayed for the hyperlink.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setToolTip</b>(java.lang.String&nbsp;toolTip)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the
+value of the title attribute for the HTML element.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setType</b>(java.lang.String&nbsp;type)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The MIME
+content type of the resource specified by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setUrl</b>(java.lang.String&nbsp;url)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Absolute,
+relative, or context relative (starting with "/") URL to the resource
+selected by this hyperlink.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setUrlLang</b>(java.lang.String&nbsp;urlLang)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The
+language code of the resource designated by this hyperlink.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setValueExpression</b>(java.lang.String&nbsp;name,
+javax.el.ValueExpression&nbsp;binding)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the <code>ValueExpression</code>
+stored for the specified name (if any), respecting any property aliases.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setVisible</b>(boolean&nbsp;visible)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>toString</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <br>
+      </div>
+      <h3><a name="4.4"></a>4.4 Tag interfaces</h3>
+      <div style="margin-left: 40px;">
+      <div style="margin-left: 40px;">
+      <table border="1" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <td colspan="5"><font size="+2"><b>Attributes</b></font></td>
+          </tr>
+          <tr>
+            <td><b>Name</b></td>
+            <td><b>Required</b></td>
+            <td><b>Request-time</b></td>
+            <td><b>Type</b></td>
+            <td><b>Description</b></td>
+          </tr>
+          <tr valign="top">
+            <td>binding</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> A ValueExpression that resolves to the UIComponent
+that corresponds to this tag. This binding allows the Java bean that
+contains the UIComponent to manipulate the UIComponent, its properties,
+and its children. </td>
+          </tr>
+          <tr valign="top">
+            <td>onKeyPress</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user presses and
+releases a key while the component has focus.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>target</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>The resource at the specified URL is displayed in the
+frame that is specified with the target attribute. Values such as
+"_blank" that are valid for the target attribute of a HTML anchor
+element are also valid for this attribute in this component</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onFocus</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when this component receives
+focus. An element receives focus when the user selects the element by
+pressing the tab key or clicking the mouse.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>urlLang</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>The language code of the resource designated by this
+hyperlink.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onKeyUp</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user releases a key
+while the component has focus.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseUp</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user releases a mouse
+button while the mouse pointer is on the component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>styleClass</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>CSS style class(es) to be applied to the outermost HTML
+element when this component is rendered.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>style</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>CSS style(s) to be applied to the outermost HTML element
+when this component is rendered.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>url</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Absolute, relative, or context relative (starting with
+"/") URL to the resource selected by this hyperlink. If the url
+attribute is specified, clicking this hyperlink sends the browser to
+the new location. If the action attribute is specified, the form is
+submitted. If both are specified, the url attribute takes precedence.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onClick</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when a mouse click occurs over
+this component. If the component submits the form (by using the action
+attribute), the script that you use with the onClick attribute should
+not return from the function. When the action attribute is used, the
+component handles the return with a script that is appended to the
+anchor element's onclick property. When you supply an onClick
+attribute, this return script is appended after your script in the
+anchor's onclick. It is ok to return from your script to abort the
+submit process if necessary.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onBlur</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when this element loses focus.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseDown</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user presses a mouse
+button while the mouse pointer is on the component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>toolTip</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Sets the value of the title attribute for the HTML
+element. The specified text will display as a tooltip if the mouse
+cursor hovers over the HTML element.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>type</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>The MIME content type of the resource specified by this
+component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>disabled</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Flag indicating that activation of this component by the
+user is not currently permitted. In this component library, the
+disabled attribute also causes the hyperlink to be renderered as
+formatted text in an HTML <span> tag. The hyperlink cannot be enabled
+from the client because this is a server side only feature. You cannot
+disable an anchor.</span></p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseOut</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when a mouse out movement occurs
+over this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseOver</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user moves the mouse
+pointer into the boundary of this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseMove</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user moves the mouse
+pointer while over the component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>htmlTemplate</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Alternative HTML template to be used by this
+component. </td>
+          </tr>
+          <tr valign="top">
+            <td>text</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>The text to be displayed for the hyperlink.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>visible</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Use the visible attribute to indicate whether the
+component should be viewable by the user in the rendered HTML page. If
+set to false, the HTML code for the component is present in the page,
+but the component is hidden with style attributes. By default, visible
+is set to true, so HTML for the component HTML is included and visible
+to the user. If the component is not visible, it can still be processed
+on subsequent form submissions because the HTML is present.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onKeyDown</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user presses down on a
+key while the component has focus.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>tabIndex</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Position of this element in the tabbing order of the
+current document. Tabbing order determines the sequence in which
+elements receive focus when the tab key is pressed. The value must be
+an integer between 0 and 32767.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>immediate</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Flag indicating that event handling for this component
+should be handled immediately (in Apply Request Values phase) rather
+than waiting until Invoke Application phase. </td>
+          </tr>
+          <tr valign="top">
+            <td>actionExpression</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> MethodExpression representing the application action
+to invoke when this component is activated by the user. The expression
+must evaluate to a either a String or a public method that takes no
+parameters, and returns a String (the logical outcome) which is passed
+to the NavigationHandler for this application. </td>
+          </tr>
+          <tr valign="top">
+            <td>actionListenerExpression</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Use the actionListenerExpression attribute to cause
+the component to fire an event. The value must be an EL expression and
+it must evaluate to the name of a public method that takes an
+ActionEvent parameter and returns void. </td>
+          </tr>
+          <tr valign="top">
+            <td>rendered</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Use the rendered attribute to indicate whether the
+HTML code for the component should be included in the rendered HTML
+page. If set to false, the rendered HTML page does not include the HTML
+for the component. If the component is not rendered, it is also not
+processed on any subsequent form submission. </td>
+          </tr>
+          <tr valign="top">
+            <td>id</td>
+            <td>false</td>
+            <td>true</td>
+            <td><code>java.lang.String</code></td>
+            <td><i>No Description</i></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <h3><a name="4.5"></a>4.5 Javascript interfaces</h3>
+      <div style="margin-left: 40px;">
+      <table
+ style="text-align: left; width: 100%; height: 100%; margin-left: auto; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td
+ style="vertical-align: top; font-weight: bold; font-style: italic;">Interface
+name</td>
+            <td
+ style="vertical-align: top; font-weight: bold; font-style: italic;">Type<br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold; font-style: italic;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">webui.@THEME@.widget.hyperlink<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Used for instantiating the
+widget<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.setProps</td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Use this function to
+change any of the following supported
+properties:
+            <ul>
+              <li>accessKey</li>
+              <li>charset</li>
+              <li>className</li>
+              <li>coords</li>
+              <li>dir</li>
+              <li>disabled</li>
+              <li>id</li>
+              <li>lang</li>
+              <li>onFocus</li>
+              <li>onBlur</li>
+              <li>onClick</li>
+              <li>onDblClick</li>
+              <li>onKeyDown</li>
+              <li>onKeyPress</li>
+              <li>onKeyUp</li>
+              <li>onMouseDown</li>
+              <li>onMouseOut</li>
+              <li>onMouseOver</li>
+              <li>onMouseUp</li>
+              <li>onMouseMove</li>
+              <li>rev</li>
+              <li>rel</li>
+              <li>shape</li>
+              <li>style</li>
+              <li>tabIndex</li>
+              <li>title</li>
+              <li>visible</li>
+            </ul>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.setProps<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Store the properties of
+the element on the widget node.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.getProps<br>
+            </td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Get all the properties of
+the hyperlink that are set <br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.getProps<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Get the properties of the
+hyperlink widget. this is used by domNode.getProps function<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.refresh<br>
+            </td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Update the anchor widget
+asynchronously.</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.addContents<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Used to add children to
+the hyperlink element.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.getClassName<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Return the style class to
+be applied to the hyperlink element.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.refresh<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Update the widget
+asynchronously. This is used by the domNode.refresh function<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.setAnchorProps<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Set the properties&nbsp;
+for the anchor element. setProps makes use of this function and also
+other elements that exhibit anchor like functionality.</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.submit<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Used to submit the form
+when the hyperlink is clicked.<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <h3><a name="4.6"></a>4.6 Theme resources keys</h3>
+      <h3><a name="4.6.1"></a>4.6.1 Style selectors</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">Hyp@THEME@<br>
+            </td>
+            <td style="vertical-align: top;">The style to be applied
+for an enabled hyperlink.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">HypDis@THEME@<br>
+            </td>
+            <td style="vertical-align: top;">The style to be applied
+for a disabled hyperlink.<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.6.2"></a>4.6.2 Image resources</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.6.3"></a>4.6.3 Javascript resources</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/hyperlink.js
+            </td>
+            <td style="vertical-align: top;">Javascript containing the
+hyperlink widget resources<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/common.js</td>
+            <td style="vertical-align: top;">Javascript containing the
+common files for the widgets<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/anchor.js</td>
+            <td style="vertical-align: top;">Javascript for the anchor
+widget. <br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/jsfx/anchor.js<br>
+            </td>
+            <td style="vertical-align: top;">Javascript file for ajax
+requests.<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Note: The
+&lt;theme&gt; tag is
+intended to be replaced with the theme
+name
+(e.g., suntheme).
+      <h3><a name="4.6.4"></a>4.6.4 Template resources</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/templates/anchor.html
+            </td>
+            <td style="vertical-align: top;">The template file for the
+hyperlink widget </td>
+          </tr>
+        </tbody>
+      </table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Note: The
+&lt;theme&gt; tag is
+intended to be replaced with the theme
+name
+(e.g., suntheme).
+      <h3><a name="4.6.5"></a>4.6.5 Other resources</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.6.6"></a>4.6.6 Localized message keys</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.7"></a>4.7 Component Extensibility</h3>
+      <div style="margin-left: 40px;">Components which want to exhibit
+the functionality of a basic html anchor element should inherit from
+the anchor component rather than from an hyperlink component. The
+hyperlink widget outputs properties which help in form submission when
+the hyperlink is clicked and these may not be required for components
+whihc want to use an anchor element for just page navigations.<br>
+      </div>
+      <h2><a name="5.0"></a>5.0 - Creator Design Time Support</h2>
+      <h3><a name="5.1"></a>5.1 Design-time Behavior</h3>
+      <div style="margin-left: 40px;">The hyperlink component will
+continue to use the existing&nbsp; html renderer for design time
+behavior. Hence there will not be any change in the existing design
+time behavior. </div>
+      <h3><a name="5.2"></a>5.2 Design-time Classes and Interfaces</h3>
+      <div style="margin-left: 40px;">N/A </div>
+      <h3><a name="5.3"></a>5.3 Localized message keys</h3>
+      <div style="margin-left: 40px;"><br>
+      </div>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="5.4"></a>5.4 Dependencies </h3>
+      <div style="margin-left: 40px;">N/A </div>
+      <h2><a name="6.0"></a>6.0 Component Dependencies</h2>
+      <h3><a name="6.1"></a>6.1 Component class dependencies</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="6.2"></a>6.2 Javascript dependencies</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N/A<br>
+      <br>
+      <h3><a name="6.3"></a>6.3 Infrastructure dependencies</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The new client side
+hyperlink component depends on
+the dojo infrastructure for rendering.<br>
+      <br>
+      <h3><a name="6.4"></a>6.4 Design time dependencies</h3>
+      <h2><a name="7.0"></a>7.0 - A11Y, I18n, Compliance, Debugging<br>
+      </h2>
+      <h3><a name="7.1"></a>7.1 Accessibility (A11Y)</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h3><a name="7.2"></a>7.2 Internationalization (I18N)</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h3><a name="7.3"></a>7.3 Level of XHTML Compliance</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h3><a name="7.4"></a>7.4 Javascript Compliance</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h3><a name="7.5"></a>7.5 Debugging</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h2><a name="8.0"></a>8.0 Component High level design</h2>
+      <div style="margin-left: 40px;">
+      <h3>8.1 Client side widget</h3>
+      <br>
+The hyperlink widget supports two different states called the enabled
+and disabled states. In the enabled state the hyperlink can be clicked
+and you can navigate to a different page. In the disabled state the
+hyperlink will appear as plain text. Clicking on the hyperlink doesnt
+generate any form of action in the disabled state. The hyperlink widget
+decides to whether submit the page or traverse to a specified url
+depending on the existence of the href attribtue set on the widget.<br>
+Note that the client side widget always defaults the dom element's href
+attribute to a value of "#". This is to help achieve the link look and
+feel. If an html anchor element does not have the href property set,
+then it renders as plain text. Hence, even though when the href
+property is not specified on the widget, the dom node's href attribute
+will default to "#". Hence, if a value of href is set on the widget
+(including the value "#"), then the hyperlink widget will traverse to
+the specified href value. Otherwise, it will submit the form.<br>
+      <br>
+      <h3>8.2 JSF Renderer</h3>
+Hyperlink's widget renderer
+has been done differently from its html renderer counterpart. The
+Hyperlink JSF
+component continues to inherit from the WebuiCommand class. The
+Hyperlink client side renderer nherits from the
+AnchorRendererBase. The AnchorRendererBase acts as a base renderer
+which
+outputs properties of an html&nbsp; anchor element. The
+HyperlinkRenderer adds on to this functionality
+provided by this renderer and outputs properties that are
+specific to the Hyperlink.<br>
+      </div>
+      <h2><a name="9.0"></a>9.0 Issues</h2>
+      <div style="margin-left: 40px;">N/A</div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

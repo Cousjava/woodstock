@@ -1,0 +1,1211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <!--
+      The contents of this file are subject to the terms
+      of the Common Development and Distribution License
+      (the License).  You may not use this file except in
+      compliance with the License.
+      
+      You can obtain a copy of the license at
+      https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      See the License for the specific language governing
+      permissions and limitations under the License.
+      
+      When distributing Covered Code, include this CDDL
+      Header Notice in each file and include the License file
+      at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      If applicable, add the following below the CDDL Header,
+      with the fields enclosed by brackets [] replaced by
+      you own identifying information:
+      "Portions Copyrighted [year] [name of copyright owner]"
+      
+      Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+    -->
+<title>Project Woodstock - BubbleHelp Component FS</title>
+<style type="text/css">
+/* <![CDATA[ */
+@import url(../../browser-uispec.css);
+.style2 {font-size: 18pt}
+  </style>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+</head>
+<body style="background-color: rgb(255, 255, 255);">
+<div class="MstDiv">
+<table class="MstTblBot" title="" border="0" cellpadding="0"
+ cellspacing="0" width="100%">
+  <tbody>
+    <tr>
+      <td class="MstTdTtl">
+      <div class="MstDivTtl">
+      <div class="Mst1TtlTxt">Project Woodstock</div>
+      </div>
+      <div class="Mst1SecDiv"> <span class="Mst1SecTxt style2">Bubble
+Help<br>
+      </span></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<table class="Mst2Tbl" style="width: 100%;" title="" border="0"
+ cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td> <br>
+      <h2 style="font-weight: bold;"><a name="1.0"></a>1.0 Component
+Overview</h2>
+      <h3><span style="font-weight: bold;"><a name="1.1"></a>1.1
+Document Revision History</span></h3>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Revision</span></td>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Date</span></td>
+            <td style="width: 50%; text-align: center;"><span
+ style="font-weight: bold;">Synopsis</span></td>
+            <td style="width: 20%; text-align: center;"><span
+ style="font-weight: bold;">Author</span></td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">0.1</td>
+            <td style="text-align: center;">05/18/2007</td>
+            <td style="text-align: center;">Initial Draft</td>
+            <td style="text-align: center;">Animesh Sahay </td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">0.2 </td>
+            <td style="text-align: center;">06/11/2007 </td>
+            <td style="text-align: center;">Updated as per review
+comments from Bob </td>
+            <td style="text-align: center;">Animesh Sahay </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 style="font-weight: bold;"><a name="1.2"></a>1.2 Component
+Description<br>
+      </h3>
+      <div style="margin-left: 40px;">Bubble component is a kind
+of&nbsp; pop up window which appears on screen in response to certain
+mouse interaction to a particular screen element.&nbsp; <br>
+      </div>
+      <h3><a name="1.3"></a>1.3 Component Purpose</h3>
+      <div style="margin-left: 40px;">Purpose of this component is to
+provide detailed information to the end user when a mouse hover on a
+particular screen element. <br>
+The Bubble component can contain any application specified
+content.
+But shouldn't be a complex component like "AddRemove". Component usage
+guidelines will describe the possible use cases.<br>
+      <br>
+      </div>
+      <h3 style="font-weight: bold;"><a name="1.4"></a>1.4 Relevant
+Documents</h3>
+      <ul>
+        <li><a target="_blank"
+ href="https://woodstock.dev.java.net/docs/specs/ajax-architecture-spec.html">Ajax
+Architecture for Woodstock JavaServer Faces</a></li>
+      </ul>
+      <br>
+      <h3><a name="1.5"></a>1.5 Definition of Terms</h3>
+      <ul style="margin-left: 40px;">
+        <li>HTML template - The file used to define HTML tags
+associated with a component</li>
+        <li>In-line JavaScript - JavaScript used to instantiate a <span
+ style="font-style: italic;">Dojo
+Widget</span>, located anywhere (i.e., in-line) in the rendered HTML
+page<br>
+        </li>
+        <li>JSF - JavaServer Faces</li>
+        <li>JSF component - The JSF <code>UIComponent</code>
+compliment to a <span style="font-style: italic;">JSP tag</span> and <span
+ style="font-style: italic;">JSF renderer</span></li>
+        <li>JSF facet - A facet is a subcomponent that has a specific
+purpose defined by its parent container<br>
+        </li>
+        <li>JSF renderer - The JSF <code>Renderer</code> compliment to
+a <span style="font-style: italic;">JSP
+tag</span> and <span style="font-style: italic;">JSF component</span><br>
+        </li>
+        <li>JSON - JavaScript Object Notation (i.e., object literals)
+defined using braces ({}) that contain a
+set of comma separated key value pairs</li>
+        <li>JSP tag - The JSF <code>UIComponentELTag</code> or <code>UIComponentELBodyTag</code>
+compliment
+to a <span style="font-style: italic;">JSF component</span>
+and <span style="font-style: italic;">JSF renderer</span><br>
+        </li>
+        <li>Subcomponent - A child component used to render a <span
+ style="font-style: italic;">complex component</span></li>
+        <li>Widget - Entity consisting of <span
+ style="font-style: italic;">widget JavaScript</span> and <span
+ style="font-style: italic;">CSS</span>, not necessarily based on the
+Dojo toolkit<span style="font-style: italic;"><br>
+          </span></li>
+        <li>Widget JavaScript - The JavaScript used to populate an <span
+ style="font-style: italic;">HTML template</span> and/or update
+component properties</li>
+        <li>Contents - JSON Array which contain JSON objects of sub
+components to be displayed inside the widget<br>
+        </li>
+        <li>Widget renderer - The <span style="font-style: italic;">JSF
+renderer</span> used to output <span style="font-style: italic;">in-line
+JavaScript</span> for
+instantiating a <span style="font-style: italic;">Dojo Widget</span></li>
+      </ul>
+      <div style="margin-left: 40px;">
+      <div style="margin-left: 40px;"> </div>
+      </div>
+      <h2><a name="2.0"></a>2.0 Requirements, goals, and assumptions</h2>
+      <h3><a name="2.1"></a>2.1 Requirements</h3>
+      <div style="margin-left: 40px;">UI and Functional requirements
+are listed separately.</div>
+      <h3><a name="2.1.1"></a>2.1.1 UI requirements</h3>
+      <div style="margin-left: 40px;">1. Structure: Bubble should
+contain following structure elements:<br>
+      <br>
+Bubble Title : The title appears in title bar area.<br>
+Bubble Remove Control: Appears to the right of the bubble title bar.
+Closes the bubble window.<br>
+Bubble Content Area: The main text of the bubble.<br>
+      <br>
+2. The size of the bubble window will stay smaller than the main
+window that it appears over. The bubble window area should not
+exceed half the area of the main window.<br>
+      <br>
+3. <span style="font-style: italic; color: rgb(0, 0, 0);">Component
+Positioning: Component should be positioned such that is is fully
+rendered within
+the browser's boundary.</span><br>
+      <br>
+      </div>
+      <h3><a name="2.1.2"></a>2.1.2 Functional requirements</h3>
+      <div style="margin-left: 40px;">1. Bubble Content: The pop
+up will contain a header and a body. The header will not be optional.<br>
+&nbsp;&nbsp;&nbsp; The header
+will have title text and controls. The text can also be a html link and
+link will appear different <br>
+&nbsp;&nbsp;&nbsp; from the text and the title.<br>
+2. At any given time only one bubble should be visible on screen.<br>
+3. Clicking on close button in header should close bubble.<br>
+4. Developer should be able to control "when to close" behavior of
+bubble.<br>
+5. Bubble window should not follow the mouse.<br>
+6. Developer should be able to put text, images and any component for
+bubble.<br>
+      <br>
+      </div>
+      <h3><a name="2.1.3"></a>2.1.3 Performance requirements</h3>
+      <div style="margin-left: 40px;">NA</div>
+      <h3><a name="2.1.4"></a>2.1.4 Browser, platform requirements</h3>
+      <ul>
+        <li>The table of supported <a
+ href="https://woodstock.dev.java.net/docs/SupportedBrowers.htm">Browsers</a>.</li>
+        <li>The table of supported <a
+ href="https://woodstock.dev.java.net/docs/SupportedContainers.htm">Containers</a>.</li>
+      </ul>
+      <h3><a name="2.1.5"></a>2.1.5 Special requirements</h3>
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NA</span>
+      <h3><a name="2.2"></a>2.2 Requirements Not Met</h3>
+      <div style="margin-left: 40px;">NA<br>
+      </div>
+      <h3><a name="2.3"></a>2.3 Assumptions</h3>
+      <div style="margin-left: 40px;">NA<br>
+      </div>
+      <h3><a name="2.4"></a>2.4 Goals</h3>
+      <div style="margin-left: 40px;">NA</div>
+      <h3><a name="2.5"></a>2.5 Non-goals</h3>
+      <div style="margin-left: 40px;">NA</div>
+      <h2><a name="3.0"></a>3.0 Component Usage</h2>
+      <div style="margin-left: 40px;">
+      <p>To
+include an bubble component in the JSP page, the web app developer
+will
+include a tag like this.<br>
+      </p>
+      <div style="margin-left: 40px;"><code>&lt;webuijsf:bubble
+id="bubble" title="Bubble Help Title"&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;webuijsf:staticText text="Add help Text" /&gt;<br>
+&lt;/webuijsf:bubble&gt;</code><br>
+      <br>
+      </div>
+Using
+the <span style="font-style: italic;">JSP tag</span>, all the <span
+ style="font-style: italic;">in-line
+JavaScript</span> necessary to generate a <span
+ style="font-style: italic;">Dojo widget</span> is automatically output
+in the rendered HTML page. This includes the name of the desired
+widget, any
+localized and themed properties required to populate the <span
+ style="font-style: italic;">HTML template</span>,
+and any JavaScript files (e.g., <span style="font-style: italic;">widget
+JavaScript</span>) necessary to support the <span
+ style="font-style: italic;">Dojo Widget</span>. However,
+a <span style="font-style: italic;">Dojo Widget</span> can also be
+represented by the following JavaScript. This
+JavaScript makes the Woodstock component available to web app
+developers who cannot, or do not want to, use the JSP and/or JSF
+frameworks.<br>
+      <br>
+Note that any one of the key-value pairs of properties below can
+contain more key-value pairs, possibly used by subcomponents.<br>
+      <br>
+      <code>dojo.require("webui.</code><code>&lt;theme&gt;</code><code>.widget.bubble");</code><code><br>
+webui.</code><code>&lt;theme&gt;</code><code>.widget.common.createWidget({<br>
+&nbsp;&nbsp;&nbsp; _widgetType: "webui.</code><code>&lt;theme&gt;</code><code>:bubble",<br>
+      </code><code>&nbsp;&nbsp;&nbsp; templatePath": "/</code><code>&lt;appname&gt;</code><code>/theme/com/sun/webui/jsf/</code><code>&lt;theme&gt;</code><code>/templates/bubble.html",</code><code><br>
+&nbsp;&nbsp;&nbsp; title "</code><code>Bubble Help Title</code><code>",<br>
+&nbsp;&nbsp;&nbsp; id: "form1:bubble"<br>
+&nbsp;&nbsp;&nbsp; <br>
+});</code><br>
+      <br>
+      <span style="font-weight: bold;">How to call BubbleHelp on
+components:</span> Bubble component exposes two javascript api
+"open()" and "close()". "open()"
+accept "event" as argument. These two functions needs to be invoked by
+the component who wants a bubble for the component. "How long a
+bubble should stay and when to close" behavior can be controlled by
+developer.<br>
+Example: Button uses "onMouseOver" event to open a bubbleHelp and
+closes it on "onMouseOut" event.<br>
+&lt;webuijsf:button
+onMouseOver="document.getElementById('form1:bubble').open(event);" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+onMouseOut="document.getElementById('form1:bubble').close();" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+primary="true"&nbsp; id="btn3" text="Change Types" onClick="return
+changeTypes();"/&gt;<br>
+      <br>
+When the component is rendered, a DOM object corresponding to the
+component is created. To manipulate the component on the client side,
+you may invoke functions on the DOM object. With reference to the DOM
+id, to change the helpTitle, invoke <code>document.getElementById(id).setProps({title:
+"New Help Title"})</code>.<br>
+      </div>
+      <h2><a name="4.0"></a>4.0 Component Interfaces</h2>
+      <h3><a name="4.1"></a>4.1 Exported interfaces table</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Interface Name<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Classification<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Reference<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 40%;">
+            <p>Comments<br>
+            </p>
+            </th>
+          </tr>
+          <tr>
+            <td>bubble.js<br>
+            </td>
+            <td>committed</td>
+            <td>Section 4.5</td>
+            <td>Javascript file for this component</td>
+          </tr>
+          <tr>
+            <td>Bubble.java<br>
+            </td>
+            <td>committed</td>
+            <td>Section 4.3</td>
+            <td>JSF component class</td>
+          </tr>
+          <tr>
+            <td>common.js<br>
+            </td>
+            <td>Private<br>
+            </td>
+            <td>Section 4.10<br>
+            </td>
+            <td>Utility script for all client side widgets<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">BubbleRenderer.java<br>
+            </td>
+            <td style="vertical-align: top;">Private<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">JSF renderer which outputs
+JSON properties for the bubble widget.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">BubbleRenderer.java<br>
+            </td>
+            <td style="vertical-align: top;">Private<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">Ajax renderer for
+Bubble.<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <h3><a name="4.2"></a>4.2 Imported interfaces</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Interface Name<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Classification<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Reference<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 40%;">
+            <p>Comments<br>
+            </p>
+            </th>
+          </tr>
+          <tr>
+            <td>jsf-api.jar</td>
+            <td>Standard</td>
+            <td>JSR 127</td>
+            <td>JSF components API library, version 1.1</td>
+          </tr>
+          <tr>
+            <td>dojo-0.4.2-ajax.jar<br>
+            </td>
+            <td>Standard<br>
+            </td>
+            <td>dojotoolkit.org<br>
+            </td>
+            <td>the dojo toolkit library<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">json.jar<br>
+            </td>
+            <td style="vertical-align: top;">Standard<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The json library<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">prototype-1.5.0.jar<br>
+            </td>
+            <td style="vertical-align: top;">Standard<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The prototype javascript
+library</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.3"></a>4.3 Component interfaces</h3>
+      <div style="margin-left: 40px;">
+      <h2><font size="-1">com.sun.webui.jsf.component</font> <br>
+Class Bubble</h2>
+      <pre>java.lang.Object<br>  <img
+ src="../../../webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by ">javax.faces.component.UIComponent<br>      <img
+ src="../../../webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by ">javax.faces.component.UIComponentBase<br>          <img
+ src="../../../webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by ">javax.faces.component.UIOutput<br>              <img
+ src="../../../webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by ">com.sun.webui.jsf.component.WebuiOutput<br>                  <img
+ src="../../../webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by "><b>com.sun.webui.jsf.component.Bubble</b><br> </pre>
+      <dl>
+        <dt><b>All Implemented Interfaces:</b> </dt>
+        <dd>javax.faces.component.StateHolder,
+javax.faces.component.ValueHolder</dd>
+      </dl>
+      <hr>
+      <dl>
+        <dt>
+          <pre>public class <b>Bubble</b><dt>extends WebuiOutput</dt></pre>
+        </dt>
+      </dl>
+      <p>The Bubble component is used to create a popup help window. </p>
+      <hr>
+      <p><!-- =========== FIELD SUMMARY =========== --><font size="+2"><b>Field
+Summary</b></font>
+&nbsp;<a
+ name="fields_inherited_from_class_javax.faces.component.UIOutput"><!-- --></a>
+      </p>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableSubHeadingColor" bgcolor="#eeeeff">
+            <th align="left"><b>Fields inherited from class
+javax.faces.component.UIOutput</b></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td><code>COMPONENT_FAMILY, COMPONENT_TYPE</code></td>
+          </tr>
+        </tbody>
+      </table>
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->&nbsp; <a
+ name="constructor_summary"><!-- --></a>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"> <b>Constructor
+Summary</b></font></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td><code><b><a
+ href="../../woodstock4_1/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/Bubble.html#Bubble%28%29">Bubble</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a
+new instance of Bubble</td>
+          </tr>
+        </tbody>
+      </table>
+<!-- ========== METHOD SUMMARY =========== -->&nbsp; <a
+ name="method_summary"><!-- --></a>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"> <b>Method
+Summary</b></font></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;int</code></font></td>
+            <td><code><b>getDuration</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number of
+milli seconds after which popup help window should close.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getFamily</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the
+family for this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getHtmlTemplate</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get
+alternative HTML template to be used by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;int</code></font></td>
+            <td><code><b>getOpenDelay</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+openDelay attribute to put a delay in ms before opening the bubble.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getRendererType</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getStyle</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS
+style(s) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getStyleClass</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS style
+class(es) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getTitle</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Title for
+the popup help window.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;int</code></font></td>
+            <td><code><b>getWidth</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number of
+pixels for the width of the bubble help window.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+            <td><code><b>isAutoClose</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+autoClose attribute to close the bubble help automatically</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+            <td><code><b>isCloseButton</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+closeButton attribute to display close button for bubble.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+            <td><code><b>isVisible</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>restoreState</b>(javax.faces.context.FacesContext&nbsp;_context,
+java.lang.Object&nbsp;_state)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Restore the
+state of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+            <td><code><b>saveState</b>(javax.faces.context.FacesContext&nbsp;_context)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save the
+state of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setAutoClose</b>(boolean&nbsp;autoClose)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+autoClose attribute to close the bubble help automatically</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setCloseButton</b>(boolean&nbsp;closeButton)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+closeButton attribute to display close button for bubble.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setDuration</b>(int&nbsp;duration)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number of
+milli seconds after which popup help window should close.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setHtmlTemplate</b>(java.lang.String&nbsp;htmlTemplate)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set
+alternative HTML template to be used by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOpenDelay</b>(int&nbsp;openDelay)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+openDelay attribute to put a delay in ms before opening the bubble.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setStyle</b>(java.lang.String&nbsp;style)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS
+style(s) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setStyleClass</b>(java.lang.String&nbsp;styleClass)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS style
+class(es) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setTitle</b>(java.lang.String&nbsp;title)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Title for
+the bubble help window.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setVisible</b>(boolean&nbsp;visible)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setWidth</b>(int&nbsp;width)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number of
+pixels for the width of the popup help window.</td>
+          </tr>
+        </tbody>
+      </table>
+      <a
+ name="fields_inherited_from_class_javax.faces.component.UIOutput"><!-- --></a>&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== --><a
+ name="constructor_summary"><!-- --></a>&nbsp;
+<!-- ========== METHOD SUMMARY =========== --><a name="method_summary"><!-- --></a></div>
+      <h3><a name="4.4"></a>4.4 Tag interfaces</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <table
+ style="text-align: left; margin-left: auto; margin-right: 0px; width: 1083px; height: 944px;"
+ border="1" cellpadding="3" cellspacing="0">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <td colspan="5"><font size="+2"><b>Attributes</b></font></td>
+          </tr>
+          <tr>
+            <td><b>Name</b></td>
+            <td><b>Required</b></td>
+            <td><b>Request-time</b></td>
+            <td><b>Type</b></td>
+            <td><b>Description</b></td>
+          </tr>
+          <tr valign="top">
+            <td>binding</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> A ValueExpression that resolves to the UIComponent
+that corresponds to this tag. This binding allows the Java bean that
+contains the UIComponent to manipulate the UIComponent, its properties,
+and its children. </td>
+          </tr>
+          <tr valign="top">
+            <td>htmlTemplate</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Alternative HTML template to be used by this
+component. </td>
+          </tr>
+          <tr valign="top">
+            <td>openDelay</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Use the openDelay attribute to put a delay in ms before
+opening the bubble.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>styleClass</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>CSS style class(es) to be applied to the outermost HTML
+element when this component is rendered.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>width</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Number of pixels for the width of the bubble help
+window. The default is 200px.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>title</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Text for popup help title. </p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>autoClose</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Use the autoClose attribute to close the bubble help
+automatically </p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>visible</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Use the visible attribute to indicate whether the
+component should be viewable by the user in the rendered HTML page. If
+set to false, the HTML code for the component is present in the page,
+but the component is hidden with style attributes. By default, visible
+is set to false, so HTML for the component HTML is included and not
+visible to the user. If the component is not visible, it can still be
+processed on subsequent form submissions because the HTML is present.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>style</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>CSS style(s) to be applied to the outermost HTML element
+when this component is rendered.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>closeButton</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Use the closeButton attribute to display close button
+for bubble. </p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>duration</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Number of milli seconds after which popup help window
+should close. The default is 2000. </p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>rendered</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Use the rendered attribute to indicate whether the
+HTML code for the component should be included in the rendered HTML
+page. If set to false, the rendered HTML page does not include the HTML
+for the component. If the component is not rendered, it is also not
+processed on any subsequent form submission. </td>
+          </tr>
+          <tr valign="top">
+            <td>id</td>
+            <td>false</td>
+            <td>true</td>
+            <td><code>java.lang.String</code></td>
+            <td><i>No Description</i></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <h3><a name="4.5"></a>4.5 Javascript interfaces</h3>
+      <div style="margin-left: 40px;">
+      <table
+ style="text-align: left; width: 100%; height: 100%; margin-left: auto; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td
+ style="vertical-align: top; font-weight: bold; font-style: italic;">Interface
+name</td>
+            <td
+ style="vertical-align: top; font-weight: bold; font-style: italic;">Type<br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold; font-style: italic;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">webui.@THEME@.widget.bubble<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Used for instantiating the
+widget<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">webui.@THEME@.widget.jsfx.bubble</td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Used for handling ajax
+request/response<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.setProps</td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Use this function to
+change any of the following supported
+properties:<br>
+            <ul>
+              <li>autoClose</li>
+              <li>className</li>
+              <li>closeButton<br>
+              </li>
+              <li>contents<br>
+              </li>
+              <li>dir</li>
+              <li>duration<br>
+              </li>
+              <li>id</li>
+              <li>lang</li>
+              <li>openDelay<br>
+              </li>
+              <li>style</li>
+              <li>title<br>
+              </li>
+              <li>visible</li>
+            </ul>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.setProps<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Store the properties of
+the element on the widget node.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.getProps<br>
+            </td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Use this function to get
+widget properties. Please see <code>setProps()</code>
+function for a list of supported properties.&nbsp; </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.getProps<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Get the properties of the
+alarm widget. this is used by domNode.getProps function<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.refresh<br>
+            </td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Use this function to
+asynchronously refresh the component.<br>
+            <ul>
+              <ul>
+                <li>execute: Comma separated string containing a list
+of
+client
+ids against which the <code>execute</code> portion of the request
+processing lifecycle must be run.</li>
+              </ul>
+            </ul>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.open<br>
+            </td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Use this function to open
+a bubble window.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.close<br>
+            </td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Use this function to close
+bubble window.<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+Note:&nbsp;&nbsp; i) domNode over here refers to the html dom element <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ii) widget refers to
+the alarm widget</div>
+      <h3><a name="4.6"></a>4.6 Theme resources keys</h3>
+      <div style="margin-left: 40px;">NA<br>
+      </div>
+      <h3><a name="4.6.1"></a>4.6.1 Style selectors</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NA<br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.6.2"></a>4.6.2 Image resources</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NA<br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.6.3"></a>4.6.3 Javascript resources</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/bubble.js
+            </td>
+            <td style="vertical-align: top;">Javascript containing the
+bubble widget resources<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/common.js</td>
+            <td style="vertical-align: top;">Javascript containing the
+common files for the widgets<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/jsfx/bubble.js</td>
+            <td style="vertical-align: top;">Javascript for the
+bubble
+widget. </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <h3><a name="4.6.4"></a>4.6.4 Template resources</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/templates/bubble.html
+            </td>
+            <td style="vertical-align: top;">The template file for the
+bubble widget<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Note: The
+&lt;theme&gt; tag is
+intended to be replaced with the theme
+name
+(e.g., suntheme).<br>
+      <br>
+      <h3><a name="4.6.5"></a>4.6.5 Other resources</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.6.6"></a>4.6.6 Localized message keys</h3>
+      <div style="margin-left: 40px;">Define message resource keys and
+expected message content.&nbsp; Exact message text is not
+required.&nbsp; <br>
+      </div>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.7"></a>4.7 Component Extensibility</h3>
+      <div style="margin-left: 40px;">NA<br>
+      </div>
+      <h2><a name="5.0"></a>5.0 - Creator Design Time Support</h2>
+      <h3><a name="5.1"></a>5.1 Design-time Behavior</h3>
+      <div style="margin-left: 40px;">TBD </div>
+      <h3><a name="5.2"></a>5.2 Design-time Classes and Interfaces</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TBD<br>
+      <h3><a name="5.3"></a>5.3 Localized message keys</h3>
+      <div style="margin-left: 40px;">Define message resource keys and
+expected message content.&nbsp; Exact message text is not
+required.&nbsp; <br>
+      </div>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="5.4"></a>5.4 Dependencies </h3>
+      <div style="margin-left: 40px;">NA </div>
+      <h2><a name="6.0"></a>6.0 Component Dependencies</h2>
+      <div style="margin-left: 40px;">NA</div>
+      <h3><a name="6.1"></a>6.1 Component class dependencies</h3>
+      <div style="margin-left: 40px;">Explicit dependencies on external
+classes - i.e. if the JSF jars are rev'd, which changed classes might
+break me?</div>
+      <h3><a name="6.2"></a>6.2 Javascript dependencies</h3>
+      <h3><a name="6.3"></a>6.3 Infrastructure dependencies</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The new client side
+bubbleHelp
+component depends on
+the dojo infrastructure for rendering.<br>
+      <h3><a name="6.4"></a>6.4 Design time dependencies</h3>
+      <h2><a name="7.0"></a>7.0 - A11Y, I18n, Compliance, Debugging<br>
+      </h2>
+      <h3><a name="7.1"></a>7.1 Accessibility (A11Y)</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h3><a name="7.2"></a>7.2 Internationalization (I18N)</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h3><a name="7.3"></a>7.3 Level of XHTML Compliance</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h3><a name="7.4"></a>7.4 Javascript Compliance</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h3><a name="7.5"></a>7.5 Debugging</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h2><a name="8.0"></a>8.0 Component High level design</h2>
+      <div style="margin-left: 40px;">
+      <div style="margin-left: 40px;">
+      <h3>8.1 Client side widget</h3>
+The client side bubble widget makes use of the fillInTemplate
+function to generate a template based widget. The bubble widget
+first
+registers the
+setProps function on its widget in the fillInTemplate function
+and then makes a call to setProps function which sets the properties
+common to the bubble widget. A getProps() is also registered in the
+fillInTemplate which is used to retrieve attribute values which
+setProps() function uses. <br>
+      <br>
+BubbleHelp component exposes two api which needs to be called by the
+component which wants bubble window to open/close on a particular
+event.<br>
+      <h3>8.2 JSF Renderer</h3>
+Bubble renderer out puts all the required properties which is used
+by bubble widget to render component.<br>
+      <br>
+      <h3>8.3 JSF Renderer (Ajax)</h3>
+Bubble renderer (ajax) handles ashyncronous requests. This enables
+asynchronously refreshing the component</div>
+      <h2><a name="9.0"></a></h2>
+      </div>
+      <h2><a name="9.0"></a>9.0 Issues</h2>
+      <div style="margin-left: 40px;">NA<br>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

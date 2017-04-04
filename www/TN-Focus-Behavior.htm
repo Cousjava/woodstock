@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <!--
+      The contents of this file are subject to the terms
+      of the Common Development and Distribution License
+      (the License).  You may not use this file except in
+      compliance with the License.
+      
+      You can obtain a copy of the license at
+      https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      See the License for the specific language governing
+      permissions and limitations under the License.
+      
+      When distributing Covered Code, include this CDDL
+      Header Notice in each file and include the License file
+      at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      If applicable, add the following below the CDDL Header,
+      with the fields enclosed by brackets [] replaced by
+      you own identifying information:
+      "Portions Copyrighted [year] [name of copyright owner]"
+      
+      Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+    -->
+<title>Project Woodstock -Focus Behavior</title>
+<link href="browser-uispec.css" type="text/css" rel="stylesheet">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body bgcolor="#FFFFFF">
+<script src="js/uispec_js.js" type="text/javascript"></script>
+<div align="right" class="security-text"><a href="#skipnav" title="Skip Navigation Links"></a></div>
+<div class="MstDiv">
+  <table class="MstTblBot" width="100%" border="0" cellpadding="0" cellspacing="0" title="">
+
+    <tr>
+      <td class="MstTdTtl"><div class="MstDivTtl">
+          <div class="Mst1TtlTxt">Project Woodstock - Focus Behavior </div>
+        </div>
+        <div class="Mst1SecDiv"> <a href="index.html">Home Page</a> &gt; <a href="Documentation.htm">Documentation</a> &gt; <strong>Technical Notes on Focus Behavior </strong></div></td>
+    </tr>
+  </table>
+</div>
+
+<p><strong>Focus Behavior</strong> <br>
+  <br>    
+  The focus functionality is implemented by<br>
+  <br>	
+  com.sun.webui.jsf.component.Body<br>
+  <br>	    
+  The "focus" attribute is used by the developer to specify the component that should receive the focus. This component is used as the default or initial focus element depending on conditions defined below.<br>
+  <br>	    
+  The "preserveFocus" attribute is used by the developer to inhibit the default behavior of preserving focus acrossrequest and response cycles.<br>
+  <br>	
+  messages.properties - Body.preserveFocus<br>	 
+  <br>	    
+  This theme key determines the default system wide preserveFocus behavior. If an application does not want focus preservation behavior, it would set this property to "false", in the theme.<br>
+  <br>	
+  com.sun.webui.jsf.renderkit.html.BodyRenderer<br>
+  <br>	    
+  The BodyRenderer renders the javascript necessary to initialize the body javascript object with the focus state. This is a combination of the "focus", and "preserveFocus" attributes and the focus state encapsulated in the FocusManager.<br>
+  <br>	    
+  It also decodes the focus state from a hidden field that is used to capture the element id on the client that had the focus last.<br>
+  <br>	
+  com.sun.webui.jsf.util.FocusManager<br>
+  <br>	    
+  The FocusManager manages the focus state across request/response cycles. It provides two methods to get/set the focus state; getRequestFocusElementId and setRequestFocusElementId.<br>
+  <br>	    
+  The value maintained by the FocusManager is an HTML element id and may not be a component's "getClientId" value.<br>
+  <br>	
+  formElements.js<br>
+  <br>	    
+  Implements a body javascript object that implements methods to manage the focus. This includes methods to set the focus and update the hidden field to transmit the data back to the server. It employs onload, and focus listeners to manage the changes in focus.<br>
+  <br>	    
+  Three constructor arguments are used to pass focus state information from the server to the client, defaultFocusElementId, focusElementFieldId, focusElementId.<br>
+  <br>	    
+  o defaultFocusElementId is the value of the Body.focus attribute.<br>	    
+  o focusElementFieldId is the id of a hidden field that maintains the element id of the element with the focus.<br>	    
+  o focusElementId is the element id of the element that had the focus in the request that resulted in the current response.<br>
+  <br>    
+  The following rules are implemented to set and manage the focus.<br>
+  <br>	
+  - Fallback Behavior<br>
+  <br>	    
+  If there is a focus element id, either from the focus attribute or from a previous request, and for whatever reason can't receive the focus, no focus is set and the default browser behavior determines which element in the page receives the focus.<br>
+  <br>	
+  - General Response Behavior: Setting initial focus.<br>
+  <br>	    
+  An "onload" listener is registered in the javascript body constructor. When this listener is invoked the initial focus is set.<br>
+  <br>	    
+  If "focusElementId" is not null, the element with this id receives the focus.<br>
+  <br>	    
+  If "focusElementId" cannot receive the focus, then the id defined in "defaultFocusElementId" receives the focus.<br>
+  <br>	    
+  If this element cannot receive the focus, then the "Fallback Behavior" is employed.<br>
+  <br>	    
+  If an element does receive the focus, that id is stored in the hidden field identified by the "focusElementFieldId"<br>	    
+  argument. This field exists in all forms.<br>
+  <br>	
+  - First Display Behavior: Setting initial focus.<br>
+  <br>	    
+  "First Display" normally differs slightly than the "General Response Behavior" in that "focusElementId" is typically null, and only "defaultFocusElementId" is used to set the initial focus, but in some circumstances, it may not be null and then "General Response Behavior" occurs.<br>
+  <br>	    
+  ["Some circumstances" are undefined at this time. Such a circumstance could occur due to a component or renderer setting an id in the FocusManager. Currently no component does this on first display. See TableActionsRenderer and TableHeaderRenderer for other cases where the FocusManager is manipulated on the server.]<br>
+  <br>	
+  - Maintaining the Focus<br>
+  <br>	    
+  The javascript body constructor registers a focus listener. It is invoked whenever an element receives the focus. The id of the element that receives the focus is stored in the hidden field identified by "focusElementFieldId". This field is submitted in all requests and is decoded by the BodyRenderer. It exists in all forms.<br>
+  <br>	    
+  If "preserveFocus" is true (the default behavior) the BodyRenderer's decode method updates the FocusManager with the value of the "focusElementFieldId" request parameter. Typically this is the element that will receive the focus on the next response, except in unusual circumstances where a component or the application deems it necessary to explicitly define another element to receive the focus.<br>	    
+  <br>	    
+  [The TableActionsRenderer and TableHeaderRenderer does this in certain circumstances, see the example section below.]<br>
+  <br>	    
+  If "preserveFocus" is false then the BodyRenderer.decode method does not store the "focusElementFieldId" request parameter value in the FocusManager, and therefore in most cases the "focusElementId" argument to the javascript body constructor will be null. However the BodyRenderer does continue to initialize the body constructor in a similar manner as when "preserverFocus" is true, as described previously. This allows the developer to dynamically change the Body.focus attribute to explicitly control the focus. The application or a component may also set focus explicitly in the FocusManager and that state will be transmitted in the response.<br>
+  <br>	    
+  [Note that the FocusManager behaviors in TableActionsRenderer and TableHeaderRender are inhibited when preserveFocus is false.]<br>
+  <br>	
+  - Elements that cannot receive the focus<br>
+  <br>	    
+  Elements that have visible=false (display: none), disabled=true, cannot have focus set to them. These are the likely causes of the "Fallback Behavior" being employed.<br>
+  <br>	    
+  The visible test is made using <br>
+  <br>		
+  webuijsf.@THEME_NAME@.common.isVisible()<br>
+  <br>
+  <br>
+  <strong>Example use of FocusManager by a Renderer</strong><br>
+  <br>    
+  - The TableActionsRenderer can affect the "preserved" focus in  a request. This happens when one of the table's pagination buttons is the last element to have the focus. <br>
+  <br>      
+  If the "next" or "last" pagination button was last to have the focus and the user has navigated to the last paginated page, then these buttons will be disabled. Since they are disabled, they will not be able to receive the focus in the next response. Similarly for the "prev" and "first" buttons when the first paginated page is displayed.<br>
+  <br>      
+  The TableActionsRenderer checks to see if the FocusManager is storing one of these buttons. If it is and the last or first paginated page is about to be displayed, it sets the FocusManager to reflect the pagination page input field as the element to receive the focus.<br>
+  <br>      
+  In order to do this it must obtain the pagination page input field component. It calls RenderingUtilities.getFocusElementId to obtain an element id suitable for setting the focus.<br>
+  <br>      
+  (See below)<br>
+  <br>
+  <br>
+  <strong>New Convenience Routines for Managing Focus</strong><br>
+  <br>    
+  - RenderingUtilities.decodeHiddenField() <br>
+  <br>      
+  This is a complementary method to renderHiddenField.<br>
+  <br>    
+  - RenderingUtilities.getFocusElementId()<br>
+  <br>      
+  This method encapsulates the checks for ComplexComponent and calls "ComplexComponent.getFocusElementId" when the component in question is a ComplexComponent otherwise returns the component's clientId.<br>
+  <br>
+  <strong><br>
+  Deprecations</strong><br>
+  <br>    
+  - ComplexComponent.getPrimaryElementId - replaced with getFocusElementId and getLabeledElementId. More work is needed in this area to support indicator behavior.<br>
+  <br>    
+  - RenderingUtilities.{set,get}LastClientId - replaced by com.sun.webui.jsf.util.FocusManager.{get,set}RequestFocusElementId.<br>
+  <br>    
+  - Body.FOCUS_PARAM - no longer needed.<br>
+  <br>    
+  - Body.JAVASCRIPT_OBJECT - no longer needed.<br>
+  <br>    
+  - Body.getFocusID - no longer needed.<br>
+  <br>    
+  - formElements.js::webuijsf.@THEME_NAME@.body setIniitialFocus<br>
+  <br>      
+  Former behavior occurs in the constructor via the onload listener.<br>
+</p>
+</BODY>
+</HTML>

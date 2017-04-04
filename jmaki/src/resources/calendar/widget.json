@@ -1,0 +1,109 @@
+/**
+ * The contents of this file are subject to the terms
+ * of the Common Development and Distribution License
+ * (the License). You may not use this file except in
+ * compliance with the License.
+ *
+ * You can obtain a copy of the license at
+ * https://woodstock.dev.java.net/public/CDDLv1.0.html.
+ * See the License for the specific language governing
+ * permissions and limitations under the License.
+ *
+ * When distributing Covered Code, include this CDDL
+ * Header Notice in each file and include the License file
+ * at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+ * If applicable, add the following below the CDDL Header,
+ * with the fields enclosed by brackets [] replaced by
+ * you own identifying information:
+ * "Portions Copyrighted [year] [name of copyright owner]"
+ *
+ * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+ */
+
+{
+    "name": "calendar",
+    "type": "@JS_NAME@",
+    "version": "@JS_VERSION@",
+    "jmakiVersion": "1.8",
+    "description": "Woodstock calendar widget.",
+    "args": [
+      {"className": {
+         "type": "STRING",
+         "description": "CSS selector.",
+         "defaultValue": ""}},
+      {"closeButtonLink": {
+         "type": "OBJECT",
+         "description": "",
+         "defaultValue": {}}},
+      {"date": {
+         "type": "STRING",
+         "description": "The date value.",
+         "defaultValue": ""}},
+      {"dateFormat": {
+         "type": "STRING",
+         "description": "The format in which to specify date text.",
+         "defaultValue": "MM/dd/yyyy"}},
+      {"decreaseLink": {
+         "type": "OBJECT",
+         "description": "",
+         "defaultValue": {}}},
+      {"increaseLink": {
+         "type": "OBJECT",
+         "description": "",
+         "defaultValue": {}}},
+      {"maxDate": {
+         "type": "OBJECT",
+         "description": "Latest date to display, in date format.",
+         "defaultValue": {}}},
+      {"minDate": {
+         "type": "OBJECT",
+         "description": "Earliest date to display, in date format.",
+         "defaultValue": {}}},
+      {"monthMenu": {
+         "type": "OBJECT",
+         "description": "The list of months displayed in the months dropDown list",
+         "defaultValue": {}}},
+      {"style": {
+         "type": "STRING",
+         "description": "Specify style rules inline.",
+         "defaultValue": ""}},
+      {"todayDateMsg": {
+         "type": "OBJECT",
+         "description": "The current date message displayed in the banner.",
+         "defaultValue": {}}},
+      {"toggleLink": {
+         "type": "OBJECT",
+         "description": "",
+         "defaultValue": {}}},
+      {"yearMenu": {
+         "type": "OBJECT",
+         "description": "The list of years displayed in the years dropDown list.",
+         "defaultValue": {}}},
+      {"visible": {
+         "type": "BOOLEAN",
+         "description": "Hide or show element.",
+         "defaultValue": false}}
+    ],
+    "value": {
+      "required": false,
+      "type": "OBJECT",
+      "defaultValue": {},
+      "description": "No value is required."
+    },
+    "config": {
+      "type": {
+        "id": "@JS_NAME@",
+        "libs": [
+            "@JS_PATH@/bootstrap.js",
+            "@JS_PATH@/webui.js"
+        ],
+        "resources": [ "@JS_LIBPATH@" ]
+        }
+    },
+    "topicInfo": {
+        "type": "publish",
+        "topicName": "/@JS_NS@/calendar/onSelect",
+        "description": "Published when a date is selected."
+    }
+}
+

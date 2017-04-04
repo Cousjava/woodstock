@@ -1,0 +1,20 @@
+Implementation-Title: Woodstock Components @FULL_VERSION@ Theme: @THEME@
+Implementation-Version: @FULL_VERSION@
+Implementation-Vendor: Sun Microsystems, Inc.
+Implementation-Vendor-Id: com.sun
+Specification-Title: Woodstock Components Theme: @THEME@
+Specification-Version: @VERSION@
+Specification-Vendor: Sun Microsystems, Inc.
+
+Name: com/sun/webui/jsf/theme/
+X-SJWUIC-SWAED-Version: @SWAED_VERSION@
+X-SJWUIC-Theme-Version: @THEME_VERSION@
+X-SJWUIC-Theme-Timestamp: @DATESTAMP@
+X-SJWUIC-Theme-Name: @THEME@
+X-SJWUIC-Theme-Prefix: /theme
+X-SJWUIC-Theme-Messages: @THEME_PACKAGE@.messages.messages
+X-SJWUIC-Theme-Images: @THEME_PACKAGE@.properties.images
+X-SJWUIC-Theme-JavaScript: @THEME_PACKAGE@.properties.javascript
+X-SJWUIC-Theme-ClassMapper: @THEME_PACKAGE@.properties.styles
+X-SJWUIC-Theme-Stylesheets: @THEME_PACKAGE@.properties.stylesheets
+X-SJWUIC-Theme-Templates: @THEME_PACKAGE@.properties.templates

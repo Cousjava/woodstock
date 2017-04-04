@@ -1,0 +1,120 @@
+/**
+ * The contents of this file are subject to the terms
+ * of the Common Development and Distribution License
+ * (the License). You may not use this file except in
+ * compliance with the License.
+ *
+ * You can obtain a copy of the license at
+ * https://woodstock.dev.java.net/public/CDDLv1.0.html.
+ * See the License for the specific language governing
+ * permissions and limitations under the License.
+ *
+ * When distributing Covered Code, include this CDDL
+ * Header Notice in each file and include the License file
+ * at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+ * If applicable, add the following below the CDDL Header,
+ * with the fields enclosed by brackets [] replaced by
+ * you own identifying information:
+ * "Portions Copyrighted [year] [name of copyright owner]"
+ *
+ * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+ */
+
+{
+    "name": "modalWindow",
+    "type": "@JS_NAME@",
+    "version": "@JS_VERSION@",
+    "jmakiVersion": "1.8",
+    "description": "Woodstock modalWindow widget.",
+    "args": [
+      {"maskColor": {
+         "type": "STRING",
+         "description": "color of the mask",
+         "defaultValue": ""}},
+      {"maskOpacity": {
+         "type": "STRING",
+         "description": "mask opacity",
+         "defaultValue": ""}},
+      {"top": {
+         "type": "STRING",
+         "description": "offset from the top, including units",
+         "defaultValue": ""}},
+      {"left": {
+         "type": "STRING",
+         "description": "offset from the left, including units; or 'auto'",
+         "defaultValue": ""}},
+      {"maxWidth": {
+         "type": "STRING",
+         "description": "maximium width of the window contents including units, such as '200px'",
+         "defaultValue": ""}},
+      {"maxHeight": {
+         "type": "STRING",
+         "description": "maximium height of the window contents including units, such as '200px'",
+         "defaultValue": ""}},
+      {"title": {
+         "type": "STRING",
+         "description": "window title, or null for none",
+         "defaultValue": ""}},
+      {"contents": {
+         "type": "ARRAY",
+         "description": "array of contents, or null for none",
+         "defaultValue": []}},
+      {"okButton": {
+         "type": "BOOLEAN",
+         "description": "true  or false to render default window ok button ( false by default)",
+         "defaultValue": false}},
+      {"okButtonOnClick": {
+         "type": "STRING",
+         "description": "handler for ok button onClick event",
+         "defaultValue": ""}},
+      {"applyButton": {
+         "type": "BOOLEAN",
+         "description": "true  or false to render default window apply button ( false by default)",
+         "defaultValue": false}},
+      {"applyButtonOnClick": {
+         "type": "STRING",
+         "description": "handler for apply button onClick event",
+         "defaultValue": ""}},
+      {"cancelButton": {
+         "type": "BOOLEAN",
+         "description": "true  or false to render default window cancel button ( false by default)",
+         "defaultValue": false}},
+      {"cancelButtonOnClick": {
+         "type": "STRING",
+         "description": "handler for cancel button onClick event",
+         "defaultValue": ""}},
+      {"closeButton": {
+         "type": "BOOLEAN",
+         "description": "true  or false to render default window close button ( true by default)",
+         "defaultValue": false}},
+      {"closeButtonOnClick": {
+         "type": "STRING",
+         "description": "handler for close button onClick event",
+         "defaultValue": ""}},
+      {"actions": {
+         "type": "ARRAY",
+         "description": "list of buttons descriptions",
+         "defaultValue": []}},
+      {"visible": {
+         "type": "BOOLEAN",
+         "description": "Hide or show element.",
+         "defaultValue": false}}
+    ],
+    "value": {
+      "required": true,
+      "type": "OBJECT",
+      "defaultValue": { 
+      },
+      "description": "Modal Window."
+    },
+    "config": {
+      "type": {
+        "id": "@JS_NAME@",
+        "libs": [
+            "@JS_PATH@/bootstrap.js",
+            "@JS_PATH@/webui.js"
+        ],
+        "resources": [ "@JS_LIBPATH@" ]
+        }
+    }
+}

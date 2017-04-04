@@ -1,0 +1,3153 @@
+/**
+ * The contents of this file are subject to the terms
+ * of the Common Development and Distribution License
+ * (the License). You may not use this file except in
+ * compliance with the License.
+ * 
+ * You can obtain a copy of the license at
+ * https://woodstock.dev.java.net/public/CDDLv1.0.html.
+ * See the License for the specific language governing
+ * permissions and limitations under the License.
+ * 
+ * When distributing Covered Code, include this CDDL
+ * Header Notice in each file and include the License file
+ * at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+ * If applicable, add the following below the CDDL Header,
+ * with the fields enclosed by brackets [] replaced by
+ * you own identifying information:
+ * "Portions Copyrighted [year] [name of copyright owner]"
+ * 
+ * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+ */
+
+body {
+	margin:0;
+}
+.form@THEME_CSS@ {
+	margin:0;
+}
+.hidden@THEME_CSS@ {
+	display:none;
+}
+.clear@THEME_CSS@ {
+	clear:both;
+}
+.float@THEME_CSS@ {
+	float:left;
+}
+.ConMgn@THEME_CSS@ {
+	margin:0px 10px;
+}
+
+/* SKIP NAVIGATION LINK */
+.SkpWht@THEME_CSS@, .SkpMedGry1@THEME_CSS@ {
+	height:0px;
+}
+/*---*/
+
+/* ADDREMOVE */
+/* This selector is rendered on the outermost HTML for an ADDREMOVE component.
+ * It does not require a definition, but can be used for creating descendant
+ * selectors
+ */
+/* .AddRm@THEME_CSS@ {} */
+
+.AddRmvBtnTbl@THEME_CSS@ .Btn1@THEME_CSS@, .AddRmvBtnTbl@THEME_CSS@ .Btn1Hov@THEME_CSS@, .AddRmvBtnTbl@THEME_CSS@ .Btn1Dis@THEME_CSS@,
+.AddRmvBtnTbl@THEME_CSS@ .Btn2@THEME_CSS@, .AddRmvBtnTbl@THEME_CSS@ .Btn2Hov@THEME_CSS@, .AddRmvBtnTbl@THEME_CSS@ .Btn2Dis@THEME_CSS@ {
+	width:100%;
+	margin:0px;
+}
+.AddRmvVrtDiv@THEME_CSS@ .Btn1@THEME_CSS@, .AddRmvVrtDiv@THEME_CSS@ .Btn1Hov@THEME_CSS@, .AddRmvVrtDiv@THEME_CSS@ .Btn1Dis@THEME_CSS@,
+.AddRmvVrtDiv@THEME_CSS@ .Btn2@THEME_CSS@, .AddRmvVrtDiv@THEME_CSS@ .Btn2Hov@THEME_CSS@, .AddRmvVrtDiv@THEME_CSS@ .Btn2Dis@THEME_CSS@ {
+	width:9em;
+	margin:0px;
+}
+.AddRmvBtnTbl@THEME_CSS@ {
+	margin-top:1.6em;
+}
+.AddRmvVrtFst@THEME_CSS@ {
+	margin:5px 0px 10px 5px;
+	float:left;
+}
+.AddRmvVrtWin@THEME_CSS@ {
+	margin:5px 0px 10px 5px;
+	float:left;
+}
+.AddRmvVrtBwn@THEME_CSS@ {
+	margin:5px 0px 10px 10px;
+	float:left;
+}
+.AddRmvHrzWin@THEME_CSS@ {
+	margin-top:3px;
+	min-width:100px;
+}
+.AddRmvHrzBwn@THEME_CSS@ {
+	margin-top:8px;
+	min-width:100px;
+}
+.AddRmvHrzDiv@THEME_CSS@ {
+	margin:5px 7px 10px 0px; 
+}
+.AddRmvVrtDiv@THEME_CSS@ {
+	clear:left;
+         margin-top:5px;
+}
+.AddRmvHrzLst@THEME_CSS@ {
+	clear:both;
+}
+.AddRmvVrtBtn@THEME_CSS@ {
+	width:120px;
+}
+.AddRmvLbl@THEME_CSS@ {
+	margin-left: 0px;
+}
+.AddRmvLbl2@THEME_CSS@ {
+	padding-left: 5px;
+	display: block;
+}
+.AddRmvLbl2ReadOnly@THEME_CSS@ {
+	padding-left: 0px;
+}
+.AddRmvLbl2@THEME_CSS@, .AddRmvLbl2ReadOnly@THEME_CSS@ {
+	height: 1.6em; 
+}
+/*---*/
+
+/* ORDERABLELIST */
+/* This selector is rendered on the outermost HTML for an ORDERABLELIST
+ * component. It does not require a definition, but can be used for
+ * creating descendant selectors
+ */
+.OrdLst@THEME_CSS@ {
+}
+
+.OrdLstBtnTbl@THEME_CSS@ .Btn1@THEME_CSS@,
+.OrdLstBtnTbl@THEME_CSS@ .Btn1Hov@THEME_CSS@,
+.OrdLstBtnTbl@THEME_CSS@ .Btn1Dis@THEME_CSS@,
+.OrdLstBtnTbl@THEME_CSS@ .Btn2@THEME_CSS@,
+.OrdLstBtnTbl@THEME_CSS@ .Btn2Hov@THEME_CSS@,
+.OrdLstBtnTbl@THEME_CSS@ .Btn2Dis@THEME_CSS@ {
+      width:100%;
+      margin:0px;
+}
+.OrdLstBtnTbl@THEME_CSS@ {
+    margin-top:1.6em;
+    padding-left:10px;
+    padding-right:10px;
+}
+.OrdLstBtnTbl@THEME_CSS@ td {
+    text-align: center;
+    width: 125px;
+}
+.OrdLstHrzWin@THEME_CSS@ {
+      margin-top:3px;
+      min-width:100px;
+}
+.OrdLstHrzBwn@THEME_CSS@ {
+      margin-top:8px;
+      min-width:100px;
+}
+.OrdLstHrzDiv@THEME_CSS@ {
+      margin:5px 7px 10px 0px;
+      float: left;
+}
+.OrdLstHrzLst@THEME_CSS@ {
+      clear:both;
+}
+
+/* BREADCRUMBS */
+.BcmWhtDiv@THEME_CSS@ {
+	margin:10px 10px 0px 10px;
+        padding: 0px;  /* must nullify BcmGryDiv.padding */
+}
+.BcmGryDiv@THEME_CSS@ {
+	padding:13px 10px 10px 10px;
+        margin: 0px;  /* must nullify BcmWhtDiv.margin */
+}
+.BcmSep@THEME_CSS@ {
+	margin:0px 5px;
+}
+/*---*/
+
+/* CHECKBOXES AND RADIO BUTTONS */
+.RbSpn@THEME_CSS@ input, .RbSpnDis@THEME_CSS@ input {
+	vertical-align: -1px;
+}
+.CbSpn@THEME_CSS@ input, .CbSpnDis@THEME_CSS@ input {
+	vertical-align: -1px;
+}
+.RbLbl@THEME_CSS@, .RbLblDis@THEME_CSS@ {
+	vertical-align: 1px;
+}
+.CbLbl@THEME_CSS@, .CbLblDis@THEME_CSS@ {
+	vertical-align: 2px;
+}
+.RbImg@THEME_CSS@, .RbImgDis@THEME_CSS@ {
+	vertical-align: -5px
+}
+.CbImg@THEME_CSS@, .CbImgDis@THEME_CSS@ {
+	vertical-align: -3px
+}
+.CbGrp@THEME_CSS@ td, .RbGrp@THEME_CSS@ td {
+	text-align: left;
+}
+.CbGrp@THEME_CSS@ label, .RbGrp@THEME_CSS@ label {
+	vertical-align: 6px;
+}
+/*---*/
+
+/* DRAG AND DROP */
+.dojoDndItem { 
+	padding:3px; 
+}
+.dndOuterSpan@THEME_CSS@ {
+    position: relative;
+}
+.dndContainer@THEME_CSS@ {
+    position:relative; 
+    top:0px; 
+    right:0px; 
+    bottom:0px; 
+    left:0px;
+}
+/*---*/
+
+/* CHECKBOX GROUP AND RADIO BUTTON GROUP */
+.RBGRPVert@THEME_CSS@, .RBGRPHoriz@THEME_CSS@, .CBGRPVert@THEME_CSS@, .CBGRPHoriz@THEME_CSS@ {
+    padding:0;
+}
+.RBGRPVert@THEME_CSS@ ul, .RBGRPHoriz@THEME_CSS@ ul, .CBGRPVert@THEME_CSS@ ul, .CBGRPHoriz@THEME_CSS@ ul {
+    clear:left;
+    float:left;
+    list-style:none;
+    margin:0;
+    padding:0;
+    text-align:left;
+}
+.RBGRPClear@THEME_CSS@, .CBGRPClear@THEME_CSS@  {
+    clear:both;
+}
+.RBGRPCaption@THEME_CSS@, .CBGRPCaption@THEME_CSS@ {
+    vertical-align:top;
+}
+.RBGRPHoriz@THEME_CSS@ ul li, .CBGRPHoriz@THEME_CSS@ ul li {
+    float:left;
+    margin:0 10px 0 0;
+}
+/*---*/
+
+/* EDITABLE LIST */
+/* This selector is rendered on the outermost HTML for an EDITABLELIST
+ * component. It does not require a definition, but can be used for
+ * creating descendant selectors
+ */
+/* .EdtLst@THEME_CSS@ {} */
+
+/* [check overwrite classes on ie.css] */
+.EdtLstTbl@THEME_CSS@ .EdtLstAddLblTd@THEME_CSS@ {
+	padding:2px 10px 0px 0px;
+}
+.EdtLstTbl@THEME_CSS@ .EdtLstRmvLblTd@THEME_CSS@ {
+	padding:6px 10px 0px 0px;
+	vertical-align:top;
+}
+.EdtLstTbl@THEME_CSS@ .EdtLstAddTxtTd@THEME_CSS@ {
+	padding:2px 14px 0px 0px;
+	vertical-align:top;
+	margin-top: 3px;
+}
+.EdtLstTbl@THEME_CSS@ .EdtLstRmvLstTd@THEME_CSS@ {
+	padding:2px 10px 1px 0px;
+	vertical-align:top;
+}
+.EdtLstTbl@THEME_CSS@ .EdtLstRmvLstTd@THEME_CSS@ .Lst@THEME_CSS@,
+.EdtLstTbl@THEME_CSS@ .EdtLstRmvLstTd@THEME_CSS@ .LstDis@THEME_CSS@ {
+	margin-bottom: 3px;
+}
+.EdtLstTbl@THEME_CSS@ .EdtLstAddTxtTd@THEME_CSS@ .TxtFld@THEME_CSS@,
+.EdtLstTbl@THEME_CSS@ .EdtLstAddTxtTd@THEME_CSS@ .TxtFldDis@THEME_CSS@ {
+	height: 1.3em;
+}
+.EdtLstTbl@THEME_CSS@ .EdtLstAddBtnTd@THEME_CSS@ {
+	padding:2px 10px 0px 0px;
+	vertical-align:top;
+	width:100px;
+}
+.EdtLstTbl@THEME_CSS@ .EdtLstRmvBtnTd@THEME_CSS@ {
+	padding:2px 10px 1px 0px;
+	vertical-align:top;
+	width:100px;
+}
+.EdtLstTbl@THEME_CSS@ .EdtLstBtnWin@THEME_CSS@ {
+	margin-top:3px;
+}
+.EdtLstTbl@THEME_CSS@ .EdtLstBtnBwn@THEME_CSS@ {
+	margin-top:9px;
+}
+.EdtLstTbl@THEME_CSS@ .TxtFld@THEME_CSS@, .EdtLstTbl@THEME_CSS@ .TxtFldDis@THEME_CSS@,
+.EdtLstTbl@THEME_CSS@ .Btn1@THEME_CSS@, .EdtLstTbl@THEME_CSS@ .Btn1Hov@THEME_CSS@, .EdtLstTbl@THEME_CSS@ .Btn1Dis@THEME_CSS@,
+.EdtLstTbl@THEME_CSS@ .Btn2@THEME_CSS@, .EdtLstTbl@THEME_CSS@ .Btn2Hov@THEME_CSS@, .EdtLstTbl@THEME_CSS@ .Btn2Dis@THEME_CSS@ {
+	width:100%;
+	margin:0px;
+}
+/*---*/
+
+/* BUTTONS */
+.Btn1@THEME_CSS@, .Btn1Hov@THEME_CSS@, .Btn1Mni@THEME_CSS@, .Btn1MniHov@THEME_CSS@, .Btn2@THEME_CSS@, .Btn2Hov@THEME_CSS@, .Btn2Mni@THEME_CSS@, .Btn2MniHov@THEME_CSS@, .Btn1Dis@THEME_CSS@, .Btn2Dis@THEME_CSS@, .Btn1MniDis@THEME_CSS@, .Btn2MniDis@THEME_CSS@ {
+	border-style:solid;
+	border-width:1px;
+}
+.Btn1@THEME_CSS@, .Btn1Hov@THEME_CSS@, .Btn1Dis@THEME_CSS@, .Btn1Mni@THEME_CSS@, .Btn1MniHov@THEME_CSS@, .Btn1MniDis@THEME_CSS@, .Btn2@THEME_CSS@, .Btn2Hov@THEME_CSS@, .Btn2Dis@THEME_CSS@, .Btn2Mni@THEME_CSS@, .Btn2MniHov@THEME_CSS@, .Btn2MniDis@THEME_CSS@ {
+	padding:0 5px 1px 5px;
+	margin:0 2px 0 1px;
+}
+/* for arrays where buttons need to be of equal width */
+.BtnTbl@THEME_CSS@ .Btn1@THEME_CSS@, .BtnTbl@THEME_CSS@ .Btn1Hov@THEME_CSS@, .BtnTbl@THEME_CSS@ .Btn1Dis@THEME_CSS@, .BtnTbl@THEME_CSS@ .Btn2@THEME_CSS@, .BtnTbl@THEME_CSS@ .Btn2Hov@THEME_CSS@, .BtnTbl@THEME_CSS@ .Btn2Dis@THEME_CSS@ {
+	width:100%;
+	margin:0px
+}
+.BtnAryDiv@THEME_CSS@ {
+	margin:5px 8px;
+}
+/*revised borders for masthead  */
+.MstDiv@THEME_CSS@ .Btn1@THEME_CSS@, .MstDiv@THEME_CSS@ .Btn1Mni@THEME_CSS@, .MstDiv@THEME_CSS@ .Btn1Hov@THEME_CSS@, .MstDiv@THEME_CSS@ .Btn1MniHov@THEME_CSS@, .MstDiv@THEME_CSS@ .Btn2@THEME_CSS@, .MstDiv@THEME_CSS@ .Btn2Mni@THEME_CSS@, .MstDiv@THEME_CSS@ .Btn2Hov@THEME_CSS@, .MstDiv@THEME_CSS@ .Btn2MniHov@THEME_CSS@ {
+	border-width:0;
+	vertical-align:middle;
+	margin:0;
+	padding-bottom:1px;
+}
+.mastheadButton_4@THEME_CSS@ a:link, .mastheadButton_4@THEME_CSS@ a:visited, .mastheadButton_4@THEME_CSS@ a:hover {
+	padding:1px 7px 1px 9px;
+}
+.mastheadButton_4@THEME_CSS@ {
+	display:inline;
+	border-style:solid;
+	border-top-width:1px;
+	border-right-width:0;
+	border-bottom-width:1px;
+	border-left-width:0;
+	margin:0;
+	padding:0 1px 2px 1px;
+	text-align:center;
+}
+/*---*/
+
+/* FILE CHOOSER */
+/* [check overwrite classes on ie.css] */
+.ChoNavBtnGrpDiv@THEME_CSS@ {
+	float: left;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.ChoImgBtn@THEME_CSS@ {
+	padding-right: 6px;
+}
+.ChoSortByDiv@THEME_CSS@ {
+	margin-top: 5px;
+	margin-bottom: 11px;
+	float: right;
+}
+.ChoFltHlpDiv@THEME_CSS@ {
+	float: left;
+	margin-bottom: 5px;
+	margin-left: 7em;
+}
+.ChoSortByDiv@THEME_CSS@ .LblLev2Txt@THEME_CSS@ {
+	padding-right: 5px;
+}
+.ChoMultiHlpDiv@THEME_CSS@ {
+	float: left;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+.ChoLev2Div@THEME_CSS@ {
+	float: left;
+	width: 7em;
+}
+.ChoLookinDiv@THEME_CSS@ {
+	float: left;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+.ChoFltDiv@THEME_CSS@ {
+	float: left;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+.ChoSelFileDiv@THEME_CSS@ {
+	float: left;
+	margin-top: 8px;
+	margin-bottom: 7px;
+}
+.ChoSelFileLev2Div@THEME_CSS@ {
+	float: left;
+	width: 8.7em;
+}
+.ChoSrvDiv@THEME_CSS@ {
+	float: left;
+	margin-top: 10px;
+	margin-bottom: 2px;
+}
+.ChoFltDiv@THEME_CSS@ .TxtFld@THEME_CSS@, .ChoLookinDiv@THEME_CSS@ .TxtFld@THEME_CSS@, .ChoSelFileDiv@THEME_CSS@ .TxtFld@THEME_CSS@, .ChoSrvDiv@THEME_CSS@ .ChoSrvTxt@THEME_CSS@, .ChoFltHlpDiv@THEME_CSS@ .inlineFieldHelp@THEME_CSS@ {
+	margin-left: 10px;
+}
+.ChoLookinDiv@THEME_CSS@ .TxtFld@THEME_CSS@, .ChoSelFileDiv@THEME_CSS@ .TxtFld@THEME_CSS@ {
+	width: 32em;
+}
+.ChoFltHlpDiv@THEME_CSS@ .inlineFieldHelp@THEME_CSS@ {
+	padding-top: 4px;
+}
+.ChoLstHdr@THEME_CSS@ {
+	margin-bottom: 0px;
+	height: 1.6em;
+	line-height: 1.6em;
+}
+.ChoLstHdr@THEME_CSS@ .ChoNameHdr@THEME_CSS@ {
+	height: 1.6em;
+	padding-left: 5px;
+	width: 56%;
+	float: left;
+}
+.ChoLstHdr@THEME_CSS@ .ChoSizeHdr@THEME_CSS@ {
+	height: 1.6em;
+	padding-left: 5px;
+	width: 16%;
+	float: left;
+}
+.ChoLstHdr@THEME_CSS@ .ChoDateTimeHdr@THEME_CSS@ {
+	height: 1.6em;
+	padding-left: 5px;
+	float: left;
+}
+.ChoLstDiv@THEME_CSS@ .LstMno@THEME_CSS@ {
+	margin-bottom: 0;
+}
+/*---*/
+
+/* HELP WINDOW */
+.HlpStpTab@THEME_CSS@ {
+	margin:0px 0px 5px 0px;
+}
+.HlpTtlDiv@THEME_CSS@ {
+	margin:15px 0px 0px 10px;
+}
+.HlpSchDiv@THEME_CSS@, .HlpIdxDiv@THEME_CSS@ {
+	margin:5px 5px 5px 10px;
+}
+.HlpRltDiv@THEME_CSS@ {
+	margin-top:6px;
+}
+body.HlpBdy@THEME_CSS@ {
+	border-left-style:solid;
+	border-left-width:1px;
+	padding:10px;
+}
+body.HlpBdy@THEME_CSS@ h1 {
+	margin-bottom:-3px;
+}
+body.HlpBdy@THEME_CSS@ h2, body.HlpBdy@THEME_CSS@ h3, body.HlpBdy@THEME_CSS@ h4, body.HlpBdy@THEME_CSS@ h5, H6 {
+	margin-bottom:-5px;
+}
+.HlpBtnDiv@THEME_CSS@ {
+	padding:7px 10px 1px 0;
+	vertical-align:middle;
+}
+/*---*/
+
+/* PAGE ALERT */
+.FulAlrtHdrDiv@THEME_CSS@ {
+	margin:7px 10px 5px 37px;
+}
+.FulAlrtMsgDiv@THEME_CSS@ {
+	margin:5px 10px 0px 37px;
+}
+.FulAlrtFrmDiv@THEME_CSS@ {
+	margin:10px 10px 5px 37px;
+}
+/*---*/
+
+/* INLINE ALERT */
+.inlineAlert_4@THEME_CSS@ {
+	margin:0 20px 0 20px;
+	text-align:center;
+}
+.inlineAlert_4@THEME_CSS@ table {
+	display: inline;	
+}
+.inlineAlert_4@THEME_CSS@ .topLeftCorner@THEME_CSS@, .inlineAlert_4@THEME_CSS@ .topRightCorner@THEME_CSS@, .inlineAlert_4@THEME_CSS@ .bottomLeftCorner@THEME_CSS@, .inlineAlert_4@THEME_CSS@ .bottomRightCorner@THEME_CSS@ {
+	width:8px;
+	height:8px;
+}
+.inlineAlert_4@THEME_CSS@ .topMiddle@THEME_CSS@ {
+	height:8px;
+}
+.inlineAlert_4@THEME_CSS@ .leftMiddle@THEME_CSS@ {
+	width:7px;
+	vertical-align:top;
+	border-left-style:solid;
+	border-left-width:1px;
+} 
+.inlineAlert_4@THEME_CSS@ .middle@THEME_CSS@ {
+	padding:0 13px;
+}
+.inlineAlert_4@THEME_CSS@ .middle@THEME_CSS@ .header@THEME_CSS@{
+	vertical-align:middle;
+	text-align:center;
+}
+.inlineAlert_4@THEME_CSS@ .middle@THEME_CSS@ .header@THEME_CSS@ img{
+	vertical-align:middle;
+	padding:0 4px 0 0;
+}
+.inlineAlert_4@THEME_CSS@ .middle@THEME_CSS@  .header@THEME_CSS@ .label@THEME_CSS@{
+	vertical-align:middle;
+}
+.inlineAlert_4@THEME_CSS@ .middle@THEME_CSS@ .details@THEME_CSS@ {
+	margin:7px 0 0 0;
+	vertical-align:middle;
+	text-align:center;
+}
+.inlineAlert_4@THEME_CSS@ .middle@THEME_CSS@ .details@THEME_CSS@ img{
+	padding:0 1px 0 10px;
+}
+.inlineAlert_4@THEME_CSS@ .rightMiddle@THEME_CSS@ {
+	width:7px;
+	vertical-align:top;
+	border-right-style:solid;
+	border-right-width:1px;
+}
+.inlineAlert_4@THEME_CSS@ .bottomMiddle@THEME_CSS@ {
+	height:7px;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+}
+/*---*/
+
+/* HELP INLINE */
+.inlineFieldHelp@THEME_CSS@ {
+	padding:2px 0 0 0;
+}
+/* LEFT PANE HELP */
+.LftHlpHlp@THEME_CSS@ {
+	position:absolute;
+	top:0px;
+	right:70%;
+	bottom:34px;
+	left:0px;
+	overflow:auto;
+}
+.LftHlpBdy@THEME_CSS@ {
+	position:absolute;
+	top:0px;
+	bottom:34px;
+	left:30%;
+	right:0px;
+	overflow:auto;
+	border-left:1px solid;
+}
+.LftHlpDiv@THEME_CSS@ {
+	margin:15px 10px 5px;
+}
+.LftHlpBtm@THEME_CSS@ {
+	position:absolute;
+	bottom:0px;
+	border-top:1px solid;
+	padding:0 13px 0 30%;
+	height:33px;
+}
+.LftHlpBtnBtm@THEME_CSS@ {
+	float:right;
+	margin: 7px 0 8px;
+	padding: 0 0 0 13px;
+	text-align:right;
+}
+/*---*/
+
+/* LISTS */
+/* Remove the border from around the span that contains dropdown
+   and select elements. When this element's class attribute contains
+   any of the "Lst" or "Mnu" selectors it gets the "border-widget: 1px"
+   appearance. It is only seen when the select element does not 
+   "sit ontop of the span". For example if the span has padding
+   offsets the span's border will be seen.
+*/
+span.Lst@THEME_CSS@,
+span.DrpDn@THEME_CSS@ {
+   border: none;
+}
+
+.Lst@THEME_CSS@, .LstDis@THEME_CSS@, .LstMno@THEME_CSS@, .LstMnoDis@THEME_CSS@ {
+	border-width:1px;
+	border-style:solid;
+}
+.LstAln@THEME_CSS@ {
+	vertical-align:top;
+} 
+/* This is required for correct alignment on safari and
+ * makes the look consistent across browsers.
+ */
+span.LstBx@THEME_CSS@,
+span.DrpDn@THEME_CSS@ {
+    border:none;
+}
+
+.LstBx@THEME_CSS@ span,
+.DrpDn@THEME_CSS@ span {
+    vertical-align: top;
+}
+
+/* LABEL INVALID AND REQUIRED IMAGES */
+
+.LstBx@THEME_CSS@  img.LblReqImg@THEME_CSS@,
+.DrpDn@THEME_CSS@ img.LblReqImg@THEME_CSS@ {
+    vertical-align: top;
+    margin-left: .25em;
+    margin-right: .5em;
+}
+
+.LstBx@THEME_CSS@  img.LblInvImg@THEME_CSS@,
+.DrpDn@THEME_CSS@ img.LblInvImg@THEME_CSS@ {
+    vertical-align: top;
+    margin-right: .25em;
+}
+/*---*/
+
+/* PROPERTY SHEET */
+.LblRqdDiv@THEME_CSS@ {
+	line-height:1.0em;
+}
+.ConFldSetDiv@THEME_CSS@ {
+	margin:7px 10px 0px;
+}
+.ConFldSetLgdDiv@THEME_CSS@ {
+	margin-bottom:10px;
+	line-height:1.1em;
+}
+.ConSubSecDiv@THEME_CSS@ {
+	padding:0px 10px 5px 0px;
+}
+.ConTblCl1Div@THEME_CSS@ {
+	margin:8px 6px 0px 15px;
+}
+.ConTblCl2Div@THEME_CSS@ {
+	margin:8px 6px 0px 0px;
+	padding:1px 0 0 0;
+}
+.ConEmbTblCl1Div@THEME_CSS@ {
+	margin:6px 10px 0px 30px;
+}
+.ConEmbTblCl2Div@THEME_CSS@ {
+	margin:3px 10px 0px 0px;
+}
+.ConJmpScnDiv@THEME_CSS@ {
+	margin:17px 10px 0px 0;
+}
+.ConJmpLnkDiv@THEME_CSS@ {
+	margin:0 25px 0 10px;
+}
+.ConRqdDiv@THEME_CSS@ {
+	text-align:right;
+	margin:5px 10px 5px 0px;
+}
+.ConJmpTopDiv@THEME_CSS@ {
+	line-height:.7em;
+	margin:15px 10px 10px 10px;
+}
+.ConEmbTblCl1Div@THEME_CSS@ input[type=checkbox], .ConEmbTblCl1Div@THEME_CSS@ input[type=radio] {
+	margin-left:-5px;
+	vertical-align:middle;
+}
+div.ConTblCl2Div@THEME_CSS@ input, div.ConTblCl2Div@THEME_CSS@ select {
+	vertical-align:middle;
+} 
+div.ConTblCl2Div@THEME_CSS@ .CbSpn@THEME_CSS@ input[type=checkbox],
+div.ConTblCl2Div@THEME_CSS@ .CbSpnDis@THEME_CSS@ input[type=checkbox] {
+	 margin-top:-8px;
+}
+.ConFldSetLgdDiv@THEME_CSS@ {
+	margin-bottom:10px;
+}
+.ConSubSecTtlTxt@THEME_CSS@ {
+	margin:15px 0px 0px 15px;
+}
+/*---*/
+
+/* CONTENT PAGE TITLE */
+.TtlTxtDiv@THEME_CSS@ {
+	margin:12px 0px 0px 10px;
+} 
+.TtlTxtDiv@THEME_CSS@ img {
+	vertical-align:text-bottom;
+	margin-right:5px;
+} 
+.TtlTxt@THEME_CSS@ {
+	margin:0px;
+}
+.TtlActDiv@THEME_CSS@, .TtlVewDiv@THEME_CSS@  {
+	margin:8px 10px 0px 10px;
+}
+.TtlHlpDiv@THEME_CSS@ {
+	margin:5px 10px 0px 10px;
+}
+.TtlBtnDiv@THEME_CSS@ {
+	margin:0px 8px 0px 10px;
+}
+.TtlBtnBtmDiv@THEME_CSS@ {
+	padding:10px 8px 0px 10px;
+}
+/*---*/
+
+/* SCHEDULER */
+.DatCalDiv@THEME_CSS@ {
+	border-right-width:1px;
+	border-right-style:solid;
+	border-bottom-width:1px;
+	border-bottom-style:solid;
+	border-left-width:1px;
+	border-left-style:solid;
+	text-align:center;
+	padding:2px 0 0 0;
+	clear:both;
+}
+.DatCalDiv@THEME_CSS@ .DatSelDiv@THEME_CSS@ {
+	float:left;
+	clear:right;
+}
+.DatCalDiv@THEME_CSS@ .DatCalLeft@THEME_CSS@ {
+	float:left;
+	clear:none;
+}
+.DatCalDiv@THEME_CSS@ .DatCalLeft@THEME_CSS@ img {
+	vertical-align:middle;
+}
+.DatCalDiv@THEME_CSS@ .DatCalLeft@THEME_CSS@ select {
+	margin:2px 1px 2px 2px;
+	vertical-align:top;
+}
+.DatCalDiv@THEME_CSS@ .DatCalRight@THEME_CSS@ {
+	float:right;
+	clear:right;
+}
+.DatCalDiv@THEME_CSS@ .DatCalRight@THEME_CSS@ select {
+	margin:2px 1px 2px 0;
+	vertical-align:top;
+}
+.DatCalDiv@THEME_CSS@ .DatCalDiv@THEME_CSS@ {
+	border:0;
+	padding:0;
+	margin:0 2px 2px 3px;
+}
+.DatCalDiv@THEME_CSS@ .DatCalDiv@THEME_CSS@ table, .DatCalTbl@THEME_CSS@ {
+	border-collapse:collapse;
+}
+a.DatLnk@THEME_CSS@:link, a.DatLnk@THEME_CSS@:visited, a.DatLnk@THEME_CSS@:hover, a.DatBldLnk@THEME_CSS@:link, a.DatBldLnk@THEME_CSS@:visited, a.DatCurLnk@THEME_CSS@:link, a.DatCurLnk@THEME_CSS@:visited,
+a.DatCurLnk@THEME_CSS@:hover, a.DatOthLnk@THEME_CSS@:link, a.DatOthLnk@THEME_CSS@:visited, a.DatOthLnk@THEME_CSS@:hover, a.DatOthBldLnk@THEME_CSS@:link, a.DatOthBldLnk@THEME_CSS@:visited,
+.DatCalTbl@THEME_CSS@ td, .DatCalTbl@THEME_CSS@ th {
+	border-style:solid;
+	border-width:1px;
+}
+a.DatLnk@THEME_CSS@:link, a.DatLnk@THEME_CSS@:visited {
+	display:block;
+	padding:5px 0px 3px;
+}
+a.DatBldLnk@THEME_CSS@:link, a.DatBldLnk@THEME_CSS@:visited {
+	display:block;
+	padding:5px 0px 3px;
+}
+a.DatCurLnk@THEME_CSS@:link, a.DatCurLnk@THEME_CSS@:visited {
+	display:block;
+	padding:5px 0px 3px;
+}
+a.DatOthLnk@THEME_CSS@:link, a.DatOthLnk@THEME_CSS@:visited {
+	display:block;
+	padding:5px 0px 3px;
+}
+a.DatOthBldLnk@THEME_CSS@:link, a.DatOthBldLnk@THEME_CSS@:visited {
+	display:block;
+	padding:5px 0px 3px;
+}
+.DateSelContainer@THEME_CSS@ {
+	border-top-style:solid;
+	border-left-style:solid;
+	border-right-style:solid;
+	border-top-width:1px;
+	border-left-width:1px;
+	border-right-width:1px;
+}
+.DatSelTopMiddle@THEME_CSS@ {
+	border-top-width:1px;
+	border-top-style:solid;
+	height:4px;
+}
+.DatSelContent@THEME_CSS@ {
+	border-right-width:1px;
+	border-right-style:solid;
+	border-left-width:1px;
+	border-left-style:solid;
+	padding:0 0 6px 8px;
+	line-height:.9em;
+}
+.DatSelDiv@THEME_CSS@ {
+	text-align:left;
+	padding:0 1px
+}
+.DatSelDiv@THEME_CSS@ span {
+	/* no attributes specified */
+}
+.DatSelDiv@THEME_CSS@ input {
+	padding-top:1px;
+}
+.DatDayHdrTxt@THEME_CSS@ {
+	display:block;
+	padding:2px 0px;
+}
+.DatCalTbl@THEME_CSS@ td, .DatCalTbl@THEME_CSS@ th {
+	width:29px;
+}
+.DatFieldTable@THEME_CSS@ td {
+	padding:1px 0;
+}
+/*---*/
+
+/* CALENDAR */
+.CalPopDiv@THEME_CSS@ {
+	padding:0 4px 0 0;
+	display:block;
+	position:relative;
+	float:left;
+	top:0;
+	left:0;
+}
+.CalPopDiv@THEME_CSS@ .DatCalDiv@THEME_CSS@ {
+	position:relative;
+	top: -3px;	
+	padding:0 0 0 0;
+	margin-bottom:0;
+}
+.CalPopShdDiv@THEME_CSS@ {
+	display:none;
+	position:absolute;
+	z-index:1000;
+	margin:-9px 0 0 -22px;
+	width:20em;
+        left:5px;
+        top:24px;
+}
+.CalPopShd2Div@THEME_CSS@ {
+}
+.CalPopDiv@THEME_CSS@ .DatSelContent@THEME_CSS@ {
+	border-right-width:1px;
+	border-right-style:solid;
+	border-left-width:1px;
+	border-left-style:solid;
+	position:relative;
+	float:left;
+	top: -3px;
+	left:0;
+	padding:0 0 3px 0;
+}
+.CalPopDiv@THEME_CSS@ .DatCalTbl@THEME_CSS@ {
+	border-left-style:solid;
+	border-left-width:1px;
+	border-right-style:solid;
+	border-right-width:1px;
+}
+.CalPopDiv@THEME_CSS@ .DatCalTbl@THEME_CSS@ th {
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-left:none;
+	border-right:none;
+	border-top-style:solid;
+	border-top-width:1px;
+}
+.CalPopDiv@THEME_CSS@ .DatCalTbl@THEME_CSS@ td.CalPopFtr@THEME_CSS@, .CalPopDiv@THEME_CSS@ .CalPopFtr@THEME_CSS@Div@THEME_CSS@ {
+	border:0;
+}
+.CalPopDiv@THEME_CSS@  a.DatCurLnk@THEME_CSS@:link, .CalPopDiv@THEME_CSS@ a.DatCurLnk@THEME_CSS@:visited,.CalPopDiv@THEME_CSS@  a.DatLnk@THEME_CSS@:link,.CalPopDiv@THEME_CSS@ a.DatLnk@THEME_CSS@:visited,.CalPopDiv@THEME_CSS@ a.DatBldLnk@THEME_CSS@:link,.CalPopDiv@THEME_CSS@ a.DatBldLnk@THEME_CSS@:visited,
+.CalPopDiv@THEME_CSS@ a.DatOthLnk@THEME_CSS@:link,.CalPopDiv@THEME_CSS@ a.DatOthLnk@THEME_CSS@:visited,.CalPopDiv@THEME_CSS@ a.DatOthBldLnk@THEME_CSS@:link,.CalPopDiv@THEME_CSS@ a.DatOthBldLnk@THEME_CSS@:visited {
+	display:block;
+	padding:2px 0px 2px;
+}
+.CalPopDiv@THEME_CSS@ .DatSelDiv@THEME_CSS@ {
+	margin:0 0 5px 0;
+	text-align:left;
+	padding: 2px 1px 0 0;
+}
+.CalPopDiv@THEME_CSS@ .DatDayHdrTxt@THEME_CSS@ {
+	display:block;
+	padding:2px 0px;
+}
+.CalPopDiv@THEME_CSS@ .DatCalTbl@THEME_CSS@ {
+	border-collapse:collapse;
+}
+.CalPopDiv@THEME_CSS@ .DatCalTbl@THEME_CSS@ td, .CalPopDiv@THEME_CSS@ .DatCalTbl@THEME_CSS@ th {
+	width:25px;
+}
+.CalPopDiv@THEME_CSS@ .DatCalTbl@THEME_CSS@ th {
+	padding-top:2px;
+}
+.CalPopDiv@THEME_CSS@ .DatSelContent@THEME_CSS@ .closeBtn@THEME_CSS@ {
+	display:block;
+	float:right;
+	margin: 0 3px 0 0;
+}
+.CalPopDiv@THEME_CSS@ .DatSelContent@THEME_CSS@ .DatSelDate@THEME_CSS@ {
+	float:left;
+	line-height:.9em;
+	padding:3px 0 3px 8px;
+}
+.CalPopDiv@THEME_CSS@ .DatCalTbl@THEME_CSS@ td.CalPopFtr@THEME_CSS@ {
+	width:auto;
+}
+.CalPopDiv@THEME_CSS@ .CalPopFtrDiv@THEME_CSS@ {
+	float:left;
+	width:100%;
+}
+.CalPopDiv@THEME_CSS@ .CurDayTxt@THEME_CSS@ {
+	float:left;
+	clear:right;
+	padding:4px 0px 4px 4px;
+}
+.CalPopFldLbl@THEME_CSS@ {
+	display:block;
+	margin-right:8px;
+        padding: 3px 1px 1px 1px;
+}
+.CalPopFldImg@THEME_CSS@ img {
+	margin-left:5px;
+}
+/* Override pluto portal server rule */
+.CalRoot@THEME_CSS@ { }  /* runtime only */
+.CalRootTbl@THEME_CSS@ { /* design-time only */
+        width: auto;
+}
+.CalPopBtnDiv@THEME_CSS@ {
+        position: relative;
+}
+.CalPopTxt@THEME_CSS@ {         
+        padding-right:8px;
+        padding-left:4px;
+}
+.CalRoot@THEME_CSS@ .CalPopTxt@THEME_CSS@ { /* runtime only */
+        padding-top:3px;
+}
+.CalPopTxt@THEME_CSS@ .inlineFieldHelp@THEME_CSS@ {
+	display: inline;
+}
+/*---*/
+
+/* TEXT, TEXTAREAS AND PASSWORD FIELDS */
+.TxtFld@THEME_CSS@, .TxtFldDis@THEME_CSS@, .TxtAra@THEME_CSS@, .TxtAraDis@THEME_CSS@ {
+	border-style:solid;
+	border-width:1px;
+	padding:1px 0 0 2px;
+}
+.TxtFld_ReadOnly@THEME_CSS@, .TxtAra_ReadOnly@THEME_CSS@{
+	border: none;
+	border-width:0px;
+}
+.TxtAra@THEME_CSS@, .TxtAraDis@THEME_CSS@ {
+	padding-left:2px;
+}
+.TxtAraLabel@THEME_CSS@ span , .TxtAraLabel@THEME_CSS@ span > img { vertical-align: top; }
+
+.TxtFldAutoCompListSpan@THEME_CSS@ {   
+    position: absolute;
+    z-index:999;
+}
+.TxtFldAutoCompAlignContainer@THEME_CSS@ {   
+    position: relative;
+}
+
+/*---*/
+
+/* EDITABLE FIELDS */
+.EdtFld_Edt@THEME_CSS@ {
+	border: none;
+	border-width:0px;
+	padding:1px 0 0 2px;
+}
+.EdtFldDis@THEME_CSS@ {
+	border: none;
+	border-width:0px;
+	padding:1px 0 0 2px;
+}
+.EdtFld_ReadOnly@THEME_CSS@ {
+	border: none;
+	border-width:0px;
+	padding:1px 0 0 2px;
+}
+/*---*/
+
+/* MENUS */
+.MnuJmpOpt@THEME_CSS@:hover {text-decoration:underline;}
+.MnuJmp@THEME_CSS@, .MnuStd@THEME_CSS@, .MnuJmp@THEME_CSS@Dis, .MnuStdDis@THEME_CSS@ {
+	border-width:1px;
+	border-style:solid;
+}
+/*---*/
+
+
+/* Modal Window */
+.MdlWinOverlay@THEME_CSS@ {
+    z-index: 1; 
+    left: 0px; 
+    width:100%; 
+    position: fixed; 
+    top: 0px; 
+    height: 100%; 
+
+}
+
+.MdlWinCenteringDiv@THEME_CSS@ {
+    text-align: center;
+    z-index:    2;
+    position:   fixed;
+    top:        0px;
+    left:        0px;
+    width: 100%;
+    height: 100%;
+}
+
+
+.MdlWinWindow@THEME_CSS@ {
+    margin: 100px auto auto; /*use margin-left and margin-top to position window */
+    width: 400px; 
+    min-width: 100px;
+    text-align: left;
+    position: relative; /* needed so that all containers within can be positioned "absolute relative to this one */            
+}
+
+.MdlWinWindowTitleBar@THEME_CSS@ {
+    position: relative;
+    width: auto;
+    text-indent: 10px;
+    z-index: 999;
+
+}
+
+
+.MdlWinWindowTitleText@THEME_CSS@ {
+    text-indent: 10px;
+    position: relative;
+    left: 0px;
+    top: 0px;
+    float: left;
+}
+
+
+.MdlWinWindowControlsContainer@THEME_CSS@ {
+    position: relative;
+    height: 20px;
+
+    float: right;
+    padding-right: 7px;
+    padding-top: 7px;            
+}
+
+
+.MdlWinWindowControl@THEME_CSS@ {
+    display: block;
+}
+
+
+.MdlWinToolbarContainer@THEME_CSS@ {
+    height: 30px;
+    z-index: 999;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    text-align: center;            
+}        
+
+
+
+.MdlWinToolbarMessage@THEME_CSS@ {
+    text-indent: 10px;
+    float: left;
+}
+
+.MdlWinToolbarNavContainer@THEME_CSS@ {
+    position: relative;
+    /*float: right;
+    right: 250px;*/
+    top: 5px;
+    left: 45%;
+}
+
+
+.MdlWinToolbarMediaContainer@THEME_CSS@ {
+    float: right;
+    position: relative;
+    top: 5px;
+    right: 10px;
+}
+
+
+.MdlWinContentContainer@THEME_CSS@ {
+    display: block;
+    width: auto;
+    z-index: 996;
+    position: relative;
+    height: auto;
+    max-height:300px;
+    padding: 8px;
+    overflow:hidden;
+    text-align: center;
+    line-height: 25px;
+    text-indent: 10px;
+    
+}
+
+
+
+.MdlWinWindowFooter@THEME_CSS@ {
+    margin-top: 15px;
+    height: auto;
+    width: auto;
+    z-index: 994;
+    padding-top: 5px;
+    padding-right: 0px;
+    padding-bottom: 5px;
+    padding-left: 0px;
+    border-top-width: 1px;
+    border-top-style: solid;
+    text-indent: 10px;
+    height: 18px;
+}
+.MdlWinActionContainer@THEME_CSS@ {
+    text-align: center;
+    height: auto;
+    float: right;
+    
+    
+}
+
+/* MASTHEAD */
+a.MstLnk@THEME_CSS@:link, a.MstLnk@THEME_CSS@:visited, a.MstLnkRt@THEME_CSS@:link, a.MstLnkRt@THEME_CSS@:visited {
+	border-width:1px;
+	border-style:solid;
+}
+a.MstLnkLft@THEME_CSS@:link, a.MstLnkLft@THEME_CSS@:visited, a.MstLnkCen@THEME_CSS@:link, a.MstLnkCen@THEME_CSS@:visited {
+	border-top-width:1px;
+	border-top-style:solid;
+	border-bottom-width:1px;
+	border-bottom-style:solid;
+	border-left-width:1px;
+	border-left-style:solid;
+}
+td.MstTdTtl@THEME_CSS@ {
+	padding:0px 10px 0px 10px;
+	vertical-align:top;
+	white-space:nowrap;
+}
+td.MstTdAlm@THEME_CSS@ {
+	vertical-align:top;
+}
+td.MstTdLogo@THEME_CSS@ {
+	vertical-align:top;
+	padding:6px 13px 8px 20px;
+}
+div.MstDivTtl@THEME_CSS@ {
+	padding-top:4px;
+}
+.MstFooter@THEME_CSS@ {
+	padding:3px 10px 3px 0;
+	border-style:solid;
+	border-width:1px;
+	min-width:590px;
+}
+.MstSec@THEME_CSS@ {
+	height:54px;
+	border-style:solid;
+	border-width:1px;
+	min-width:600px;
+}
+.MstSec@THEME_CSS@ div {
+	padding:15px 0 16px 0;
+	vertical-align:middle;
+}
+.MstSec@THEME_CSS@ td {
+	padding:0 10px;
+}
+div.MstDivUsr@THEME_CSS@ {
+	padding:4px 0 0 0;
+}
+.MstLbl@THEME_CSS@, .MstTxt@THEME_CSS@, 
+.MstUsrLnk@THEME_CSS@, .MstAlmLnk@THEME_CSS@, 
+span.MstAlmDwnTxt@THEME_CSS@, span.MstAlmCrtTxt@THEME_CSS@,
+span.MstAlmMajTxt@THEME_CSS@, span.MstAlmMinTxt@THEME_CSS@ {
+	vertical-align:top;
+	line-height:1.0em;
+}
+a.MstLnk@THEME_CSS@:link, a.MstLnk@THEME_CSS@:visited {
+	padding:2px 10px 1px;
+	vertical-align:middle
+}
+.MstSpcImg@THEME_CSS@ {
+	display:none;
+}
+.MstBdy@THEME_CSS@ {
+	margin:0px;
+}
+.MstDiv@THEME_CSS@ {
+	border-style:solid;
+	border-width:1px;
+	min-width:600px;
+}
+.MstTblTop@THEME_CSS@ td {
+	padding:6px 10px 4px;
+}
+.MstTblTop@THEME_CSS@ .TxtFld@THEME_CSS@, .MstTblTop@THEME_CSS@ .MnuStd@THEME_CSS@ {
+	margin:0 6px 0 0;
+	vertical-align:middle;
+}
+.MstTblTop@THEME_CSS@ img {
+	vertical-align:middle;
+}
+.MstTblEnd@THEME_CSS@  td {
+	padding:1px 0 2px 0;
+}
+td.MstTblEnd@THEME_CSS@ {
+	padding-left:10px;
+}
+.MstTblBot@THEME_CSS@ .hrule@THEME_CSS@ {
+	margin:0 0 1px 0;
+	border-top-style:solid;
+	border-top-width:1px;
+	height:1px;
+}	
+.MstStatDiv@THEME_CSS@ a, .MstTmeDiv@THEME_CSS@ span, .MstAlmDiv@THEME_CSS@ a {
+	vertical-align:top;
+	line-height:1.0em;
+}
+a.MstLnkLft@THEME_CSS@:link, a.MstLnkLft@THEME_CSS@:visited,
+a.MstLnkRt@THEME_CSS@:link, a.MstLnkRt@THEME_CSS@:visited, 
+a.MstLnkCen@THEME_CSS@:link, a.MstLnkCen@THEME_CSS@:visited {
+	padding:2px 10px 1px;
+	vertical-align:middle;
+	white-space:nowrap;
+}
+/*---*/
+
+/* DYNAMIC TABSET/TAB (aka tab2) */
+.DTabsetRow@THEME_CSS@ {
+    /* padding-left/right must match dtab.tabsetPadLeft/right in message.properties */
+    padding: 6px 0px 0px 10px;
+    overflow: hidden;
+    clear:both;
+}
+.DTabSelDiv@THEME_CSS@, .DTabSelDiv2@THEME_CSS@ {
+    padding-bottom: 1px;
+}
+.DTabSelDiv@THEME_CSS@, .DTabSelDiv2@THEME_CSS@, .DTabLnkDiv@THEME_CSS@, .DTabScrollDiv@THEME_CSS@ {
+    border-style: solid none none solid;
+    border-width: 1px 0px 0px 1px;
+    float: left;
+}
+.DTabBottom@THEME_CSS@ {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+.DTabLast@THEME_CSS@ {
+    border-right-style: solid;
+    border-right-width: 1px;
+}
+.DTabTitle@THEME_CSS@, .DTabScrollDiv@THEME_CSS@ span {
+    padding: 8px 13px 7px;
+    float:left;
+}
+.DTabTitle@THEME_CSS@ {
+    display: block;
+    text-align: center;
+    white-space: nowrap;
+}
+div.DTabPad@THEME_CSS@ {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.DTabCloseBtn@THEME_CSS@ {
+    float: left;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+.DTabScrollDiv@THEME_CSS@ span {
+    padding-left: 0px;
+    padding-right: 0px;
+    visibility: hidden;
+}
+.DTabScrollBtn@THEME_CSS@ {
+    border-style:none;
+    margin-left: -1px;
+    float: left;
+}
+.DTabLoad@THEME_CSS@ {
+    float: left;
+    margin-left: 4px;
+    margin-top: 3px
+}
+.DTabLoadOff@THEME_CSS@, .DTabCloseBtnOff@THEME_CSS@ {
+    visibility: hidden;
+}
+.DTabContents@THEME_CSS@ {
+    display: block;
+    height: 5.0em;   /* overridden by themeable parameter "dtabset.contentHeight" */
+                     /*  and widget "contentHeight" property */
+}
+/*---*/
+
+/* TABSET */
+.Tab1Div@THEME_CSS@ td {
+	border-style:solid;
+	border-width:1px;
+}
+.Tab1Div@THEME_CSS@ {
+	padding:6px 10px 0px;
+} 
+a.Tab1Lnk@THEME_CSS@:link, a.Tab1Lnk@THEME_CSS@:visited  {
+        display:block;
+	padding:8px 15px 7px;
+	text-align:center;
+}
+.Tab1Div@THEME_CSS@ table {
+	border-collapse:collapse;
+}
+.Tab1Div@THEME_CSS@ td.Tab1TblSpcTd@THEME_CSS@ {
+	border:none;
+}
+.Tab1Div@THEME_CSS@ td.Tab1TblSelTd@THEME_CSS@ {
+	border-bottom:none;
+}
+/* deprecated */
+.Tab1Div@THEME_CSS@ .Tab1SelTxtLeft@THEME_CSS@ {
+	position: absolute;
+	width: 2px;
+	height: 2.8em;
+}
+/* deprecated */
+.Tab1Div@THEME_CSS@ .Tab1SelTxtNew@THEME_CSS@ {
+	display:block;
+	padding:8px 13px 7px;
+	text-align:center;
+}
+.Tab1Div@THEME_CSS@ td a.TabPad@THEME_CSS@ {
+	padding:8px 20px 7px;
+}
+.Tab1Div@THEME_CSS@ td.Tab1TblSelTd@THEME_CSS@ div.TabPad@THEME_CSS@ {
+	padding:8px 20px 7px;
+}
+/* LEVEL 2 TABS */
+.Tab2Div@THEME_CSS@ td {
+	border-style:solid;
+	border-width:1px;
+}
+table.Tab2TblNew@THEME_CSS@ td.Tab2TblSelTd@THEME_CSS@ {
+	border-top-width:1px;
+	border-top-style:solid;
+	border-right-width:1px;
+	border-right-style:solid;
+	border-left-width:1px;
+	border-left-style:solid;
+}
+table.Tab2Tbl3New@THEME_CSS@ td.Tab2TblSelTd@THEME_CSS@ {
+	border-top-width:1px;
+	border-top-style:solid;
+	border-right-width:1px;
+	border-right-style:solid;
+	border-left-width:1px;
+	border-left-style:solid;
+}
+.Tab2Div@THEME_CSS@ {
+	padding:6px 0px 0px 10px;
+}
+a.Tab2Lnk@THEME_CSS@:link, a.Tab2Lnk@THEME_CSS@:visited {
+	padding:5px 15px 4px;
+	text-align:center;
+        display:block;
+}
+.Tab2Div@THEME_CSS@ table {
+	border-collapse:collapse;
+}
+/* deprecated */
+.Tab2Div@THEME_CSS@ .Tab2SelTxtLeft@THEME_CSS@ {
+	position: absolute;
+	width: 2px;
+	height: 2.1em;
+}
+.Tab2Div@THEME_CSS@ .Tab2SelTxt@THEME_CSS@ {
+	display:block;
+	padding:5px 15px 4px;
+	text-align:center;
+}
+.Tab2Div@THEME_CSS@ td.Tab2TblSelTd@THEME_CSS@ {
+	border-bottom:none;
+}
+.Tab2Div@THEME_CSS@ td a.TabPad@THEME_CSS@, .Tab2Div@THEME_CSS@ td.Tab2TblSelTd@THEME_CSS@ div.TabPad@THEME_CSS@ {
+	padding:5px 20px 4px;
+}
+/* LEVEL 3 TABS*/
+.Tab3Div@THEME_CSS@ {
+	padding:6px 0px 0px 10px;
+}
+.Tab3Div@THEME_CSS@ td {
+	border-style:solid;
+	border-width:1px;
+}
+a.Tab3Lnk@THEME_CSS@:link,a.Tab3Lnk@THEME_CSS@:visited {
+	padding:4px 15px 3px;
+	text-align:center;
+        display:block;
+}
+table.Tab3TblNew@THEME_CSS@ td {
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+}
+table.Tab3TblNew@THEME_CSS@ div.Tab3SelTxt@THEME_CSS@ {
+	padding:4px 15px 3px;
+	text-align:center;
+}
+table.Tab3TblNew@THEME_CSS@ td.Tab3TblSelTd@THEME_CSS@ {
+	border-top-width:1px;
+	border-top-style:solid;
+	border-right-width:1px;
+	border-right-style:solid;
+	border-left-width:1px;
+	border-left-style:solid;
+	border-bottom:none;
+}
+.Tab3Div@THEME_CSS@ td a.TabPad@THEME_CSS@, .Tab3Div@THEME_CSS@ td.Tab3TblSelTd@THEME_CSS@ div.TabPad@THEME_CSS@ {
+	padding:5px 20px 4px;
+}
+/* Hide Styles */
+.Tab1Div@THEME_CSS@ td.hidden@THEME_CSS@, .Tab2Div@THEME_CSS@ td.hidden@THEME_CSS@, .Tab3Div@THEME_CSS@ td.hidden@THEME_CSS@ {
+	display:none;
+}
+/* MINI-TABS */
+.MniTabDiv@THEME_CSS@ {
+	padding:7px 0px 0px 10px;
+}
+.MniTabDiv@THEME_CSS@ td.hidden@THEME_CSS@ {
+	display:none;
+}
+table.MniTabTbl@THEME_CSS@ {
+	border-collapse:collapse;
+}
+table.MniTabTbl@THEME_CSS@ td {
+	border-style:solid;
+	border-width:1px;
+}
+a.MniTabLnk@THEME_CSS@:link,a.MniTabLnk@THEME_CSS@:visited {
+	padding:5px 15px 4px;
+}
+table.MniTabTbl@THEME_CSS@ td.MniTabTblSelTd@THEME_CSS@ {
+	border-top-width:1px;
+	border-top-style:solid;
+	border-right-width:1px;
+	border-right-style:solid;
+	border-left-width:1px;
+	border-left-style:solid;
+	border-bottom:none;
+}
+.MniTabSelTxt@THEME_CSS@ {
+	padding:5px 15px 4px;
+}
+/* MINI-TABS - LIGHTWEIGHT */
+.TabGrp@THEME_CSS@ .TabGrpBox@THEME_CSS@ {
+	border-right-width:1px;
+	border-right-style:solid;
+	border-bottom-width:1px;
+	border-bottom-style:solid;
+	border-left-width:1px;
+	border-left-style:solid;
+	border-top:none;
+	padding:10px;
+}
+.TabGrp@THEME_CSS@ a.MniTabLnk@THEME_CSS@:link, .TabGrp@THEME_CSS@ a.MniTabLnk@THEME_CSS@:visited, .TabGrp@THEME_CSS@ .MniTabSelTxt@THEME_CSS@ {
+	padding:4px 10px 3px;
+}
+.TabGrp@THEME_CSS@ .MniTabDiv@THEME_CSS@ td.hidden@THEME_CSS@ {
+	display:none;
+}
+/*---*/
+
+/* TABLE */
+table.Tbl@THEME_CSS@ {
+	border-style:solid;
+	border-width:1px;
+	padding:6px;
+	width:100%;
+	empty-cells:show;
+}
+table.Tbl@THEME_CSS@ td, table.Tbl@THEME_CSS@ th {
+	border-right:none;
+	border-top:none;
+	padding:3px 5px 1px 5px;
+	border-left-style:solid;
+	border-left-width:1px;
+	border-bottom-style:solid;
+	border-bottom-width:1px; 
+	margin:0;
+}
+/* Table Caption/Title */
+table.Tbl@THEME_CSS@ caption.TblTtlTxt@THEME_CSS@ {
+	text-align:left;
+	padding:3px 10px 2px 10px;
+}
+.TblTtlTxtSpn@THEME_CSS@ {
+	padding:0;
+	float:left;
+}
+.TblTtlMsgSpn@THEME_CSS@ {
+	padding:0 0 0 3px;
+	float:right;
+}
+/* Action Bar */
+table.Tbl@THEME_CSS@ td.TblActTdLst@THEME_CSS@ {
+	border-top-style:solid; 
+	border-top-width:1px;
+}
+table.Tbl@THEME_CSS@ td.TblActTd@THEME_CSS@ {
+	border-left:none;
+	border-bottom:none;
+	padding:0px 0px 6px 0px;
+	vertical-align:middle;
+}
+table.Tbl@THEME_CSS@ td.TblActTdLst@THEME_CSS@ {
+	border-left:none;
+	border-bottom:none;
+	padding:6px 0px 2px 0px;
+	vertical-align:middle;
+}
+.TblPgnTxtBld@THEME_CSS@ {
+	margin:0px 5px 0px 10px;
+}
+.TblPgnTxt@THEME_CSS@ {
+	margin:0px 3px 0px 3px;
+}
+.TblPgnLftBtn@THEME_CSS@ {
+	margin:0px;
+}
+.TblPgnRtBtn@THEME_CSS@ {
+	margin-right:10px;
+}
+.TblPgnGoBtn@THEME_CSS@ {
+	margin-right:8px;
+}
+/* Selection Column - Headers */
+table.Tbl@THEME_CSS@ th.TblColHdrSel@THEME_CSS@ {
+	border-top-width:1px; 
+	border-top-style:solid;
+	border-left-width:1px; 
+	border-left-style:solid; 
+	border-bottom-width:1px; 
+	border-bottom-style:solid;
+	vertical-align:bottom;
+	padding:0;
+}
+table.Tbl@THEME_CSS@ th.TblColHdrSel@THEME_CSS@ a.TblHdrLnk@THEME_CSS@:link {
+	display:block;
+	padding:3px 0px;
+}
+table.Tbl@THEME_CSS@ th.TblColHdrSel@THEME_CSS@ a.TblHdrLnk@THEME_CSS@:visited {
+	display:block;
+	padding:3px 0px;
+}
+table.Tbl@THEME_CSS@ th.TblColHdrSrtSel@THEME_CSS@ {
+	border-top-width:1px; 
+	border-top-style:solid;
+	border-left-width:1px; 
+	border-left-style:solid; 
+	border-bottom-width:1px; 
+	border-bottom-style:solid; 
+	text-align:center;
+	border-right:none;
+	padding:0px;
+	vertical-align:bottom;
+}
+table.Tbl@THEME_CSS@ th.TblColHdrSrtSel@THEME_CSS@ a.TblHdrImgLnk@THEME_CSS@:link, 
+table.Tbl@THEME_CSS@ th.TblColHdrSrtSel@THEME_CSS@ a.TblHdrImgLnk@THEME_CSS@:visited {
+	border-left-width:1px; 
+	border-left-style:solid;
+}
+table.Tbl@THEME_CSS@ th.TblColHdrSrtSel@THEME_CSS@ a.TblHdrImgLnk@THEME_CSS@:link, 
+table.Tbl@THEME_CSS@ th.TblColHdrSrtSel@THEME_CSS@ a.TblHdrImgLnk@THEME_CSS@:visited {
+	display:block;
+	text-align:left;
+	padding-bottom:1px;
+	width:21px;
+}
+table.Tbl@THEME_CSS@ th.TblColHdrSrtSel@THEME_CSS@ a.TblHdrImgLnk@THEME_CSS@:hover {
+	width:21px;
+}
+table.Tbl@THEME_CSS@ th.TblColHdrSrtSel@THEME_CSS@ a.TblHdrLnk@THEME_CSS@:link,
+table.Tbl@THEME_CSS@ th.TblColHdrSrtSel@THEME_CSS@ a.TblHdrLnk@THEME_CSS@:visited {
+	display:block;
+	padding:3px 0px 2px;
+}
+/* Selection Column - Cells */
+table.Tbl@THEME_CSS@ td.TblTdSel@THEME_CSS@, 
+table.Tbl@THEME_CSS@ td.TblTdSrtSel@THEME_CSS@ {
+	text-align:center;
+	vertical-align:middle;
+	padding:0px 3px;
+}
+/* Override checkbox selectors when in property sheet */
+table.Tbl@THEME_CSS@ td.TblTdSel@THEME_CSS@ .CbSpn@THEME_CSS@ input[type=checkbox] {
+	vertical-align: middle;
+	margin-top: 0px;
+}
+/* Regular Column Headers */
+table.Tbl@THEME_CSS@ th.TblColHdr@THEME_CSS@ {
+	border-top-width:1px; 
+	border-top-style:solid;
+	border-left-width:1px; 
+	border-left-style:solid; 
+	border-bottom-width:1px; 
+	border-bottom-style:solid; 
+	vertical-align:bottom;
+	padding:0;
+}
+table.Tbl@THEME_CSS@ a.TblHdrImgLnk@THEME_CSS@:link, 
+table.Tbl@THEME_CSS@ a.TblHdrImgLnk@THEME_CSS@:visited {
+	border-left-width:1px; 
+	border-left-style:solid;
+}
+.TblHdrTxt@THEME_CSS@ {
+	display:block;
+	padding:4px 5px 3px;
+	min-height:11px;
+}
+table.TblHdrTbl@THEME_CSS@ {
+	width:100%;
+	border:0;
+	height:1.7em;
+}
+table.TblHdrTbl@THEME_CSS@ td, 
+table.TblHdrTbl@THEME_CSS@ th {
+	border:0;
+	padding:0;
+	vertical-align:bottom;
+	width:100%;
+}
+table.TblHdrTbl@THEME_CSS@ img {
+	margin:0;
+	padding-right:5px;
+	padding-left:5px;
+}
+table.Tbl@THEME_CSS@ a.TblHdrLnk@THEME_CSS@:link, 
+table.Tbl@THEME_CSS@ a.TblHdrLnk@THEME_CSS@:visited {
+	display:block;
+	padding:3px 0 3px 5px;
+}
+table.Tbl@THEME_CSS@ a.TblHdrImgLnk@THEME_CSS@:link, 
+table.Tbl@THEME_CSS@ a.TblHdrImgLnk@THEME_CSS@:visited {
+	display:block;
+	white-space:nowrap;
+	padding:4px 2px 2px 0px;
+	width:21px;
+}
+table.Tbl@THEME_CSS@ a.TblHdrImgLnk@THEME_CSS@:hover {
+	white-space:nowrap;
+	width:21px;
+}
+table.Tbl@THEME_CSS@ a.TblHdrImgLnk@THEME_CSS@ img {
+	padding-right:2px;
+}
+/* Current Sort Column */
+table.Tbl@THEME_CSS@ th.TblColHdrSrt@THEME_CSS@ {
+	border-top-width:1px; 
+	border-top-style:solid;
+	border-left-width:1px; 
+	border-left-style:solid; 
+	border-bottom-width:1px; 
+	border-bottom-style:solid;
+}
+table.Tbl@THEME_CSS@ th.TblColHdrSrt@THEME_CSS@ a.TblHdrImgLnk@THEME_CSS@:link,
+table.Tbl@THEME_CSS@ th.TblColHdrSrt@THEME_CSS@ a.TblHdrImgLnk@THEME_CSS@:visited {
+	border-left-width:1px; 
+	border-left-style:solid;
+}
+table.Tbl@THEME_CSS@ span.TblColHdrSrtDis@THEME_CSS@ {
+	border-left-width:1px; 
+	border-left-style:solid;
+}
+table.Tbl@THEME_CSS@ span.TblColHdrSelDis@THEME_CSS@ {
+	border-left-width:1px; 
+	border-left-style:solid;
+}
+table.Tbl@THEME_CSS@ th.TblColHdrSrt@THEME_CSS@ {
+	vertical-align:bottom;
+	padding:0px;
+}
+table.Tbl@THEME_CSS@ th.TblColHdrSrt@THEME_CSS@ table.TblHdrTbl@THEME_CSS@ {
+	width:100%;
+	border:none;
+}
+table.Tbl@THEME_CSS@ th.TblColHdrSrt@THEME_CSS@ a.TblHdrLnk@THEME_CSS@:link, 
+table.Tbl@THEME_CSS@ th.TblColHdrSrt@THEME_CSS@ a.TblHdrLnk@THEME_CSS@:visited {
+	display:block;
+	padding:4px 5px 3px 5px;
+}
+table.Tbl@THEME_CSS@ th.TblColHdrSrt@THEME_CSS@ a.TblHdrImgLnk@THEME_CSS@:link,
+table.Tbl@THEME_CSS@ th.TblColHdrSrt@THEME_CSS@ a.TblHdrImgLnk@THEME_CSS@:visited {
+	display:block;
+	border-left-style:solid;
+	border-left-width:1px;
+	padding-bottom:1px;
+	width:21px;
+}
+table.Tbl@THEME_CSS@ .TblHdrSrtNum@THEME_CSS@ {
+	margin-left:-1px;
+	width:21px;
+}
+table.Tbl@THEME_CSS@ span.TblColHdrSrtDis@THEME_CSS@ {
+	display:block;
+	text-align:left;
+	padding:0px 2px 0px 0px;
+}
+table.Tbl@THEME_CSS@ span.TblColHdrSrtDis@THEME_CSS@ img, 
+span.TblColHdrSelDis@THEME_CSS@ img {
+	padding-right:2px;
+}
+table.Tbl@THEME_CSS@ span.TblColHdrSelDis@THEME_CSS@ {
+	display:block;
+	white-space:nowrap;
+	padding:4px 2px 2px 0px;
+	width:21px;
+}
+/* Multi-Column Headers */ 
+table.Tbl@THEME_CSS@ th.TblMultColHdr@THEME_CSS@ {
+	border-top:none;
+	border-left-style:solid;
+	border-left-width:1px;
+	border-bottom-style:solid; 
+	border-bottom-width:1px;
+	padding:0px;
+	margin:0px;
+	vertical-align:bottom;
+}
+table.Tbl@THEME_CSS@ th.TblMultHdr@THEME_CSS@ {
+	border-bottom:none;
+	border-top-width:1px;
+	border-top-style:solid;
+	border-left-width:1px;
+	border-left-style:solid;
+	text-align:center;
+	padding:0 5px;
+}
+table.Tbl@THEME_CSS@ th.TblMultColHdr@THEME_CSS@ a.TblHdrLnk@THEME_CSS@:link, 
+table.Tbl@THEME_CSS@ th.TblMultColHdr@THEME_CSS@ a.TblHdrLnk@THEME_CSS@:visited {
+	border-top:none;
+}
+table.Tbl@THEME_CSS@ th.TblMultColHdr@THEME_CSS@ a.TblHdrLnk@THEME_CSS@:link img, 
+table.Tbl@THEME_CSS@ th.TblMultColHdr@THEME_CSS@ a.TblHdrLnk@THEME_CSS@:visited img, 
+table.Tbl@THEME_CSS@ th.TblMultColHdr@THEME_CSS@ .TblHdrTxt@THEME_CSS@ img, 
+table.Tbl@THEME_CSS@ th.TblMultColHdrSrt@THEME_CSS@ a.TblHdrLnk@THEME_CSS@:link img, 
+table.Tbl@THEME_CSS@ th.TblMultColHdrSrt@THEME_CSS@ a.TblHdrLnk@THEME_CSS@:visited img {
+	margin:1px 0px;
+}
+table.Tbl@THEME_CSS@ th.TblMultColHdr@THEME_CSS@ a.TblHdrLnk@THEME_CSS@:hover {
+	border-top:none;
+}
+table.Tbl@THEME_CSS@ th.TblMultColHdrSrt@THEME_CSS@ {
+	border-top:none;
+	border-left-width:1px; 
+	border-left-style:solid; 
+	border-bottom-width:1px; 
+	border-bottom-style:solid;
+	padding:0px;
+	margin:0px;
+	vertical-align:bottom;
+}
+table.Tbl@THEME_CSS@ th.TblMultColHdrSrt@THEME_CSS@ a.TblHdrImgLnk@THEME_CSS@:link, 
+table.Tbl@THEME_CSS@ th.TblMultColHdrSrt@THEME_CSS@ a.TblHdrImgLnk@THEME_CSS@:visited {
+	border-left-width:1px; 
+	border-left-style:solid;
+}
+/* Sorted Cells */
+table.Tbl@THEME_CSS@ .TblColFtrSpc@THEME_CSS@ {
+	border-left:none;
+	border-bottom-style:solid; 
+	border-bottom-width:1px;
+	border-top-width:2px; 
+	border-top-style:solid;
+}
+table.Tbl@THEME_CSS@ .TblColFtrSpc@THEME_CSS@ {
+	padding:4px 5px 1px 5px;
+}
+/* Spacer Colums */
+table.Tbl@THEME_CSS@ th.TblTdSpc@THEME_CSS@ {
+	border-top-width:1px; 
+	border-top-style:solid;
+	border-left:none; 
+	border-bottom-width:1px; 
+	border-bottom-style:solid;
+	vertical-align:bottom;
+	padding:0;
+}
+table.Tbl@THEME_CSS@ td.TblTdSpc@THEME_CSS@ { 
+	border-left:none;
+}
+/*Table Sub-Grouping */
+table.Tbl@THEME_CSS@ .TblGrpRow@THEME_CSS@ {
+	border-left-style:solid;
+	border-left-width:1px;
+	border-bottom-style:solid; 
+	border-bottom-width:1px;
+	border-top-width:0px;
+	border-top-style:solid;
+}
+table.Tbl@THEME_CSS@ .TblGrpRow@THEME_CSS@ {
+	vertical-align:bottom;
+}
+table.Tbl@THEME_CSS@ .TblGrpLft@THEME_CSS@ input {
+	margin:2px 1px 1px 2px;
+}
+table.Tbl@THEME_CSS@ .TblGrpLft@THEME_CSS@ {
+	float:left;
+}
+table.Tbl@THEME_CSS@ .TblGrpCbImg@THEME_CSS@ img {
+	margin-left:-4px;
+	margin-bottom:-3px;
+}
+table.Tbl@THEME_CSS@ .TblGrpRt@THEME_CSS@ {
+	float:right;
+}
+table.Tbl@THEME_CSS@ .TblGrpRow@THEME_CSS@ {
+	vertical-align:bottom;
+	min-height:12px;
+	padding:4px 5px 3px;
+}
+/* Table Footers */
+/* Table Column-level Footer */
+table.Tbl@THEME_CSS@ .TblColFtr@THEME_CSS@ {
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-top-width:2px;
+	border-top-style:solid;
+}
+table.Tbl@THEME_CSS@ .TblColFtrSrt@THEME_CSS@ {
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-top-width:2px;
+	border-top-style:solid;
+}
+/*Table Group Column-Level Footer */
+table.Tbl@THEME_CSS@ .TblGrpColFtr@THEME_CSS@ {
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+}
+table.Tbl@THEME_CSS@ .TblGrpColFtrSrt@THEME_CSS@ {
+	border-bottom-style:solid;
+	border-bottom-width:1px;}
+table.Tbl@THEME_CSS@ .TblColFtr@THEME_CSS@ {
+	padding:4px 5px 1px 5px;
+}
+/* Embedded Table Panels */
+.TblPnlLytDiv@THEME_CSS@ {
+	border-top-width:1px; 
+	border-top-style:solid;
+}
+.TblPnlShd1Div@THEME_CSS@ {}
+.TblPnlDiv@THEME_CSS@ {}
+.TblMgn@THEME_CSS@ {
+	margin:0px 10px;
+}
+/* Other Table Content Styles*/
+table.Tbl@THEME_CSS@ .TblTdLyt@THEME_CSS@ img, 
+table.Tbl@THEME_CSS@ .TblTdSrt@THEME_CSS@ img, 
+table.Tbl@THEME_CSS@ .TblTdAlm@THEME_CSS@ img,  
+table.Tbl@THEME_CSS@ .TblTdSrtAlm@THEME_CSS@ img {
+	vertical-align:middle;
+	margin-bottom:2px;
+}
+table.Tbl@THEME_CSS@ .TblTdSel@THEME_CSS@ img, 
+table.Tbl@THEME_CSS@ .TblTdSrtSel@THEME_CSS@ img {
+	vertical-align:middle;
+	margin:3px 0px 0px 8px;
+}
+.TblTdLyt@THEME_CSS@ {} 
+/* Mouseover and Row Selection Styles */
+table.Tbl@THEME_CSS@ tr.TblHovRow@THEME_CSS@ td {}
+table.Tbl@THEME_CSS@ tr.TblHovRow@THEME_CSS@ th {}
+/* Table Overall Footer */ 
+table.Tbl@THEME_CSS@ td.TblFtrRow@THEME_CSS@ {
+	padding:6px 3px 3px 0px;
+	border-left:none;
+	border-bottom:none;
+	vertical-align:middle;
+	text-align:center;
+}
+table.Tbl@THEME_CSS@ .TblFtrLft@THEME_CSS@ {
+	float:left;
+}
+table.Tbl@THEME_CSS@ .TblFtrMsgSpn@THEME_CSS@ {
+	float:right;
+}
+/* Table Group Overall Footer */
+table.Tbl@THEME_CSS@ .TblGrpFtrRow@THEME_CSS@ {
+	padding:4px 5px 3px;
+}
+/* Embedded Table Panels */
+table.Tbl@THEME_CSS@ td.TblPnlTd@THEME_CSS@ {
+	border:none;
+	padding:0px;
+	vertical-align:middle;
+}
+.TblPnlLytDiv@THEME_CSS@ {
+	display:none;
+	padding:4px 0px;
+	margin-left:-3px;
+}
+.TblPnlShd3Div@THEME_CSS@ {}
+.TblPnlShd2Div@THEME_CSS@ {}
+.TblPnlShd1Div@THEME_CSS@ {
+	border-width:1px;
+	border-style:solid;
+	margin: 0 0 10px 0;
+}
+.TblPnlDiv@THEME_CSS@ {
+	border-top-width:1px;
+	border-top-style:solid;
+	padding:1px 15px 1px 15px;
+}
+table.Tbl@THEME_CSS@ div.TblPnlDiv@THEME_CSS@ td {
+	border:none;
+	padding-left:0px;
+}
+.TblPnlTtl@THEME_CSS@ {
+	margin:8px 0 0 0;
+	padding:0 0px 5px;
+}
+.TblPnlBtnDiv@THEME_CSS@ {
+	text-align:left;
+	margin:10px 0;
+	padding-top:8px;
+	margin-right:3px;
+	border-top-width:1px;
+       	border-top-style:solid;
+}
+.TblPnlHlpTxt@THEME_CSS@ {
+	margin:10px 0;
+	padding:7px 12px;
+        border-style:solid;
+   	border-width:1px;
+	white-space:normal;
+   	-moz-border-radius-topleft:5px;
+   	-moz-border-radius-topright:5px;
+   	-moz-border-radius-bottomleft:5px;
+   	-moz-border-radius-bottomright:5px; 
+}
+.TblPnlSrtTbl@THEME_CSS@ td {
+	padding:3px;
+}
+/* For when appearing in titledbox*/
+.TtldBoxInrDiv@THEME_CSS@ .TblMgn@THEME_CSS@ {
+	margin:0px;
+}
+/*---*/
+
+/* LIGHTWEIGHT TABLE DESIGN */
+table.TblLt@THEME_CSS@ {
+	width:100%;
+	padding:0px;
+	border-bottom:none;
+	empty-cells:show;
+	border-collapse:collapse;
+}
+/* Table Caption/Title */
+table.TblLt@THEME_CSS@ caption.TblTtlTxt@THEME_CSS@ {
+	text-align:left;
+	padding:5px 5px 5px 0px;
+	border:none;
+}
+table.TblLt@THEME_CSS@ caption.TblTtlTxt@THEME_CSS@ span.TblTtlTxtSpn@THEME_CSS@ {
+	float:left;
+}
+table.TblLt@THEME_CSS@ caption.TblTtlTxt@THEME_CSS@ span.TblTtlMsgSpn@THEME_CSS@ {
+	float:right;
+	margin-top:1px;
+}
+/* Action Bar */
+table.TblLt@THEME_CSS@ td.TblActTd@THEME_CSS@ {
+	padding:8px 5px;
+	vertical-align:middle;
+	border-style:solid;
+	border-width:1px;
+}
+table.TblLt@THEME_CSS@ td.TblActTdLst@THEME_CSS@ {
+	padding:5px 5px;
+	vertical-align:middle;
+	border-style:solid;
+	border-width:1px;
+}
+/* Selection Column - Headers */
+table.TblLt@THEME_CSS@ th.TblColHdrSel@THEME_CSS@ {
+	border-top-width:1px; 
+	border-top-style:solid;
+	border-left-width:1px; 
+	border-left-style:solid;
+	border-bottom-width:1px; 
+	border-bottom-style:solid;
+}
+table.TblLt@THEME_CSS@ th.TblColHdrSrtSel@THEME_CSS@ {
+	border-top-width:1px; 
+	border-top-style:solid;
+	border-left-width:1px; 
+	border-left-style:solid;
+	border-bottom-width:1px; 
+	border-bottom-style:solid;
+}
+/* Regular Column Headers */
+table.TblLt@THEME_CSS@ th.TblColHdr@THEME_CSS@ {
+	border-top-width:1px; 
+	border-top-style:solid;
+	border-left-width:1px; 
+	border-left-style:solid;
+	border-bottom-width:1px; 
+	border-bottom-style:solid;
+}
+table.TblLt@THEME_CSS@ table.TblHdrTbl@THEME_CSS@ td {
+	border:none;
+	padding:0px;
+	margin:0px;
+	vertical-align:
+	bottom;width:100%;
+}
+table.TblLt@THEME_CSS@ a.TblHdrLnk@THEME_CSS@:link, 
+table.TblLt@THEME_CSS@ a.TblHdrLnk@THEME_CSS@:visited {
+	padding:5px 5px 3px;
+	min-height:12px;
+}
+table.TblLt@THEME_CSS@ a.TblHdrImgLnk@THEME_CSS@:link, 
+table.TblLt@THEME_CSS@ a.TblHdrImgLnk@THEME_CSS@:visited {
+	border-left-width:1px; 
+	border-left-style:solid;
+}
+table.TblLt@THEME_CSS@ span.TblColHdrSelDis@THEME_CSS@ {
+	border-left-width:1px; 
+	border-left-style:solid;
+}
+/* Current Sort Column */
+table.TblLt@THEME_CSS@ th.TblColHdrSrt@THEME_CSS@ {
+	border-top-width:1px; 
+	border-top-style:solid;
+	border-left-width:1px; 
+	border-left-style:solid;
+	border-bottom-width:1px; 
+	border-bottom-style:solid;
+}
+table.TblLt@THEME_CSS@ th.TblColHdrSrt@THEME_CSS@ a.TblHdrImgLnk@THEME_CSS@:link, 
+table.Tbl@THEME_CSS@ th.TblColHdrSrt@THEME_CSS@ a.TblHdrImgLnk@THEME_CSS@:visited {
+	border-left-width:1px; 
+	border-left-style:solid;
+}
+/* Multi-Column Headers */
+table.TblLt@THEME_CSS@ th.TblMultColHdr@THEME_CSS@ {
+	border-top:none;
+	border-left-width:1px; 
+	border-left-style:solid;
+	border-bottom-width:1px; 
+	border-bottom-style:solid;
+	padding:0px;margin:0px;
+	vertical-align:bottom;
+}
+table.TblLt@THEME_CSS@ th.TblMultHdr@THEME_CSS@ {
+	border-bottom:none;
+	border-top-width:1px; 
+	border-top-style:solid;
+	border-left-width:1px; 
+	border-left-style:solid;
+	text-align:center;
+	padding:4px 5px;
+}
+/*Table Sub-Grouping */
+table.TblLt@THEME_CSS@ .TblGrpRow@THEME_CSS@ {
+	border-left-width:1px; 
+	border-left-style:solid; 
+	border-top-width:3px; 
+	border-top-style:double;
+	padding:4px 5px 3px;
+}
+/* Table Footers */ 
+table.TblLt@THEME_CSS@ td.TblFtrRow@THEME_CSS@ {
+	padding:6px 5px 3px;
+	border:none;
+	vertical-align:middle;
+	text-align:center;
+	border-left:none;
+	border-right:none;
+}
+table.TblLt@THEME_CSS@ .TblColFtr@THEME_CSS@ {
+	border-bottom-width:1px; 
+	border-bottom-style:solid;
+	border-top-width:3px; 
+	border-top-style:double;
+}
+table.TblLt@THEME_CSS@ .TblColFtrSrt@THEME_CSS@ {
+	border-bottom-width:1px; 
+	border-bottom-style:solid;
+	border-top-width:3px; 
+	border-top-style:double;
+}
+table.TblLt@THEME_CSS@ .TblColFtrSpc@THEME_CSS@ {
+	border-left:none;
+	border-bottom-width:1px; 
+	border-bottom-style:solid; 
+	border-top-width:3px; 
+	border-top-style:double;
+}
+/* Embedded Table Panels */
+table.TblLt@THEME_CSS@ td.TblPnlTd@THEME_CSS@ {
+	padding-left:10px;
+	border-top:none;
+	border-bottom:none;
+}
+/*---*/
+
+/* TREE */
+.TreBdy@THEME_CSS@ {	
+	margin:0px;
+}
+.Tree@THEME_CSS@ {
+	/*	width:500px;*/
+}
+.TreeImg@THEME_CSS@ {	
+	padding-top:2px;
+	padding-bottom:1px;
+}
+.TreeImgHeight@THEME_CSS@ {
+	display:inline;	
+	line-height:22px;
+}
+.TreeContent@THEME_CSS@ {
+	display:inline;	
+	vertical-align:middle;	
+	padding-left:5px;
+	white-space:nowrap;
+}
+.TreeLinkSpace@THEME_CSS@ {
+	margin-left:3px;
+}
+.TreeRootRow@THEME_CSS@, .TreeRootSelRow@THEME_CSS@ {
+	height:28px;
+}
+.TreeRootRowHeader@THEME_CSS@ {
+	height:9px;
+}
+.TreeRow@THEME_CSS@ {
+	white-space:nowrap;
+	clear:both;
+}
+.TreeRow@THEME_CSS@ .float@THEME_CSS@ {
+	padding-left:5px;
+}
+.TreeRootRow@THEME_CSS@ .float@THEME_CSS@, .TreeRootSelRow@THEME_CSS@ .float@THEME_CSS@ {
+	padding-left:7px;
+}
+.TreeSelRow@THEME_CSS@ {
+	white-space:nowrap;
+}
+.TreeSelRow@THEME_CSS@ .float@THEME_CSS@ {
+	padding-left:5px;
+}
+/*---*/
+
+/* VERSION DIALOG */
+.VrsMstBdy@THEME_CSS@ {
+	float:left;
+	clear:right;
+	width:100%;
+	clear:both;
+	height:109px;
+}
+.VrsBdy@THEME_CSS@ {
+	position:absolute;
+	top:0px;
+	bottom:0px;
+        width:100%;
+}
+.VrsMgn@THEME_CSS@ {
+	clear:both;
+	width:100%;
+	overflow:auto;
+}
+.VrsTxt@THEME_CSS@ {
+	margin:0px 25px 10px;
+}
+.VrsBtnAryDiv@THEME_CSS@ {
+	text-align:right;
+	padding:10px 15px;
+	width:auto;
+	height:auto;
+}
+.VrsPrdDiv@THEME_CSS@ {
+	padding:30px 0px 0px 195px;
+}
+.VrsLgoDiv@THEME_CSS@ {
+	padding:5px 0 0 0;
+}
+.VrsPrdTd@THEME_CSS@ {
+	float:left;
+	clear:none;
+	vertical-align:top;
+	padding:10px 0px 0px 5px;
+}
+.VrsLgoTd@THEME_CSS@ {
+	float:right;
+	clear:right;
+	text-align:right;
+	vertical-align:top;
+	padding:12px 10px 0px 10px;
+}
+.VrsHdrTxt@THEME_CSS@ {
+	margin:20px 25px 7px;
+}
+/*---*/
+
+/* WIZARD */
+.WizBar@THEME_CSS@ {
+	height:30px;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+}
+.WizStpTab@THEME_CSS@ {
+	position:relative;
+}
+.WizTtlBar@THEME_CSS@ {
+	position:relative;
+	height:41px;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	line-height:41px;
+	padding:0 0 0 15px;
+}
+.WizStp@THEME_CSS@ {
+	position:absolute;
+	top:72px;
+	right:70%;
+	bottom:34px;
+	left:0px;
+	overflow:auto;
+	padding:18px 10px 0 4px;
+}
+.WizHlpDiv@THEME_CSS@ {
+	position:absolute;
+	top:73px;
+	right:70%;
+	bottom:34px;
+	left:0px;
+	overflow:auto;
+	padding:15px 10px 0 10px;
+}
+.WizBdy@THEME_CSS@ {
+	position:absolute;
+	top:72px;
+	bottom:34px;
+	left:30%;
+	right:0px;
+	overflow:auto;
+	border-left-style:solid;
+	border-left-width:1px;
+	padding:18px 10px 0 15px;
+}
+.WizBtm@THEME_CSS@ {
+	position:absolute;
+	bottom:0px;
+	border-top-style:solid;
+	border-top-width:1px;
+	padding:0 13px 0 30%;
+	height:33px;
+}
+.WizBtnBtm@THEME_CSS@ {
+	float:right;
+	margin: 7px 0 8px;
+	padding: 0 0 0 13px;
+	text-align:right;
+}
+.WizBtnBtm@THEME_CSS@ .left@THEME_CSS@ {
+	float:left;
+	clear:none;
+}
+.WizBtnBtm@THEME_CSS@ .right@THEME_CSS@ {
+	float:right;
+	clear:none;
+}
+.WizStpNumDiv@THEME_CSS@ {
+	margin:0 5px 20px 15px;
+}
+.WizStpArwDiv@THEME_CSS@ {
+	margin:0 5px 20px 0;
+}
+.WizStpArwDiv@THEME_CSS@ span {
+	vertical-align:middle;
+}
+.WizStpArwDiv@THEME_CSS@ img {
+	vertical-align:middle;
+	padding:0 1px 0 0;
+}
+.WizStpTxtDiv@THEME_CSS@ {
+	margin:0 0 20px 4px;
+}
+.WizStpCurTxt@THEME_CSS@ {
+	vertical-align:top;
+}
+.WizSubTtlDiv@THEME_CSS@ {
+	margin:0 0 20px 0;
+}
+.WizStpTitle@THEME_CSS@ {
+	padding:4px 0 21px 10px;
+}
+.WizSubStpTtlDiv@THEME_CSS@ {
+	padding:2px 0 0 10px;
+}
+.WizCntHlpTxt@THEME_CSS@ {
+	margin:0 0 20px 0;
+}
+.WizTtl@THEME_CSS@ .TtlTxtDiv@THEME_CSS@ {
+	margin:10px 0 3px 10px;
+} 
+.WizStpsPnTtlDiv@THEME_CSS@ {
+	padding:7px 0 7px 10px;
+}
+/*---*/
+
+/* BUBBLE */
+.BubbleDiv@THEME_CSS@ {
+    position:absolute;
+    width:20em;
+    z-index:99;    
+}
+.BubbleShadow@THEME_CSS@ {
+    display: block;
+}
+.Bubble@THEME_CSS@ {
+    position: relative; 
+    padding: 0px;
+    left: -5px;
+    top: -5px;
+}
+.Bubble@THEME_CSS@ .topLeftArrow@THEME_CSS@, 
+.Bubble@THEME_CSS@ .topRightArrow@THEME_CSS@ {
+    margin: 0px;
+    width: 44px;
+    height: 15px;
+    position: relative;
+    display: none;
+}
+.Bubble@THEME_CSS@ .bottomLeftArrow@THEME_CSS@,
+.Bubble@THEME_CSS@ .bottomRightArrow@THEME_CSS@ {
+    margin: 0px;
+    width: 53px;
+    height: 20px;
+    position: relative;
+    display: none;
+}
+.Bubble@THEME_CSS@ .bottomLeftArrow@THEME_CSS@ {
+    top:0px;
+    left:5px;
+    float:left;
+}
+.Bubble@THEME_CSS@ .bottomRightArrow@THEME_CSS@ {
+    top:0px;
+    left:-5px;
+    float:right;
+}
+.Bubble@THEME_CSS@ .topLeftArrow@THEME_CSS@ {
+    left:5px;
+    float:left;
+}
+.Bubble@THEME_CSS@ .topRightArrow@THEME_CSS@ {
+    left:-5px;
+    float:right;
+}
+.BubbleHeader@THEME_CSS@ {  /* Note override for IE6 in ie.css */
+    overflow: auto;
+    margin-right: 1px;
+}
+.BubbleTitle@THEME_CSS@ {
+    float: left;
+    width: 75%;
+    padding: 0;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.BubbleCloseBtn@THEME_CSS@, .NoBubbleCloseBtn@THEME_CSS@ {
+    float: right;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-right: 4px;
+    width: 15px;
+    height: 14px;
+}
+.BubbleContent@THEME_CSS@ {
+    margin:10px;
+}
+.BubbleContent@THEME_CSS@ {
+    clear: both;
+}
+/*---*/
+
+/* ACCORDION */
+.Accordion@THEME_CSS@ {
+    padding: 0;
+    width: 100%;  /* default, can be overridden by supplying a style attribute */
+    overflow: hidden;
+}
+.AccdHeader@THEME_CSS@ {
+    border-style: none solid solid solid;
+    border-width: 1px;
+    overflow: hidden;
+    height: 25px;
+}
+.AccdHeader@THEME_CSS@ .AccdRefreshBtn@THEME_CSS@ img, .AccdHeader@THEME_CSS@ .AccdOpenAllBtn@THEME_CSS@ img, .AccdHeader@THEME_CSS@ .AccdCloseAllBtn@THEME_CSS@ img {
+    float:right;
+    margin-top: 2px;
+    margin-right: 2px;
+    margin-left: 2px;
+}
+.AccdHeader@THEME_CSS@ .AccdRefreshBtnFocus@THEME_CSS@ img, .AccdHeader@THEME_CSS@ .AccdOpenAllBtnFocus@THEME_CSS@ img, .AccdHeader@THEME_CSS@ .AccdCloseAllBtnFocus@THEME_CSS@ img {
+    float:right;
+    margin-top: 2px;
+    margin-right: 2px;
+    margin-left: 2px;
+    border-style: solid solid solid solid;
+    border-width: 1px;
+}
+.AccdDivider@THEME_CSS@ {
+    float: right;
+    height:15px;
+    width:1px;
+    margin-top: 4px;
+    margin-right: 2px;
+    margin-left: 2px;
+}
+.AccdTabExpanded@THEME_CSS@, .AccdTabCollapsed@THEME_CSS@,
+.AccdTabExpanded_Focus@THEME_CSS@, .AccdTabCollapsed_Focus@THEME_CSS@ {
+    border-style: none solid solid solid;
+    border-width: 1px;
+}
+.AccdTabExpanded@THEME_CSS@ a, .AccdTabCollapsed@THEME_CSS@ a, 
+.AccdTabExpanded_Focus@THEME_CSS@ a, .AccdTabCollapsed_Focus@THEME_CSS@ a {
+    display: block;
+    padding: 3px 6px 3px 6px;
+}
+.AccdDownTurner@THEME_CSS@, .AccdRightTurner@THEME_CSS@ {
+    display: block;
+    margin-top:3px;
+    margin-left:1px;
+    margin-right:1px;
+    float: left;
+    width: 16px;
+    height: 15px;
+}
+.AccdTabMenuCue@THEME_CSS@ {
+    margin-top: 0px;
+    margin-right: 2px;
+    float: right;
+    height: 16px;
+    width: 16px;
+}
+.AccdTabContent@THEME_CSS@ {
+    border-style: solid solid solid solid;
+    border-width: 1px;
+    padding: 5px;
+    overflow: auto;
+    height: 100px;   /* default height, but can be overridden */
+}
+.AccdTabContent_Focus@THEME_CSS@ {
+    border-style: solid solid solid solid;
+    border-width: 2px;
+    padding: 5px;
+    overflow: auto;
+    height: 100px;   /* default height, but can be overridden */
+}
+/*---*/
+
+/* PROGRESS BAR */
+.progressBar_4@THEME_CSS@ {
+	margin:12px 11px;
+}
+.progressBar_4@THEME_CSS@ .operationLabel@THEME_CSS@ {
+	margin:0 0 9px 1px;
+	line-height:1.0;
+}
+.progressBar_4@THEME_CSS@ .barContainer@THEME_CSS@ {
+	display:block;
+	float:left;
+	position:relative;
+	margin-bottom:6px;
+	padding:.09em;
+	border-style:solid;
+	border-width:1px;
+	width:16.9em;
+}
+.progressBar_4@THEME_CSS@ .barDeterminate@THEME_CSS@, .progressBar_4@THEME_CSS@ .barIndeterminate@THEME_CSS@, .progressBar_4@THEME_CSS@ .barIndeterminatePaused@THEME_CSS@ {
+	width:0%;
+	height:.8em;
+}
+.progressBar_4@THEME_CSS@ .failure@THEME_CSS@{
+	
+	float:left;
+	margin-bottom:7px;
+	padding:1px;
+	width:17.1em;
+}
+.progressBar_4@THEME_CSS@ .failureLabel@THEME_CSS@ {
+	padding:0 0 0 1.3em;
+	line-height:1.0;
+}
+.progressBar_4@THEME_CSS@ .barIndeterminate@THEME_CSS@, .progressBar_4@THEME_CSS@ .barIndeterminatePaused@THEME_CSS@{
+	width:100%
+}
+.progressBar_4@THEME_CSS@ .barLabel@THEME_CSS@ {
+	position:absolute;
+	line-height:.9;
+	top:.09em;
+	left:0;
+	width:16.9em;
+	height:.9em;
+	text-align:right;
+}
+.progressBar_4@THEME_CSS@ .statusLabel@THEME_CSS@ {
+	padding:0 0 0 1px ;
+	line-height:1.0;
+	width:16.9em;
+	margin-bottom:20px;
+}
+.progressBar_4@THEME_CSS@ .buttonsBottom@THEME_CSS@ {
+	margin: 11px 0 20px -1px;
+}
+.progressBar_4@THEME_CSS@ .buttonsRight@THEME_CSS@ {
+	float:left;
+	clear:right;
+	margin: -2px 0 0 0;
+	padding-left:.9em;
+}
+.progressBar_4@THEME_CSS@ .log@THEME_CSS@ {
+	margin:20px 0;
+}
+.progressBar_4@THEME_CSS@ .busy@THEME_CSS@ {
+	margin:10px;
+}
+/*---*/
+
+/* MENU */
+.MenuDiv@THEME_CSS@ {
+    position: absolute;
+    z-index: 99;
+}
+.MenuShadow@THEME_CSS@ {
+    display:block;
+}
+.Menu@THEME_CSS@ {
+    position: relative; 
+    padding: 1px 0px;
+
+    /* If you change these, then you MUST change the defaults in the javascript
+       to be the absolute values of these */
+    left: -5px;  /* horizontal offset from shadow */
+    top: -5px;   /* vertical offset from shadow */
+}
+ul.MenuItems@THEME_CSS@, ul.MenuItems@THEME_CSS@ ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+ul.MenuItems@THEME_CSS@ {
+    position: relative;
+    top: 0px;
+    left: 0px;
+}
+ul.MenuItems@THEME_CSS@ li .MenuItemSeparator@THEME_CSS@ {
+    margin:0 0.5em;
+}
+ul.MenuItems@THEME_CSS@ ul li {
+    padding:0;
+}
+ul.MenuItems@THEME_CSS@ li .MenuItem@THEME_CSS@,          /* 1st-level menu item */ 
+ul.MenuItems@THEME_CSS@ li .MenuItemDisabled@THEME_CSS@,
+ul.MenuItems@THEME_CSS@ ul li .MenuItem@THEME_CSS@,       /* 2nd-level menu item in 1st-level optgroup */
+ul.MenuItems@THEME_CSS@ ul li .MenuItemDisabled@THEME_CSS@,
+ul.MenuItems@THEME_CSS@ li .MenuOptGroupHeader@THEME_CSS@ {  /* 1st-level optgroup header */
+    margin: 0.3em 0;
+    height: 1.3em;
+}
+ul.MenuItems@THEME_CSS@ li .MenuItem@THEME_CSS@,             /* 1st-level menu item */
+ul.MenuItems@THEME_CSS@ li .MenuItemDisabled@THEME_CSS@,
+ul.MenuItems@THEME_CSS@ li .MenuOptGroupHeader@THEME_CSS@ {  /* 1st-level optgroup header */
+    padding: 0px 5px;
+}
+.MenuItemWidget@THEME_CSS@, .NoMenuItemWidget@THEME_CSS@ {
+    margin-top: 0.15em;  /* depends on final image height */
+    width: 12px;
+    float: left;
+}
+.MenuItemWidget@THEME_CSS@ {
+    height: 14px;
+}
+.NoMenuItemWidget@THEME_CSS@ {
+    height: 1px;
+}
+.MenuItemLabel@THEME_CSS@ {
+    display: block;
+    margin-left: 5px;
+    float: left;
+}
+.MenuItemAccel@THEME_CSS@ {  /* Accelerators not currently supported */
+    float: right;
+}
+.MenuItemSubmenu@THEME_CSS@, .NoMenuItemSubmenu@THEME_CSS@ {
+    margin-top: .3em;
+    margin-left: 5px;
+    width: 7px;
+    float: right;
+}
+.MenuItemSubmenu@THEME_CSS@ {
+    height: 7px;
+}
+.NoMenuItemSubmenu@THEME_CSS@ {
+    height: 1px;
+}
+ul.MenuItems@THEME_CSS@ ul li .MenuItem@THEME_CSS@ .MenuItemLabel@THEME_CSS@,  /* 2nd-level menu item label under 1st-level optgroup header */
+ul.MenuItems@THEME_CSS@ ul li .MenuItemDisabled@THEME_CSS@ .MenuItemLabel@THEME_CSS@ {
+    margin: 0 1.0em;
+}
+/*---*/
+
+/* COMMON TASKS */
+.commonTaskSection_4@THEME_CSS@ {
+	width: 100%;
+}
+.commonTaskSection_4@THEME_CSS@ .TskScnTpBx@THEME_CSS@ .header@THEME_CSS@ {
+	margin: 17px 0px 0px 20px;
+}
+.commonTaskSection_4@THEME_CSS@ .TskScnTpBx@THEME_CSS@ .help@THEME_CSS@ {
+	margin: 3px 0 23px 21px;
+}
+.commonTaskGroup_4@THEME_CSS@ {
+	margin:0 0 20px 20px;
+}
+.commonTaskSection_4@THEME_CSS@ .header@THEME_CSS@ {
+	padding-bottom: 5px;
+	display: block;
+}
+.commonTask_4@THEME_CSS@ {
+	margin:0 22px 20px;
+}
+.commonTaskGroup_4@THEME_CSS@ .commonTask_4@THEME_CSS@ {
+	margin:0 0 2px 0;
+}
+.commonTask_4@THEME_CSS@ .left@THEME_CSS@ {
+	border-top-style:solid;
+	border-top-width:1px;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-left-style:solid;
+	border-left-width:1px;
+}
+.commonTask_4@THEME_CSS@ .center@THEME_CSS@ {
+	border-top-style:solid;
+	border-top-width:1px;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+}
+.commonTask_4@THEME_CSS@ .right@THEME_CSS@ {
+	border-top-style:solid;
+	border-top-width:1px;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-right-style:solid;
+	border-right-width:1px;
+}
+.commonTask_4@THEME_CSS@ a.TskScnTxtBg@THEME_CSS@,.commonTask_4@THEME_CSS@  a.TskScnTxtBgOvr@THEME_CSS@ {
+	display: block;
+	position: relative;
+	width: 100%;
+	min-height:21px;
+}
+.commonTask_4@THEME_CSS@ .infoPanel@THEME_CSS@ {
+	border-style:solid;
+	border-width:1px;
+	position:absolute;
+	height: 20em;
+	width: 10em;
+	z-index:2;
+}
+.commonTask_4@THEME_CSS@ .infoPanel@THEME_CSS@ .closeButton@THEME_CSS@ {
+	float: right;
+}
+.commonTask_4@THEME_CSS@ .infoPanel@THEME_CSS@ .info@THEME_CSS@ {
+	padding: 0 18px 0 0;
+	margin: 21px 3px 15px 12px;
+	height:14.2em;
+	overflow:auto;
+}
+.commonTask_4@THEME_CSS@ .infoPanel@THEME_CSS@ .more@THEME_CSS@ {
+	height:1.5em;
+	margin:5px 5px 0 5px;
+	border-top-style:solid;
+	border-top-width:1px;
+	padding:2px 0 0 5px;
+	overflow:hidden;
+}
+.commonTask_4@THEME_CSS@ .bullet@THEME_CSS@ {
+	margin-right:.4em;
+}
+.commonTask_4@THEME_CSS@ a.TskScnTxtBg@THEME_CSS@, .commonTask_4@THEME_CSS@ a.TskScnTxtBgOvr@THEME_CSS@ {
+	border-left-style:solid;
+	border-left-width:1px;
+}
+.commonTask_4@THEME_CSS@ .TskScnTskPdng@THEME_CSS@ {
+	padding: 0px 7px;
+	display: block;
+	padding-top: 4px;
+	padding-bottom: 3px;
+}
+.commonTask_4@THEME_CSS@ .TskScnTskLftBtm@THEME_CSS@, 
+.commonTask_4@THEME_CSS@ .TskScnTskLftTp@THEME_CSS@, 
+.commonTask_4@THEME_CSS@ .TskScnTskRghtBtm@THEME_CSS@, 
+.commonTask_4@THEME_CSS@ .TskScnTskRghtTp@THEME_CSS@ {
+	position: absolute;
+	width: 8px;
+	height: 11px;
+	cursor: pointer;
+}
+.commonTask_4@THEME_CSS@ .TskScnTskLftBtm@THEME_CSS@ {
+	bottom: -1px;
+	left: -1px;
+}     
+.commonTask_4@THEME_CSS@ .TskScnTskLftTp@THEME_CSS@ {
+	top: -1px;
+	left: -1px;
+}             
+.commonTask_4@THEME_CSS@ .TskScnTskRghtBtm@THEME_CSS@ {
+	bottom: -1px;
+	right: 0px;
+	z-index:1;
+}     
+.commonTask_4@THEME_CSS@ .TskScnTskRghtTp@THEME_CSS@ {
+	position: absolute;
+	top: -1px;
+	right: 0px;
+	z-index:1;
+} 
+.commonTask_4@THEME_CSS@ .TskScnTskRghtBrdr@THEME_CSS@ {
+	display: block;
+	position: absolute;
+	height: 100%;
+	right: 0px;
+	width: 1px;
+	cursor: pointer;
+}
+/*---*/
+
+/* TABLE2 */
+/* Table2 'global' styles */
+.table2@THEME_CSS@ .center@THEME_CSS@ {
+	text-align:center !important;
+}
+.table2@THEME_CSS@ .clear@THEME_CSS@ {
+	clear:both;
+	height:0;
+}
+.table2@THEME_CSS@ .clear@THEME_CSS@.spacer@THEME_CSS@ {
+	clear:both;
+	height:6px;
+}
+.table2@THEME_CSS@ input {
+	margin:0;
+	padding:0;
+}
+/* Top Level Container */
+.table2@THEME_CSS@ {
+	empty-cells:show;
+	-moz-border-radius-topleft:5px;
+	-moz-border-radius-topright:5px;
+	padding:3px 0 0 0;
+	position:relative;
+	text-align:left;
+	
+}
+/* Background */
+.table2@THEME_CSS@ .bg@THEME_CSS@ {
+	border-width:1px;
+	border-style:solid;
+	padding:6px 5px 6px;
+}
+/* Title Bar */
+.table2@THEME_CSS@ .title@THEME_CSS@ {
+	padding:2px 10px 2px 10px;
+}
+/* Header and Footer */
+.table2@THEME_CSS@ .header@THEME_CSS@, .table2@THEME_CSS@ .footer@THEME_CSS@ {
+	clear:both;
+	/*position:absolute;*/
+	border-left-style:solid;
+	border-left-width:1px;
+	margin:0 0 0 -1px;
+}
+.table2@THEME_CSS@ .header@THEME_CSS@ th, .table2@THEME_CSS@ .footer@THEME_CSS@ th {
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	padding:0;
+}
+.table2@THEME_CSS@ .header@THEME_CSS@ th, .table2@THEME_CSS@ .footer@THEME_CSS@ th {
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	padding:0;
+	vertical-align:bottom;
+}
+.table2@THEME_CSS@ .header@THEME_CSS@ th span, .table2@THEME_CSS@ .footer@THEME_CSS@ th span {
+	display:block;
+	padding:3px 5px 1px 5px;
+}
+.table2@THEME_CSS@ .header@THEME_CSS@ th a.Hyp@THEME_CSS@:link,
+.table2@THEME_CSS@ .header@THEME_CSS@ th a.Hyp@THEME_CSS@:hover,
+.table2@THEME_CSS@ .header@THEME_CSS@ th a.Hyp@THEME_CSS@:visited {
+	display:block;	
+}
+.table2@THEME_CSS@ .header@THEME_CSS@ th a span {
+	display:block;
+	padding:0;
+}
+.table2@THEME_CSS@ th a.Hyp@THEME_CSS@ {	
+}
+.table2@THEME_CSS@ th a.Hyp@THEME_CSS@ span {
+	height:100%;  
+        padding:3px 5px 1px 5px;
+}
+.table2@THEME_CSS@ .paginationButtons@THEME_CSS@ a.Hyp@THEME_CSS@ span,
+.table2@THEME_CSS@ .paginationButtons@THEME_CSS@ a.HypDis@THEME_CSS@ span{
+	height:100%;  
+        padding:3px 0 2px;
+}
+/* Spanning Headers */
+.table2@THEME_CSS@ .header@THEME_CSS@ th.spanning@THEME_CSS@ table,
+.table2@THEME_CSS@ .header@THEME_CSS@ th.spanning@THEME_CSS@ span {
+	margin:0;
+	padding:0;
+}
+.table2@THEME_CSS@ .header@THEME_CSS@ th.spanning@THEME_CSS@ {
+	border-bottom:none;
+}
+.table2@THEME_CSS@ .header@THEME_CSS@ th.spanning@THEME_CSS@ th.lastSpannedColumn@THEME_CSS@ {
+	border-right:none;
+}
+.table2@THEME_CSS@ .header@THEME_CSS@ th.spanning@THEME_CSS@ div {
+	border-top-width:1px;
+	border-top-style:solid;
+}
+/* Group Header */
+.table2@THEME_CSS@ .groupHeader@THEME_CSS@ {
+	border-style:solid;
+	border-width:1px;
+	margin:0;
+}
+.table2@THEME_CSS@ .groupHeader@THEME_CSS@ button {
+	vertical-align:middle;
+}
+.table2@THEME_CSS@ .groupHeader@THEME_CSS@ input {
+	vertical-align:middle;
+}
+.table2@THEME_CSS@ .groupHeader@THEME_CSS@ th {
+	padding:3px 5px 2px 5px;
+	border:none;
+}
+.table2@THEME_CSS@ .groupHeader@THEME_CSS@ .groupControls@THEME_CSS@ {
+	float:left;
+}
+.table2@THEME_CSS@ .groupHeader@THEME_CSS@ .groupLabel@THEME_CSS@ {
+	/*margin:0 0 0 .5em;*/
+	vertical-align:middle;
+}
+.table2@THEME_CSS@ .groupHeader@THEME_CSS@ table {
+	width:100%;
+}
+/* Rows and Cells */
+.table2@THEME_CSS@ tr {
+	border-right-style:solid;
+	border-right-width:1px;
+}
+.table2@THEME_CSS@ td, .table2@THEME_CSS@ th  {
+	border-right-style:solid;
+	border-right-width:1px;
+	padding:3px 5px 1px 5px;
+	text-align:left;
+}
+.table2@THEME_CSS@ td {
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+}
+.table2@THEME_CSS@ .rowSelectionCount@THEME_CSS@ {
+	vertical-align:middle;
+}
+/* Table Scroller */
+.table2@THEME_CSS@ .tableScroller@THEME_CSS@ {
+	border-left-style:solid;
+	border-left-width:1px;
+	border-bottom-width:1px;
+	border-bottom-style:solid;
+	border-top-width:1px;
+	border-top-style:solid;
+	height:100px;
+	overflow:auto;
+	overflow-x: hidden;
+	width:100%;
+}
+.table2@THEME_CSS@ .tableScroller@THEME_CSS@ table {
+	clear:left;
+	float:left;
+	width:100%;
+}
+/* Action Bar and Drawers */
+.table2@THEME_CSS@ .actionBar@THEME_CSS@ {
+	border-left:none;
+	border-bottom:none;
+	padding:0 0 6px 0;
+	vertical-align:middle;        
+}
+.table2@THEME_CSS@ .actionBar@THEME_CSS@ input, .table2@THEME_CSS@ .actionBar@THEME_CSS@ select,
+.table2@THEME_CSS@ .drawer@THEME_CSS@ input, .table2@THEME_CSS@ .drawer@THEME_CSS@ select {
+	margin:0 5px;
+}
+.table2@THEME_CSS@ .actionBar@THEME_CSS@ .actionList@THEME_CSS@ {
+	float:left;
+	margin:0;
+	padding:0;
+}
+.table2@THEME_CSS@ .actionBar@THEME_CSS@ .controlsList@THEME_CSS@ {
+	float:right;
+	margin:0;
+	padding:0;
+	text-align:right;
+}
+.table2@THEME_CSS@ .drawer@THEME_CSS@ {
+	border-width:1px;
+	border-style:solid;
+	float:left;
+	width:100%;
+}
+.table2@THEME_CSS@ .drawer@THEME_CSS@ .drawer@THEME_CSS@ {
+	border:none;
+	border-top-width:1px;
+	border-top-style:solid;
+	padding:0;
+	float:left;
+	width:100%;
+}
+.table2@THEME_CSS@ .drawer@THEME_CSS@ .buttonBar@THEME_CSS@ {
+	padding:6px 0 4px 0;
+	float:left;
+	width:100%;
+}
+.table2@THEME_CSS@ .drawer@THEME_CSS@ .controlBucket1@THEME_CSS@ {
+	float:left;
+	padding:6px 9px 4px 9px;
+}
+.table2@THEME_CSS@ .drawer@THEME_CSS@ .controlBucket2@THEME_CSS@ {
+	float:right;
+	padding:6px 9px 4px 9px;
+}
+/* Pagination Controls */
+.table2@THEME_CSS@ .paginationControls@THEME_CSS@ {
+	float:right;
+}
+.table2@THEME_CSS@ .paginationButtons@THEME_CSS@ {
+	margin:0 0 0 .5em;
+}
+.table2@THEME_CSS@ .tableDiv@THEME_CSS@ {	
+        border-left-style:solid;
+	border-left-width:1px;
+	border-bottom-width:1px;
+	border-bottom-style:solid;
+	border-top-width:1px;
+	border-top-style:solid; 
+        overflow:auto;          
+}
+
+.table2@THEME_CSS@ .tableDiv@THEME_CSS@ table {
+        clear:left;
+	float:left;
+	width:100%;
+}
+.table2@THEME_CSS@ .tableScrollerTbody@THEME_CSS@ {
+	overflow: auto; 
+	overflow-x:hidden;	
+}
+/* STYLES FOR SEARCH (Custom Filter) PANEL */
+/* We are dealing with a list of choices, so semantically speaking, an unordered list is the correct way to mark it up*/
+.rbcb@THEME_CSS@ ul {
+	float:left;
+	list-style:none;
+	margin:0;
+	padding:6px 9px 4px 9px;
+	text-align:left;
+} 
+.rbcb@THEME_CSS@ ul li {
+	margin:5px 0;
+	padding:0;
+	vertical-align:bottom;
+}
+span.rbcb@THEME_CSS@ input {
+	display:inline;
+	float:none;
+}
+.rbcb@THEME_CSS@ .groupLabel {
+	display:block;
+	float:left;
+	padding:3px 5px 0 0;
+	margin:0;
+}
+.rbcb@THEME_CSS@ label {
+	margin:0;
+	padding:0 15px 0 0;
+}
+.rbcb@THEME_CSS@ .rb@THEME_CSS@ {
+	display:block;
+	float:left;
+	margin:0 5px 0 0;
+}
+/* To use it as a horizontal list */
+.rbcb@THEME_CSS@.horizontal ul li {
+	float:left;
+	margin:0 10px 0 0;
+}
+/* Tips */
+.table2@THEME_CSS@ .tip@THEME_CSS@ {
+	margin:8px 9px 7px 9px;
+	padding:7px 12px;
+	border-style:solid;
+   	border-width:1px;
+	white-space:normal;
+   	-moz-border-radius-topleft:5px;
+   	-moz-border-radius-topright:5px;
+   	-moz-border-radius-bottomleft:5px;
+   	-moz-border-radius-bottomright:5px;
+}
+/* Multisort bucket */
+.table2@THEME_CSS@ .multiSort@THEME_CSS@ {
+	border-bottom-width:1px;
+	border-bottom-style:solid;
+}
+/* TABLE2 LITE */
+.table2@THEME_CSS@.lite@THEME_CSS@ .bg@THEME_CSS@, .table2@THEME_CSS@.lite@THEME_CSS@ .actionBar@THEME_CSS@ {
+	padding:0;
+}
+.table2@THEME_CSS@.lite@THEME_CSS@ .groupHeader@THEME_CSS@, .table2@THEME_CSS@.lite@THEME_CSS@ .tableScroller@THEME_CSS@ {
+	border-width:0;
+	border-style:none;
+}
+.table2@THEME_CSS@.lite@THEME_CSS@ .header@THEME_CSS@ {
+	border-top-width:1px;
+	border-top-style:solid;
+}
+.table2@THEME_CSS@.lite@THEME_CSS@ .clear@THEME_CSS@.spacer@THEME_CSS@ {
+	height:0;
+}
+.table2@THEME_CSS@.lite@THEME_CSS@ .title@THEME_CSS@ {
+	padding-top:0;
+	padding-bottom:0;
+}
+.table2@THEME_CSS@.lite@THEME_CSS@ .titleText@THEME_CSS@ {
+	float:left;
+	line-height:1.7em;
+}
+.table2@THEME_CSS@.lite@THEME_CSS@ .rowSelectionCount@THEME_CSS@ {
+	line-height:1.8em;
+	vertical-align:bottom;
+}
+.table2@THEME_CSS@.lite@THEME_CSS@ .paginationControls@THEME_CSS@ {
+	margin:-2px 0 0 0;
+}
+.table2@THEME_CSS@.lite@THEME_CSS@ .paginationButtons@THEME_CSS@ {
+	line-height:1.8
+}
+/*---*/
+
+/* Login */
+.logLblSvrNam@THEME_CSS@ {margin:0px 0px 5px 15px}
+.logTxtSvrNam@THEME_CSS@ {margin:0px 0px 5px 10px}
+.logLblStxt@THEME_CSS@ {margin:0px 0px 5px 15px}
+.logStxt@THEME_CSS@ {margin:0px 0px 5px 10px}
+.logUsrLbl@THEME_CSS@ {margin:4px 0px 6px 15px}
+.logUsrNam@THEME_CSS@ {margin:4px 0px 6px 10px}
+.logLbl@THEME_CSS@ {margin:0px 0px 3px 15px}
+.logInp@THEME_CSS@ {margin:0px 0px 3px 10px}
+.logLblLst@THEME_CSS@ {margin:0px 0px 10px 15px}
+.logInpLst@THEME_CSS@ {margin:0px 0px 10px 10px}
+.logBtn@THEME_CSS@ {margin:0px 0px 7px 10px}
+.logHlp@THEME_CSS@ {margin:0px 15px 7px 10px}
+.logErr@THEME_CSS@ {margin:5px 15px 5px 0px}
+.logCpy@THEME_CSS@ {width :720px;margin:5px 0px 50px;vertical-align:top}
+.logTxtCpy@THEME_CSS@ {
+    vertical-align:top
+}
+.LogBdy@THEME_CSS@ {
+    margin:0px;
+}
+.LogCntTd@THEME_CSS@ {
+    padding-top:120px;
+}
+/*---*/
+
+/* Rating */
+.RatingTextContainer@THEME_CSS@ {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.RatingControlContainer@THEME_CSS@ {
+}
+
+.RatingSpacerNode@THEME_CSS@ {
+    float: left;
+    width: 10px;
+    height: 15px;
+}
+
+.RatingGradeAvgFullImage@THEME_CSS@, .RatingGradeAvgHalfImage@THEME_CSS@,
+.RatingGradeFullImage@THEME_CSS@, .RatingGradeEmptyImage@THEME_CSS@,
+.RatingNotInterestedOnImage@THEME_CSS@, .RatingNotInterestedOffImage@THEME_CSS@,
+.RatingClearOnImage@THEME_CSS@, .RatingClearOffImage@THEME_CSS@ {
+    float: left;
+    margin-right: 1px;
+    width: 17px;
+    height: 15px;
+    border: none;
+}
+
+.RatingModeNormalImage@THEME_CSS@, .RatingModeAverageImage@THEME_CSS@ {
+    float: left;
+    width: 30px;
+    height: 15px;
+    border: none;
+}
+/*---*/
+/* PANNER */
+/* Note that the border-width and border-style is interdependent
+   with the ".pannerpuck" selector. When the style is "double"
+   the width is divided among the outer border, the middle spacing
+   and the inner border. At 3 pixels, the border-width in
+   "pannerpuck" results in the puck border overlapping the inner
+   border and the middle spacing. This gives the appearance that
+   the viewport reveals all of the canvas
+*/
+.panner@THEME_CSS@ {
+    line-height: 0;
+    width: 50px;
+    height: 50px;
+    border-width: 3px;
+    border-style: double;
+    position: relative;
+}
+.pannerpuck@THEME_CSS@ {
+    line-height: 0;
+    width: 10px;
+    height: 10px;
+    border-width: 2px;
+    border-style: dashed;
+    position: absolute;
+    top: -2px;
+    left: -2px;
+}

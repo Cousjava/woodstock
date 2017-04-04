@@ -1,0 +1,2868 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <!--
+      The contents of this file are subject to the terms
+      of the Common Development and Distribution License
+      (the License).  You may not use this file except in
+      compliance with the License.
+      
+      You can obtain a copy of the license at
+      https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      See the License for the specific language governing
+      permissions and limitations under the License.
+      
+      When distributing Covered Code, include this CDDL
+      Header Notice in each file and include the License file
+      at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      If applicable, add the following below the CDDL Header,
+      with the fields enclosed by brackets [] replaced by
+      you own identifying information:
+      "Portions Copyrighted [year] [name of copyright owner]"
+      
+      Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+    -->
+<title>Project Woodstock - Image Component FS</title>
+<style type="text/css"> 
+/* <![CDATA[ */
+@import url(../../browser-uispec.css);
+.style2 {font-size: 18pt}
+  </style>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+</head>
+<body style="background-color: rgb(255, 255, 255);">
+<div class="MstDiv">
+<table class="MstTblBot" title="" border="0" cellpadding="0"
+ cellspacing="0" width="100%">
+  <tbody>
+    <tr>
+      <td class="MstTdTtl">
+      <div class="MstDivTtl">
+      <div class="Mst1TtlTxt">Project Woodstock</div>
+      </div>
+      <div class="Mst1SecDiv"> <span class="Mst1SecTxt style2">Component
+Functional Spec Image </span></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<table class="Mst2Tbl" style="width: 100%;" title="" border="0"
+ cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td> <br>
+      <h2 style="font-weight: bold;"><a name="1.0"></a>1.0 Component
+Overview</h2>
+      <h3><span style="font-weight: bold;"><a name="1.1"></a>1.1
+Document Revision History</span></h3>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Revision</span></td>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Date</span></td>
+            <td style="width: 50%; text-align: center;"><span
+ style="font-weight: bold;">Synopsis</span></td>
+            <td style="width: 20%; text-align: center;"><span
+ style="font-weight: bold;">Author</span></td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">0.1</td>
+            <td style="text-align: center;">05/11/2007</td>
+            <td style="text-align: center;">Initial Draft</td>
+            <td style="text-align: center;">Venkatesh Babu</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.2<br>
+            </td>
+            <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+05/28/2007<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Incorporate
+review comments.<br>
+            </td>
+            <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Venkatesh Babu<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 style="font-weight: bold;"><a name="1.2"></a>1.2 Component
+Description<br>
+      </h3>
+      <div style="margin-left: 40px;">An image component is used to
+display an image on the page.<br>
+      </div>
+      <h3><a name="1.3"></a>1.3 Component Purpose</h3>
+      <div style="margin-left: 40px;">The client side Image&nbsp; does
+not introduce any new interfaces. The
+com.sun.webui.jsf.renderkit.widget.ImageRenderer renders the Image
+component
+as a javascript dojo widget which allows developer to control its
+behavior on the client.</div>
+      <h3 style="font-weight: bold;"><a name="1.4"></a>1.4 Relevant
+Documents</h3>
+      <div style="margin-left: 40px;"><a target="_blank"
+ href="ajax-architecture-spec.html">Ajax
+Architecture for Woodstock JavaServer Faces</a></div>
+      <h3><a name="1.5"></a>1.5 Definition of Terms</h3>
+      <div style="margin-left: 40px;">
+      <ul>
+        <li>HTML template - The file used to define HTML tags
+associated with a component</li>
+        <li>In-line JavaScript - JavaScript used to instantiate a <span
+ style="font-style: italic;">Dojo
+Widget</span>, located anywhere (i.e., in-line) in the rendered HTML
+page<br>
+        </li>
+        <li>JSF - JavaServer Faces</li>
+        <li>JSF component - The JSF <code>UIComponent</code>
+compliment to a <span style="font-style: italic;">JSP tag</span> and <span
+ style="font-style: italic;">JSF renderer</span></li>
+        <li>JSF facet - A facet is a subcomponent that has a specific
+purpose defined by its parent container<br>
+        </li>
+        <li>JSF renderer - The JSF <code>Renderer</code> compliment to
+a <span style="font-style: italic;">JSP
+tag</span> and <span style="font-style: italic;">JSF component</span><br>
+        </li>
+        <li>JSON - JavaScript Object Notation (i.e., object literals)
+defined using braces ({}) that contain a
+set of comma separated key value pairs</li>
+        <li>JSP tag - The JSF <code>UIComponentELTag</code> or <code>UIComponentELBodyTag</code>
+compliment
+to a <span style="font-style: italic;">JSF component</span>
+and <span style="font-style: italic;">JSF renderer</span><br>
+        </li>
+        <li>Subcomponent - A child component used to render a <span
+ style="font-style: italic;">complex component</span></li>
+        <li>Widget - Entity consisting of <span
+ style="font-style: italic;">widget JavaScript</span> and <span
+ style="font-style: italic;">CSS</span>, not necessarily based on the
+Dojo toolkit<span style="font-style: italic;"><br>
+          </span></li>
+        <li>Widget JavaScript - The JavaScript used to populate an <span
+ style="font-style: italic;">HTML template</span> and/or update
+component properties</li>
+        <li>Contents - JSON Array which contain JSON objects of sub
+components to be displayed inside the widget<br>
+        </li>
+        <li>Widget renderer - The <span style="font-style: italic;">JSF
+renderer</span> used to output <span style="font-style: italic;">in-line
+JavaScript</span> for
+instantiating a <span style="font-style: italic;">Dojo Widget</span></li>
+      </ul>
+      <div style="margin-left: 40px;"> </div>
+      </div>
+      <h2><a name="2.0"></a>2.0 Requirements, goals, and assumptions</h2>
+      <h3><a name="2.1"></a>2.1 Requirements</h3>
+      <h3><a name="2.1.1"></a>2.1.1 UI requirements</h3>
+      <div style="margin-left: 40px;">N/A<br>
+      </div>
+      <h3><a name="2.1.2"></a>2.1.2 Functional requirements</h3>
+      <div style="margin-left: 40px;">
+      <ul>
+        <li>The Image component should provide the functionality of an
+html &lt;img&gt; element.</li>
+        <li>It shall support rendering of images got from the theme as
+well as images that are specified by an url attribute.<br>
+        </li>
+      </ul>
+      </div>
+      <h3><a name="2.1.3"></a>2.1.3 Performance requirements</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.1.4"></a>2.1.4 Browser, platform requirements</h3>
+      <ul>
+        <li>The table of supported <a href="../SupportedBrowers.htm">Browsers</a>.</li>
+        <li>The table of supported <a href="../SupportedContainers.htm">Containers</a>.</li>
+      </ul>
+      <h3><a name="2.1.5"></a>2.1.5 Special requirements</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.2"></a>2.2 Requirements Not Met</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.3"></a>2.3 Assumptions</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.4"></a>2.4 Goals</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.5"></a>2.5 Non-goals</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h2><a name="3.0"></a>3.0 Component Usage</h2>
+      <div style="margin-left: 40px;">
+      <p>The image component can be used to render an image specified
+by the url attribute or an image identified by a Theme identifier.<br>
+If&nbsp; the url attribute is used, the jsp tag will look like this:<br>
+      </p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:image id="image1" <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+url="/images/version_product_name.png" <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+alt="#{msgs.masthead_imageAltText}" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+height="140" width="140" border="2" hspace="5" vspace="5"
+align="middle" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+toolTip="#{msgs.masthead_imageToolTip}"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+onMouseOver="(document.getElementById('form6:text')).innerHTML='#{msgs.masthead_imageMouseOver}';
+return false;"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+onMouseOut="(document.getElementById('form6:text')).innerHTML='#{msgs.masthead_imageMouseOut}';
+return false;"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+onClick="(document.getElementById('form6:text')).innerHTML='#{msgs.masthead_imageOnClick}';
+return false;"/&gt;&nbsp; <br>
+      </p>
+      <p>The output json in this case would look something like this:<br>
+      </p>
+      <pre id="line197">&lt;<span class="start-tag">script</span><span
+ class="attribute-name"> type</span>=<span class="attribute-value">"text/javascript"</span>&gt;<br>webui.&lt;theme&gt;.widget.common.createWidget({<br>    "_widgetType": "webui.&lt;theme&gt;:image",<br>    "templatePath": "/&lt;appname&gt;/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/image.html",<br>    "width": 140,<br>    "title": "This is an image",<br>    "src": "/&lt;appname&gt;/images/version_product_name.png",<br>    "onMouseOut": "(document.getElementById('form6:text')).innerHTML='The mouse is outside the image'; return false;",<br>    "alt": "Image",<br>    "id": "form6:image1",<br>    "onMouseOver": "(document.getElementById('form6:text')).innerHTML='The mouse is over the image'; return false;",<br>    "height": 140,<br>    "align": "middle",<br>    "hspace": 5,<br>    "vspace": 5,<br>    "visible": true,<br>    "border": 2,<br>    "onClick": "(document.getElementById('form6:text')).innerHTML='The image has been clicked'; return false;",<br>    "_modules": [<br>        "webui.&lt;theme&gt;.widget.image",<br>        "webui.&lt;theme&gt;.widget.jsfx.image"<br>    ]<br>});<br>&lt;/<span
+ class="end-tag">script</span>&gt;</pre>
+      <p> </p>
+      <p>And if an icon attribute is used, the jsp tag will look like
+this:<br>
+      </p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:image id="image2" icon="ALARM_CRITICAL_SMALL" hspace="5"
+longDesc="#{msgs.masthead_imageDesc}"/&gt; <br>
+      </p>
+      <p>In this case, the widget renderer will take care of mapping
+the icon's
+image to an appropriate url and output that in the json properties.<br>
+Hence, the json output would look something like this.<br>
+      </p>
+      <pre id="line197">&lt;<span class="start-tag">script</span><span
+ class="attribute-name"> type</span>=<span class="attribute-value">"text/javascript"</span>&gt;<br>webui.&lt;theme&gt;.widget.common.createWidget({<br>    "_widgetType": "webui.&lt;theme&gt;:image",<br>    "templatePath": "/&lt;appname&gt;/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/image.html",<br>    "width": 10,<br>    "longDesc": "This is an example of an image icon",<br>    "height": 10,<br>    "hspace": 5,<br>    "visible": true,<br>    "border": 0,<br>    "src": "/&lt;appname&gt;/theme/com/sun/webui/jsf/&lt;theme&gt;/images/alarms/critical_small.gif",<br>    "_modules": [<br>        "webui.&lt;theme&gt;.widget.image",<br>        "webui.&lt;theme&gt;.widget.jsfx.image"<br>    ],<br>    "id": "form6:image2"<br>});<br>&lt;/<span
+ class="end-tag">script</span>&gt;<br><br>The image widget can be updated in the following way:<br><br>      </pre>
+      <ul>
+        <li>Get an handle to to the image dom node.<br>
+          <code>var domNode =&nbsp;
+document.getElementById("form6:image1")</code></li>
+        <li>Use the getProps function that is available on the dom node
+to obtain all the properties that are set on that particular dom
+element.</li>
+        <code>&nbsp;var props = domNode.getProps(); // returns a json
+object.<br>
+        </code><li>Use the setProps function to specify the properties
+to be
+updated for the particular component as a json object.<br>
+          <code>&nbsp;domNode.setProps({src:"/images/foo.jpg"});<span
+ style="font-family: verdana,helvetica,arial,sans-serif;"></span></code></li>
+      </ul>
+      <br>
+Note: &lt;appname&gt; is replaced by the application name.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;theme&gt; tag is
+replaced by the theme name.
+      <h3>3.1 Updating the component Asynchronously </h3>
+      <div style="margin-left: 40px;">The image component also
+supports asynchronous updates. For example you could update the src of
+the component asynchronously the following way.<br>
+This example uses a text field whose value is bound to a backing bean.
+The image component's src value is also bound to the same backing
+bean. <br>
+When an user enters text in the text field, the corresponding text will
+be updated in the anchor. <br>
+      <br>
+Here is how the code looks like.<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:image id="image6" url="#{ImageBean.imageUrl}"
+alt="#{msgs.masthead_imageAltText}" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+toolTip="#{msgs.masthead_imageToolTip}"/&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;br/&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:textField id="textField1" onKeyUp="refreshImage();"
+text="#{ImageBean.imageUrl}"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+label="#{msgs.masthead_textField1}"/&gt;&lt;br/&gt;<br>
+      <br>
+Note that the textField's onKeyUp attribute refers the refreshImage
+javascript function.<br>
+This function will invoke the "refresh" function that is located on the
+html image element's dom.<br>
+The argument that is passed to the refresh function would be the client
+id of the text field.<br>
+Hence the javascript function would look something like this.<br>
+      <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+&lt;script type="text/javascript"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+function refreshImage() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Get text to refresh.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+var domNode = document.getElementById("form1:image6");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+domNode.refresh("form1:textField1"); // Update text field value and
+refresh.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/script&gt;<br>
+      <br>
+By default, the image component's ajax functionality is set to true.
+i.e. the ajaxify attribute of the image component returns true by
+default.<br>
+You can turn off the ajax functionality by setting the ajaxify
+attribute to false while creating the image component.<br>
+      <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:image id="image6" url="#{ImageBean.imageUrl}"
+alt="#{msgs.masthead_imageAltText}" ajaxify="false"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+toolTip="#{msgs.masthead_imageToolTip}"/&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+      <br>
+The above created image component will not exhibit any ajax
+functionality.</div>
+      <p> </p>
+      </div>
+      <h2><a name="4.0"></a>4.0 Component Interfaces</h2>
+      <h3><a name="4.1"></a>4.1 Exported interfaces table</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Interface Name<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Classification<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Reference<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 40%;">
+            <p>Comments<br>
+            </p>
+            </th>
+          </tr>
+          <tr>
+            <td>themes/javascript/widget/image.js</td>
+            <td>Committed</td>
+            <td>Section 4.5</td>
+            <td>Javascript file for this component</td>
+          </tr>
+          <tr>
+            <td>themes/javascript/widget/jsfx/image.js<br>
+            </td>
+            <td>Committed</td>
+            <td><br>
+            </td>
+            <td>Javascript for handling Ajax requests<br>
+            </td>
+          </tr>
+          <tr>
+            <td>themes/javascript/widget/common.js<br>
+            </td>
+            <td>Private<br>
+            </td>
+            <td><br>
+            </td>
+            <td>Utility script for widgets<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.component.ImageComponent.java</td>
+            <td style="vertical-align: top;">Public<br>
+            </td>
+            <td style="vertical-align: top;">Section 4.10</td>
+            <td style="vertical-align: top;">JSF component class for
+the image component.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.widget.ImageRenderer.java</td>
+            <td style="vertical-align: top;">Private<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">Widget renderer for Image
+Component.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.ajax.ImageRenderer.java</td>
+            <td style="vertical-align: top;">Private<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">Ajax renderer for the
+Image Component.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.html.ImageRenderer.java<br>
+            </td>
+            <td style="vertical-align: top;">Private<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">Designtime renderer for
+the Image component<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3><a name="4.2"></a>4.2 Imported interfaces</h3>
+      <br>
+      <div style="margin-left: 40px;">
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Interface Name<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Classification<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Reference<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 40%;">
+            <p>Comments<br>
+            </p>
+            </th>
+          </tr>
+          <tr>
+            <td>jsf-api.jar</td>
+            <td>Standard</td>
+            <td>JSR 127</td>
+            <td>JSF components API library, version 1.1</td>
+          </tr>
+          <tr>
+            <td>dojo-0.4.1-ajax.jar<br>
+            </td>
+            <td>Standard<br>
+            </td>
+            <td>dojotoolkit.org<br>
+            </td>
+            <td>the dojo toolkit library<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">json.jar<br>
+            </td>
+            <td style="vertical-align: top;">Standard<br>
+            </td>
+            <td style="vertical-align: top;"><font size="-1"><span
+ class="a">www.<b>json</b>.org</span></font> </td>
+            <td style="vertical-align: top;">The json library<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">prototype-1.5.0.jar<br>
+            </td>
+            <td style="vertical-align: top;">Standard<br>
+            </td>
+            <td style="vertical-align: top;"><font size="-1"><span
+ class="a">www.<b>prototype</b>js.org/</span></font> </td>
+            <td style="vertical-align: top;">The prototype javascript
+library<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <br>
+      <h3><a name="4.3"></a>4.3 Component interfaces</h3>
+      <div style="margin-left: 40px;">
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"><b>Constructor
+Summary</b></font></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td><code><b>ImageComponent</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Construct a
+new <code>ImageComponent</code>.</td>
+          </tr>
+        </tbody>
+      </table>
+&nbsp;
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"><b>Method
+Summary</b></font></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getAlign</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies
+the position of the image with respect to its context.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getAlt</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alternative
+textual description of the image rendered by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;int</code></font></td>
+            <td><code><b>getBorder</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies
+the width of the img border in pixels.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getFamily</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the
+family for this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;int</code></font></td>
+            <td><code><b>getHeight</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Image
+height override.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;int</code></font></td>
+            <td><code><b>getHspace</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies
+the amount of white space in pixels to be inserted to the left and
+right of the image.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getHtmlTemplate</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get
+alternative HTML template to be used by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getIcon</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The
+identifier of the desired theme image.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getLongDesc</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A verbose
+description of this image.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnClick</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse click occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnDblClick</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse double click occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnMouseDown</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user presses a mouse button while the mouse
+pointer is on the component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnMouseMove</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user moves the mouse pointer while over the
+component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnMouseOut</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse out movement occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnMouseOver</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user moves the mouse pointer into the boundary
+of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnMouseUp</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user releases a mouse button while the mouse
+pointer is on the component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getRendererType</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getStyle</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS
+style(s) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getStyleClass</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS style
+class(es) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getToolTip</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the
+value of the title attribute for the HTML element.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getUrl</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Absolute or
+relative URL to the image to be rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+            <td><code><b>getValue</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;javax.el.ValueExpression</code></font></td>
+            <td><code><b>getValueExpression</b>(java.lang.String&nbsp;name)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the <code>ValueExpression</code>
+stored for the specified name (if any), respecting any property aliases.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;int</code></font></td>
+            <td><code><b>getVspace</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies
+the amount of white space in pixels to be inserted above and below the
+image.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;int</code></font></td>
+            <td><code><b>getWidth</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Image width
+override.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+            <td><code><b>isAjaxify</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test if
+default Ajax functionality should be turned off.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+            <td><code><b>isVisible</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>restoreState</b>(javax.faces.context.FacesContext&nbsp;_context,
+java.lang.Object&nbsp;_state)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Restore the
+state of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+            <td><code><b>saveState</b>(javax.faces.context.FacesContext&nbsp;_context)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save the
+state of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setAjaxify</b>(boolean&nbsp;ajaxify)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set flag
+indicating to turn off default Ajax functionality.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setAlign</b>(java.lang.String&nbsp;align)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies
+the position of the image with respect to its context.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setAlt</b>(java.lang.String&nbsp;alt)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alternative
+textual description of the image rendered by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setBorder</b>(int&nbsp;border)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies
+the width of the img border in pixels.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setHeight</b>(int&nbsp;height)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Image
+height override.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setHspace</b>(int&nbsp;hspace)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies
+the amount of white space in pixels to be inserted to the left and
+right of the image.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setHtmlTemplate</b>(java.lang.String&nbsp;htmlTemplate)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set
+alternative HTML template to be used by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setIcon</b>(java.lang.String&nbsp;icon)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The
+identifier of the desired theme image.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setId</b>(java.lang.String&nbsp;id)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The
+component identifier for this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setLongDesc</b>(java.lang.String&nbsp;longDesc)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A verbose
+description of this image.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnClick</b>(java.lang.String&nbsp;onClick)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse click occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnDblClick</b>(java.lang.String&nbsp;onDblClick)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse double click occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnMouseDown</b>(java.lang.String&nbsp;onMouseDown)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user presses a mouse button while the mouse
+pointer is on the component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnMouseMove</b>(java.lang.String&nbsp;onMouseMove)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user moves the mouse pointer while over the
+component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnMouseOut</b>(java.lang.String&nbsp;onMouseOut)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse out movement occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnMouseOver</b>(java.lang.String&nbsp;onMouseOver)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user moves the mouse pointer into the boundary
+of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setOnMouseUp</b>(java.lang.String&nbsp;onMouseUp)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user releases a mouse button while the mouse
+pointer is on the component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setRendered</b>(boolean&nbsp;rendered)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+rendered attribute to indicate whether the HTML code for the component
+should be included in the rendered HTML page.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setStyle</b>(java.lang.String&nbsp;style)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS
+style(s) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setStyleClass</b>(java.lang.String&nbsp;styleClass)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS style
+class(es) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setToolTip</b>(java.lang.String&nbsp;toolTip)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the
+value of the title attribute for the HTML element.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setUrl</b>(java.lang.String&nbsp;url)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Absolute or
+relative URL to the image to be rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setValueExpression</b>(java.lang.String&nbsp;name,
+javax.el.ValueExpression&nbsp;binding)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the <code>ValueExpression</code>
+stored for the specified name (if any), respecting any property aliases.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setVisible</b>(boolean&nbsp;visible)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setVspace</b>(int&nbsp;vspace)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies
+the amount of white space in pixels to be inserted above and below the
+image.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setWidth</b>(int&nbsp;width)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Image width
+override.</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <h3><a name="4.4"></a>4.4 Tag interfaces</h3>
+      <div style="margin-left: 40px;">
+      <table border="1" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <td colspan="5"><font size="+2"><b>Attributes</b></font></td>
+          </tr>
+          <tr>
+            <td><b>Name</b></td>
+            <td><b>Required</b></td>
+            <td><b>Request-time</b></td>
+            <td><b>Type</b></td>
+            <td><b>Description</b></td>
+          </tr>
+          <tr valign="top">
+            <td>binding</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> A ValueExpression that resolves to the UIComponent
+that corresponds to this tag. This binding allows the Java bean that
+contains the UIComponent to manipulate the UIComponent, its properties,
+and its children. </td>
+          </tr>
+          <tr valign="top">
+            <td>onDblClick</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when a mouse double click occurs
+over this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>width</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Image width override. When specified, the width and
+height attributes tell web browsers to override the natural image or
+object size in favor of these values, specified in pixels. Some
+browsers might not support this behavior.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>rendered</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Use the rendered attribute to indicate whether the
+HTML code for the component should be included in the rendered HTML
+page. If set to false, the rendered HTML page does not include the HTML
+for the component. If the component is not rendered, it is also not
+processed on any subsequent form submission. </td>
+          </tr>
+          <tr valign="top">
+            <td>id</td>
+            <td>false</td>
+            <td>true</td>
+            <td><code>java.lang.String</code></td>
+            <td><i>No Description</i></td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseUp</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user releases a mouse
+button while the mouse pointer is on the component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>styleClass</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>CSS style class(es) to be applied to the outermost HTML
+element when this component is rendered.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>height</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Image height override. When specified, the width and
+height attributes tell web browsers to override the natural image or
+object size in favor of these values, specified in pixels. Some
+browsers might not support this behavior.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>icon</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>The identifier of the desired theme image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>align</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Specifies the position of the image with respect to its
+context. Valid values are: bottom (the default); middle; top; left;
+right.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>vspace</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Specifies the amount of white space in pixels to be
+inserted above and below the image. The default value is not specified
+but is generally a small, non-zero size.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>style</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>CSS style(s) to be applied to the outermost HTML element
+when this component is rendered.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>url</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Absolute or relative URL to the image to be rendered.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>border</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Specifies the width of the img border in pixels. The
+default value for this attribute depends on the web browser.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onClick</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when a mouse click occurs over
+this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseDown</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user presses a mouse
+button while the mouse pointer is on the component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>toolTip</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Sets the value of the title attribute for the HTML
+element. The specified text will display as a tooltip if the mouse
+cursor hovers over the HTML element.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>ajaxify</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Flag indicating to turn off default Ajax
+functionality. Set ajaxify to false when providing a different Ajax
+implementation. </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseOut</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when a mouse out movement occurs
+over this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>alt</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Alternative textual description of the image rendered by
+this component. The alt text can be used by screen readers and in tool
+tips, and when image display is turned off in the web browser.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseOver</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user moves the mouse
+pointer into the boundary of this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseMove</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user moves the mouse
+pointer while over the component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>htmlTemplate</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Alternative HTML template to be used by this
+component. </td>
+          </tr>
+          <tr valign="top">
+            <td>longDesc</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>A verbose description of this image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>hspace</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Specifies the amount of white space in pixels to be
+inserted to the left and right of the image. The default value is not
+specified but is generally a small, non-zero size.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>visible</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Use the visible attribute to indicate whether the
+component should be viewable by the user in the rendered HTML page. If
+set to false, the HTML code for the component is present in the page,
+but the component is hidden with style attributes. By default, visible
+is set to true, so HTML for the component HTML is included and visible
+to the user. If the component is not visible, it can still be processed
+on subsequent form submissions because the HTML is present.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <br>
+      <br>
+      <h3><br>
+      </h3>
+      <h3><a name="4.5"></a>4.5 Javascript interfaces</h3>
+      <div style="margin-left: 40px;">
+      <div style="margin-left: 40px;">
+      <table
+ style="text-align: left; width: 100%; height: 100%; margin-left: auto; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td
+ style="vertical-align: top; font-weight: bold; font-style: italic;">Interface
+name</td>
+            <td
+ style="vertical-align: top; font-weight: bold; font-style: italic;">Type<br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold; font-style: italic;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">webui.@THEME@.widget.image<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Used for instantiating the
+widget<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.setProps</td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Use this function to
+change any of the following supported
+properties:
+            <ul>
+              <li>alt</li>
+              <li>align</li>
+              <li>border<br>
+              </li>
+              <li>className</li>
+              <li>dir</li>
+              <li>height</li>
+              <li>hspace<br>
+              </li>
+              <li>id</li>
+              <li>lang</li>
+              <li>longDesc<br>
+              </li>
+              <li>onClick</li>
+              <li>onDblClick</li>
+              <li>onKeyDown</li>
+              <li>onKeyPress</li>
+              <li>onKeyUp</li>
+              <li>onMouseDown</li>
+              <li>onMouseMove</li>
+              <li>onMouseOut</li>
+              <li>onMouseOver</li>
+              <li>onMouseUp</li>
+              <li>src</li>
+              <li>style</li>
+              <li>tabIndex</li>
+              <li>title</li>
+              <li>visible</li>
+              <li>vspace</li>
+              <li>width</li>
+            </ul>
+            <br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.setProps<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Store the properties of
+the element on the widget node.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.getProps<br>
+            </td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Get all the properties of
+the image that are set <br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.getProps<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Get the properties of the
+image widget. this is used by domNode.getProps function<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      </div>
+      <h3><a name="4.6"></a>4.6 Theme resources keys</h3>
+      <div style="margin-left: 40px;"><br>
+      </div>
+      <h3><a name="4.6.1"></a>4.6.1 Style selectors</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/a<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.6.2"></a>4.6.2 Image resources</h3>
+      <br>
+These image resources are found in <code>com/sun/webui/jsf/&lt;theme&gt;/images
+directory.<br>
+The identifiers for these images are defined in the
+com/sun/webui/jsf/&lt;theme&gt;/properties/images.properties file.<br>
+      <br>
+Each image identifer has a corresponding identifiers with suffix <br>
+"_WIDTH" which contains a numeric value indicating the width of the
+specified image.<br>
+"_HEIGHT" which contains a numeric value indicating the height of the
+specified image.<br>
+"_ALT" which contains the alt text to be shown for the image.<br>
+      <br>
+      <br>
+For example, for the theme image key "LABEL_INVALID_ICON", the
+following entries will be found in the images.properties file.<br>
+      <br>
+LABEL_INVALID_ICON=/com/sun/webui/jsf/suntheme/images/alerts/error_small.gif<br>
+LABEL_INVALID_ICON_HEIGHT=14<br>
+LABEL_INVALID_ICON_WIDTH=11<br>
+LABEL_INVALID_ICON_ALT=Label.invalidAltText<br>
+      <br>
+Here the value for the </code><code>LABEL_INVALID_ICON_ALT key points
+to a key found in the
+com/sun/webui/jsf/&lt;theme&gt;/properties/messages.properties file.</code><br>
+      <code><br>
+These identifiers can be used as the value of "icon" attribute for the
+image component.<br>
+      <br>
+      </code>
+      <table style="width: 864px;" border="1" bordercolor="#000000"
+ cellpadding="3" cellspacing="0">
+        <thead><tr valign="top">
+          <th
+ style="width: 346px; text-align: left; vertical-align: top;">
+          <p>Image key name</p>
+          </th>
+          <th
+ style="width: 504px; text-align: left; vertical-align: top;">
+          <p>Description</p>
+          </th>
+        </tr>
+        </thead> <tbody>
+          <tr valign="top">
+            <td width="346">
+            <p>ALARM_CRITICAL_SMALL</p>
+            </td>
+            <td width="504">
+            <p>Critical alarm, small image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALARM_CRITICAL_MEDIUM</p>
+            </td>
+            <td width="504">
+            <p>Critical alarm, medium
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALARM_MAJOR_SMALL</p>
+            </td>
+            <td width="504">
+            <p>Major alarm, small image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALARM_MINOR_SMALL</p>
+            </td>
+            <td width="504">
+            <p>Minor alarm, small image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALARM_MINOR_MEDIUM</p>
+            </td>
+            <td width="504">
+            <p>Minor alarm, medium image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALARM_DOWN_SMALL</p>
+            </td>
+            <td width="504">
+            <p>Down alarm, small image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALARM_DOWN_MEDIUM</p>
+            </td>
+            <td width="504">
+            <p>Down alarm, medium image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALARM_MASTHEAD_CRITICAL_MEDIUM</p>
+            </td>
+            <td width="504">
+            <p>Critical
+alarm in masthead, medium image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALARM_MASTHEAD_CRITICAL_DIMMED</p>
+            </td>
+            <td width="504">
+            <p>Critical alarm
+in masthead, medium image, dimmed.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALARM_MASTHEAD_MAJOR_MEDIUM</p>
+            </td>
+            <td width="504">
+            <p>Major alarm in masthead,
+medium image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALARM_MASTHEAD_MAJOR_DIMMED</p>
+            </td>
+            <td width="504">
+            <p> </p>
+Major alarm in masthead, medium image, dimmed.<br>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALARM_MASTHEAD_MINOR_MEDIUM</p>
+            </td>
+            <td width="504">
+            <p>Minor alarm in
+masthead,
+medium image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALARM_MASTHEAD_MINOR_DIMMED</p>
+            </td>
+            <td width="504">
+            <p>Minor alarm in
+masthead, medium image, dimmed.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_DEGRADED_DIMMED</p>
+            </td>
+            <td width="504">
+            <p>Degraded alert, dimmed
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_DEGRADED_LARGE</p>
+            </td>
+            <td width="504">
+            <p>Degraded alert, large
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_DEGRADED_MEDIUM</p>
+            </td>
+            <td width="504">
+            <p>Degraded alert, medium
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_DEGRADED_SMALL</p>
+            </td>
+            <td width="504">
+            <p>Degraded alert, small
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_ERROR_LARGE</p>
+            </td>
+            <td width="504">
+            <p>Error type Alert, large
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_ERROR_MEDIUM</p>
+            </td>
+            <td width="504">
+            <p>Error type Alert, medium
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_ERROR_SMALL</p>
+            </td>
+            <td width="504">
+            <p>Error type Alert, small
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_FAILED_DIMMED</p>
+            </td>
+            <td width="504">
+            <p>Failed/Fatal type alert,
+dimmed image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_FAILED_LARGE</p>
+            </td>
+            <td width="504">
+            <p>Failed/Fatal type
+alert, large
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_FAILED_MEDIUM</p>
+            </td>
+            <td width="504">
+            <p>Failed/Fatal type
+alert,
+medium image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_FAILED_SMALL</p>
+            </td>
+            <td width="504">
+            <p>Failed/Fatal type
+alert, small
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_HELP_LARGE</p>
+            </td>
+            <td width="504">
+            <p>Help/Question type alert, large
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_HELP_MEDIUM</p>
+            </td>
+            <td width="504">
+            <p>Help/Question
+type alert, medium
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_HELP_SMALL</p>
+            </td>
+            <td width="504">
+            <p>Help/Question
+type alert, small
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_INFO_LARGE</p>
+            </td>
+            <td width="504">
+            <p>Information type alert,
+large image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_INFO_MEDIUM</p>
+            </td>
+            <td width="504">
+            <p>Information type alert,
+medium image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_INFO_SMALL</p>
+            </td>
+            <td width="504">
+            <p>Information type alert,
+small image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_OK_DIMMED</p>
+            </td>
+            <td width="504">
+            <p>Ok type alert, dimmed
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_OK_LARGE</p>
+            </td>
+            <td width="504">
+            <p>Ok type alert, large
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_OK_MEDIUM</p>
+            </td>
+            <td width="504">
+            <p>Ok type alert, medium
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_OK_SMALL</p>
+            </td>
+            <td width="504">
+            <p>Ok type alert, small
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_SUCCESS_LARGE</p>
+            </td>
+            <td width="504">
+            <p>Success alert, large
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_SUCCESS_MEDIUM</p>
+            </td>
+            <td width="504">
+            <p>Success alert, medium
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_SUCCESS_SMALL</p>
+            </td>
+            <td width="504">
+            <p>Success alert, small
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_UNKNOWN_DIMMED</p>
+            </td>
+            <td width="504">
+            <p>Unknown type alert,
+dimmed image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_UNKNOWN_LARGE</p>
+            </td>
+            <td width="504">
+            <p>Unknown type alert,
+large image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_UNKNOWN_MEDIUM</p>
+            </td>
+            <td width="504">
+            <p>Unknown type alert,
+small image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_UNKNOWN_SMALL</p>
+            </td>
+            <td width="504">
+            <p>Unknown type alert,
+small image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_WARNING_LARGE</p>
+            </td>
+            <td width="504">
+            <p>Warning alert, large
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_WARNING_MEDIUM</p>
+            </td>
+            <td width="504">
+            <p>Warning alert, medium
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>ALERT_WARNING_SMALL</p>
+            </td>
+            <td width="504">
+            <p>Warning alert, small
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>PRIMARY_ENABLED</p>
+            </td>
+            <td width="504">
+            <p>Primary button enabled.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>PRIMARY_MINI_ENABLED</p>
+            </td>
+            <td width="504">
+            <p>Mini primary button,
+enabled.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>PRIMARY_MINI_ROLL</p>
+            </td>
+            <td width="504">
+            <p>Mini primary button roll
+over image</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>PRIMARY_ROLL</p>
+            </td>
+            <td width="504">
+            <p>Primary button roll over
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>SECONDARY_ENABLED</p>
+            </td>
+            <td width="504">
+            <p>Secondary button enabled.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>SECONDARY_MINI_ENABLED</p>
+            </td>
+            <td width="504">
+            <p>Secondary mini button
+enabled.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>SECONDARY_MINI_ROLL</p>
+            </td>
+            <td width="504">
+            <p>Secondary mini button
+roll over image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>SECONDARY_ROLL</p>
+            </td>
+            <td width="504">
+            <p>Secondary roll over
+button image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>CALENDAR_BACKWARD</p>
+            </td>
+            <td width="504">
+            <p>Back image for calendar.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>CALENDAR_DROP_SHADOW</p>
+            </td>
+            <td width="504">
+            <p>Calendar's shadow image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>CALENDAR_FOOTER_GRADIENT</p>
+            </td>
+            <td width="504">
+            <p>Calendar footer gradient
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>CALENDAR_TITLE_GRADIENT</p>
+            </td>
+            <td width="504">
+            <p>Calendar title gradient
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>CALENDAR_FORWARD</p>
+            </td>
+            <td width="504">
+            <p>Calendar forward button
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>CALENDAR_BUTTON</p>
+            </td>
+            <td width="504">
+            <p>Calendar button's image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>CALENDAR_BUTTON_DISABLED</p>
+            </td>
+            <td width="504">
+            <p>Calendar button's
+disabled image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>CALENDAR_BUTTON_FLIP</p>
+            </td>
+            <td width="504">
+            <p>Calendar button's flip
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>CALENDAR_BUTTON_ROLL</p>
+            </td>
+            <td width="504">
+            <p>Calendar button's roll
+over image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>HELP_BACK</p>
+            </td>
+            <td width="504">
+            <p>Help's back button..</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>HELP_BACK_DISABLED</p>
+            </td>
+            <td width="504">
+            <p>Help's back button
+disabled.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>HELP_FORWARD</p>
+            </td>
+            <td width="504">
+            <p>Help's forward button.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>HELP_FORWARD_DISABLED</p>
+            </td>
+            <td width="504">
+            <p>Help's forward disabled
+button.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>HELP_PRINT</p>
+            </td>
+            <td width="504">
+            <p>Help window print image .</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>HELP_PRINT_DISABLED</p>
+            </td>
+            <td width="504">
+            <p>Print disabled image
+style. </p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>HELP_BTNNAV_GRADIENT</p>
+            </td>
+            <td width="504">
+            <p>Help navigation button
+gradient image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>HREF_ANCHOR</p>
+            </td>
+            <td width="504">
+            <p>Href's anchor image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>HREF_TOP</p>
+            </td>
+            <td width="504">
+            <p>Top href image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>HREF_LINK</p>
+            </td>
+            <td width="504">
+            <p>Href link image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>LABEL_INVALID_ICON</p>
+            </td>
+            <td width="504">
+            <p>Invalid icon image for
+label.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>LABEL_REQUIRED_ICON</p>
+            </td>
+            <td width="504">
+            <p>Required icon image for
+label.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>MASTHEAD_STATUS_ICON</p>
+            </td>
+            <td width="504">
+            <p>Masthead's status icon
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>MASTHEAD_BACKGROUND</p>
+            </td>
+            <td width="504">
+            <p>Masthead's background
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>MASTHEAD_SEPARATOR</p>
+            </td>
+            <td width="504">
+            <p>Masthead's separator
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>MASTHEAD_LINK_ENABLED</p>
+            </td>
+            <td width="504">
+            <p>Masthead's link enabled
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>MASTHEAD_LINK_ROLL</p>
+            </td>
+            <td width="504">
+            <p>Masthead's link roll
+over image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>SEC_MASTHEAD_BACKGROUND</p>
+            </td>
+            <td width="504">
+            <p>Secondary masthead's
+background image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>MASTHEAD_STATUS_AREA_SEPARATOR</p>
+            </td>
+            <td width="504">
+            <p>Masthead's status area
+separator image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>DOT</p>
+            </td>
+            <td width="504">
+            <p>Spacer image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>SEARCH</p>
+            </td>
+            <td width="504">
+            <p>Search image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>PAGETITLE_SEARCH_SEPARATOR</p>
+            </td>
+            <td width="504">
+            <p>Pagetitle search
+separator image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>SCHEDULER_FORWARD</p>
+            </td>
+            <td width="504">
+            <p>Scheduler's forward link
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>SCHEDULER_POPUP</p>
+            </td>
+            <td width="504">
+            <p>Scheduler's popup link
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>SCHEDULER_BACKWARD</p>
+            </td>
+            <td width="504">
+            <p>Scheduler's back link
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>SCHEDULER_GRADIENT</p>
+            </td>
+            <td width="504">
+            <p>Scheduler's gradient
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_ACTIONS_SEPARATOR</p>
+            </td>
+            <td width="504">
+            <p>Table's action separator
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_DESELECT_MULTIPLE</p>
+            </td>
+            <td width="504">
+            <p>Deselect multiple
+selections icon image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_DESELECT_SINGLE</p>
+            </td>
+            <td width="504">
+            <p>Deselect a single
+selection icon image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_EMBEDDED_ACTIONS_SEPARATOR</p>
+            </td>
+            <td width="504">
+            <p>Table's embedded actions
+separator image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_EMPTY_CELL</p>
+            </td>
+            <td width="504">
+            <p>Empty table cell
+indicator image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_GROUP_PANEL</p>
+            </td>
+            <td width="504">
+            <p>Collapsed table group
+panel image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_GROUP_PANEL_FLIP</p>
+            </td>
+            <td width="504">
+            <p>Expand table group panel
+image icon.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_PAGINATE</p>
+            </td>
+            <td width="504">
+            <p>Pagination image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_PAGINATION_FIRST</p>
+            </td>
+            <td width="504">
+            <p>Paginate to first page
+link image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_PAGINATION_FIRST_DISABLED</p>
+            </td>
+            <td width="504">
+            <p>Paginate to first page
+disabled link image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_PAGINATION_LAST</p>
+            </td>
+            <td width="504">
+            <p>Paginate to last page
+link image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_PAGINATION_LAST_DISABLED</p>
+            </td>
+            <td width="504">
+            <p>Paginate to last page
+disabled link image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_PAGINATION_NEXT</p>
+            </td>
+            <td width="504">
+            <p>Paginate to next page
+link image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_PAGINATION_NEXT_DISABLED</p>
+            </td>
+            <td width="504">
+            <p>Pagination to next page
+disabled link image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_PAGINATION_PREV</p>
+            </td>
+            <td width="504">
+            <p>Paginate to previous
+page link image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_PAGINATION_PREV_DISABLED</p>
+            </td>
+            <td width="504">
+            <p>Paginate to previous
+page disabled link
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_PREFERENCES_PANEL</p>
+            </td>
+            <td width="504">
+            <p>Table preferences panel
+enable link image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_PREFERENCES_PANEL_FLIP</p>
+            </td>
+            <td width="504">
+            <p>Table preferences panel
+hide link image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_SCROLL_PAGE</p>
+            </td>
+            <td width="504">
+            <p>Scroll through all table
+contents link
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_SELECT_MULTIPLE</p>
+            </td>
+            <td width="504">
+            <p>Multiple selection link
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_SORT_ADD</p>
+            </td>
+            <td width="504">
+            <p>Add sort link image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_SORT_ASCENDING</p>
+            </td>
+            <td width="504">
+            <p>Sort in ascending order
+link image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_SORT_CLEAR</p>
+            </td>
+            <td width="504">
+            <p>Clear sorting link image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_SORT_DESCENDING</p>
+            </td>
+            <td width="504">
+            <p>Sort in descending order
+link image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_SORT_DESCENDING_DISABLED</p>
+            </td>
+            <td width="504">
+            <p>Sort in descending order
+link disabled
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_SORT_PANEL</p>
+            </td>
+            <td width="504">
+            <p>Sort panel display link
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_SORT_PANEL_FLIP</p>
+            </td>
+            <td width="504">
+            <p>Flip sort panel display
+link image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_SORT_PRIMARY</p>
+            </td>
+            <td width="504">
+            <p>Primary sort column link
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABLE_SORT_SELECT</p>
+            </td>
+            <td width="504">
+            <p>Primary sort column
+selection link image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABS_LEVEL1_BACKGROUND</p>
+            </td>
+            <td width="504">
+            <p>Level 1 tab background
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABS_LEVEL1_DESELECT</p>
+            </td>
+            <td width="504">
+            <p>Level 1 tab deselected
+background image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABS_LEVEL1_SELECTED</p>
+            </td>
+            <td width="504">
+            <p>Level 1 tab selected
+background image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABS_LEVEL1_SELECTED_1LEV</p>
+            </td>
+            <td width="504">
+            <p>Level 1 tab selected
+image for 1 level tab
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABS_LEVEL2_BACKGROUND</p>
+            </td>
+            <td width="504">
+            <p>Level 2 tab background
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABS_LEVEL2_DESELECT</p>
+            </td>
+            <td width="504">
+            <p>Level 2 tab deselected
+state image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABS_LEVEL2_SELECTED</p>
+            </td>
+            <td width="504">
+            <p>Level 2 tab selected
+state image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABS_LEVEL3_BACKGROUND</p>
+            </td>
+            <td width="504">
+            <p>Level 3 tab background
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABS_LEVEL3_DESELECT</p>
+            </td>
+            <td width="504">
+            <p>Level 3 tab deselected
+state image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABS_LEVEL3_SELECTED</p>
+            </td>
+            <td width="504">
+            <p>Level 3 tab selected
+state image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABS_MINITAB_BACKGROUND</p>
+            </td>
+            <td width="504">
+            <p>Mini tab background
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABS_MINITAB_DESELECT</p>
+            </td>
+            <td width="504">
+            <p>Minitab deselected state
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TABS_MINITAB_SELECTED</p>
+            </td>
+            <td width="504">
+            <p>Minitab selected state
+image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="346">
+            <p>TAB_DIVIDER</p>
+            </td>
+            <td width="504">
+            <p>Tab's divider image.&nbsp;&nbsp; &nbsp;&nbsp; <br>
+            </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">OK_ALARM_INDICATOR<br>
+            </td>
+            <td style="vertical-align: top;">Image to be shown for an
+"OK" alarm.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">TREE_DOCUMENT<br>
+            </td>
+            <td style="vertical-align: top;">Image to be shown for a
+tree's document type image.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">TREE_FOLDER<br>
+            </td>
+            <td style="vertical-align: top;">Image to be shown for a
+tree's folder type image.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">TREE_FOLDER_ALARM_MINOR<br>
+            </td>
+            <td style="vertical-align: top;">Minor "folder-alarm" icon
+to be shown for the tree.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">TREE_FOLDER_ALARM_MAJOR<br>
+            </td>
+            <td style="vertical-align: top;">Major "folder-alarm" icon
+to be shown for the tree.</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">TREE_FOLDER_ALARM_DOWN<br>
+            </td>
+            <td style="vertical-align: top;">Down "folder-alarm" icon
+to be shown for the tree.</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">TREE_FOLDER_ALARM_CRITICAL<br>
+            </td>
+            <td style="vertical-align: top;">Critical&nbsp;
+"folder-alarm" icon to be shown for the tree.</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">TREE_SERVER<br>
+            </td>
+            <td style="vertical-align: top;">The server icon to be
+shown for the tree.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">TREE_SERVER_CRITICAL<br>
+            </td>
+            <td style="vertical-align: top;">The critical alarm server
+icon to be shown for the tree.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">TREE_SERVER_DOWN<br>
+            </td>
+            <td style="vertical-align: top;">The down alarm server icon
+to be shown for the tree.</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">TREE_SERVER_MAJOR<br>
+            </td>
+            <td style="vertical-align: top;">The major alarm server
+icon to be shown for the tree.</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">TREE_SERVER_MINOR<br>
+            </td>
+            <td style="vertical-align: top;">The minor alarm server
+icon to be shown for the tree.</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">TREE_STORAGE<br>
+            </td>
+            <td style="vertical-align: top;">The storage icon to be
+shown for the tree.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">TREE_STORAGE_MAJOR<br>
+            </td>
+            <td style="vertical-align: top;">The&nbsp; major alarm
+storage icon to be shown for the tree.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">VERSION_BRAND<br>
+            </td>
+            <td style="vertical-align: top;">The brand version image to
+be shown.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">CTS_RIGHT_TOGGLE<br>
+            </td>
+            <td style="vertical-align: top;">The toggle icon to be
+shown for the common task.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">CTS_RIGHT_TOGGLE_EMPTY<br>
+            </td>
+            <td style="vertical-align: top;">The image to be shown when
+there is no toggle icon to be displayed for the common task.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">CTS_PANEL_CLOSE<br>
+            </td>
+            <td style="vertical-align: top;">The close image to be
+shown for the common task info panel<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">CTS_RIGHT_TOGGLE_OVER<br>
+            </td>
+            <td style="vertical-align: top;">The image to be shown for
+the common task info icon when mouse hover happens.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">CTS_RIGHT_TOGGLE_SELECTED<br>
+            </td>
+            <td style="vertical-align: top;">The image to be shown for
+the common task info icon when the info panel is open.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">CTS_OVERVIEW<br>
+            </td>
+            <td style="vertical-align: top;">The overview image to be
+shown in an info panel.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">PROGRESS_BUSY<br>
+            </td>
+            <td style="vertical-align: top;">The busy image to be shown
+for a progressbar.<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+Note: &lt;theme&gt; tag is
+replaced by the theme name (eg., suntheme).
+      <h3><a name="4.6.3"></a>4.6.3 Javascript resources</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/common.js</td>
+            <td style="vertical-align: top;">Javascript containing the
+common files for the widgets<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/image.js</td>
+            <td style="vertical-align: top;">Javascript for the image
+widget. <br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/jsfx/image.js</td>
+            <td style="vertical-align: top;">Javascript for the ajax
+implementation of image<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Note: The &lt;theme&gt; tag is
+intended to be replaced with the theme
+name
+(e.g., suntheme).
+      <h3><a name="4.6.4"></a>4.6.4 Template resources</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/templates/image.html
+            </td>
+            <td style="vertical-align: top;">Template for the image
+element.<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.6.5"></a>4.6.5 Other resources</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.6.6"></a>4.6.6 Localized message keys</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.7"></a>4.7 Component Extensibility</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h2><a name="5.0"></a>5.0 - Creator Design Time Support</h2>
+      <h3><a name="5.1"></a>5.1 Design-time Behavior</h3>
+      <div style="margin-left: 40px;">The&nbsp; image component will
+continue to use the existing&nbsp; html
+renderers present in runtime and designtime packages for design time
+behavior. Hence there will not be any change
+in the existing design time behavior. </div>
+      <h3><a name="5.2"></a>5.2 Design-time Classes and Interfaces</h3>
+      <div style="margin-left: 40px;">N/A </div>
+      <h3><a name="5.3"></a>5.3 Localized message keys</h3>
+      <div style="margin-left: 40px;">Define message resource keys and
+expected message content.&nbsp; Exact message text is not
+required.&nbsp; <br>
+      </div>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="5.4"></a>5.4 Dependencies </h3>
+      <div style="margin-left: 40px;">N/A<br>
+      </div>
+      <h2><a name="6.0"></a>6.0 Component Dependencies</h2>
+      <h3><a name="6.1"></a>6.1 Component class dependencies</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="6.2"></a>6.2 Javascript dependencies</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N/A<br>
+      <h3><a name="6.3"></a>6.3 Infrastructure dependencies</h3>
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;The new client side anhor widget depends
+on
+the dojo infrastructure for rendering.<br>
+      <br>
+      <h3><a name="6.4"></a>6.4 Design time dependencies</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N/A<br>
+      <br>
+      <h2><a name="7.0"></a>7.0 - A11Y, I18n, Compliance, Debugging<br>
+      </h2>
+      <h3><a name="7.1"></a>7.1 Accessibility (A11Y)</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h3><a name="7.2"></a>7.2 Internationalization (I18N)</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h3><a name="7.3"></a>7.3 Level of XHTML Compliance</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h3><a name="7.4"></a>7.4 Javascript Compliance</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h3><a name="7.5"></a>7.5 Debugging</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h2><a name="8.0"></a>8.0 Component High level design</h2>
+      <div style="margin-left: 40px;">The Icon JSF component extends
+from the ImageComponent and is used for specifying images obtained from
+the theme. Both the Icon and the ImageComponent use the ImageRenderer
+for rendering the images. The Image's widget renderer does not
+distinguish rendering of components depending on whether the component
+is a ImageComponent or an Icon component. It first checks whether the
+icon attribute for the component has been specified and if so whether
+the url attribute has not been specified. If that is the case, then the
+ImageRenderer renders the icon represented by the icon attribute.<br>
+If the url attribute is specified, then the image specified by the url
+attribute is rendered. Note that over here, if both the icon and the
+url attribute are specified, then the image specified by the url
+attribute<br>
+will take precedence. Also, if both icon and url values are specified,
+then the values of width, height and alt for that particular themed
+image specified by the icon attribute will not be applicable to the
+image specified by the url attribute.<br>
+      <br>
+Internet Explorer browsers&nbsp; with versions below 7.0 have problems
+displaying png images. Hence,&nbsp; a special image transformation
+function is applied applied to these images. This function can be found
+in the messages.properties file with the key
+"Image.IEPngCSSStyleQuirk".For png images on IE browsers with version
+below 7.0, if&nbsp; the height and width values are not specified, then
+the renderer outputs a default value of "100px" for both width and
+height.<br>
+      <br>
+      </div>
+      <h2><a name="9.0"></a>9.0 Issues</h2>
+      <div style="margin-left: 40px;">N/A<br>
+      </div>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

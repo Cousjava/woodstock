@@ -1,0 +1,143 @@
+/**
+ * The contents of this file are subject to the terms
+ * of the Common Development and Distribution License
+ * (the License). You may not use this file except in
+ * compliance with the License.
+ *
+ * You can obtain a copy of the license at
+ * https://woodstock.dev.java.net/public/CDDLv1.0.html.
+ * See the License for the specific language governing
+ * permissions and limitations under the License.
+ *
+ * When distributing Covered Code, include this CDDL
+ * Header Notice in each file and include the License file
+ * at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+ * If applicable, add the following below the CDDL Header,
+ * with the fields enclosed by brackets [] replaced by
+ * you own identifying information:
+ * "Portions Copyrighted [year] [name of copyright owner]"
+ *
+ * Copyright 2008 Sun Microsystems, Inc. All rights reserved.
+ */
+
+{
+    "name": "popupMenu",
+    "type": "@JS_NAME@",
+    "version": "@JS_VERSION@",
+    "jmakiVersion": "1.8",
+    "description": "Woodstock popupMenu widget.",
+    "args": [
+      {"accessKey": {
+         "type": "STRING",
+         "description": "Shortcut key.",
+         "defaultValue": ""}},
+      {"className": {
+         "type": "STRING",
+         "description": "CSS selector.",
+         "defaultValue": ""}},
+      {"dir": {
+         "type": "STRING",
+         "description": "Specifies the directionality of text.",
+         "defaultValue": "ltr"}},
+      {"formId": {
+         "type": "STRING",
+         "description": "The id of the HTML form element for page submit.",
+         "defaultValue": ""}},
+      {"onBlur": {
+         "type": "STRING",
+         "description": "Element lost focus.",
+         "defaultValue": ""}},
+      {"onClick": {
+         "type": "STRING",
+         "description": "Mouse button is clicked on element.",
+         "defaultValue": ""}},
+      {"onDblClick": {
+         "type": "STRING",
+         "description": "Mouse button is double-clicked on element.",
+         "defaultValue": ""}},
+      {"onFocus": {
+         "type": "STRING",
+         "description": "Element received focus.",
+         "defaultValue": ""}},
+      {"onKeyDown": {
+         "type": "STRING",
+         "description": "Key is pressed down over element.",
+         "defaultValue": ""}},
+      {"onKeyPress": {
+         "type": "STRING",
+         "description": "Key is pressed and released over element.",
+         "defaultValue": ""}},
+      {"onKeyUp": {
+         "type": "STRING",
+         "description": "Key is released over element.",
+         "defaultValue": ""}},
+      {"onMouseDown": {
+         "type": "STRING",
+         "description": "Mouse button is pressed over element.",
+         "defaultValue": ""}},
+      {"onMouseOut": {
+         "type": "STRING",
+         "description": "Mouse is moved away from element.",
+         "defaultValue": ""}},
+      {"onMouseOver": {
+         "type": "STRING",
+         "description": "Mouse is moved onto element.",
+         "defaultValue": ""}},
+      {"onMouseUp": {
+         "type": "STRING",
+         "description": "Mouse button is released over element.",
+         "defaultValue": ""}},
+      {"onMouseMove": {
+         "type": "STRING",
+         "description": "Mouse is moved while over element.",
+         "defaultValue": ""}},
+      {"primary": {
+         "type": "BOOLEAN",
+         "description": "Set button as primary if true.",
+         "defaultValue": false}},
+      {"style": {
+         "type": "STRING",
+         "description": "Specify style rules inline.",
+         "defaultValue": ""}},
+      {"tabIndex": {
+         "type": "INT",
+         "description": "Position in tabbing order.",
+         "defaultValue": -1}},
+      {"title": {
+         "type": "STRING",
+         "description": "Provides a title for element.",
+         "defaultValue": "PopupMenu widget"}},
+      {"visible": {
+         "type": "BOOLEAN",
+         "description": "Hide or show element.",
+         "defaultValue": true}}
+    ],
+    "value": {
+      "required": true,
+      "type": "OBJECT",
+      "defaultValue": {"menu": [
+        {"label": "Goto Sun", "href": "http://www.sun.com"},
+        {"label": "My Action", "action": {"topic": "/mytopic", "message": "My message"}},
+        {"label": "My Value", "value": "my_value"},
+        {"label": "Sub Menu", "menu": [
+            {"label": "Sub Item", "value": "sub_value"}
+            ]}
+        ]},
+      "description": "Simple menu showing types of menu items."
+    },
+    "topicInfo": {
+        "type": "publish",
+        "topicName": "/@JS_NS@/popupMenu/onClick",
+        "description": "Published when a menu item is selected."
+    },
+    "config": {
+      "type": {
+        "id": "@JS_NAME@",
+        "libs": [
+            "@JS_PATH@/bootstrap.js",
+            "@JS_PATH@/webui.js"
+        ],
+        "resources": [ "@JS_LIBPATH@" ]
+        }
+    }
+}

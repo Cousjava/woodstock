@@ -1,0 +1,2631 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <!--
+      The contents of this file are subject to the terms
+      of the Common Development and Distribution License
+      (the License).  You may not use this file except in
+      compliance with the License.
+      
+      You can obtain a copy of the license at
+      https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      See the License for the specific language governing
+      permissions and limitations under the License.
+      
+      When distributing Covered Code, include this CDDL
+      Header Notice in each file and include the License file
+      at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      If applicable, add the following below the CDDL Header,
+      with the fields enclosed by brackets [] replaced by
+      you own identifying information:
+      "Portions Copyrighted [year] [name of copyright owner]"
+      
+      Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+    -->
+<title>Project Woodstock - Bubble Component Test Specification</title>
+<meta name="COPYRIGHT" content="">
+<style type="text/css"> 
+/* <![CDATA[ */
+@import url(../../browser-uispec.css);
+.style2 {font-size: 18pt}
+  </style>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+</head>
+<body bgcolor="#ffffff">
+<div class="security-text" align="right"><a href="#skipnav"
+ title="Skip Navigation Links"></a></div>
+<div class="MstDiv">
+<table class="MstTblBot" title="" border="0" cellpadding="0"
+ cellspacing="0" width="100%">
+  <tbody>
+    <tr>
+      <td class="MstTdTtl">
+      <div class="MstDivTtl">
+      <div class="Mst1TtlTxt">4.1 Project Woodstock</div>
+      </div>
+      <div class="Mst1SecDiv"><big><big>DRAFT: <big
+ style="font-weight: bold;">Bubble </big></big></big><span
+ class="Mst1SecTxt style2">Test Specification <br>
+      </span></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<table class="Mst2Tbl" style="width: 1245px; height: 8659px;" title=""
+ border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td><br>
+      <br>
+      <h3><span style="font-weight: bold;">Document Revision History</span></h3>
+      <table
+ style="text-align: left; margin-left: auto; margin-right: auto; width: 1240px; height: 118px;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Revision</span></td>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Date</span></td>
+            <td style="width: 50%; text-align: center;"><span
+ style="font-weight: bold;">Synopsis</span></td>
+            <td style="width: 20%; text-align: center;"><span
+ style="font-weight: bold;">Author</span></td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">0.1</td>
+            <td style="text-align: center;">05/25/2007</td>
+            <td style="text-align: center;">Initial Draft</td>
+            <td style="text-align: center;">Bharathi Hemanth Kumar<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; text-align: center;">0.2<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">06/29/2007<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Additional
+Updates Made<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Bharathi
+Hemanth Kumar<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; text-align: center;">0.3<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">08/09/2007<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Additional
+Updates based on publishing of Functional Spec and Example App Made
+available to <br>
+Open Source Community</td>
+            <td style="vertical-align: top; text-align: center;">Bharathi
+Hemanth Kumar<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <big><span style="font-weight: bold;">Table of Contents:</span><br>
+      </big><a href="#1.0">1.0 Overview</a><br>
+      <div style="margin-left: 40px;"><a href="#1.1">1.1 Component
+Description</a><br>
+      </div>
+      <div style="margin-left: 40px;"><a href="#1.2">1.2 Relevant
+Documents</a><br>
+      <a href="#1.3">1.3 Definition of Terms</a><br>
+      </div>
+      <a href="#2.0">2.0 Test Requirements</a><br>
+      <a href="#3.0">3.0 Test Matrix</a><br>
+      <div style="margin-left: 40px;"><a href="#3.1">3.1 UI Functional
+Tests</a><br>
+      <a href="#3.2">3.2 A11Y Tests</a><br>
+      <a href="#3.3">3.3 I18N Tests</a><br>
+      <a href="#3.4">3.4 Run-time Tests</a><br>
+      <a href="#3.5">3.5 Design-time Tests</a><br>
+      <a href="#3.6">3.6 JSP Tests</a><br>
+      <a href="#3.7">3.7 XHTML Test</a><br>
+      </div>
+      <a href="#4.0">4.0 Automation</a><br>
+      <a href="#5.0">5.0 Approval</a><br>
+      <h2 style="font-weight: bold;"><a name="1.0"></a>1.0 Overview</h2>
+      <font size="3">This test specification describes the approach to
+be taken when testing the rendering of the 4.1 Project Woodstock Bubble
+Component (Bubble).</font><br>
+      <h3 style="font-weight: bold;"><a name="1.1"></a>1.1 Component
+Description<br>
+      </h3>
+The Bubble is a component that allows the end user to see
+information pertinent to a certain area of the screen. The end users
+hovers (that is places the mouse focus over ) a component for some
+time, and a <br>
+pop up window appears with additional information that is
+appropriate to that context.
+      <h3 style="font-weight: bold;"><a name="1.2"></a>1.2 Relevant
+Documents</h3>
+      <ul>
+        <li><a
+ href="https://woodstock.dev.java.net/docs/specs/component-fs-bubblehelp.html">Bubble
+Functional Specification </a>- final link when
+approved.<br>
+        </li>
+        <li><a
+ href="http://xdesign.sfbay/projects/swaed-working/popuphelp/">Sun
+Web Application Guidelines</a>&nbsp; - flip to final link when
+approved.</li>
+        <li><a href="https://woodstock.dev.java.net/ProjectRoadmap.htm">Project
+Woodstock Road Map</a><br>
+        </li>
+      </ul>
+      <h3><a name="1.3"></a>1.3 Definition of Terms</h3>
+      <span style="font-weight: bold;"></span>
+      <table style="text-align: left; width: 974px; height: 564px;"
+ border="0" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td
+ style="vertical-align: top; font-weight: bold; text-align: left; text-decoration: underline;">Term:<br>
+            </td>
+            <td
+ style="vertical-align: top; font-weight: bold; text-align: left; text-decoration: underline;">Definition:<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">A11Y</span><br>
+            </td>
+            <td style="vertical-align: top;">Accessibility<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">AJAX<br>
+            </td>
+            <td style="vertical-align: top;">Asynchronous JavaScript +
+XML</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">API<br>
+            </td>
+            <td style="vertical-align: top;">Application Programming
+Interface, such as methods of a Java class</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">AppServer
+            <br>
+            </td>
+            <td style="vertical-align: top;">Sun Java System
+Application Server</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">BUI</td>
+            <td style="vertical-align: top;">Browser user Interface</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">Component
+            <br>
+            </td>
+            <td style="vertical-align: top;">Entity consisting of a <span
+ style="font-style: italic;">JSP tag</span>, <span
+ style="font-style: italic;">JSF component</span>, <span
+ style="font-style: italic;">JSF renderer</span>, JavaScript, CSS, <span
+ style="font-style: italic;">Dojo Widget</span>, and <span
+ style="font-style: italic;">HTML Template<br>
+            </span><span style="font-weight: bold;"></span></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">CSS</td>
+            <td style="vertical-align: top;">Cascading Style Sheet<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">Design-time
+renderer </td>
+            <td style="vertical-align: top;">The <span
+ style="font-style: italic;">JSF renderer</span> used to output partial
+HTML for the Creator IDE</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Dojo</span></td>
+            <td style="vertical-align: top;">Open source JavaScript
+toolkit</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Dojo widget</span></td>
+            <td style="vertical-align: top;">A <span
+ style="font-style: italic;">widget</span> based on the Dojo toolkit,
+also consisting an <span style="font-style: italic;">HTML template</span>
+and <span style="font-style: italic;">event listener JavaScript</span></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Dynamic Faces, JSF Extensions</span><br>
+            </td>
+            <td style="vertical-align: top;">Framework to support AJAX
+in JSF<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Glassfish</span></td>
+            <td style="vertical-align: top;">Sun's Open Source System
+Application Server</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">HTML template</span></td>
+            <td style="vertical-align: top;">The file used to define
+HTML tags associated with a component</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">I18N</span></td>
+            <td style="vertical-align: top;">Internationalization</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">JCOV</span></td>
+            <td style="vertical-align: top;">Java Code Coverage Tool</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">JSF</span></td>
+            <td style="vertical-align: top;">JavaServer Faces</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">JSON</span><br>
+            </td>
+            <td style="vertical-align: top;">Javascript Object Notation</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Silk</span></td>
+            <td style="vertical-align: top;">Silk Test, BUI Automation
+Tool from Segue, Inc.</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">SWAED</span></td>
+            <td style="vertical-align: top;">Sun Web App Experience
+Design</td>
+          </tr>
+        </tbody>
+      </table>
+      <span style="font-weight: bold;"></span><br>
+      <h2><a name="2.0"></a>2.0 Test Requirements</h2>
+The <font size="3">Bubble</font> component will be tested to
+meet the following
+requirements, standards,
+and tests:<br>
+      <ul>
+        <li>SWAED Guidelines compliant <br>
+        </li>
+        <li>A11Y compliant by GA<br>
+        </li>
+        <li>I18N compliant by GA<br>
+        </li>
+        <li>XHTML transitional compliant by GA<br>
+        </li>
+        <li>GUI functional test requirements</li>
+        <li>JSP test requirements</li>
+        <li>API test requirements</li>
+      </ul>
+      <h3><a name="2.1"></a>2.1 Tools and Methods:</h3>
+The <font size="3">Bubble</font> component will be tested using
+the the
+following tools and methods:<br>
+      <ul>
+        <li>GUI tests will be performed on platform and browser
+configurations
+identified here:</li>
+        <ul>
+          <li>The table of supported <a
+ href="https://woodstock.dev.java.net/docs/SupportedBrowers.htm">Browsers</a>.</li>
+        </ul>
+        <ul>
+          <li>The table of supported <a
+ href="https://woodstock.dev.java.net/docs/SupportedContainers.htm">Containers</a>.</li>
+        </ul>
+        <li>Functional and BUI tests will be automated using <a
+ href="http://www.borland.com/us/solutions/lifecycle-quality-management/index.html">SilkTool</a></li>
+        <li><a href="http://www.javascriptlint.com/">JavaScriptLint</a>
+will be used to check for syntax errors in the component's javascript.<br>
+        </li>
+        <li>API tests will be written for each method in the
+classes of the component</li>
+        <li>Automated tests will be integrated into a test harness and
+run nightly as a regression suite</li>
+        <li>Automated code coverage goal of 80% (at GA) will be
+achieved as outlined in
+the project test plan<br>
+        </li>
+      </ul>
+      <h3><a name="2.2"></a>2.2 Issue Tracking <br>
+      </h3>
+Bugs will be filed using Bugtracker (Issue Tracker) and entered against
+the proper Project Woodstock Revision and sub-component category.&nbsp;
+This tool can be found on the <a href="https://woodstock.dev.java.net/">woodstock
+open source site</a>.
+You must have<br>
+a valid user account in order to submit issues against
+this sub-component.<br>
+      <br>
+      <table
+ style="text-align: left; margin-left: 40px; width: 359px; height: 71px;"
+ cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Component:</span><br>
+            </td>
+            <td style="vertical-align: top;">Components<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;"><span
+ style="font-weight: bold;">Sub-Component:</span><br>
+            </td>
+            <td style="vertical-align: top;">Bubble<big><br>
+            </big></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Version</span><small
+ style="font-weight: bold;">:</small><big><br>
+            </big></td>
+            <td style="vertical-align: top;">4.1<big><br>
+            </big></td>
+          </tr>
+        </tbody>
+      </table>
+      <h2><a name="3.0"></a>3.0 Test Matrix</h2>
+      <br>
+The following are
+definitions of the fields used in the test case matrix:<br>
+      <br>
+      <div style="margin-left: 40px;">
+      <table style="text-align: left;" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;"><small>Test
+Case ID</small></td>
+            <td style="vertical-align: top;"><small>Unique
+identifier for each test case<br>
+            </small></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Test Case Synopsis</span><br>
+            </small></td>
+            <td style="vertical-align: top;"><small>Description
+of the test case<br>
+            </small></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">User Defined Fields</span><br>
+            </small></td>
+            <td style="vertical-align: top;"><small>Defined by
+the test engineer to allow for flexibility in writing the test case<br>
+            </small></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      </div>
+      <h3><a name="3.1"></a>3.1 Web Guidelines Compliancy Tests </h3>
+      <br>
+      <table
+ style="background-color: rgb(255, 255, 255); text-align: left;"
+ border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case ID</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case Synopsis</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Netscape</a><br>
+            </td>
+            <td style="vertical-align: top;">Solaris<br>
+Mozilla <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Netscape</a><br>
+            </td>
+            <td style="vertical-align: top;">Linux<br>
+Mozilla<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+IE</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top;">MAC Safari <br>
+Client-only <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Comments</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);">UI-01<br>
+            </td>
+            <td style="vertical-align: top;"> The <a
+ href="mailto:swaed-core@sun.com">SWAED-CORE team</a> has reviewed the
+"good coding practices" example <br>
+written
+for this
+component.&nbsp; <br>
+The examples are in compliance with the UI
+spec written.&nbsp; Therefore <br>
+individual test cases for each UI
+requirement has not been completed. <br>
+By signing off on this test case it
+is assumed that SWAED has reviewed <br>
+the component for <br>
+completeness and
+compliance with guidelines written.<br>
+            <br>
+Testing has occurred across all browsers and
+platforms supported. </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">QA must request the
+            <br>
+review. Be sure to set <br>
+review deadlines, collect <br>
+comments, files
+issues, etc.<br>
+            <br>
+Maya Venkatramam<br>
+is the SWAED representative <br>
+for this component project. </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">UI-02<br>
+            </td>
+            <td style="vertical-align: top;">Structure of the <font
+ size="3">Bubble</font><br>
+            <br>
+            <span style="text-decoration: underline; font-weight: bold;">ToTest</span><br>
+&nbsp; 1. Set your url to: <a class="moz-txt-link-freetext"
+ href="http://blah.india:8081/example/faces/bubblehelp/test1.jsp">http://hostname:8080/example/faces/bubble/bubble.jsp</a>&nbsp;
+            <br>
+&nbsp; 2. Click on a component<br>
+&nbsp; 3. review the Bubble <br>
+            <br>
+            <span style="font-weight: bold; text-decoration: underline;">To
+Verify</span><br>
+1.The Title should appear in the title bar area.<br>
+2.Close button(X)appears to the right of the Bubble
+title bar. <br>
+3.The main text of the Bubble.<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">UI-03<br>
+            </td>
+            <td style="vertical-align: top;">To check the size of the
+Bubble<br>
+            <br>
+            <span style="font-weight: bold; text-decoration: underline;">To
+verify</span> <br>
+The size of the Bubble window should be smaller than the main
+window that <br>
+it appears over. The Bubble window area should not
+exceed half the area of<br>
+the main window.<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">UI-04<br>
+            </td>
+            <td style="vertical-align: top;">To check for the help
+links in
+the <font size="3">Bubble</font><br>
+            <br>
+            <span style="text-decoration: underline; font-weight: bold;">To
+Verify</span><br>
+To check for the related links placed at the right bottom end of the
+Bubble&nbsp; <br>
+text. <br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">UI-05<br>
+            </td>
+            <td style="vertical-align: top;">To Check the rounded
+corners of
+the <font size="3">Bubble</font>.<br>
+            <br>
+            <span style="text-decoration: underline; font-weight: bold;">To
+Verify</span><br>
+To check whether the corners of the <font size="3">Bubble</font>
+is a rounded corner<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">UI-06<br>
+            </td>
+            <td style="vertical-align: top;">Appearance of the callout
+shape<br>
+            <span style="text-decoration: underline; font-weight: bold;">To
+Verify<br>
+            </span>1.On mouse over on a component, the <font size="3">Bubble</font>
+appears<span style="text-decoration: underline; font-weight: bold;"><br>
+            </span>2.The callout shape of the Bubble should be
+acute<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">UI-07<br>
+            </td>
+            <td style="vertical-align: top;">The check the shadow
+Borders of the <font size="3">Bubble</font><br>
+            <span style="font-weight: bold; text-decoration: underline;">To
+Verify</span><br>
+1.On mouse over on a component, the Bubble appears<br>
+2. The Borders of the Bubble should be thin line with shadow
+borders<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">UI-08<br>
+            </td>
+            <td style="vertical-align: top;">Text area and Background
+color<br>
+            <span style="font-weight: bold; text-decoration: underline;">To
+Verify</span><br>
+1. On mouse over on a component, the <font size="3">Bubble</font>
+appears<br>
+2.The Text area and the body color of the <font size="3">Bubble</font>
+should be
+contrast<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">UI-9<br>
+            </td>
+            <td style="vertical-align: top;">Check for the scroll bars<br>
+            <span style="font-weight: bold; text-decoration: underline;">To
+Verify</span><br>
+1. On mouse over on a component, the <font size="3">Bubble</font>
+appears<br>
+2. If the content in the Bubble is more then there should be a "
+more link"&nbsp; <br>
+placed at the end of the pop Up help text. <br>
+3. Scroll bars should not appear<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">UI-10<br>
+            </td>
+            <td style="vertical-align: top;">Check for the large
+components like table, Add Remove etc.........<br>
+            <span style="font-weight: bold; text-decoration: underline;">To
+Verify</span><br>
+1. On mouse over on an area, the <font size="3">Bubble</font>
+appears<br>
+2. Large components like table, Add remove should not be present in<br>
+the <font size="3">Bubble</font> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">UI-11<br>
+            </td>
+            <td style="vertical-align: top;">Check for the Bubble
+appearance in all directions.<br>
+            <br style="font-weight: bold; text-decoration: underline;">
+            <span style="font-weight: bold; text-decoration: underline;">To
+Verify</span><br>
+1. Do the mouse overon top-left corner component in a page<br>
+The Bubble should appear to right-bottom of the component<br>
+2. Do the mouse over on top-right corner component in a page . <br>
+The Bubble should appear to the left-bottom of the component<br>
+3. Do the mouse over on bottom-left corner component in a page. <br>
+The Bubble should appear to the top-right corner of the component<br>
+4.Do the mouse over on bottom-left corner component in a page.<br>
+The Bubble should appear to the top-right corner of the component<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">UI-12<br>
+            </td>
+            <td style="vertical-align: top;">Check for one callout for
+a Bubble<br>
+            <br style="font-weight: bold; text-decoration: underline;">
+            <span style="font-weight: bold; text-decoration: underline;">To
+Verify</span><br>
+1. On mouse over on an area, the <font size="3">Bubble</font>
+appears<br>
+2.the Bubble should have only one callout<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-left: 40px;">
+      <div style="text-align: center;"> </div>
+      <br>
+      </div>
+      <h3><a name="3.2"></a>3.2 A11Y&nbsp; Tests</h3>
+The <font size="3">Bubble</font> component needs to comply with
+accessibility
+requirements
+set forth in the Solaris Section <a
+ href="http://solaris.eng/accessibility/508_friendly/index.html">508</a>
+Readiness Assessment Form (See 1194.22 Web-based intranet and internet
+information and applications).<br>
+      <span style="font-weight: bold;"><br>
+      </span>Accessibility testing will involve utilizing an
+accessibility tool (<a
+ href="http://accessibility.eng/site.topics/ifd-download/index.html">InFocus</a>)
+as well as manual testing.&nbsp; For the InFocus testing, it is best
+to start out by saving the source of the <font size="3">Bubble</font>
+Examples.&nbsp;
+This
+will speed up the<br>
+overall test effort.&nbsp;&nbsp; There is also screen
+reader software
+(home Page Reader, Jaws, etc.) which is optional testing and will only
+be executed if time permits.&nbsp; <br>
+      <br>
+&nbsp;<br>
+      <a
+ href="http://accessibility.eng/site.topics/ifd-download/index.html"></a><br>
+      <table
+ style="background-color: rgb(255, 255, 255); text-align: left;"
+ border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case ID</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case Synopsis</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Netscape</a><br>
+            </td>
+            <td style="vertical-align: top;">Solaris<br>
+Mozilla <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Netscape</a><br>
+            </td>
+            <td style="vertical-align: top;">Linux<br>
+Mozilla<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+IE</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top;">MAC Safari <br>
+Client-only <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Comments</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);">A11Y-01<br>
+            </td>
+            <td style="vertical-align: top;"> All examples written for
+the <font size="3">Bubble</font> have been tested using the
+InFocus accessibility tool. <br>
+            <br>
+Each test will have its own test case with steps to review.<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">A11Y-02<br>
+            </td>
+            <td style="vertical-align: top;"><a
+ href="http://solaris.eng/accessibility/508_friendly/preamble.html#1194.22a"
+ target="preamble">Each</a><a
+ href="http://solaris.eng/accessibility/508_friendly/preamble.html#1194.22a"
+ target="preamble">Paragraph (a)</a>
+A text equivalent for every non-text element shall be provided<br>
+&nbsp;(e.g.,
+via "alt", "longdesc", or
+in element content). <br>
+            <br>
+            <span style="font-weight: bold; text-decoration: underline;">To
+Test<br>
+            </span><span
+ style="font-weight: bold; text-decoration: underline;"></span><small><big>1.
+launch the browser of&nbsp; Bubble component. <br>
+            </big></small><a class="moz-txt-link-freetext"
+ href="http://blah.india:8081/example/faces/bubblehelp/test1.jsp">http://hostname:8080/example/faces/bubble/bubble.jsp</a><br>
+            <small><big>2. Using the browser tools, block images from
+being rendered on a page. <br>
+3. Save the page in html format</big><br>
+            </small><br
+ style="font-weight: bold; text-decoration: underline;">
+            <span style="font-weight: bold; text-decoration: underline;">Verification:<span
+ style="text-decoration: underline;"><span style="font-weight: bold;"><br>
+            </span></span></span>1. The text equivalent to the close
+button&nbsp; are found in the html format<span
+ style="font-weight: bold; text-decoration: underline;"></span><span
+ style="font-weight: bold; text-decoration: underline;"><span
+ style="text-decoration: underline;"><span style="font-weight: bold;"> </span></span></span>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A </td>
+            <td style="vertical-align: top;"><a
+ href="http://solaris.eng/accessibility/508_friendly/preamble.html#1194.22b"
+ target="preamble">Paragraph (b)</a>
+Equivalent alternatives for any multimedia presentation shall be
+            <br>
+synchronized with the
+presentation.<br>
+            <br>
+            <span style="font-weight: bold; text-decoration: underline;">N/A<br>
+            <br>
+            </span><span
+ style="font-weight: bold; text-decoration: underline;"></span> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">A11Y-03<br>
+            <br>
+            </td>
+            <td style="vertical-align: top;"><a
+ href="http://solaris.eng/accessibility/508_friendly/preamble.html#1194.22c"
+ target="preamble">Paragraph (c)</a>
+Web pages
+shall be designed so that all information conveyed with<br>
+&nbsp;color is also
+available
+without color, for example from context or markup.<br>
+            <span style="font-weight: bold; text-decoration: underline;"></span><br>
+            <span style="font-weight: bold; text-decoration: underline;">To
+Test<br>
+            </span><span
+ style="font-weight: bold; text-decoration: underline;"></span><small><big>1.
+launch the browser of&nbsp; Bubble component. <br>
+            </big></small><a class="moz-txt-link-freetext"
+ href="http://blah.india:8081/example/faces/bubblehelp/test1.jsp">http://hostname:8080/example/faces/bubble/bubble.jsp</a><br>
+2. Do the&nbsp; mouse over on any component<br>
+            <br>
+            <span style="text-decoration: underline; font-weight: bold;">Verification</span><br>
+1. The Bubble&nbsp; should appear.<br>
+2. The text relevant to the component should be seen in the Bubble<br>
+            <span style="text-decoration: underline;"></span> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">A11Y-04</td>
+            <td style="vertical-align: top;"><a
+ href="http://solaris.eng/accessibility/508_friendly/preamble.html#1194.22d"
+ target="preamble">Paragraph (d)</a>
+Documents
+shall be organized so they are readable without requiring <br>
+an associated
+style
+sheet.<br>
+            <br>
+            <span style="font-weight: bold; text-decoration: underline;"></span><span
+ style="font-weight: bold; text-decoration: underline;">ToTest<br>
+            </span>1.<small><big>
+launch the browser of&nbsp; Bubble component. <br>
+            </big></small><a class="moz-txt-link-freetext"
+ href="http://blah.india:8081/example/faces/bubblehelp/test1.jsp">http://hostname:8080/example/faces/bubble/bubble.jsp</a><br>
+2. Do the&nbsp; mouse over on any component<br>
+3. The Bubble will appear with the text<br>
+            <br>
+            <span style="font-weight: bold; text-decoration: underline;">Verification</span><br>
+1. The text or the explanation relevant to the&nbsp; component should
+appear inspite of the<br>
+&nbsp;weird display of the Bubble since it is
+without css<br>
+            <span style="font-weight: bold; text-decoration: underline;"></span>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A</td>
+            <td style="vertical-align: top;"><a
+ href="http://solaris.eng/accessibility/508_friendly/preamble.html#1194.22e"
+ target="preamble">Paragraph (e)</a>
+Redundant text links shall be provided for each active region of a
+            <br>
+server-side image map.<br>
+            <span style="font-weight: bold; text-decoration: underline;">N/A</span><br>
+            <span style="font-weight: bold; text-decoration: underline;"></span><span
+ style="font-weight: bold; text-decoration: underline;"></span><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A</td>
+            <td style="vertical-align: top;"><a
+ href="http://solaris.eng/accessibility/508_friendly/preamble.html#1194.22f"
+ target="preamble">Paragraph (f)</a>
+Client-side image maps shall be provided instead of server-side image
+            <br>
+maps except where
+the regions cannot be defined with an available geometric shape.<br>
+            <span style="font-weight: bold; text-decoration: underline;"></span><span
+ style="font-weight: bold; text-decoration: underline;">N/A</span><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A</td>
+            <td style="vertical-align: top;"><a
+ href="http://solaris.eng/accessibility/508_friendly/preamble.html#1194.22g"
+ target="preamble">Paragraph (g)</a>
+Row and
+column headers shall be identified for data tables. <br>
+            <br>
+            <span style="font-weight: bold;">N/A</span><span
+ style="font-weight: bold; text-decoration: underline;"><br>
+            </span><span
+ style="font-weight: bold; text-decoration: underline;"></span><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A</td>
+            <td style="vertical-align: top;"><a
+ href="http://solaris.eng/accessibility/508_friendly/preamble.html#1194.22h"
+ target="preamble">Paragraph (h)</a>
+Markup
+shall be used to associate data cells and header cells for data<br>
+&nbsp;tables
+that have two
+or more logical levels of row or column headers.<br>
+            <br>
+            <span style="font-weight: bold;">N/A<br>
+            <br>
+            </span><span
+ style="font-weight: bold; text-decoration: underline;"></span> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A</td>
+            <td style="vertical-align: top;"><a
+ href="http://solaris.eng/accessibility/508_friendly/preamble.html#1194.22i"
+ target="preamble">Paragraph (i)</a>
+Frames
+shall be titled with text that facilitates frame identification and
+navigation. <br>
+            <br>
+            <span style="font-weight: bold; text-decoration: underline;">N/A</span><span
+ style="font-weight: bold; text-decoration: underline;"></span><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A</td>
+            <td style="vertical-align: top;"> <a
+ href="http://solaris.eng/accessibility/508_friendly/preamble.html#1194.22j"
+ target="preamble">Paragraph (j)</a>
+Pages
+shall be designed to avoid causing the screen to flicker with a
+frequency<br>
+&nbsp;greater than 2
+Hz and lower than 55 Hz.<br>
+            <br>
+            <span style="font-weight: bold; text-decoration: underline;">N/A</span><span
+ style="font-weight: bold; text-decoration: underline;"></span><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A<br>
+            </td>
+            <td style="vertical-align: top;"><a
+ href="http://solaris.eng/accessibility/508_friendly/preamble.html#1194.22k"
+ target="preamble">Paragraph (k)</a>
+A
+text-only page, with equivalent information or functionality, shall be
+provided<br>
+to make a
+web site comply with the provisions of this part, when compliance
+cannot be <br>
+accomplished in any other
+way. The content of the text-only page shall be updated whenever <br>
+the
+primary page changes.<br>
+            <br>
+            <span style="font-weight: bold;">N/A<br>
+            <br>
+            </span><span
+ style="font-weight: bold; text-decoration: underline;"></span> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A</td>
+            <td style="vertical-align: top;"><a
+ href="http://solaris.eng/accessibility/508_friendly/preamble.html#1194.22l"
+ target="preamble">Paragraph (l)</a>
+When pages
+utilize scripting languages to display content, or to create <br>
+interface
+elements, the
+information provided by the script shall be identified with functional
+            <br>
+text that can be read by assistive
+technology.<br>
+            <br>
+            <span style="font-weight: bold; text-decoration: underline;">N/A</span><span
+ style="font-weight: bold; text-decoration: underline;"></span><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A</td>
+            <td style="vertical-align: top;"><a
+ href="http://solaris.eng/accessibility/508_friendly/preamble.html#1194.22m"
+ target="preamble">Paragraph (m)</a>
+When a web page requires that an applet, plug-in or other application<br>
+be present on the
+client system to interpret page content, the page must provide a link
+            <br>
+to a plug-in or applet that complies
+with &sect;1194.21(a) through (l).<br>
+            <br>
+            <span style="font-weight: bold;">N/A<br>
+            <br>
+            </span><span
+ style="font-weight: bold; text-decoration: underline;"></span> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A</td>
+            <td style="vertical-align: top;"><a
+ href="http://solaris.eng/accessibility/508_friendly/preamble.html#1194.22n"
+ target="preamble">Paragraph (n)</a>
+When electronic forms are designed to be completed on-line, the form
+shall <br>
+allow people
+using assistive technology to access the information, field elements,
+and <br>
+functionality required for
+completion and submission of the form, including all directions and
+cues.<br>
+            <br>
+            <span style="font-weight: bold;">N/A<br>
+            <br>
+            <br>
+            </span><span
+ style="font-weight: bold; text-decoration: underline;"></span> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A</td>
+            <td style="vertical-align: top;"><a
+ href="http://solaris.eng/accessibility/508_friendly/preamble.html#1194.22o"
+ target="preamble">Paragraph (o)</a>
+A method
+shall be provided that permits users to skip repetitive navigation
+links.<br>
+            <br>
+            <span style="font-weight: bold; text-decoration: underline;">N/A</span><span
+ style="font-weight: bold; text-decoration: underline;"></span><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">N/A</td>
+            <td style="vertical-align: top;"><a
+ href="http://solaris.eng/accessibility/508_friendly/preamble.html#1194.22p"
+ target="preamble">Paragraph (p)</a>
+When a
+timed response is required, the user shall be alerted and given
+sufficient<br>
+&nbsp;time to
+indicate more time is required.<br>
+            <br>
+            <span style="font-weight: bold;">N/A<br>
+            <br>
+            </span><span
+ style="font-weight: bold; text-decoration: underline;"></span> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">A11Y-OPT-XX<br>
+            </td>
+            <td style="vertical-align: top;">Optional Screen Reader
+Testing <br>
+            <br>
+            <span style="font-weight: bold; text-decoration: underline;">To
+Test:</span><br>
+1. Whethere the optical screen reader reads the text and the Links
+present<br>
+            <br>
+            <span style="font-weight: bold; text-decoration: underline;">Verification:<br>
+            </span>1. Open a Example page<br>
+2. On mouse hover a <font size="3">Bubble </font>appears<br>
+3.Check whether the screen reader reads all the text and the links in
+the Bubble<br>
+            <span style="font-weight: bold; text-decoration: underline;"></span>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="3.3"></a>3.3&nbsp; I18N Tests<br>
+      </h3>
+      <span style="text-decoration: underline;">Assumptions:</span><br>
+1. L10N has translated both the <span style="font-weight: bold;">component</span>
+      <span style="font-weight: bold;">set</span> and <span
+ style="font-weight: bold;">example.war</span>.&nbsp;
+This delivery has been unjarred and resides locally on a
+mounted/shared&nbsp; drive. <br>
+2. The user has deployed the example.war and 4.1 component jars to a
+host and to the container as well.<br>
+      <br>
+      <span style="text-decoration: underline;">Setup Instructions:</span><br>
+1. deploy the example webapp to your host.<br>
+2. deploy the localized jars to the example app and edit the
+faces-config.xml:<br>
+      <pre>     -- on your host as root:<br>     cd /usr/local/apps/example/WEB-INF/lib<br>     cp &lt;path to unjarred i18n jar/lib/&gt;* .<br><br>     -- edit faces-config.xml to include the supported locales:<br>     cd /usr/local/apps/example/WEB-INF<br>     vi faces-config.xml - add in supported-locale info:<br><br>     &lt;application&gt;<br>        &lt;locale-config&gt;<br>          &lt;default-locale&gt;en&lt;/default-locale&gt;<br>          &lt;supported-locale&gt;de&lt;/supported-locale&gt;<br>          &lt;supported-locale&gt;fr&lt;/supported-locale&gt;<br>          &lt;supported-locale&gt;es&lt;/supported-locale&gt;<br>          &lt;supported-locale&gt;it&lt;/supported-locale&gt;<br>          &lt;supported-locale&gt;ja&lt;/supported-locale&gt;<br>          &lt;supported-locale&gt;ko&lt;/supported-locale&gt;<br>          &lt;supported-locale&gt;sv&lt;/supported-locale&gt;<br>          &lt;supported-locale&gt;pt_BR&lt;/supported-locale&gt;<br>          &lt;supported-locale&gt;zh_CN&lt;/supported-locale&gt;<br>          &lt;supported-locale&gt;zh_HK&lt;/supported-locale&gt;<br>          &lt;supported-locale&gt;zh_TW&lt;/supported-locale&gt;<br>        &lt;/locale-config&gt;<br>     &lt;/application&gt;<br><br></pre>
+3. Redeploy the example app in AppServer. <br>
+4. Set the Browser locale to one of the languages supported and start
+testing!<br>
+      <br>
+      <br>
+      <table
+ style="background-color: rgb(255, 255, 255); text-align: left;"
+ border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case ID</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case Synopsis</a> </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Netscape</a><br>
+            </td>
+            <td style="vertical-align: top;">Solaris<br>
+Mozilla <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Netscape</a><br>
+            </td>
+            <td style="vertical-align: top;">Linux<br>
+Mozilla<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+IE</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top;">MAC Safari <br>
+Client-only <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Comments</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);">I18N-01<br>
+            </td>
+            <td style="vertical-align: top;">Multi-byte Languages
+render properly (German (de) and Swedish(sv))<br>
+To Test:<br>
+1. Launch a browser. Change the locale to German (de).<br>
+2. Launch the example app:<br>
+            <a class="moz-txt-link-freetext"
+ href="http://blah.india:8081/example/faces/bubblehelp/test1.jsp">http://hostname:8080/example/faces/bubble/bubble.jsp</a><br>
+3.visit the Bubble example<br>
+            <br>
+Verification:<br>
+Review all Labels, messages and text, looking for proper
+translation.&nbsp; No invalid<br>
+characters (??? in particular), no text scrolling off page, etc.<br>
+            <br>
+* Repeat for the Swedish (switch browser locale and reload the page).<br>
+            <span style="font-weight: bold; font-style: italic;"></span>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><a
+ class="header">I18N-02<br>
+            </a> </td>
+            <td style="vertical-align: top;">Latin based languages are
+okay (Italian(it), French(fr), Spanish(es), and Portuguese(pt_BR))<br>
+            <br>
+To Test:<br>
+1. Launch a browser. Change the locale to French (fr).<br>
+2. Launch the example app:<br>
+            <a class="moz-txt-link-freetext"
+ href="http://blah.india:8081/example/faces/bubblehelp/test1.jsp">http://hostname:8080/example/faces/bubble/bubble.jsp</a><br>
+visit the Bubble example<br>
+            <br>
+Verification:<br>
+Review all Labels, messages and text, looking for proper translation.
+No invalid characters<br>
+(??? in particular), no text scrolling off page, etc.<br>
+            <br>
+* Repeat for Italian, Spanish and finally Portuguese (switch browser
+locale and reload the page).<br>
+            <br>
+            <span style="font-weight: bold; font-style: italic;"></span>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><a
+ class="header">I18N-03<br>
+            </a> </td>
+            <td style="vertical-align: top;">Special Characters are
+okay (Chinese (zh_CN, zh_HK or zh_TW), Japanese(ja), and Korean(ko))<br>
+            <br>
+To Test:<br>
+1. Launch a browser. Change the locale to French (fr).<br>
+2. Launch the example app:<br>
+            <a class="moz-txt-link-freetext"
+ href="http://blah.india:8081/example/faces/bubblehelp/test1.jsp">http://hostname:8080/example/faces/bubble/bubble.jsp</a><br>
+visit the Bubble example<br>
+            <br>
+Verification:<br>
+Review all Labels, messages and text, looking for proper
+translation.&nbsp; No invalid characters<br>
+&nbsp;(??? in particular), no text scrolling off page, etc.<br>
+            <br>
+&nbsp;*Repeat for Japanese and Korean&nbsp; (switch browser language,
+reload the page).<br>
+            <span style="font-weight: bold; font-style: italic;"></span>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="3.4"></a>3.4 Run-Time GUI Functional Tests<br>
+      </h3>
+      <a class="header"><br>
+      </a>
+      <table
+ style="background-color: rgb(255, 255, 255); text-align: left;"
+ border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case ID</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case Synopsis</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Netscape</a><br>
+            </td>
+            <td style="vertical-align: top;">Solaris<br>
+Mozilla <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Netscape</a><br>
+            </td>
+            <td style="vertical-align: top;">Linux<br>
+Mozilla<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+IE</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top;">MAC Safari <br>
+Client-only <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Comments</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);">RT-01<br>
+            </td>
+            <td style="vertical-align: top;">Existance of <font
+ size="3">Bubble</font>
+component when end users hovers<br>
+            <span style="text-decoration: underline; font-weight: bold;"><br>
+To
+Verify<br>
+            </span>1.Launch the example app:<br>
+            <a class="moz-txt-link-freetext"
+ href="http://blah.india:8081/example/faces/bubblehelp/test1.jsp">http://hostname:8080/example/faces/bubble/bubble.jsp</a><span
+ style="text-decoration: underline; font-weight: bold;"><br>
+            </span>2.Place the mouse focus over a component for few
+seconds<br>
+3.<font size="3">Bubble</font> should&nbsp; appear, with
+additional information that is
+appropriate to that context.<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><a
+ class="header">RT-02<br>
+            </a> </td>
+            <td style="vertical-align: top;">Appearance of <font
+ size="3">Bubble</font>
+component<br>
+            <span style="text-decoration: underline; font-weight: bold;"><br>
+To
+Verify</span><br>
+1. Launch the example app:<br>
+            <a class="moz-txt-link-freetext"
+ href="http://blah.india:8081/example/faces/bubblehelp/test1.jsp">http://hostname:8080/example/faces/bubble/bubble.jsp</a><br>
+2. Place the mouse on a component <br>
+3. The <font size="3">Bubble</font> will appear<br>
+4.The <font size="3">Bubble</font> should have heading and the
+information in detail.<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><a
+ class="header">RT-03<br>
+            </a> </td>
+            <td style="vertical-align: top;">At any given time only one
+            <font size="3">Bubble</font> should be visible on
+screen.<br>
+            <span style="text-decoration: underline; font-weight: bold;"><br>
+To
+Verify</span><br>
+1. Launch the example app:<br>
+            <a class="moz-txt-link-freetext"
+ href="http://blah.india:8081/example/faces/bubblehelp/test1.jsp">http://hostname:8080/example/faces/bubble/bubble.jsp</a><br>
+2.Place a mouse focus over a component<br>
+3.The Bubble will appear <br>
+4.Now take out the mouse from that area and place it in another text
+area.<br>
+5.The first <font size="3">Bubble</font> should get disappeared
+and a new <font size="3">Bubble</font>
+for the present hover should appear<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">RT-04<br>
+            </td>
+            <td style="vertical-align: top;">Bubble window should
+not follow the mouse<br>
+            <span style="text-decoration: underline; font-weight: bold;"><br>
+To
+Verify</span><br>
+1. Launch the example app:<br>
+            <a class="moz-txt-link-freetext"
+ href="http://blah.india:8081/example/faces/bubblehelp/test1.jsp">http://hostname:8080/example/faces/bubble/bubble.jsp</a><br>
+2.The Bubble component&nbsp; which appears when the end user
+hovers(that is places the mouse <br>
+focus over) <span style="font-style: italic;"><span
+ style="font-weight: bold;"><br>
+            </span></span>3.The Bubble should not follow the
+mouse when the mouse is moved from that place to another place<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">RT-05<br>
+            </td>
+            <td style="vertical-align: top;">Drag and Drop: It should
+possible to "pick up" or "drag" the pop up
+help to a different location<br>
+&nbsp;<span style="text-decoration: underline; font-weight: bold;"><br>
+To
+Verify<br>
+            </span>1. Launch the example app:<br>
+            <a class="moz-txt-link-freetext"
+ href="http://blah.india:8081/example/faces/bubblehelp/test1.jsp">http://hostname:8080/example/faces/bubble/bubble.jsp</a><br>
+2..Place a mouse focus over an area <br>
+3.The Bubble will appear <br>
+4. Click on the Bubble and drag it, should be able to drag and
+drop the Bubble to different place <span
+ style="text-decoration: underline; font-weight: bold;"><br>
+            </span></td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">RT-06<br>
+            </td>
+            <td style="vertical-align: top;">To close the Bubble<br>
+            <br>
+            <span style="text-decoration: underline; font-weight: bold;">To
+Verify</span><br>
+1..Click on the close button(X button) at the top-right corner of the
+Bubble.<br>
+2. The Bubble should get closed</td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">RT-07<br>
+            </td>
+            <td style="vertical-align: top;">To Check the functionality
+of the " Links" in the Bubble<br>
+            <br>
+            <span style="text-decoration: underline; font-weight: bold;">To
+Verify</span><br>
+1. Launch the example app:<br>
+            <a class="moz-txt-link-freetext"
+ href="http://blah.india:8081/example/faces/bubblehelp/test1.jsp">http://hostname:8080/example/faces/bubble/bubble.jsp</a><br>
+2.Place a mouse focus over an area <br>
+3.The Bubble will appear <br>
+4. Click on the" Link" option in the Bubble.<br>
+5. A new pop-up/New window should open<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">RT-08<br>
+            </td>
+            <td style="vertical-align: top;">To Check the 0.5 seconds
+delay in appearance and disappearance of the Bubble.<br>
+            <br>
+            <span style="font-weight: bold; text-decoration: underline;">To
+Verify<br>
+            </span>1. Launch the example app:<br>
+            <a class="moz-txt-link-freetext"
+ href="http://blah.india:8081/example/faces/bubblehelp/test1.jsp">http://hostname:8080/example/faces/bubble/bubble.jsp</a><br>
+2.Place the mouse focus over an component A.<br>
+3.The Bubble will appear after 0.5 sec<br>
+4.Do a immediate mouse over on another component B.<br>
+5.The Bubble diappears from component A in 0.5 sec and components
+appears for <br>
+component B after 0.5 sec.<br>
+6. So finally you should be able to see only one Bubble at a time.<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <a class="header"></a><a class="header"><br>
+      </a>
+      <h3><a name="3.5"></a>3.5 Design-Time Functional Tests</h3>
+* Add in instructions to install NB6+VWP that contains bubble component.<br>
+      <br>
+      <a class="header"> </a>
+      <table
+ style="background-color: rgb(255, 255, 255); text-align: left;"
+ border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case ID</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case Synopsis</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Netscape</a><br>
+            </td>
+            <td style="vertical-align: top;">Solaris<br>
+Mozilla <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Netscape</a><br>
+            </td>
+            <td style="vertical-align: top;">Linux<br>
+Mozilla<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+IE</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top;">MAC Safari <br>
+Client-only <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Comments</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <a class="header"> </a> <a class="header"><br>
+      </a> <a class="header"> </a><a class="header"><br>
+      </a> <a class="header"> </a>
+      <h3><a name="3.6"></a>3.6 XHTML Tests</h3>
+      <a class="header"><span
+ style="font-weight: bold; text-decoration: underline;">Prep-work:</span><br>
+1. <font size="3">Install the latest
+PWS Components on a server. Launch a browser and visit the Bubble
+tests (found in the example.war) saving each page's source to a file.</font><font
+ face="Arial, sans-serif"><font size="3"><br>
+      <br>
+      </font></font></a><a class="header"><br>
+      </a>
+      <table
+ style="background-color: rgb(255, 255, 255); text-align: left;"
+ border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case ID</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case Synopsis</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+NS7</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+NS7</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+IE</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top;">MAC Safari <br>
+Client-only <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Comments</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);">XHTML-01<br>
+            </td>
+            <td style="vertical-align: top;"> <a class="header"><font
+ size="3">Launch a browser and go
+to&nbsp;<b>
+http://crowroad.eng.sun.com/htmlcheck/</b></font> </a>
+            <ul>
+              <li> <font size="3">Towards
+the bottom
+of the page, there is a &#8220;upload files&#8221; link. Click this.</font> </li>
+            </ul>
+            <ul>
+              <li> <font size="3">In the
+File field,
+or click browse, locate and select the page source of choice.</font> </li>
+            </ul>
+            <ul>
+              <li> <font size="3">Choose
+&#8220;XHTML 1.0
+Transitional&#8221; for the Document Type or even leave it blank <br>
+                </font></li>
+              <li><font size="3">(since you
+made the updates to the header, the tool will automatically select
+XHTML 1.0 Transitional). </font> </li>
+            </ul>
+            <ul>
+              <li> <font size="3">Do not
+select any
+checkboxes.</font> </li>
+            </ul>
+            <ul>
+              <li> <font size="3">Click
+Validate
+this document. </font> </li>
+            </ul>
+            <ul>
+              <li> <font color="#000000"><font size="3">Manually
+review the list for any compliance issues. File bugs where appropriate.</font></font>
+              </li>
+              <small> </small>
+            </ul>
+            <a class="header"><br>
+            </a> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <a class="header"><br>
+      </a>
+      <h3><a name="3.7"></a>3.7 JSP Tests</h3>
+      <a class="header">This section identifies the automated BUI tests
+written against the Bubble JSP pages (example.war). <br>
+      <br>
+      </a>
+      <table
+ style="background-color: rgb(255, 255, 255); text-align: left;"
+ border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);">Test<br>
+            </td>
+            <td style="vertical-align: top;">&nbsp; API&nbsp; Approval
+and Integration Into Test Harness Complete <br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">Silk-01<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">Silk-02<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <a class="header"><br>
+      </a>
+      <h3><a name="3.8"></a>3.8 API Tests</h3>
+      <a class="header"> </a>
+      <div style="margin-left: 40px;"><br>
+      </div>
+API level unit tests will
+be written by QA, calling each method written
+for the component.&nbsp; These tests include both positive
+and negative value arguments.&nbsp; The goal is to look for consistent
+and proper behavior, <br>
+making sure range limits are met, and correct
+error reporting is handed by the class. The API tests will be
+incorporated into the internal test harness and run nightly. &nbsp;
+Nightly test results will be posted and available <br>
+for review.&nbsp;
+JCOV, the java
+code coverage tool, will be used to ensure that we meet the code
+coverage goales for milestones and GA in particular.&nbsp; <br>
+      <div style="margin-left: 40px;"> <br>
+      </div>
+      <br>
+      <table
+ style="background-color: rgb(255, 255, 255); text-align: left;"
+ border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);">Date
+            <br>
+            </td>
+            <td style="vertical-align: top;">&nbsp; API&nbsp; Approval
+and Integration Into Test Harness Complete <br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h2><a name="4.0"></a>4.0 Automation Implementation<br>
+      </h2>
+These are the QA
+milestones for writing automated tests. The dates indicate when the
+corresponding milestones have been met.<br>
+      <br>
+      <div style="margin-left: 40px;">
+      <table
+ style="background-color: rgb(255, 255, 255); text-align: left;"
+ border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><a class="header">Category</a><br>
+            </td>
+            <td style="vertical-align: top;"><a class="header">Completion
+Date</a><br>
+            </td>
+            <td style="vertical-align: top;"><a class="header">Date
+Accepted</a><br>
+            </td>
+            <td style="vertical-align: top;"><a class="header">Comments</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><a class="header">API Tests</a>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><a class="header">Silk
+Tests</a> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">JavaScriptLint <br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <br>
+      <br>
+      <h2><a name="5.0"></a>5.0 Approval <br>
+      </h2>
+The following sign-offs
+are required for document acceptance.<br>
+      <br>
+      <div style="margin-left: 40px;">
+      <table
+ style="background-color: rgb(255, 255, 255); text-align: left;"
+ border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><a class="header">Approver
+Role</a><br>
+            </td>
+            <td style="vertical-align: top;"><a class="header">Approver
+Name</a><br>
+            </td>
+            <td style="vertical-align: top;"><a class="header">Date</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><a class="header">Quality
+Engineer (peer)</a><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><a class="header">Component
+Engineer</a> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><a class="header">Manager</a>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <br>
+      <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

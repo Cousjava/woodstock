@@ -1,0 +1,1238 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <!--
+      The contents of this file are subject to the terms
+      of the Common Development and Distribution License
+      (the License).  You may not use this file except in
+      compliance with the License.
+      
+      You can obtain a copy of the license at
+      https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      See the License for the specific language governing
+      permissions and limitations under the License.
+      
+      When distributing Covered Code, include this CDDL
+      Header Notice in each file and include the License file
+      at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      If applicable, add the following below the CDDL Header,
+      with the fields enclosed by brackets [] replaced by
+      you own identifying information:
+      "Portions Copyrighted [year] [name of copyright owner]"
+      
+      Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+    -->
+<title>Project Woodstock - Button Component Func Spec</title>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<style type="text/css"> 
+/* <![CDATA[ */
+@import url(../../browser-uispec.css);
+.style2 {font-size: 18pt}
+</style>
+</head>
+<body bgcolor="#FFFFFF">
+
+<div align="right" class="security-text"><a href="#skipnav" title="Skip Navigation Links"></a></div>
+
+ <div class="MstDiv">
+  <table class="MstTblBot" width="100%" border="0" cellpadding="0" cellspacing="0" title="">
+
+    <tr>
+      <td class="MstTdTtl"><div class="MstDivTtl">
+          <div class="Mst1TtlTxt">Project Woodstock</div>
+        </div>
+        <div class="Mst1SecDiv"> <span class="Mst1SecTxt style2">Component Functional Specificaiton - Button </span></div></td>
+    </tr>
+  </table>
+</div> 
+ 
+  
+ 
+  <table title="" class="Mst2Tbl" style="width: 100%;" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td> &nbsp;
+      
+
+      
+      <br>
+      <h2><a name="1.0"></a>1.0 Description</h2>
+      <div style="margin-left: 40px;">This document describes a Web
+Application Guidelines compliant implementation of a client-side button
+written for use with Woodstock. Woodstock is the internal name
+for version 4 of the
+Sun Java Web User Interface Components tag library. The Woodstock
+components will be implemented using JavaServer Faces 1.2 framework and
+will adhere to version 4 of the Web Application Guidelines.<br>
+      <br>
+Note: This document assumes the reader has basic knowledge of
+HTML, JavaScript, JavaServer Pages, JavaServer Faces, Dojo, JSON, and
+Dynamic Faces. If not, please see the relevant documents before reading
+on.<br>
+      </div>
+      <h3><a name="1.1"></a><span style="font-weight: bold;">1.1
+Document Revision History</span><br>
+      </h3>
+      <table style="width: 95%; text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="width: 15%; text-align: center;"><span style="font-weight: bold;">Revision</span></td>
+            <td style="width: 15%; text-align: center;"><span style="font-weight: bold;">Date</span></td>
+            <td style="width: 50%; text-align: center;"><span style="font-weight: bold;">Synopsis</span></td>
+            <td style="width: 20%; text-align: center;"><span style="font-weight: bold;">Author</span></td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">1.0
+            </td>
+            <td style="text-align: center;">03/07/2006</td>
+            <td style="text-align: left;">Initial Draft</td>
+            <td style="text-align: center;">Dan Labrecque</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; text-align: center;">1.1<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">03/28/2007<br>
+            </td>
+            <td style="vertical-align: top;">Updated Section 7.4.1<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Dan
+Labrecque</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 style="font-weight: bold;"><a name="1.2"></a>1.2
+Relevant Document</h3>
+
+      <ul>
+        <li><a target="_blank" href="ajax-architecture-spec.html">Ajax
+Architecture for
+Woodstock JavaServer Faces</a></li>
+        <li><a target="_blank" href="ajax-architecture-example.html">Ajax
+Architecture Example for
+Woodstock JavaServer Faces Components</a></li>
+        <li><a target="_blank" href="http://wiki.java.net/bin/view/Javatools/CustomComponentLibraries">Component
+Authoring Guide</a></li>
+        <li><a href="http://jupiter.czech.sun.com/wiki/view/Creator/DesignerRulesForComponentAuthors" target="_blank">Designer Rules For Component Authors</a></li>
+        <li><a target="_blank" href="http://docs.sun.com/source/816-6408-10/contents.htm">JavaScript</a></li>
+        <li><a target="_blank" href="http://www.json.org/">JSON</a></li>
+        <li><a target="_blank" href="http://www.w3.org/TR/html401/">HTML
+4.01
+Specification</a></li>
+        <li>Web
+Application Guidelines - Version 4.0 - (coming soon) </li>
+      </ul>
+      <h3><a name="1.3"></a>1.3 Definition of
+Terms<br>
+      </h3>
+      <div style="margin-left: 40px;">See section 1.3 of <a target="_blank" href="ajax-architecture-spec.html#1.3">Ajax
+Architecture for Woodstock JavaServer Faces</a><br>
+      </div>
+      <h2><a name="2.0"></a>2.0 Requirements,
+goals, and assumptions</h2>
+      <h3><a name="2.1"></a>2.1 Requirements
+(required)</h3>
+      <div style="margin-left: 40px;">See section 2.1 of <a target="_blank" href="ajax-architecture-spec.html#2.1">Ajax
+Architecture for Woodstock JavaServer Faces</a></div>
+      <h3><a name="2.1.1"></a>2.1.1 UI 
+requirements (required, can be link)</h3>
+      <div style="margin-left: 40px;">See section 7.1 (Simple Elements)
+of&nbsp;Web
+Application Guidelines (coming soon) </div>
+      <h3><a name="2.1.2"></a>2.1.2 Functional
+requirements (required)</h3>
+      <ul>
+        <li>Ajax architecture must support a variety of runtime
+environments;
+particularly Portlet, JSF, JSP and for service processors.</li>
+      </ul>
+      <h3><a name="2.1.3"></a>2.1.3
+Performance requirements (optional)</h3>
+      <ul>
+        <li>Should not introduce a large memory footprint.</li>
+        <li>Should not overly impede startup performance.</li>
+      </ul>
+      <h3><a name="2.1.4"></a>2.1.4 Browser, platform requirements</h3>
+      <div style="margin-left: 40px;">See section 2.1.4 of <a target="_blank" href="ajax-architecture-spec.html#2.1.4">Ajax
+Architecture for Woodstock JavaServer Faces</a></div>
+      <h3><a name="2.1.5"></a>2.1.5 Special
+requirements (optional)</h3>
+      <ul>
+        <li><span style="font-style: italic;">Dojo widgets</span> shall
+not be dependent on the
+underlying JSF framework.</li>
+        <li><span style="font-style: italic;">Widget JavaScript</span>
+shall not include any references to server-side frameworks such as
+Dynamic Faces, JSP,
+or JSF.</li>
+      </ul>
+      <h3><a name="2.2"></a>2.2 Requirements Not Met (required, if you
+are not meeting
+a requirement)</h3>
+      <div style="margin-left: 40px;">TBD</div>
+      <h3><a name="2.3"></a>2.3 Assumptions
+(optional)</h3>
+      <ul>
+        <li>The Dojo toolkit shall be used to create template based
+widgets.</li>
+        <li>JSON shall be used to define client-side widget properties.</li>
+        <li>The locale does not change during Ajax requests.</li>
+      </ul>
+      <h3><a name="2.4"></a>2.4 Goals
+(optional)</h3>
+      <ul>
+        <li><span style="font-style: italic;">Dojo widgets</span> shall
+support web applications that are
+not based on JSF or JSP.</li>
+      </ul>
+      <h3>2.5 Non-goals
+(optional)</h3>
+      <ul>
+        <li>Support tags to instantiate a <span style="font-style: italic;">Dojo Widget</span> instead of using
+JavaScript.<br>
+        </li>
+      </ul>
+      <h2><a name="3.0"></a>3.0 Component Usage</h2>
+      <div style="margin-left: 40px;">Woodstock components can be used
+in a few different ways. The most
+typical way to use a component is with the <span style="font-style: italic;">JSP tag</span>. For example, to
+include an image in the JSP page, the web app developer will
+include a tag like this.<br>
+      <br>
+      <div style="margin-left: 40px;"><code>&lt;webuijsf:button
+id="button1" text="Button 1" /&gt;</code><br>
+      <br>
+      </div>
+Using
+the <span style="font-style: italic;">JSP tag</span>, all the <span style="font-style: italic;">in-line
+JavaScript</span> necessary to generate a <span style="font-style: italic;">Dojo widget</span> is automatically output
+in the rendered HTML page. This includes the name of the desired
+widget, any
+localized and themed properties required to populate the <span style="font-style: italic;">HTML template</span>,
+and any JavaScript files (e.g., <span style="font-style: italic;">widget
+JavaScript</span>) necessary to support the <span style="font-style: italic;">Dojo Widget</span>. However,
+a <span style="font-style: italic;">Dojo Widget</span> can also be
+represented by the following JavaScript. This
+JavaScript makes the Woodstock component available to web app
+developers who cannot, or do not want to, use the JSP and/or JSF
+frameworks.<br>
+      <br>
+Note that any one of the key-value pairs of properties below can
+contain more key-value pairs, possibly used by subcomponents.<br>
+      <div style="margin-left: 40px;"><br>
+      <code>dojo.require("webui.</code><code>&lt;theme&gt;</code><code>.widget.button");</code><code><br>
+webui.</code><code>&lt;theme&gt;</code><code>.widget.common.createWidget({<br>
+&nbsp;&nbsp;&nbsp; _widgetType: "webui.</code><code>&lt;theme&gt;</code><code>:button",<br>
+      </code><code>&nbsp;&nbsp;&nbsp; templatePath": "/</code><code>&lt;appname&gt;</code><code>/theme/com/sun/webui/jsf/</code><code>&lt;theme&gt;</code><code>/templates/button.html",</code><code><br>
+&nbsp;&nbsp;&nbsp; value: "Button 1"<br>
+&nbsp;&nbsp;&nbsp; id: "form1:button1"<br>
+});<br>
+      </code><code></code><code></code> </div>
+      <br>
+      <code></code>Web app developers may also continue to define
+components and
+properties via a managed bean as shown below. In this scenario, the
+component will behave similarly as if a <span style="font-style: italic;">JSP tag</span> were used. That is, the <span style="font-style: italic;">in-line
+JavaScript</span>, necessary to instantiate a <span style="font-style: italic;">Dojo Widget</span>, is automatically
+output
+in the page by the <span style="font-style: italic;">widget renderer</span>.<br>
+      <br>
+      <div style="margin-left: 40px;"><code>public class ButtonBean {<br>
+&nbsp;&nbsp;&nbsp; private Button button = null;<br>
+      <br>
+&nbsp;&nbsp;&nbsp; public Button getButton() {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; if (button == null) {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; button = new
+Button();<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; button.setText("Button
+1");<br>
+      </code><code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; return button;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp;&nbsp; public void setButton(Button button) {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; this.button = button;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+}<br>
+      </code> </div>
+      <br>
+Note that the above example assumes the <code>binding</code> attribute
+of a <span style="font-style: italic;">JSP tag</span> is
+used. For example:<br>
+      <br>
+      <div style="margin-left: 40px;"><code>&lt;webuijsf:button
+id="button1" </code><code>binding="#{ButtonBean.button}" /&gt;<br>
+      </code></div>
+      </div>
+      <div style="margin-left: 40px;"><br>
+To update the widget, the setProps function shall be used. Note that
+functions such as setMini, setPrimary, etc. are no longer required and
+shall be deprecated.<br>
+      <br>
+      <div style="margin-left: 40px;"><code>var domNode =
+document.getElementById("form1:button1");<br>
+domNode.setProps({<br>
+&nbsp;&nbsp;&nbsp; mini: true,<br>
+&nbsp;&nbsp;&nbsp; visible: true<br>
+});</code><br>
+      </div>
+      </div>
+      <div style="margin-left: 40px;"> </div>
+      <h2>4.0 Component
+Interfaces</h2>
+      <h3><a name="4.1"></a>4.1 Exported
+interfaces table (Required, Prelim)</h3>
+      <table style="width: 95%; margin-left: auto; margin-right: auto; text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <th style="vertical-align: top; width: 30%;">
+            <p>Interface Name<br>
+            </p>
+            </th>
+            <th style="vertical-align: top;">
+            <p>Classification<br>
+            </p>
+            </th>
+            <th style="vertical-align: top;">
+            <p>Reference<br>
+            </p>
+            </th>
+            <th style="vertical-align: top;">
+            <p>Comments<br>
+            </p>
+            </th>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; width: 30%;">com.sun.webui.jsf.component.Button</td>
+            <td style="vertical-align: top;">Stable</td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The interface for <span style="font-style: italic;">JSF components</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.html.ButtonRenderer</td>
+            <td style="vertical-align: top;">Unstable</td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The interface for
+design-time rendering<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.widget.ButtonRenderer</td>
+            <td style="vertical-align: top;">Unstable</td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The interface for
+widget rendering</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.taglib.ButtonTag</td>
+            <td style="vertical-align: top;">Unstable</td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The interface for <span style="font-style: italic;">JSP tags</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" rowspan="1" style="vertical-align: top;"><span style="font-weight: bold;">component-type and renderer-type
+faces-config.xml parameters</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.button<br>
+            </td>
+            <td style="vertical-align: top;">Unstable </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The name used to define
+the component-type<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.html.button<br>
+            </td>
+            <td style="vertical-align: top;">Unstable </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The name used to define
+the renderer-type for design-time rendering<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.widget.button</td>
+            <td style="vertical-align: top;">Unstable </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The name used to define
+the renderer-type for widget rendering</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <br>
+      <h3><a name="4.2"></a>4.2 Imported
+interfaces (Required, Final)</h3>
+      <div style="margin-left: 40px;">See section 4.2 of <a target="_blank" href="ajax-architecture-spec.html#4.2">Ajax
+Architecture for Woodstock JavaServer Faces</a></div>
+      <h3><a name="4.3"></a>4.3 Component
+interfaces (Required, Prelim)<br>
+      </h3>
+      <div style="margin-left: 40px;">com.sun.webui.jsf.component.Button.java<br>
+com.sun.webui.jsf.renderkit.html.ButtonRenderer.java<br>
+com.sun.webui.jsf.renderkit.widget.ButtonRenderer.java<br>
+com.sun.webui.jsf.taglib.ButtonTag.java<br>
+      </div>
+      <h3><a name="4.4"></a>4.4 Tag interfaces
+(required, Prelim)</h3>
+      <h3><a name="4.4.1"></a>4.4.1 Individual
+tag attributes descriptions (optional)</h3>
+      <div style="margin-left: 40px;">
+      <table border="1" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <td colspan="5"><font size="+2"><b>Attributes</b></font></td>
+          </tr>
+          <tr>
+            <td><b>Name</b></td>
+            <td><b>Required</b></td>
+            <td><b>Request-time</b></td>
+            <td><b>Type</b></td>
+            <td><b>Description</b></td>
+          </tr>
+          <tr valign="top">
+            <td>binding</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> A ValueExpression that resolves to the UIComponent
+that corresponds to this tag. This binding allows the Java bean that
+contains the UIComponent to manipulate the UIComponent, its properties,
+and its children. </td>
+          </tr>
+          <tr valign="top">
+            <td>onDblClick</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when a mouse double click occurs
+over this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>imageURL</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Resource path of an image to be displayed to create the
+visual appearance of this button instead of the standard button image.
+Either the <code>imageURL</code> or <code>text</code> attributes must
+be specified. When an <code>imageURL</code> value is given, the button
+type is set to <code>image</code>.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onKeyPress</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user presses and
+releases a key while the component has focus.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>reset</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Indicates that the button should be a HTML reset button.
+By default, this value is false and the button is created as a submit
+button. If the value is set to true, no action listener will be invoked.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onFocus</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when this component receives
+focus. An element receives focus when the user selects the element by
+pressing the tab key or clicking the mouse.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>escape</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Escape the html text so it won't be interpreted by the
+browser as HTML. When the <code>escape</code> value is set to false,
+an HTML <code>button</code> element is rendered, instead of an HTML <code>input</code>
+element. And the <code>alt</code> attribute does not apply.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onKeyUp</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user releases a key
+while the component has focus.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseUp</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user releases a mouse
+button while the mouse pointer is on the component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>styleClass</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>CSS style class(es) to be applied to the outermost HTML
+element when this component is rendered.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>icon</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>The identifier key of a theme image to be used for the
+button. </p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>style</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>CSS style(s) to be applied to the outermost HTML element
+when this component is rendered.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onClick</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when a mouse click occurs over
+this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>mini</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Indicates that the button should be rendered using a
+different style than normal buttons. By default, a button that
+specifies the mini attribute looks the same as a normal button. You
+must set your own CSS style to render a mini button. </td>
+          </tr>
+          <tr valign="top">
+            <td>onBlur</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when this element loses focus.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseDown</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user presses a mouse
+button while the mouse pointer is on the component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>toolTip</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Sets the value of the title attribute for the HTML
+element. The specified text will display as a tooltip if the mouse
+cursor hovers over the HTML element.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>primary</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Indicates that the button is the most commonly used
+button within a group.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>disabled</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Indicates that activation of this component by the user
+is not currently permitted. In this component library, the disabled
+attribute also causes the button to be renderered using a particular
+style.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseOut</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user moves the mouse
+pointer off this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>alt</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Alternative textual description of the image rendered by
+this component. The alt text can be used by screen readers and in tool
+tips, and when image display is turned off in the web browser.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseOver</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user moves the mouse
+pointer into the boundary of this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseMove</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user moves the mouse
+pointer while over the component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>noTextPadding</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Indicates that padding should not be applied to the
+button text. By default, whitespace characters are padded to button
+text greater than or equal to 4 characters in length. If the value is
+set to true, no padding is applied.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>text</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Text to display on the button. Either the <code>imageURL</code>
+or <code>text</code> attributes must be specified. When an <code>imageURL</code>
+value is given, the button type is set to <code>image</code>.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>visible</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Use the visible attribute to indicate whether the
+component should be viewable by the user in the rendered HTML page. If
+set to false, the HTML code for the component is present in the page,
+but the component is hidden with style attributes. By default, visible
+is set to true, so HTML for the component HTML is included and visible
+to the user. If the component is not visible, it can still be processed
+on subsequent form submissions because the HTML is present.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onKeyDown</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user presses down on a
+key while the component has focus.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>tabIndex</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Position of this element in the tabbing order of the
+current document. Tabbing order determines the sequence in which
+elements receive focus when the tab key is pressed. The value must be
+an integer between 0 and 32767.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>immediate</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Flag indicating that event handling for this component
+should be handled immediately (in Apply Request Values phase) rather
+than waiting until Invoke Application phase. </td>
+          </tr>
+          <tr valign="top">
+            <td>actionExpression</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> MethodExpression representing the application action
+to invoke when this component is activated by the user. The expression
+must evaluate to a either a String or a public method that takes no
+parameters, and returns a String (the logical outcome) which is passed
+to the NavigationHandler for this application. </td>
+          </tr>
+          <tr valign="top">
+            <td>actionListenerExpression</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Use the actionListenerExpression attribute to cause
+the component to fire an event. The value must be an EL expression and
+it must evaluate to the name of a public method that takes an
+ActionEvent parameter and returns void. </td>
+          </tr>
+          <tr valign="top">
+            <td>rendered</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Use the rendered attribute to indicate whether the
+HTML code for the component should be included in the rendered HTML
+page. If set to false, the rendered HTML page does not include the HTML
+for the component. If the component is not rendered, it is also not
+processed on any subsequent form submission. </td>
+          </tr>
+          <tr valign="top">
+            <td>id</td>
+            <td>false</td>
+            <td>true</td>
+            <td><code>java.lang.String</code></td>
+            <td><i>No Description</i></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">htmlTemplate<br>
+            </td>
+            <td style="vertical-align: top;">false<br>
+            </td>
+            <td style="vertical-align: top;">true<br>
+            </td>
+            <td style="vertical-align: top;"><code>java.lang.String</code></td>
+            <td style="vertical-align: top;">Set alternative HTML
+template to be used by this component.<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      </div>
+      <h3><a name="4.5"></a>4.5 JavaScript
+interfaces (required, Prelim)</h3>
+      <table style="width: 95%; margin-left: auto; margin-right: auto; text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <th style="vertical-align: top;">
+            <p>Interface Name<br>
+            </p>
+            </th>
+            <th style="vertical-align: top;">
+            <p>Classification<br>
+            </p>
+            </th>
+            <th style="vertical-align: top;">
+            <p>Reference<br>
+            </p>
+            </th>
+            <th style="vertical-align: top;">
+            <p>Comments<br>
+            </p>
+            </th>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">webui.&lt;theme&gt;.widget.button</td>
+            <td style="vertical-align: top;">Unstable</td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The interface for
+individual widgets</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">webui.&lt;theme&gt;.widget.button.fillInTemplate</td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">This function is used to
+generate a template based widget.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">webui.&lt;theme&gt;.widget.button.setProps</td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">This function is used to
+set widget properties with Object literals.<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <div style="margin-left: 40px;">Note: The &lt;theme&gt; tag is
+intended to be replaced with the current
+theme name and version number.<br>
+      </div>
+      <h3><a name="4.6"></a>4.6 Theme
+resources keys (required, Final)</h3>
+      <table style="width: 95%; margin-left: auto; margin-right: auto; text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <th style="vertical-align: top;">
+            <p>Interface Name<br>
+            </p>
+            </th>
+            <th style="vertical-align: top;">
+            <p>Classification<br>
+            </p>
+            </th>
+            <th style="vertical-align: top;">
+            <p>Reference<br>
+            </p>
+            </th>
+            <th style="vertical-align: top;">
+            <p>Comments<br>
+            </p>
+            </th>
+          </tr>
+          <tr>
+            <td style="width: 30%;">N/A</td>
+            <td style="width: 10%;">Unstable</td>
+            <td style="width: 10%;"><br>
+            </td>
+            <td>The path to the JavaScript file containing Dojo
+functions </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.6.1"></a>4.6.1 Style
+selectors</h3>
+      <div style="margin-left: 40px;">TBD</div>
+      <h3><a name="4.6.2"></a>4.6.2 Image
+resources</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="4.6.3"></a>4.6.3 JavaScript
+resources</h3>
+      <table style="margin-left: auto; margin-right: auto; width: 95%; text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span style="font-weight: bold;">JavaScript Resources</span><br>
+            </td>
+            <td style="vertical-align: top;"><span style="font-weight: bold;">Comments</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/button.js
+            </td>
+            <td style="vertical-align: top;">JavaScript containing
+widget resources </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/formElements.js</td>
+            <td style="vertical-align: top;">JavaScript resources
+associated with buttons shall be deprecated<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <div style="margin-left: 40px;">Note: The &lt;theme&gt; tag is
+intended to be replaced with the theme
+name
+(e.g., suntheme).<br>
+      </div>
+      <h3><a name="4.6.4"></a>4.6.4 Other
+resources</h3>
+      <table style="width: 95%; margin-left: auto; margin-right: auto; text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span style="font-weight: bold;">Template Resources</span></td>
+            <td style="vertical-align: top;"><span style="font-weight: bold;">Comments</span></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/css/button.css</td>
+            <td style="vertical-align: top;">The CSS file name (TBD...)<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/templates/button.html</td>
+            <td style="vertical-align: top;">The HTML template name for
+individual widgets</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <div style="margin-left: 40px;">Note: The &lt;theme&gt; tag is
+intended to be replaced with the theme
+name
+(e.g., suntheme).<br>
+      <span style="font-weight: bold;"></span></div>
+      <h3><a name="4.6.5"></a>4.6.5 Localized
+message keys</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="4.7"></a>4.7 Component
+Extensibility</h3>
+      <div style="margin-left: 40px;">See section 4.7 of <a target="_blank" href="ajax-architecture-spec.html#4.7">Ajax
+Architecture for Woodstock JavaServer Faces</a> </div>
+      <h2><a name="5.0"></a>5.0 - Creator
+Design Time Support (required, Prelim)</h2>
+      <h3><a name="5.1"></a>5.1 Design-time Behavior</h3>
+      <div style="margin-left: 40px;">See section 5.1 of <a target="_blank" href="ajax-architecture-spec.html#5.1">Ajax
+Architecture for Woodstock JavaServer Faces</a><br>
+      </div>
+      <h3><a name="5.2"></a>5.2 Design-time Classes and Interfaces</h3>
+      <div style="margin-left: 40px;">The
+com.sun.webui.jsf.renderkit.html.ButtonRenderer class shall continue to
+be used as the design-time renderer. Thus, there is no change between
+the Woodstock releases.<br>
+      <br>
+See section 5.2 of <a target="_blank" href="ajax-architecture-spec.html#5.2">Ajax
+Architecture for Woodstock JavaServer Faces</a><br>
+      </div>
+      <h3><a name="5.3"></a>5.3 Localized message keys</h3>
+      <div style="margin-left: 40px;">N/A<br>
+      </div>
+      <h3><a name="5.4"></a>5.4 Dependencies </h3>
+      <div style="margin-left: 40px;">N/A<br>
+      </div>
+      <h2><a name="6.0"></a>6.0 Component Dependencies</h2>
+      <h3><a name="6.1"></a>6.1 Component
+class dependencies</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="6.2"></a>6.2 JavaScript
+dependencie</h3>
+ 
+      <div style="margin-left: 40px;">See section 6.2 of <a target="_blank" href="ajax-architecture-spec.html#6.2">Ajax
+Architecture for Woodstock JavaServer Faces</a></div>
+      <div style="margin-left: 40px;">
+
+      </div>
+      <h3><a name="6.3"></a>6.3 Infrastructure
+dependencies<br>
+      </h3>
+
+      <div style="margin-left: 40px;">N/A<br>
+      </div>
+      <div style="margin-left: 40px;">
+      </div>
+      <h3><a name="6.4"></a>6.4 Design time
+dependencies</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h2><a name="7.0"></a>7.0 -
+Accessibility, Internationalization, Compliance, JavaScript (required)<br>
+      </h2>
+      <h3><a name="7.1"></a>7.1 Accessibility
+(A11Y)</h3>
+      <div style="margin-left: 40px;">The HTML title and alt (in the
+case of an icon button) attributes shall be supported in order to be
+508 compliant.<br>
+      <br>
+See section 7.1 of <a target="_blank" href="ajax-architecture-spec.html#7.1">Ajax
+Architecture for Woodstock JavaServer Faces</a><br>
+      </div>
+      <h3><a name="7.2"></a>7.2
+Internationalization (I18N)</h3>
+      <div style="margin-left: 40px;">See section 7.2 of <a target="_blank" href="ajax-architecture-spec.html#7.2">Ajax
+Architecture for Woodstock JavaServer Faces</a><br>
+      </div>
+      <h3><a name="7.3"></a>7.3 Level of XHTML Compliance</h3>
+      <div style="margin-left: 40px;">See section 7.3 of <a target="_blank" href="ajax-architecture-spec.html#7.3">Ajax
+Architecture for Woodstock JavaServer Faces</a> </div>
+      <h3><a name="7.4"></a>7.4 JavaScript</h3>
+      <h3><a name="7.4.1"></a>7.4.1 Client-side Updating<br>
+      </h3>
+      <div style="margin-left: 40px;">Web app developers shall be able
+to update all widget properties via the setProps function. In fact, the
+widget's fillInTemplate functions shall use this feature as well. All
+existing functions such as setMini, setPrimary, etc. shall be
+deprecated. For example:<br>
+      <code><br>
+&nbsp;&nbsp;&nbsp; webui.@THEME@.widget.button = function()
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.fillInTemplate = function() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // Set
+public functions. <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.domNode.setProps = function(props) {
+dojo.widget.byId(this.id).setProps(props); }<br>
+      <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; // Set private
+functions.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+this.getClassName = webui.@THEME@.widget.button.getClassName;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.getHoverClassName = webui.@THEME@.widget.button.getHoverClassName;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; this.setProps =
+webui.@THEME@.widget.button.setProps;<br>
+      <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //
+Deprecated functions from formElements.js. <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; // <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // Note:
+Although we now have a setProps function to update properties,<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // the
+following functions must be backward compatible.<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+this.domNode.isSecondary = webui.@THEME@.button.isSecondary;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ...<br>
+      <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Set
+properties.<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; this.setProps(this);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; return
+true;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+      </code></div>
+      <div style="margin-left: 40px;"><code>&nbsp;&nbsp;&nbsp; /**</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; * This function is used to set
+widget properties with the</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; * following Object literals.</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; * &lt;ul&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp; &lt;li&gt;alt&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp; &lt;li&gt;align&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;
+&lt;li&gt;className&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;
+&lt;li&gt;contents&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp; &lt;li&gt;dir&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;
+&lt;li&gt;disabled&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp; &lt;li&gt;id&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp; &lt;li&gt;lang&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp; &lt;li&gt;mini&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp; &lt;li&gt;name&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp; &lt;li&gt;onBlur&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;
+&lt;li&gt;onClick&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;
+&lt;li&gt;onDblClick&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;
+&lt;li&gt;onFocus&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;
+&lt;li&gt;onKeyDown&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;
+&lt;li&gt;onKeyPress&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;
+&lt;li&gt;onKeyUp&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;
+&lt;li&gt;onMouseDown&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;
+&lt;li&gt;onMouseOut&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;
+&lt;li&gt;onMouseOver&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;
+&lt;li&gt;onMouseUp&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;
+&lt;li&gt;onMouseMove&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;
+&lt;li&gt;primary&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp; &lt;li&gt;style&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;
+&lt;li&gt;tabIndex&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp; &lt;li&gt;title&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp; &lt;li&gt;type&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp; &lt;li&gt;value&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;
+&lt;li&gt;visible&lt;/li&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; * &lt;/ul&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; *</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; * @param props Key-Value pairs of
+properties.</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; */</code><br>
+      <code>&nbsp;&nbsp;&nbsp; webui.@THEME@.widget.button.setProps =
+function(props) {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; if (props == null) {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return false;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // After widget has been
+initialized, save properties for later updates.<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; if (this.updateProps == true) {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+webui.@THEME@.widget.common.extend(this, props);&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // Set flag indicating properties
+can be updated.<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; this.updateProps = true;<br>
+      <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // Set DOM node properties.<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+webui.@THEME@.widget.common.setCoreProps(this.domNode, props);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+webui.@THEME@.widget.common.setCommonProps(this.domNode, props);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+webui.@THEME@.widget.common.setJavaScriptProps(this.domNode, props);<br>
+      </code> <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ...</code><br>
+      <code>&nbsp;&nbsp;&nbsp; }</code>
+      </div>
+      <div style="margin-left: 40px;">
+      <div style="margin-left: 40px;"><code></code></div>
+See section 7.4.1 of <a target="_blank" href="ajax-architecture-spec.html#7.4.1">Ajax
+Architecture for Woodstock JavaServer Faces</a><br>
+      </div>
+      <h3><a name="7.4.2"></a>7.4.2 Properties</h3>
+      <div style="margin-left: 40px;"> Themed CSS selectors and other
+properties shall be added to the <code>props.js</code> file of the
+module.
+For example, <code>widget/props.js</code>
+includes the following button properties.<br>
+      <br>
+      <code>&nbsp;&nbsp;&nbsp; webui.@THEME@.widget.props = {</code><br>
+      <div style="margin-left: 40px;"><code>&nbsp;&nbsp;&nbsp; //
+Button properties.</code><br>
+      <code>&nbsp;&nbsp;&nbsp; button: {</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; imageClassName:
+"Btn3@THEME_CSS@",</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+imageDisabledClassName: "Btn3Dis@THEME_CSS@",</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+imageHovClassName: "Btn3Hov@THEME_CSS@",</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+primaryClassName: "Btn1@THEME_CSS@",</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+primaryDisabledClassName: "Btn1Dis@THEME_CSS@",</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+primaryHovClassName: "Btn1Hov@THEME_CSS@",</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+primaryMiniClassName: "Btn1Mni@THEME_CSS@",</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+primaryMiniHovClassName: "Btn1MniHov@THEME_CSS@",</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+primaryMiniDisabledClassName: "Btn1MniDis@THEME_CSS@",</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+secondaryClassName: "Btn2@THEME_CSS@",</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+secondaryDisabledClassName: "Btn2Dis@THEME_CSS@",</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+secondaryHovClassName: "Btn2Hov@THEME_CSS@",</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+secondaryMiniClassName: "Btn2Mni@THEME_CSS@",</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+secondaryMiniDisabledClassName: "Btn2MniDis@THEME_CSS@",</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+secondaryMiniHovClassName: "Btn2MniHov@THEME_CSS@"</code><br>
+      <code>&nbsp;&nbsp;&nbsp; },<br>
+&nbsp;&nbsp;&nbsp; ...<br>
+      </code></div>
+      <br>
+See section 7.4.2 of <a target="_blank" href="ajax-architecture-spec.html#7.4.2">Ajax
+Architecture for Woodstock JavaServer Faces</a><br>
+      </div>
+      <div style="margin-left: 40px;"> </div>
+      <h3><a name="7.4.3"></a>7.4.3 Debugging</h3>
+      <div style="margin-left: 40px;"> Debugging
+shall be turned on via the debug attribute of the head tag. However, in
+order for the button to participate in the debug scheme, the <code>button.js</code>
+file must be added to the <code>.../widget/props.js</code> file. For
+example:<br>
+      <br>
+      <div style="margin-left: 40px;"><code>// For debugging only,
+obtain all module resources before invoking</code><br>
+      <code>// dojo.hostenv.writeIncludes(). This will ensure that
+JavaScript</code><br>
+      <code>// files are accessible to JavaScript debuggers.</code><br>
+      <code>dojo.requireIf(djConfig.isDebug,
+"webui.@THEME@.widget.button");</code><code></code><br>
+      <code>...</code><br>
+      </div>
+      <br>
+See section 7.4.3 of <a target="_blank" href="ajax-architecture-spec.html#7.4.3">Ajax
+Architecture for Woodstock JavaServer Faces</a><br>
+      </div>
+      <h2><a name="8.0"></a>8.0 Component High Level Design (optional)<br>
+      </h2>
+      <div style="margin-left: 40px;">Ajax is quickly becoming
+essential to web applications. Although not all components must support
+asynchronous communication, web app developers must be able to update
+widgets without a page refresh. Woodstock components provide this
+support by implementing a client-side renderer and API. Not only does
+client-side rendering help both web app and component developers
+implement Ajax features, but it removes the dependancy and fragmented
+HTML from JSF. This
+helps
+make Woodstock components available to a larger group of web app
+developers who
+cannot, or do not want to, use JSP and/or JSF. Thus, web<span style="font-style: italic;"></span> app developers may (eventually) be
+able to choose their
+own server-side framework.<br>
+      <br>
+See section 1.4 of <a target="_blank" href="ajax-architecture-spec.html#1.4">Ajax
+Architecture for Woodstock JavaServer Faces</a><a target="_blank" href="http://lockhart.east/woodstock/specs/ajax-architecture-spec.html#1.4"></a>
+      </div>
+      <h2><a name="9.0"></a>9.0 Issues</h2>
+      <div style="margin-left: 40px;">
+        TBD
+      </div>
+      </td>
+    </tr>
+
+
+  </tbody>
+</table>
+
+</body>
+</html>

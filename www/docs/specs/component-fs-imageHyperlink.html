@@ -1,0 +1,1456 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <!--
+      The contents of this file are subject to the terms
+      of the Common Development and Distribution License
+      (the License).  You may not use this file except in
+      compliance with the License.
+      
+      You can obtain a copy of the license at
+      https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      See the License for the specific language governing
+      permissions and limitations under the License.
+      
+      When distributing Covered Code, include this CDDL
+      Header Notice in each file and include the License file
+      at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      If applicable, add the following below the CDDL Header,
+      with the fields enclosed by brackets [] replaced by
+      you own identifying information:
+      "Portions Copyrighted [year] [name of copyright owner]"
+      
+      Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+    -->
+<title>Project Woodstock - Image Hyperlink FS</title>
+<style type="text/css"> 
+/* <![CDATA[ */
+@import url(../../browser-uispec.css);
+.style2 {font-size: 18pt}
+  </style>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+</head>
+<body style="background-color: rgb(255, 255, 255);">
+<div class="MstDiv">
+<table class="MstTblBot" title="" border="0" cellpadding="0"
+ cellspacing="0" width="100%">
+  <tbody>
+    <tr>
+      <td class="MstTdTtl">
+      <div class="MstDivTtl">
+      <div class="Mst1TtlTxt">Project Woodstock</div>
+      </div>
+      <div class="Mst1SecDiv"> <span class="Mst1SecTxt style2">Component
+Functional Spec - ImageHyperlink<br>
+      </span></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<table class="Mst2Tbl" style="width: 100%;" title="" border="0"
+ cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td> <br>
+      <h2 style="font-weight: bold;"><a name="1.0"></a>1.0 Component
+Overview</h2>
+      <h3><span style="font-weight: bold;"><a name="1.1"></a>1.1
+Document Revision History</span></h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: auto; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Revision</span></td>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Date</span></td>
+            <td style="width: 50%; text-align: center;"><span
+ style="font-weight: bold;">Synopsis</span></td>
+            <td style="width: 20%; text-align: center;"><span
+ style="font-weight: bold;">Author</span></td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">1.0<br>
+            </td>
+            <td style="text-align: center;">05/08/2007</td>
+            <td style="text-align: center;">Initial Draft</td>
+            <td style="text-align: center;">Venkatesh Babu<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; text-align: center;">1.1<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">05/30/2007<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Update
+with latest changes in the imageHyperlink<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Venkatesh
+Babu<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 style="font-weight: bold;"><a name="1.2"></a>1.2 Component
+Description<br>
+      </h3>
+      <div style="margin-left: 40px;">The imageHyperlink JSF component
+now
+renders itself with the help of a client side renderer instead of an
+html renderer. This means that there will exist a client side
+imageHyperlink
+widget for rendering the imageHyperlink component </div>
+      <h3><a name="1.3"></a>1.3 Component Purpose</h3>
+      <div style="margin-left: 40px;">The ImageHyperlink component is a
+specialized hyperlink component that renders an image along with the
+regular hyperlink. The ImageHyperlink component allows you to specify
+different images to be shown when the widget in the enabled state and
+disabled state.Also, the imageHyperlink widget allows you to specify an
+url to navigate to as well submit the form when you click on the
+hyperlink so that the JSF navigation mechanism can be followed. </div>
+      <h3 style="font-weight: bold;"><a name="1.4"></a>1.4 Relevant
+Documents</h3>
+      <ul>
+      </ul>
+      <div style="margin-left: 40px;"> <a target="_blank"
+ href="http://lockhart.east/woodstock/specs/ajax-architecture-spec.html">Ajax
+Architecture for Woodstock JavaServer Faces</a> </div>
+      <div style="margin-left: 40px;"><br>
+      </div>
+      <h3><a name="1.5"></a>1.5 Definition of Terms</h3>
+      <div style="margin-left: 40px;">
+      <ul>
+        <li>HTML template - The file used to define HTML tags
+associated with a component</li>
+        <li>In-line JavaScript - JavaScript used to instantiate a <span
+ style="font-style: italic;">Dojo
+Widget</span>, located anywhere (i.e., in-line) in the rendered HTML
+page<br>
+        </li>
+        <li>JSF - JavaServer Faces</li>
+        <li>JSF component - The JSF <code>UIComponent</code>
+compliment to a <span style="font-style: italic;">JSP tag</span> and <span
+ style="font-style: italic;">JSF renderer</span></li>
+        <li>JSF facet - A facet is a subcomponent that has a specific
+purpose defined by its parent container<br>
+        </li>
+        <li>JSF renderer - The JSF <code>Renderer</code> compliment to
+a <span style="font-style: italic;">JSP
+tag</span> and <span style="font-style: italic;">JSF component</span><br>
+        </li>
+        <li>JSON - JavaScript Object Notation (i.e., object literals)
+defined using braces ({}) that contain a
+set of comma separated key value pairs</li>
+        <li>JSP tag - The JSF <code>UIComponentELTag</code> or <code>UIComponentELBodyTag</code>
+compliment
+to a <span style="font-style: italic;">JSF component</span>
+and <span style="font-style: italic;">JSF renderer</span><br>
+        </li>
+        <li>Subcomponent - A child component used to render a <span
+ style="font-style: italic;">complex component</span></li>
+        <li>Widget - Entity consisting of <span
+ style="font-style: italic;">widget JavaScript</span> and <span
+ style="font-style: italic;">CSS</span>, not necessarily based on the
+Dojo toolkit<span style="font-style: italic;"><br>
+          </span></li>
+        <li>Widget JavaScript - The JavaScript used to populate an <span
+ style="font-style: italic;">HTML template</span> and/or update
+component properties</li>
+        <li>Contents - JSON Array which contain JSON objects of sub
+components to be displayed inside the widget<br>
+        </li>
+        <li>Widget renderer - The <span style="font-style: italic;">JSF
+renderer</span> used to output <span style="font-style: italic;">in-line
+JavaScript</span> for
+instantiating a <span style="font-style: italic;">Dojo Widget</span></li>
+      </ul>
+      </div>
+      <h2><a name="2.0"></a>2.0 Requirements, goals, and assumptions</h2>
+      <h3><a name="2.1"></a>2.1 Requirements</h3>
+      <h3><a name="2.1.1"></a>2.1.1 UI requirements</h3>
+      <h3><a name="2.1.2"></a>2.1.2 Functional requirements</h3>
+      <div style="margin-left: 40px;">
+      <ul>
+        <li>The imageHyperlink component should act as a specialized
+hyperlink component and hence provide all the functionalities of an
+hyperlink component.</li>
+        <li>The imageHyperlink component shall support a mechanism for
+specifying images to be displayed in the enabled and disabled states.</li>
+        <li>Developers shall be able to use the url attribute as well
+as actionExpression attribute for page navigation with the url
+attribute taking precedence over the actionExpression attribute if both
+of them are specified.<br>
+        </li>
+      </ul>
+      </div>
+      <h3><a name="2.1.3"></a>2.1.3 Performance requirements</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.1.4"></a>2.1.4 Browser, platform requirements</h3>
+      <ul>
+        <li>The table of supported <a
+ href="http://xdesign.sfbay/people/dspell/ProjectWoodstock/docs/SupportedBrowers.htm">Browsers</a>.</li>
+        <li>The table of supported <a
+ href="http://xdesign.sfbay/people/dspell/ProjectWoodstock/docs/SupportedContainers.htm">Containers</a>.</li>
+      </ul>
+      <div style="margin-left: 40px;">Document any exceptions to the
+standard Woodstock supported browsers and platforms. </div>
+      <h3><a name="2.1.5"></a>2.1.5 Special requirements</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.2"></a>2.2 Requirements Not Met</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.3"></a>2.3 Assumptions</h3>
+      <div style="margin-left: 40px;">N/A.</div>
+      <h3><a name="2.4"></a>2.4 Goals</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.5"></a>2.5 Non-goals</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h2><a name="3.0"></a>3.0 Component Usage</h2>
+      <div style="margin-left: 40px;">
+      <p>The&nbsp; imageHyperlink tag can be used in a
+JSP page the following way. there exists an "disabledImage" facet which
+allows you to specify an image that should be shown when the hyperlink
+should be disabled. If this facet does not exist, then the same image
+is shown when the imageHyperlink is in enabled or the disabled state.<br>
+      <br>
+      </p>
+      <div style="margin-left: 40px;"><code>&lt;webuijsf:imageHyperlink
+id="imhyperlink" text="Sun Microsystems" url="http://sun.com"
+imageUrl=</code><span style="font-family: monospace;">"</span>/hyperlink/myyahoo.gif"
+      <code>target="_blank"&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;f:facet name="disabledImage"&gt;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &lt;webuijsf:image id="image2"
+url="/hyperlink/sun.gif"/&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;/f:facet&gt;<br>
+&lt;/webuijsf:imageHyperlink&gt;<br>
+      </code> </div>
+      <br>
+This will output the necessary javascript needed to create the anchor
+widget on the client side. The output would look something like this.<br>
+      <div style="margin-left: 40px;"><code></code><code><br>
+      </code>
+      <pre style="white-space: -moz-pre-wrap;">webui.suntheme.widget.common.createWidget({<br>    "formId": "form1",<br>    "_widgetType": "webui.&lt;theme&gt;:imageHyperlink",<br>    "templatePath": "&lt;appname&gt;/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/imageHyperlink.html",<br>    "href": "<code>http://sun.com</code>",<br>    "disabled": false,<br>    <span
+ style="font-family: verdana,helvetica,arial,sans-serif;">"target":"_blank",</span><br>    "imagePosition": "right",<br>    "enabledImage": {<br>        "templatePath": "/&lt;appname&gt;/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/image.html",<br>        "_widgetType": "webui.&lt;theme&gt;:image",<br>        "width": 13,<br>        "height": 13,<br>        "visible": true,<br>        "src": "/&lt;appname&gt;/faces/hyperlink/myyahoo.gif",<br>        "border": 0,          <code></code><br>        "_modules": [<br>            "webui.&lt;theme&gt;.widget.image",<br>            "webui.&lt;theme&gt;.widget.jsfx.image"<br>        ],<br>        "id": "form1:imhyperlink:imhyperlink_image"<br>    },<br>    "id": "form1:imhyperlink",<br>    "contents": [<br>        "Sun MicroSystems",<br>        "&amp;nbsp;"<br>    ],<br>    "disabledImage": {<br>        "templatePath": "/&lt;appname&gt;/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/image.html",<br>        "_widgetType": "webui.&lt;theme&gt;:image",<br>        "width": 13,<br>        "height": 13,<br>        "visible": true,<br>        "src": "/&lt;appanme&gt;/faces/hyperlink/sun.gif",<br>        "border": 0,<br>        "_modules": [<br>            "webui.&lt;theme&gt;.widget.image",<br>            "webui.&lt;theme&gt;.widget.jsfx.image"<br>        ],<br>        "id": "form1:imhyperlink:image2"<br>    },<br>    "params": [],<br>    "visible": true,<br>    "_modules": [<br>        "webui.&lt;theme&gt;.widget.imageHyperlink",<br>        "webui.&lt;theme&gt;.widget.jsfx.imageHyperlink"<br>    ]<br>});</pre>
+      <br>
+      </div>
+      <div style="margin-left: 40px;">The imageHyperlink widget can be
+updated in the following way:<br>
+      </div>
+      <ul>
+        <ul>
+          <li>Get an handle to to the imageHyperlink dom node<br>
+            <code>var domNode =&nbsp;
+document.getElementById("form1:imhyperlink")</code></li>
+          <li>Use the getProps function that is available on the dom
+node
+to obtain all the properties that are set on that particular dom
+element.</li>
+          <code>&nbsp;var props = domNode.getProps(); // returns a json
+object.</code><br>
+          <code> </code>
+          <li>Use the setProps function to specify the
+properties to be
+updated for the particular component as a json object.<br>
+            <code>&nbsp;domNode.setProps({disabled:true});</code></li>
+        </ul>
+      </ul>
+      <div style="margin-left: 40px;">Note: &lt;appname&gt; is replaced
+by the application name.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;theme&gt; tag is
+replaced by the theme name.<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; <br>
+      <code></code><code></code> </div>
+      </div>
+      <h2><a name="4.0"></a>4.0 Component Interfaces</h2>
+      <h3><a name="4.1"></a>4.1 Exported interfaces table</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td>javascript/widget/imageHyperlink.js</td>
+            <td>public</td>
+            <td>Javascript file for imageHyperlink widget<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">javascript/widget/hyperlink.js</td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Javascript file for the
+hyperlink widget<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">javascript/widget/anchor.js<br>
+            </td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Javascript file for
+rendering an anchor widget.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">javascript/widget/jsfx/anchor.js<br>
+            </td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Javascript file for ajax
+functionality.<br>
+            </td>
+          </tr>
+          <tr>
+            <td>com.sun.webui.jsf.component.imageHyperlink.java<br>
+            </td>
+            <td>public</td>
+            <td>JSF component class</td>
+          </tr>
+          <tr>
+            <td>javascript/widget/common.js<br>
+            </td>
+            <td>Private<br>
+            </td>
+            <td>Utility script for all client side widgets<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.widgetImageHyperlinkRenderer.java<br>
+            </td>
+            <td style="vertical-align: top;">Private<br>
+            </td>
+            <td style="vertical-align: top;">JSF renderer which outputs
+JSON properties for the imageHyperlink widget.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.ajax.ImageHyperlinkRenderer.java<br>
+            </td>
+            <td style="vertical-align: top;">Private<br>
+            </td>
+            <td style="vertical-align: top;">Renderer used to handle
+ajax requests<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.html.ImageHyperlinkRenderer.java<br>
+            </td>
+            <td style="vertical-align: top;">Private<br>
+            </td>
+            <td style="vertical-align: top;">Renderer used for
+designtime rendering.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.taglib.imageHyperlinkTag.java</td>
+            <td style="vertical-align: top;">Public<br>
+            </td>
+            <td style="vertical-align: top;">JSP Custom Tag
+implementation</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.2"></a>4.2 Imported interfaces</h3>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Interface Name<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Classification<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Reference<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 40%;">
+            <p>Comments<br>
+            </p>
+            </th>
+          </tr>
+          <tr>
+            <td>jsf-api.jar</td>
+            <td>Standard</td>
+            <td>JSR 127</td>
+            <td>JSF components API library, version 1.1</td>
+          </tr>
+          <tr>
+            <td>dojo-0.4.1-ajax.jar<br>
+            </td>
+            <td>Standard<br>
+            </td>
+            <td>dojotoolkit.org<br>
+            </td>
+            <td>the dojo toolkit library<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">json.jar<br>
+            </td>
+            <td style="vertical-align: top;">Standard<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The json library<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">prototype-1.5.0.jar<br>
+            </td>
+            <td style="vertical-align: top;">Standard<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The prototype javascript
+library<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <h3><a name="4.3"></a>4.3 Component interfaces</h3>
+<!-- ========== METHOD SUMMARY =========== --><!-- ========== METHOD SUMMARY =========== -->
+&nbsp; <a name="method_summary"><!-- --></a>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"> <b>Method
+Summary</b></font></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getAlign</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies
+the position of the image with respect to its context.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getAlt</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alternative
+textual description of the image rendered by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;int</code></font></td>
+            <td><code><b>getBorder</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies
+the width of the img border in pixels.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getFamily</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the
+family for this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;int</code></font></td>
+            <td><code><b>getHeight</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When
+specified, the width and height attributes tell the
+client browser to override the natural image or object size in favor of
+these values, specified in pixels.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;int</code></font></td>
+            <td><code><b>getHspace</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies
+the amount of white space in pixels to be inserted to the left and
+right of the image.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getIcon</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The
+identifier of the desired theme image.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;ImageComponent</code></font></td>
+            <td><code><b>getImageFacet</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return a
+component that implements an image or an icon.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getImageURL</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Absolute or
+relative URL to the image to be rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnDblClick</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies
+the position of the image with respect to its context.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getRendererType</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getTextPosition</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies
+where the text will be placed relative to the image.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;int</code></font></td>
+            <td><code><b>getVspace</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies
+the amount of white space in pixels to be inserted above and below the
+image.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;int</code></font></td>
+            <td><code><b>getWidth</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Image width
+override.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+            <td><code><b>isVisible</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>restoreState</b>(javax.faces.context.FacesContext&nbsp;_context,
+java.lang.Object&nbsp;_state)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Restore the
+state of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+            <td><code><b>saveState</b>(javax.faces.context.FacesContext&nbsp;_context)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save the
+state of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setAlign</b>(java.lang.String&nbsp;align)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies
+the position of the image with respect to its context.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setAlt</b>(java.lang.String&nbsp;alt)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alternative
+textual description of the image rendered by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setBorder</b>(int&nbsp;border)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies
+the width of the img border in pixels.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setHeight</b>(int&nbsp;height)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When
+specified, the width and height attributes tell the
+client browser to override the natural image or object size in favor of
+these values, specified in pixels.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setHspace</b>(int&nbsp;hspace)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies
+the amount of white space in pixels to be inserted to the left and
+right of the image.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setIcon</b>(java.lang.String&nbsp;icon)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The
+identifier of the desired theme image.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setImageURL</b>(java.lang.String&nbsp;imageURL)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Absolute or
+relative URL to the image to be rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setTextPosition</b>(java.lang.String&nbsp;textPosition)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies
+where the text will be placed relative to the image.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setVisible</b>(boolean&nbsp;visible)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setVspace</b>(int&nbsp;vspace)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies
+the amount of white space in pixels to be inserted above and below the
+image.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setWidth</b>(int&nbsp;width)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Image width
+override.</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableSubHeadingColor" bgcolor="#eeeeff">
+            <th align="left"><b>Methods inherited from class
+com.sun.webui.jsf.component.Hyperlink</b></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td><code>getFocusElementId, getHtmlTemplate,
+getIndicatorComponent, getLabeledElementId, getOnBlur, getOnClick,
+getOnFocus, getOnKeyDown, getOnKeyPress, getOnKeyUp, getOnMouseDown,
+getOnMouseMove, getOnMouseOut, getOnMouseOver, getOnMouseUp,
+getPrimaryElementID, getShape, getStyle, getStyleClass, getTabIndex,
+getTarget, getText, getToolTip, getType, getUrl, getUrlLang, getValue,
+getValueExpression, isAjaxify, isDisabled, setAjaxify, setDisabled,
+setHtmlTemplate, setOnBlur, setOnClick, setOnDblClick, setOnFocus,
+setOnKeyDown, setOnKeyPress, setOnKeyUp, setOnMouseDown, setOnMouseMove,
+setOnMouseOut, setOnMouseOver, setOnMouseUp, setShape, setStyle,
+setStyleClass, setTabIndex, setTarget, setText, setToolTip, setType,
+setUrl, setUrlLang, setValueExpression, toString</code></td>
+          </tr>
+        </tbody>
+      </table>
+&nbsp; <br>
+      <h3><a name="4.4"></a>4.4 Tag interfaces</h3>
+      <div style="margin-left: 40px;"><br>
+      </div>
+      <br>
+      <table border="1" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <td colspan="5"><font size="+2"><b>Attributes</b></font></td>
+          </tr>
+          <tr>
+            <td><b>Name</b></td>
+            <td><b>Required</b></td>
+            <td><b>Request-time</b></td>
+            <td><b>Type</b></td>
+            <td><b>Description</b></td>
+          </tr>
+          <tr valign="top">
+            <td>binding</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> A ValueExpression that resolves to the UIComponent
+that corresponds to this tag. This binding allows the Java bean that
+contains the UIComponent to manipulate the UIComponent, its properties,
+and its children. </td>
+          </tr>
+          <tr valign="top">
+            <td>onDblClick</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Specifies the position of the image with respect to its
+context. Valid values are: bottom (the default); middle; top; left;
+right.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>width</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Image width override. When specified, the width and
+height attributes tell user agents to override the natural image or
+object size in favor of these values.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>imageURL</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Absolute or relative URL to the image to be rendered.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>height</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>When
+specified, the width and height attributes tell the client browser to
+override the natural image or object size in favor of these values,
+specified in pixels. Some browsers might not support this behavior.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>icon</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>The identifier of the desired theme image.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>hspace</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Specifies the amount of white space in pixels to be
+inserted to the left and right of the image. The default value is not
+specified but is generally a small, non-zero size.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>align</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Specifies the position of the image with respect to its
+context. Valid values are: bottom (the default); middle; top; left;
+right.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>vspace</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Specifies the amount of white space in pixels to be
+inserted above and below the image. The default value is not specified
+but is generally a small, non-zero size.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>visible</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Use the visible attribute to indicate whether the
+component should be viewable by the user in the rendered HTML page. If
+set to false, the HTML code for the component is present in the page,
+but the component is hidden with style attributes. By default, visible
+is set to true, so HTML for the component HTML is included and visible
+to the user. If the component is not visible, it can still be processed
+on subsequent form submissions because the HTML is present.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>border</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Specifies the width of the img border in pixels. The
+default value for this attribute depends on the client browser</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>alt</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Alternative textual description of the image rendered by
+this component. The alt text can be used by screen readers and in tool
+tips, and when image display is turned off in the web browser.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>textPosition</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Specifies where the text will be placed relative to the
+image. The valid values currently are "right" or "left".</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onKeyPress</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user presses and
+releases a key while the component has focus.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>target</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>The resource at the specified URL is displayed in the
+frame that is specified with the target attribute. Values such as
+"_blank" that are valid for the target attribute of a HTML anchor
+element are also valid for this attribute in this component</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onFocus</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when this component receives
+focus. An element receives focus when the user selects the element by
+pressing the tab key or clicking the mouse.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>rendered</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Use the rendered attribute to indicate whether the
+HTML code for the component should be included in the rendered HTML
+page. If set to false, the rendered HTML page does not include the HTML
+for the component. If the component is not rendered, it is also not
+processed on any subsequent form submission. </td>
+          </tr>
+          <tr valign="top">
+            <td>urlLang</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>The language code of the resource designated by this
+hyperlink.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>id</td>
+            <td>false</td>
+            <td>true</td>
+            <td><code>java.lang.String</code></td>
+            <td><i>No Description</i></td>
+          </tr>
+          <tr valign="top">
+            <td>onKeyUp</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user releases a key
+while the component has focus.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseUp</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user releases a mouse
+button while the mouse pointer is on the component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>styleClass</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>CSS style class(es) to be applied to the outermost HTML
+element when this component is rendered.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>actionListenerExpression</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Use the actionListenerExpression attribute to cause
+the component to fire an event. The value must be an EL expression and
+it must evaluate to the name of a public method that takes an
+ActionEvent parameter and returns void. </td>
+          </tr>
+          <tr valign="top">
+            <td>style</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>CSS style(s) to be applied to the outermost HTML element
+when this component is rendered.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>url</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Absolute, relative, or context relative (starting with
+"/") URL to the resource selected by this hyperlink. If the url
+attribute is specified, clicking this hyperlink sends the browser to
+the new location. If the action attribute is specified, the form is
+submitted. If both are specified, the url attribute takes precedence.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onClick</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when a mouse click occurs over
+this component. If the component submits the form (by using the action
+attribute), the script that you use with the onClick attribute should
+not return from the function. When the action attribute is used, the
+component handles the return with a script that is appended to the
+anchor element's onclick property. When you supply an onClick
+attribute, this return script is appended after your script in the
+anchor's onclick. It is ok to return from your script to abort the
+submit process if necessary.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onBlur</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when this element loses focus.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseDown</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user presses a mouse
+button while the mouse pointer is on the component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>toolTip</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Sets the value of the title attribute for the HTML
+element. The specified text will display as a tooltip if the mouse
+cursor hovers over the HTML element.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>ajaxify</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Flag indicating to turn off default Ajax
+functionality. Set ajaxify to false when providing a different Ajax
+implementation. </td>
+          </tr>
+          <tr valign="top">
+            <td>type</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>The MIME content type of the resource specified by this
+component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>actionExpression</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> MethodExpression representing the application action
+to invoke when this component is activated by the user. The expression
+must evaluate to a either a String or a public method that takes no
+parameters, and returns a String (the logical outcome) which is passed
+to the NavigationHandler for this application. </td>
+          </tr>
+          <tr valign="top">
+            <td>disabled</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Flag indicating that clicking of this component by the
+user is not currently permitted. </p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseOut</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when a mouse out movement occurs
+over this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseOver</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user moves the mouse
+pointer into the boundary of this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseMove</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user moves the mouse
+pointer while over the component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>htmlTemplate</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Alternative HTML template to be used by this
+component. </td>
+          </tr>
+          <tr valign="top">
+            <td>text</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>The text to be displayed for the hyperlink.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>immediate</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Flag indicating that event handling for this component
+should be handled immediately (in Apply Request Values phase) rather
+than waiting until Invoke Application phase. </td>
+          </tr>
+          <tr valign="top">
+            <td>onKeyDown</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user presses down on a
+key while the component has focus.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>tabIndex</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Position of this element in the tabbing order of the
+current document. Tabbing order determines the sequence in which
+elements receive focus when the tab key is pressed. The value must be
+an integer between 0 and 32767.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.5"></a>4.5 Javascript interfaces</h3>
+      <div style="margin-left: 40px;">
+      <table
+ style="text-align: left; width: 100%; height: 100%; margin-left: auto; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td
+ style="vertical-align: top; font-weight: bold; font-style: italic;">Interface
+name</td>
+            <td
+ style="vertical-align: top; font-weight: bold; font-style: italic;">Type<br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold; font-style: italic;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">webui.@THEME@.widget.anchor<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Used for instantiating the
+widget<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.setProps</td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Use this function to
+change any of the following supported
+properties:
+            <ul>
+              <li>accessKey</li>
+              <li>charset</li>
+              <li>className</li>
+              <li>coords</li>
+              <li>dir</li>
+              <li>disabled</li>
+              <li>href</li>
+              <li>hrefLang</li>
+              <li>id</li>
+              <li>lang</li>
+              <li>onFocus</li>
+              <li>onBlur</li>
+              <li>onClick</li>
+              <li>onDblClick</li>
+              <li>onKeyDown</li>
+              <li>onKeyPress</li>
+              <li>onKeyUp</li>
+              <li>onMouseDown</li>
+              <li>onMouseOut</li>
+              <li>onMouseOver</li>
+              <li>onMouseUp</li>
+              <li>onMouseMove</li>
+              <li>rev</li>
+              <li>rel</li>
+              <li>shape</li>
+              <li>style</li>
+              <li>tabIndex</li>
+              <li>title</li>
+              <li>visible</li>
+            </ul>
+            <br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.setProps<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Store the properties of
+the element on the widget node.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.getProps<br>
+            </td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Get all the properties of
+the anchor that are set <br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.getProps<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Get the properties of the
+anchor widget. this is used by domNode.getProps function<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.refresh<br>
+            </td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Update the anchor widget
+asynchronously.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.refresh<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Used to update the anchor
+widget asynchronously. This is used by the domNode.refresh function<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.addContents<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Used to add children to
+the anchor element.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.getClassName<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Returns the style class
+name to be used for the enabled/disabled state of the anchor.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.setAnchorProps<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Set the properties&nbsp;
+for the anchor element. setProps makes use of this function and also
+other elements that exhibit anchor like functionality.<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Note:&nbsp;&nbsp; i) domNode over here refers to the html dom element <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp;&nbsp; ii) widget refers to the hyperlink widget
+      <h3><a name="4.6"></a>4.6 Theme resources keys</h3>
+      <h3><a name="4.6.1"></a>4.6.1 Style selectors</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">Hyp@THEME@<br>
+            </td>
+            <td style="vertical-align: top;">The style to be applied
+for an enabled imageHyperlink.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">HypDis@THEME@<br>
+            </td>
+            <td style="vertical-align: top;">The style to be applied
+for a disabled imageHyperlink.<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <h3><a name="4.6.2"></a>4.6.2 Image resources</h3>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N/A<br>
+      <h3><a name="4.6.3"></a>4.6.3 Javascript resources</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/imageHyperlink.js</td>
+            <td style="vertical-align: top;">Javascript containing the
+imageHyperlink widget resources<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/hyperlink.js
+            </td>
+            <td style="vertical-align: top;">Javascript containing the
+hyperlink widget resources<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/common.js</td>
+            <td style="vertical-align: top;">Javascript containing the
+common files for the widgets<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javaqscript/widget/jsfx/imageHyperlink.js<br>
+            </td>
+            <td style="vertical-align: top;">Used for asynchronous
+updates.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/anchor.js</td>
+            <td style="vertical-align: top;">Javascript for the anchor
+widget. <br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Note: The &lt;theme&gt; tag is
+intended to be replaced with the theme
+name
+(e.g., suntheme).
+      <h3><a name="4.6.4"></a>4.6.4 Template resources</h3>
+      <br>
+      <table
+ style="width: 95%; margin-left: auto; margin-right: auto; text-align: left;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Template Resources</span></td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Comments</span></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/templates/imageHyperlink.html</td>
+            <td style="vertical-align: top;">The HTML template name for
+imageHyperlink widget<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Note: The &lt;theme&gt; tag is
+intended to be replaced with the theme
+name
+(e.g., suntheme).
+      <h3><a name="4.6.5"></a>4.6.5 Other resources</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N/A<br>
+      <h3><a name="4.6.6"></a>4.6.6 Localized message keys</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N/A<br>
+      <br>
+      <h3><a name="4.7"></a>4.7 Component Extensibility</h3>
+      <div style="margin-left: 40px;">N/A.<br>
+      <br>
+      </div>
+      <h2><a name="5.0"></a>5.0 - Creator Design Time Support</h2>
+      <h3><a name="5.1"></a>5.1 Design-time Behavior</h3>
+      <div style="margin-left: 40px;">The&nbsp; imageHyperlink
+component will
+continue to use the existing&nbsp; html
+renderer for design time behavior. Hence there will not be any change
+in the existing design time behavior. </div>
+      <h3><a name="5.2"></a>5.2 Design-time Classes and Interfaces</h3>
+      <div style="margin-left: 40px;">N/A </div>
+      <h3><a name="5.3"></a>5.3 Localized message keys</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+N/A<br>
+      <h3><a name="5.4"></a>5.4 Dependencies </h3>
+      <div style="margin-left: 40px;">N/A </div>
+      <h2><a name="6.0"></a>6.0 Component Dependencies</h2>
+      <h3><a name="6.1"></a>6.1 Component class dependencies</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="6.2"></a>6.2 Javascript dependencies</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N/A<br>
+      <br>
+      <h3><a name="6.3"></a>6.3 Infrastructure dependencies</h3>
+      <ul>
+        <li>&nbsp;The new client side anhor widget depends on
+the dojo infrastructure for rendering.</li>
+      </ul>
+      <h3><a name="6.4"></a>6.4 Design time dependencies</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N/A<br>
+      <br>
+      <h2><a name="7.0"></a>7.0 - A11Y, I18n, Compliance, Debugging<br>
+      </h2>
+      <h3><a name="7.1"></a>7.1 Accessibility (A11Y)</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="7.2"></a>7.2 Internationalization (I18N)</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="7.3"></a>7.3 Level of XHTML Compliance</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="7.4"></a>7.4 Javascript Compliance</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="7.5"></a>7.5 Debugging</h3>
+      <div style="margin-left: 40px;">
+      <ul>
+        <li>Set the debug attribute to true in the head tag if
+debugging is to be
+enabled for the particular page.</li>
+      </ul>
+      </div>
+      <h2><a name="8.0"></a>8.0 Component High level design</h2>
+      <div style="margin-left: 40px;">
+      <h3>8.1 Client side Widget:</h3>
+The imageHyperlink widget supports two different states called the
+enabled
+and disabled states. In the enabled state the imageHyperlink can be
+clicked
+and you can navigate to a different page. In the disabled state the
+imageHyperlink will appear as plain text. Clicking on the
+imageHyperlink doesnt
+generate any form of action in the disabled state.<br>
+      <br>
+The imageHyperlink widget also supports two forms of page navigations.<br>
+      <ul>
+        <li>Use the href attribute to navigate to a particular url.<br>
+        </li>
+        <li>Submit the form when the imageHyperlink is clicked<br>
+        </li>
+      </ul>
+The client side widget also supports two different kinds of contents -
+"enabledImage" and "disabledImage". These are used if the image of
+the&nbsp; imageHyperlink widget is to be
+changed
+depending on the enabled or the disabled state of the widget. <br>
+The imageHyperlink widget&nbsp; decides whether or not to submit the
+page or use the href attribute to navigate depending on whether the
+href attribute is specified or not for the widget. If no href attribute
+is specified for the dom element will have a default value of "#" set.
+This is to get link look and feel. <br>
+      <br>
+      <h3>8.2 JSF Component Renderer:</h3>
+The ImageHyperlink widget renderer inherits from the Hyperlink's widget
+renderer. The contents JSON property in this case contains the children
+of the ImageHyperlink component and the text of the imageHyperlink. The
+image to be shown for the enabled state of the imageHyperlink component
+goes into the "enabledImage" JSON property. If the disabledImage facet
+is specified, the image specified in that facet goes inside the
+disabledImage JSON property.</div>
+      <h2><a name="9.0"></a>9.0 Issues</h2>
+      <div style="margin-left: 40px;">N/A</div>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

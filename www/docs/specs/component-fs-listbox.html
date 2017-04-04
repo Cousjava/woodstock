@@ -1,0 +1,1710 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <!--
+      The contents of this file are subject to the terms
+      of the Common Development and Distribution License
+      (the License).  You may not use this file except in
+      compliance with the License.
+      
+      You can obtain a copy of the license at
+      https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      See the License for the specific language governing
+      permissions and limitations under the License.
+      
+      When distributing Covered Code, include this CDDL
+      Header Notice in each file and include the License file
+      at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      If applicable, add the following below the CDDL Header,
+      with the fields enclosed by brackets [] replaced by
+      you own identifying information:
+      "Portions Copyrighted [year] [name of copyright owner]"
+      
+      Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+    -->
+<title>Project Woodstock - Listbox Component FS</title>
+<style type="text/css"> 
+/* <![CDATA[ */
+@import url(../../browser-uispec.css);
+.style2 {font-size: 18pt}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body bgcolor="#FFFFFF">
+<div align="right" class="security-text"><a href="#skipnav" title="Skip Navigation Links"></a></div>
+<div class="MstDiv">
+  <table class="MstTblBot" width="100%" border="0" cellpadding="0" cellspacing="0" title="">
+
+    <tr>
+      <td class="MstTdTtl"><div class="MstDivTtl">
+          <div class="Mst1TtlTxt">Project Woodstock</div>
+        </div>
+        <div class="Mst1SecDiv"> <span class="Mst1SecTxt style2">Listbox Component Functional Spec</span></div></td>
+    </tr>
+  </table>
+</div>
+
+<table border="0" cellpadding="0" cellspacing="0" class="Mst2Tbl" style="width: 100%;" title="">
+  <tbody>
+    <tr>
+      <td>
+	  <br>
+	  <h2 style="font-weight: bold;"><a name="1.0"></a>1.0 Component Overview</h2>
+	  <h3><span style="font-weight: bold;"><a name="1.1"></a>1.1 Document Revision History</span></h3>
+	  <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Revision</span></td>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Date</span></td>
+            <td style="width: 50%; text-align: center;"><span
+ style="font-weight: bold;">Synopsis</span></td>
+            <td style="width: 20%; text-align: center;"><span
+ style="font-weight: bold;">Author</span></td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">0.1</td>
+            <td style="text-align: center;">05/16/2007</td>
+            <td style="text-align: center;">Initial Draft</td>
+            <td style="text-align: center;">Matthew Bohm</td>
+          </tr>
+        </tbody>
+      </table>
+	  <h3 style="font-weight: bold;"><a name="1.2"></a>1.2 Component Description<br>
+      </h3>
+	  <div style="margin-left: 40px;">This document describes a Web Application Guidelines compliant implementation of a client-side listbox written for use with Woodstock.</div>
+<h3><a name="1.3"></a>1.3 Component Purpose</h3>
+<div style="margin-left: 40px;">The listbox component allows single or multiple selection from one or more options.</div>
+<h3 style="font-weight: bold;"><a name="1.4"></a>1.4 Relevant Documents</h3>
+      <ul>
+        <li><a target="_blank"
+ href="http://lockhart.east/woodstock/specs/ajax-architecture-spec.html">Ajax
+Architecture for
+Woodstock JavaServer Faces</a></li>
+        <li><a target="_blank"
+ href="http://lockhart.east/woodstock/specs/ajax-architecture-example.html">Ajax
+Architecture Example for
+Woodstock JavaServer Faces Components</a></li>
+
+        <li><a target="_blank"
+ href="http://wiki.java.net/bin/view/Javatools/CustomComponentLibraries">Component
+Authoring Guide</a><br>
+        </li>
+        <li><a
+ href="http://jupiter.czech.sun.com/wiki/view/Creator/DesignerRulesForComponentAuthors"
+ target="_blank">Designer Rules For Component Authors</a></li>
+        <li><a target="_blank"
+ href="http://docs.sun.com/source/816-6408-10/contents.htm">JavaScript</a></li>
+        <li><a target="_blank" href="http://www.json.org/">JSON</a></li>
+        <li><a target="_blank" href="http://www.w3.org/TR/html401/">HTML
+4.01
+Specification</a></li>
+
+        <li><a target="_blank"
+ href="http://xdesign.sfbay/projects/hci-admin">Web
+Application Guidelines - Version 4.0</a></li>
+      </ul>
+<h3><a name="1.5"></a>1.5 Definition of Terms</h3>
+<div style="margin-left: 40px;">See section 1.3 of <a
+ target="_blank"
+ href="http://lockhart.east/woodstock/specs/ajax-architecture-spec.html#1.3">Ajax
+Architecture for Woodstock JavaServer Faces</a><br>
+      </div>
+<h2><a name="2.0"></a>2.0 Requirements, goals, and assumptions</h2>
+<h3><a name="2.1"></a>2.1 Requirements</h3>
+<div style="margin-left: 40px;">See section 2.1 of <a
+ target="_blank"
+ href="http://lockhart.east/woodstock/specs/ajax-architecture-spec.html#2.1">Ajax
+Architecture for Woodstock JavaServer Faces</a></div>
+<h3><a name="2.1.1"></a>2.1.1 UI requirements</h3>
+<div style="margin-left: 40px;">See section 7.1 (Simple Elements)
+of&nbsp;<a target="_blank"
+ href="http://xdesign.sfbay/projects/hci-admin">Web
+Application Guidelines</a></div>
+<h3><a name="2.1.2"></a>2.1.2 Functional requirements</h3>
+<div style="margin-left: 40px;">
+      <!-- ul>
+        <li -->
+	Ajax architecture must support a variety of runtime
+environments;
+particularly Portlet, JSF, JSP and for service processors.<br>
+        <!-- /li>
+      </ul -->
+</div>
+<h3><a name="2.1.3"></a>2.1.3 Performance requirements</h3>
+<div style="margin-left: 40px;"></div>
+<h3><a name="2.1.4"></a>2.1.4 Browser, platform requirements</h3>
+
+<ul>
+  <li>The table of supported <a href="../SupportedBrowers.htm">Browsers</a>.</li>
+  <li>The table of supported <a href="../SupportedContainers.htm">Containers</a>.</li>
+  <li>See section 2.1.4 of <a
+ target="_blank"
+ href="http://lockhart.east/woodstock/specs/ajax-architecture-spec.html#2.1.4">Ajax
+Architecture for Woodstock JavaServer Faces</a>.</li>
+</ul>        
+
+<div style="margin-left: 40px;"></div>
+
+<h3><a name="2.1.5"></a>2.1.5 Special requirements</h3>
+        <ul>
+        <li><span style="font-style: italic;">Dojo widgets</span> shall
+not be dependent on the
+underlying JSF framework.</li>
+        <li><span style="font-style: italic;">Widget JavaScript</span>
+shall not include any references to server-side frameworks such as
+Dynamic Faces, JSP,
+or JSF.</li>
+      </ul>
+<div style="margin-left: 40px;"></div>
+<h3><a name="2.2"></a>2.2 Requirements Not Met</h3>
+<div style="margin-left: 40px;">None known.</div>
+<h3><a name="2.3"></a>2.3 Assumptions</h3>
+        <ul>
+        <li>The Dojo toolkit shall be used to create template based
+widgets.</li>
+        <li>JSON shall be used to define client-side widget properties.</li>
+        <li>The locale does not change during Ajax requests.<br>
+
+        </li>
+      </ul>
+<div style="margin-left: 40px;"></div>
+<h3><a name="2.4"></a>2.4 Goals</h3>
+<div style="margin-left: 40px;"></div>
+      <ul>
+        <li><span style="font-style: italic;">Dojo widgets</span> shall
+support web applications that are
+not based on JSF or JSP.<br>
+        </li>
+      </ul>
+<h3><a name="2.5"></a>2.5 Non-goals</h3>
+<div style="margin-left: 40px;"></div>
+<ul>
+        <li>Support tags to instantiate a <span
+ style="font-style: italic;">Dojo Widget</span> instead of using
+JavaScript.<br>
+        </li>
+      </ul>
+<h2><a name="3.0"></a>3.0 Component Usage</h2>
+      <div style="margin-left: 40px;">Woodstock components can be used
+in a few different ways. The most
+typical way to use a component is with the <span
+ style="font-style: italic;">JSP tag</span>. For example, to
+include a listbox in the JSP page, the web app developer will
+include a tag like this.<br>
+      <br>
+      <div style="margin-left: 40px;"><code>&lt;webuijsf:listbox
+id="listbox1"
+items="#{ListboxBean.items}" binding="#{ListboxBean.listbox}" /&gt;<br>
+      <br>
+      </code></div>
+      </div>
+      <div style="margin-left: 40px;">The items&nbsp; are defined in
+the ListboxBean as follows:<code><br>
+
+      <br>
+      </code>
+      <div style="margin-left: 40px;"><code>public class ListboxBean {<br>
+&nbsp;&nbsp;&nbsp; private Listbox listbox = null;<br>
+      <br>
+&nbsp;&nbsp;&nbsp; private Option[] items = { new OptionTitle("Select
+an item" ), <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+new Option("item1", "Item 1" ),<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+new Option("item2", "Item 2"), <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+new Option("item3", "Item 3") };<br>
+      <br>
+&nbsp;&nbsp;&nbsp; public Listbox getListbox() {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; if (</code><code>listbox </code><code>==
+null) {<br>
+
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; </code><code>listbox
+      </code><code>= new Listbox();<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; </code><code>listbox.setItems(
+items );</code><code><br>
+      </code><code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; }<br>
+
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; return listbox;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp;&nbsp; public void setListbox(Listbox listbox) {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; this.listbox= listbox;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+
+      <br>
+&nbsp;&nbsp;&nbsp; public Option[] getItems() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return this.items;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp;&nbsp; public void setItems( Option[] items ) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.items = items;<br>
+
+&nbsp;&nbsp;&nbsp; }<br>
+}</code></div>
+      </div>
+      <div style="margin-left: 40px;">
+      <div style="margin-left: 40px;">
+      <div style="margin-left: 40px;"><code></code></div>
+      </div>
+      </div>
+
+      <div style="margin-left: 40px;">
+      <div style="margin-left: 40px;"> <br>
+      </div>
+Using
+the <span style="font-style: italic;">JSP tag</span>, all the <span
+ style="font-style: italic;">in-line
+JavaScript</span> necessary to generate a <span
+ style="font-style: italic;">Dojo widget</span> is automatically output
+in the rendered HTML page. This includes the name of the desired
+widget, any
+localized and themed properties required to populate the <span
+ style="font-style: italic;">HTML template</span>,
+and any JavaScript files (e.g., <span style="font-style: italic;">widget
+JavaScript</span>) necessary to support the <span
+ style="font-style: italic;">Dojo Widget</span>. However,
+a <span style="font-style: italic;">Dojo Widget</span> can also be
+represented by the following JavaScript. This
+JavaScript makes the Woodstock component available to web app
+developers who cannot, or do not want to, use the JSP and/or JSF
+frameworks.<br>
+
+      <br>
+Note that any one of the key-value pairs of properties below can
+contain more key-value pairs, possibly used by subcomponents.<br>
+      <div style="margin-left: 40px;"><br>
+      <code>dojo.require("webui.</code><code>&lt;theme&gt;</code><code>.widget.listbox");<br>
+      <br>
+      </code>webui.suntheme.widget.common.createWidget({<br>
+      <pre id="line113">    "_widgetType": "webui.suntheme:listbox",<br>    "templatePath": "<code>/</code><code>&lt;appname&gt;</code><code>/theme/com/sun/webui/jsf/</code><code>&lt;theme&gt;</code><code>/templates/</code>listbox.html",<br>  &nbsp; "id": "form1:listbox1",<br>    "options": [<br>        {<br>            "selected": false,<br>            "isTitle": false,<br>            "value": "action_1_value",<br>            "label": "Action 1",<br>            "group": false,<br>            "disabled": false,<br>            "separator": false<br>        },<br>        {<br>            "label": "---------------------",<br>            "group": false,<br>            "disabled": true,<br>            "separator": true<br>        },<br>        {<br>            "label": "Action Group 1",<br>            "group": true,<br>            "options": [<br>                {<br>                    "selected": false,<br>                    "isTitle": false,<br>                    "value": "action_A_value",<br>                    "label": "Action A",<br>                    "group": false,<br>                    "disabled": false,<br>                    "separator": false<br>                },<br>                {<br>                    "selected": false,<br>                    "isTitle": false,<br>                    "value": "action_B_value",<br>                    "label": "Action B",<br>                    "group": false,<br>                    "disabled": false,<br>                    "separator": false<br>                }<br>            ]<br>        },<br>        {<br>            "label": "---------------------",<br>            "group": false,<br>            "disabled": true,<br>            "separator": true<br>        },<br>        {<br>            "selected": false,<br>            "isTitle": false,<br>            "value": "action_2_value",<br>            "label": "Action 2",<br>            "group": false,<br>            "disabled": false,<br>            "separator": false<br>        },    <br>     ]<br>});</pre>
+
+      <code> </code><code></code><code></code> </div>
+      <br>
+      
+      </div>
+      <div style="margin-left: 40px;"><br>
+To update the widget, the setProps function shall be used. Note that
+functions such as setDisabled(), etc. are no longer required and
+shall be deprecated.<br>
+      <br>
+      <div style="margin-left: 40px;"><code>var domNode =
+document.getElementById("form1:listbox1");<br>
+
+domNode.setProps({<br>
+&nbsp;&nbsp;&nbsp; disabled: true,<br>
+&nbsp;&nbsp;&nbsp; visible: true,<br>
+&nbsp;&nbsp;&nbsp; labelOnTop: true<br>
+});<br>
+      <br>
+      </code></div>
+
+      </div>
+      <div style="margin-left: 40px;">The changed() function has been
+deprecated. Page authors no longer need to invoke this function
+if they set the selection using JavaScript. This has been done via a
+dojo.event connect for the onchange event.<br>
+      </div>
+      <div style="margin-left: 40px;">
+      <div style="margin-left: 40px;"> </div>
+      </div>
+      <div style="margin-left: 40px;">Note: The &lt;theme&gt; tag is intended to be replaced with the theme name (e.g., suntheme). The &lt;appname&gt; tag is intended to be replaced with the web application name.</div>
+
+      <h2>4.0 Component
+Interfaces</h2>
+      <h3><a name="4.1"></a>4.1 Exported
+interfaces table (Required, Prelim)</h3>
+      <table
+ style="width: 95%; margin-left: auto; margin-right: auto; text-align: left;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <th style="vertical-align: top; width: 30%;">
+            <p>Interface Name<br>
+
+            </p>
+            </th>
+            <th style="vertical-align: top;">
+            <p>Classification<br>
+            </p>
+            </th>
+            <th style="vertical-align: top;">
+            <p>Reference<br>
+
+            </p>
+            </th>
+            <th style="vertical-align: top;">
+            <p>Comments<br>
+            </p>
+            </th>
+          </tr>
+          <tr>
+
+            <td style="vertical-align: top; width: 30%;">com.sun.webui.jsf.component.Listbox</td>
+            <td style="vertical-align: top;">Stable</td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The interface for <span
+ style="font-style: italic;">JSF components</span><br>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.html.ListboxRenderer</td>
+            <td style="vertical-align: top;">Unstable</td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The interface for
+design-time rendering<br>
+            </td>
+
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.widget.ListboxRenderer</td>
+            <td style="vertical-align: top;">Unstable</td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The interface for
+widget rendering</td>
+
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.taglib.ListboxTag</td>
+            <td style="vertical-align: top;">Unstable</td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The interface for <span
+ style="font-style: italic;">JSP tags</span><br>
+
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" rowspan="1" style="vertical-align: top;"><span
+ style="font-weight: bold;">component-type and renderer-type
+faces-config.xml parameters</span><br>
+            </td>
+          </tr>
+          <tr>
+
+            <td style="vertical-align: top;">com.sun.webui.jsf.listbox<br>
+            </td>
+            <td style="vertical-align: top;">Unstable </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The name used to define
+the component-type<br>
+            </td>
+
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.html.listbox<br>
+            </td>
+            <td style="vertical-align: top;">Unstable </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The name used to define
+the renderer-type for design-time rendering<br>
+
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.widget.listbox</td>
+            <td style="vertical-align: top;">Unstable </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The name used to define
+the renderer-type for widget rendering</td>
+
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.2"></a>4.2 Imported
+interfaces (Required, Final)</h3>
+      <div style="margin-left: 40px;">See section 4.2 of <a
+ target="_blank"
+ href="http://lockhart.east/woodstock/specs/ajax-architecture-spec.html#4.2">Ajax
+Architecture for Woodstock JavaServer Faces</a></div>
+      <h3><a name="4.3"></a>4.3 Component
+interfaces (Required, Prelim)<br>
+
+      </h3>
+      <div style="margin-left: 40px;">com.sun.webui.jsf.component.Listbox.java<br>
+com.sun.webui.jsf.renderkit.html.ListboxRenderer.java<br>
+com.sun.webui.jsf.renderkit.widget.ListboxRenderer.java<br>
+com.sun.webui.jsf.taglib.ListboxTag.java<br>
+      </div>
+      <h3><a name="4.4"></a>4.4 Tag interfaces
+(required, Prelim)</h3>
+      <h3><a name="4.4.1"></a>4.4.1 Individual
+tag attributes descriptions (optional)</h3>
+
+      <div style="margin-left: 40px;">
+      <table border="1" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <td colspan="5"><font size="+2"><b>Attributes</b></font></td>
+          </tr>
+          <tr>
+            <td><b>Name</b></td>
+
+            <td><b>Required</b></td>
+            <td><b>Request-time</b></td>
+            <td><b>Type</b></td>
+            <td><b>Description</b></td>
+          </tr>
+          <tr valign="top">
+            <td>binding</td>
+
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> A ValueExpression that resolves to the UIComponent
+that corresponds to this tag. This binding allows the Java bean that
+contains the UIComponent to manipulate the UIComponent, its properties,
+and its children. </td>
+          </tr>
+          <tr valign="top">
+
+            <td>toolTip<br>
+            </td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Sets the value of the title attribute for the HTML
+element. The specified text will display as a tooltip if the mouse
+cursor hovers over the HTML element.</p>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>monospace<br>
+            </td>
+            <td>false</td>
+            <td>false</td>
+
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>When the monospace attribute is set to true, the list items render in a monospace font.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>multiple<br>
+            </td>
+            <td>false</td>
+            <td>false</td>
+
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Flag indicating whether multiple selections are permitted.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>htmlTemplate<br>
+
+            </td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p> Alternative HTML template to be used by this component.</p>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>actionExpression<br>
+            </td>
+            <td>false</td>
+            <td>false</td>
+
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>The actionExpression attribute is used to specify the
+action to take when this component is activated by the user. The value
+of the actionExpression attribute must be one of the following: </p>
+            <ul>
+              <li>an outcome string, used to indicate which page to
+display next, as defined by a navigation rule in the application
+configuration resource file <code>(faces-config.xml)</code>.</li>
+              <li>a JavaServer Faces EL expression that resolves to a
+backing bean method. The method must take no parameters and return an
+outcome string. The class that defines the method must implement the <code>java.io.Serializable</code>
+
+interface or <code>javax.faces.component.StateHolder</code> interface.</li>
+            </ul>
+            
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>actionListenerExpression</td>
+
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>The actionListenerExpression attribute is used to
+specify a method to handle an action event that is triggered when this
+component is activated by the user. The actionListenerExpression
+attribute value must be a JavaServer Faces EL expression that resolves
+to a method in a backing bean. The method must take a single parameter
+that is an ActionEvent, and its return type must be <code>void</code>.
+The class that defines the method must implement the <code>java.io.Serializable</code>
+
+interface or <code>javax.faces.component.StateHolder</code> interface.
+            </p>
+
+            </td>
+          </tr>
+
+          <tr valign="top">
+            <td>onDblClick</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+
+            <td>
+            <p>Scripting code executed when a mouse double click occurs
+over this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>labelOnTop<br>
+            </td>
+            <td>false</td>
+
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>If this attribute is true, the label is rendered above
+the component. If it is false, the label is rendered next to the
+component. The default is false.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+
+            <td>onKeyPress</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user presses and
+releases a key while the component has focus. </p>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onFocus<br>
+            </td>
+            <td>false</td>
+            <td>false</td>
+
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when this component receives
+focus. An element receives focus when the user selects the element by
+pressing the tab key or clicking the mouse.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>rendered<br>
+
+            </td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p> Use the rendered attribute to indicate whether the HTML
+code for the component should be included in the rendered HTML page. If
+set to false, the rendered HTML page does not include the HTML for the
+component. If the component is not rendered, it is also not processed
+on any subsequent form submission.</p>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>id<br>
+            </td>
+            <td>false</td>
+            <td>true<br>
+
+            </td>
+            <td><code>java.lang.String</code></td>
+            <td>The id of the listbox<br>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onKeyUp<br>
+
+            </td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user releases a key
+while the component has focus.</p>
+            </td>
+
+          </tr>
+          <tr valign="top">
+            <td>onMouseUp</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+
+            <p>Scripting code executed when the user releases a mouse
+button while the mouse pointer is on the component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>styleClass<br>
+            </td>
+            <td>false</td>
+
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>CSS style class(es) to be applied to the outermost HTML
+element when this component is rendered.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+
+            <td>items<br>
+            </td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>Specifies the options that the web application user can
+choose from. The value must be one of an array, Map or Collection whose
+members are all subclasses of<code>com.sun.webui.jsf.model.Option</code>.</td>
+
+          </tr>
+          <tr valign="top">
+            <td>style<br>
+            </td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+
+            <td>
+            <p>CSS style(s) to be applied to the outermost HTML element
+when this component is rendered.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onClick<br>
+            </td>
+            <td>false</td>
+
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when a mouse click occurs over
+this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+
+            <td>onBlur<br>
+            </td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when this element loses focus.</p>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseDown</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+
+            <td>
+            <p>Scripting code executed when the user presses a mouse
+button while the mouse pointer is on the component..</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>converter<br>
+            </td>
+            <td>false</td>
+
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p> The converter attribute is used to specify a method to
+translate native property values to String and back for this component.
+The converter attribute value must be one of the following: </p>
+            <ul>
+              <li>A JavaServer Faces EL expression that resolves to a
+backing bean or bean property that implements the <code>javax.faces.converter.Converter</code>
+
+interface; or </li>
+              <li>the ID of a registered converter (a String).</li>
+            </ul>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>required<br>
+            </td>
+
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p> Flag indicating that an input value for this field is
+mandatory, and failure to provide one will trigger a validation error.</p>
+            </td>
+
+          </tr>
+          <tr valign="top">
+            <td>disabled<br>
+            </td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+
+            <td>
+            <p>Flag indicating that the user is not permitted to
+activate this component, and that the component's value will not be
+submitted with the form.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>validatorExpression<br>
+            </td>
+            <td>false</td>
+
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p> The validator attribute is used to specify a method in
+a backing bean to validate input to the component. The validator
+attribute value must be a JavaServer Faces EL expression that resolves
+to a public method with return type void. The method must take three
+parameters: </p>
+            <ul>
+              <li>a <code>javax.faces.context.FacesContext</code></li>
+
+              <li>a <code>javax.faces.component.UIComponent</code>
+(the component whose data is to be validated)</li>
+              <li>a <code>java.lang.Object</code> containing the data
+to be validated. </li>
+            </ul>
+            <p>The backing bean where the method is defined must
+implement <code>java.io.Serializable</code> or <code>javax.faces.component.StateHolder</code>.</p>
+
+            <p>The method is invoked during the Process Validations
+Phase.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseOut<br>
+            </td>
+            <td>false</td>
+
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when a mouse out movement occurs
+over this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+
+            <td>separators<br>
+            </td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Flag indicating that items corresponding to <code>com.sun.webui.jsf.model.Option</code>
+
+that are defined inside a <code>com.sun.webui.jsf.model.OptionGroup</code>
+should be surrounded by separators inside the list. The default value
+is true. If false, no separators are shown. To manually specify the
+location of separators, set this flag to false and place instances of <code>com.sun.webui.jsf.model.Separator</code>
+between the relevant <code>com.sun.webui.jsf.model.Option</code>
+instances when specifying the <code>items</code> attribute.</p>
+            </td>
+          </tr>
+
+          <tr valign="top">
+            <td>onMouseOver</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>Scripting code executed when the user moves the mouse
+pointer into the boundary of this component. </td>
+
+          </tr>
+          <tr valign="top">
+            <td>onMouseMove<br>
+            </td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+
+            <td>Scripting code executed when the user moves the mouse
+pointer while over the component. </td>
+          </tr>
+          <tr valign="top">
+            <td>selected<br>
+            </td>
+            <td>false</td>
+            <td>false</td>
+
+            <td><code>java.lang.String</code></td>
+            <td>The object that represents the selections made from the
+available options. If multiple selections are allowed, this must be
+bound to an Object array, or an array of primitives. </td>
+          </tr>
+          <tr valign="top">
+            <td>immediate<br>
+            </td>
+            <td>false</td>
+
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Flag indicating that event handling for this component
+should be handled immediately (in Apply Request Values phase) rather
+than waiting until Invoke Application phase. </td>
+          </tr>
+          <tr valign="top">
+            <td>label<br>
+
+            </td>
+            <td>false</td>
+            <td>false<br>
+            </td>
+            <td><code>java.lang.String</code></td>
+            <td>If set, a label is rendered adjacent to the component
+with the value of this attribute as the label text.</td>
+          </tr>
+
+          <tr>
+            <td style="vertical-align: top;">onChange<br>
+            </td>
+            <td style="vertical-align: top;">false<br>
+            </td>
+            <td style="vertical-align: top;">false<br>
+            </td>
+
+            <td style="vertical-align: top;"><code>java.lang.String</code></td>
+            <td style="vertical-align: top;">Scripting code executed
+when the element value of this component is changed. </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">visible<br>
+            </td>
+            <td style="vertical-align: top;">false</td>
+
+            <td style="vertical-align: top;">false<br>
+            </td>
+            <td style="vertical-align: top;"><code>java.lang.String</code></td>
+            <td style="vertical-align: top;">Use the visible attribute
+to indicate whether the component should be viewable by the user in the
+rendered HTML page. If set to false, the HTML code for the component is
+present in the page, but the component is hidden with style attributes.
+By default, visible is set to true, so HTML for the component HTML is
+included and visible to the user. If the component is not visible, it
+can still be processed on subsequent form submissions because the HTML
+is present.</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">onKeyDown<br>
+
+            </td>
+            <td style="vertical-align: top;">false</td>
+            <td style="vertical-align: top;">false</td>
+            <td style="vertical-align: top;"><code>java.lang.String</code></td>
+            <td style="vertical-align: top;">Scripting code executed
+when the user presses down on a key while the component has focus.</td>
+          </tr>
+          <tr>
+
+            <td style="vertical-align: top;">labelLevel<br>
+            </td>
+            <td style="vertical-align: top;">false</td>
+            <td style="vertical-align: top;">false</td>
+            <td style="vertical-align: top;"><code>java.lang.String</code></td>
+            <td style="vertical-align: top;">Sets the style level for
+the generated label, provided the label attribute has been set. Valid
+values are 1 (largest), 2 and 3 (smallest). The default value is 2.</td>
+
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">readOnly<br>
+            </td>
+            <td style="vertical-align: top;">false</td>
+            <td style="vertical-align: top;">false</td>
+            <td style="vertical-align: top;"><code>java.lang.String</code></td>
+
+            <td style="vertical-align: top;">If this attribute is set
+to true, the value of the component is rendered as text, preceded by
+the label if one was defined.</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">valueChangeListenerExpression<br>
+            </td>
+            <td style="vertical-align: top;">false</td>
+            <td style="vertical-align: top;">false</td>
+
+            <td style="vertical-align: top;"><code>java.lang.String</code></td>
+            <td style="vertical-align: top;"> The <code>valueChangeListener</code>
+attribute is used to specify a method to handle an value-change event
+that is triggered when the user enters data in the input component. The
+value of the attribute value must be a JavaServer Faces EL expression
+that resolves to a backing bean method. The method must take a single
+parameter of type <code>javax.faces.event.ValueChangeEvent</code>, and
+its return type must be void. The backing bean where the method is
+defined must implement <code>java.io.Serializable</code> or <code>javax.faces.component.StateHolder</code>.</td>
+
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">tabIndex<br>
+            </td>
+            <td style="vertical-align: top;">false</td>
+            <td style="vertical-align: top;">false</td>
+            <td style="vertical-align: top;"><code>java.lang.String</code></td>
+
+            <td style="vertical-align: top;">Position of this element
+in the tabbing order of the current document. Tabbing order determines
+the sequence in which elements receive focus when the tab key is
+pressed. The value must be an integer between 0 and 32767.</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      </div>
+      <h3><a name="4.5"></a>4.5 JavaScript
+interfaces (required, Prelim)</h3>
+      <table
+ style="width: 95%; margin-left: auto; margin-right: auto; text-align: left;"
+ border="1" cellpadding="2" cellspacing="2">
+
+        <tbody>
+          <tr>
+            <th style="vertical-align: top;">
+            <p>Interface Name<br>
+            </p>
+            </th>
+            <th style="vertical-align: top;">
+            <p>Classification<br>
+
+            </p>
+            </th>
+            <th style="vertical-align: top;">
+            <p>Reference<br>
+            </p>
+            </th>
+            <th style="vertical-align: top;">
+            <p>Comments<br>
+
+            </p>
+            </th>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">webui.&lt;theme&gt;.widget.listbox</td>
+            <td style="vertical-align: top;">Unstable</td>
+            <td style="vertical-align: top;"><br>
+
+            </td>
+            <td style="vertical-align: top;">The interface for
+individual widgets</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">webui.&lt;theme&gt;.widget.listbox.fillInTemplate</td>
+            <td style="vertical-align: top;"><br>
+            </td>
+
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">This function is used to
+generate a template based widget.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">webui.&lt;theme&gt;.widget.listbox.setProps</td>
+
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">This function is used to
+set widget properties with Object literals.<br>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+      <br>
+      <div style="margin-left: 40px;">Note: The &lt;theme&gt; tag is
+intended to be replaced with the current
+theme name and version number.<br>
+      </div>
+      <h3><a name="4.6"></a>4.6 Theme
+resources keys (required, Final)</h3>
+      <table
+ style="width: 95%; margin-left: auto; margin-right: auto; text-align: left;"
+ border="1" cellpadding="2" cellspacing="2">
+
+        <tbody>
+          <tr>
+            <th style="vertical-align: top;">
+            <p>Interface Name<br>
+            </p>
+            </th>
+            <th style="vertical-align: top;">
+            <p>Classification<br>
+
+            </p>
+            </th>
+            <th style="vertical-align: top;">
+            <p>Reference<br>
+            </p>
+            </th>
+            <th style="vertical-align: top;">
+            <p>Comments<br>
+
+            </p>
+            </th>
+          </tr>
+          <tr>
+            <td style="width: 30%;">N/A</td>
+            <td style="width: 10%;">Unstable</td>
+            <td style="width: 10%;"><br>
+            </td>
+
+            <td>The path to the JavaScript file containing Dojo
+functions </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.6.1"></a>4.6.1 Style
+selectors</h3>
+      <div style="margin-left: 40px;">TBD<br>
+
+      </div>
+      <h3><a name="4.6.2"></a>4.6.2 Image
+resources</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="4.6.3"></a>4.6.3 JavaScript
+resources</h3>
+      <table
+ style="margin-left: auto; margin-right: auto; width: 95%; text-align: left;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">JavaScript Resources</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Comments</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/listbox.js
+            </td>
+
+            <td style="vertical-align: top;">JavaScript containing
+widget resources </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/props.js</td>
+            <td style="vertical-align: top;">JavaScript containing
+common properties<br>
+            </td>
+
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/formElements.js</td>
+            <td style="vertical-align: top;">JavaScript resources
+associated with listbox shall be deprecated<br>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+      <br>
+      <div style="margin-left: 40px;">Note: The &lt;theme&gt; tag is
+intended to be replaced with the theme
+name
+(e.g., suntheme).<br>
+      </div>
+      <h3><a name="4.6.4"></a>4.6.4 Other
+resources</h3>
+      <table
+ style="width: 95%; margin-left: auto; margin-right: auto; text-align: left;"
+ border="1" cellpadding="2" cellspacing="2">
+
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Template Resources</span></td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Comments</span></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/templates/listbox.html</td>
+
+            <td style="vertical-align: top;">The HTML template name for
+individual widgets</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <div style="margin-left: 40px;">Note: The &lt;theme&gt; tag is
+intended to be replaced with the theme
+name
+(e.g., suntheme).<br>
+
+      <span style="font-weight: bold;"></span></div>
+      <h3><a name="4.6.5"></a>4.6.5 Localized
+message keys</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="4.7"></a>4.7 Component
+Extensibility</h3>
+      <div style="margin-left: 40px;">See section 4.7 of <a
+ target="_blank"
+ href="http://lockhart.east/woodstock/specs/ajax-architecture-spec.html#4.7">Ajax
+Architecture for Woodstock JavaServer Faces</a> </div>
+      <h2><a name="5.0"></a>5.0 - Creator
+Design Time Support (required, Prelim)</h2>
+
+      <h3><a name="5.1"></a>5.1 Design-time Behavior</h3>
+      <div style="margin-left: 40px;">See section 5.1 of <a
+ target="_blank"
+ href="http://lockhart.east/woodstock/specs/ajax-architecture-spec.html#5.1">Ajax
+Architecture for Woodstock JavaServer Faces</a><br>
+      </div>
+      <h3><a name="5.2"></a>5.2 Design-time Classes and Interfaces</h3>
+      <div style="margin-left: 40px;">The
+com.sun.webui.jsf.renderkit.html.ListboxRenderer class shall continue
+to
+be used as the design-time renderer. Thus, there is no change between
+the Woodstock releases.<br>
+      <br>
+
+See section 5.2 of <a target="_blank"
+ href="http://lockhart.east/woodstock/specs/ajax-architecture-spec.html#5.2">Ajax
+Architecture for Woodstock JavaServer Faces</a><br>
+      </div>
+      <h3><a name="5.3"></a>5.3 Localized message keys</h3>
+      <div style="margin-left: 40px;">N/A<br>
+      </div>
+      <h3><a name="5.4"></a>5.4 Dependencies </h3>
+      <div style="margin-left: 40px;">N/A<br>
+
+      </div>
+      <h2><a name="6.0"></a>6.0 Component Dependencies</h2>
+      <h3><a name="6.1"></a>6.1 Component
+class dependencies</h3>
+      <div style="margin-left: 40px;">N/A<br>
+      </div>
+      <h3><a name="6.2"></a>6.2 JavaScript
+dependencies</h3>
+      <ul>
+
+      </ul>
+      <div style="margin-left: 40px;">See section 6.2 of <a
+ target="_blank"
+ href="http://lockhart.east/woodstock/specs/ajax-architecture-spec.html#6.2">Ajax
+Architecture for Woodstock JavaServer Faces</a></div>
+      <div style="margin-left: 40px;">
+      <ul>
+      </ul>
+      </div>
+      <h3><a name="6.3"></a>6.3 Infrastructure
+dependencies<br>
+
+      </h3>
+      <ul>
+      </ul>
+      <div style="margin-left: 40px;">N/A<br>
+      </div>
+      <div style="margin-left: 40px;">
+      <ul>
+      </ul>
+
+      </div>
+      <h3><a name="6.4"></a>6.4 Design time
+dependencies</h3>
+      <div style="margin-left: 40px;">N/A<br>
+      </div>
+      <h2><a name="7.0"></a>7.0 -
+Accessibility, Internationalization, Compliance, JavaScript (required)<br>
+      </h2>
+      <h3><a name="7.1"></a>7.1 Accessibility
+(A11Y)<br>
+
+      </h3>
+      <div style="margin-left: 40px;">See section 7.1 of <a
+ target="_blank"
+ href="http://lockhart.east/woodstock/specs/ajax-architecture-spec.html#7.1">Ajax
+Architecture for Woodstock JavaServer Faces</a><br>
+      </div>
+      <h3><a name="7.2"></a>7.2
+Internationalization (I18N)</h3>
+      <div style="margin-left: 40px;">See section 7.2 of <a
+ target="_blank"
+ href="http://lockhart.east/woodstock/specs/ajax-architecture-spec.html#7.2">Ajax
+Architecture for Woodstock JavaServer Faces</a><br>
+      </div>
+
+      <h3><a name="7.3"></a>7.3 Level of XHTML Compliance</h3>
+      <ul>
+      </ul>
+      <div style="margin-left: 40px;">See section 7.3 of <a
+ target="_blank"
+ href="http://lockhart.east/woodstock/specs/ajax-architecture-spec.html#7.3">Ajax
+Architecture for Woodstock JavaServer Faces</a> </div>
+      <h3><a name="7.4"></a>7.4 JavaScript</h3>
+      <h3><a name="7.4.1"></a>7.4.1 Client-side Updating<br>
+
+      </h3>
+      <div style="margin-left: 40px;">Web app developers shall be able
+to update all widget properties via the setProps function. In fact, the
+widget's fillInTemplate functions shall use this feature as well. All
+existing functions such as setDisabled, etc. shall be
+deprecated. For example:<br>
+      <code><br>
+      </code>
+      <div style="margin-left: 40px;"><code>webui.@THEME@.widget.listbox
+= function() {</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp; // Set defaults</code><br>
+
+      <code>&nbsp;&nbsp;&nbsp; this.widgetType = "listbox";</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp; // Register widget</code><br>
+      <code>&nbsp;&nbsp;&nbsp; dojo.widget.Widget.call(this);</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp; /**</code><br>
+
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; * This function is used to
+generate a template based widget.</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp; */</code><br>
+      <code>&nbsp;&nbsp;&nbsp; this.fillInTemplate = function() {</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Set ids.</code><br>
+
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (this.id) {</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.labelContainer.id = this.id + "_label";</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.listContainer.id = this.id + "_list"; </code><br>
+
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</code><br>
+
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Set public
+functions.</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.domNode.setProps = function(props) { return
+dojo.widget.byId(this.id).setProps(props); }</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.domNode.getSelectedValue = function() { return
+dojo.widget.byId(this.id).getSelectedValue(); }</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.domNode.getSelectedLabel = function() { return
+dojo.widget.byId(this.id).getSelectedLabel(); }</code><br>
+
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Deprecated
+functions from formElements.js. </code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // </code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Note:
+Although we now have a setProps function to update properties,</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // the following
+functions must be backward compatible.</code><br>
+
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.domNode.changed = function() {
+dojo.widget.byId(this.id).changed(); }</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.domNode.getSelectElement = function() {
+dojo.widget.byId(this.id).getSelectElement(); }</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.domNode.setDisabled =&nbsp; function(disabled) {
+dojo.widget.byId(this.id).setDisabled(disabled); }</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Set private
+functions.</code><br>
+
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.setProps =
+webui.@THEME@.widget.listbox.setProps;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.getSelectClassName =
+webui.@THEME@.widget.listbox.getSelectClassName;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.setSelectProps = webui.@THEME@.widget.listbox.setSelectProps;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.addOptions
+= webui.@THEME@.widget.listbox.addOptions;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+this.getOptionClassName =
+webui.@THEME@.widget.listbox.getOptionClassName; </code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.setOptionProps = webui.@THEME@.widget.listbox.setOptionProps;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.setGroupOptionProps =
+webui.@THEME@.widget.listbox.setGroupOptionProps;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.listboxChanged = webui.@THEME@.widget.listbox.listboxChanged;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.jumpListboxChanged =
+webui.@THEME@.widget.listbox.jumpListboxChanged;</code><br>
+
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.getSelectedValue = webui.@THEME@.widget.listbox.getSelectedValue;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.getSelectedLabel = webui.@THEME@.widget.listbox.getSelectedLabel;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.initStyleClasses = webui.@THEME@.widget.listbox.initStyleClasses;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.setDisabled
+= webui.@THEME@.widget.listbox.setDisabled;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+this.getSelectElement = webui.@THEME@.listbox.getSelectElement;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.changed =
+webui.@THEME@.listbox.changed;</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span
+ style="font-weight: bold;">// Set properties.</span></code><br
+ style="font-weight: bold;">
+      <code style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.setProps(this);</code><br>
+      <code></code><br>
+
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Set events.</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+dojo.event.connect(this.domNode, "onchange",</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+webui.@THEME@.widget.listbox.createOnChangeCallback(this.id));</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return true;</code><br>
+
+      <code>&nbsp;&nbsp;&nbsp; }</code><br>
+      <code>}</code><br>
+      <code></code><br>
+      <code>/**</code><br>
+      <code>&nbsp;* This function is used to set widget properties with
+the</code><br>
+      <code>&nbsp;* following Object literals.</code><br>
+
+      <code>&nbsp;*</code><br>
+      <code>&nbsp;* &lt;ul&gt;</code><br>
+      <code>&nbsp;*&nbsp; &lt;li&gt;id&lt;/li&gt;</code><br>
+      <code>&nbsp;*&nbsp; &lt;li&gt;dir&lt;/li&gt;</code><br>
+
+      <code>&nbsp;*&nbsp; &lt;li&gt;disabled&lt;/li&gt;</code><br>
+      <code>&nbsp;*&nbsp; &lt;li&gt;labelOnTop&lt;/li&gt;</code><br>
+      <code>&nbsp;*&nbsp; &lt;li&gt;lang&lt;/li&gt;</code><br>
+
+      <code>&nbsp;*&nbsp; &lt;li&gt;multiple&lt;/li&gt;</code><br>
+      <code>&nbsp;*&nbsp; &lt;li&gt;onBlur&lt;/li&gt;</code><br>
+      <code>&nbsp;*&nbsp; &lt;li&gt;onChange&lt;/li&gt;</code><br>
+
+      <code>&nbsp;*&nbsp; &lt;li&gt;onClick&lt;/li&gt;</code><br>
+      <code>&nbsp;*&nbsp; &lt;li&gt;onDblClick&lt;/li&gt;</code><br>
+      <code>&nbsp;*&nbsp; &lt;li&gt;onFocus&lt;/li&gt;</code><br>
+
+      <code>&nbsp;*&nbsp; &lt;li&gt;onMouseDown&lt;/li&gt;</code><br>
+      <code>&nbsp;*&nbsp; &lt;li&gt;onMouseOut&lt;/li&gt;</code><br>
+      <code>&nbsp;*&nbsp; &lt;li&gt;onMouseOver&lt;/li&gt;</code><br>
+
+      <code>&nbsp;*&nbsp; &lt;li&gt;onMouseUp&lt;/li&gt;</code><br>
+      <code>&nbsp;*&nbsp; &lt;li&gt;onMouseMove&lt;/li&gt;</code><br>
+      <code>&nbsp;*&nbsp; &lt;li&gt;onKeyPress&lt;/li&gt;</code><br>
+
+      <code>&nbsp;*&nbsp; &lt;li&gt;onKeyUp&lt;/li&gt;</code><br>
+      <code>&nbsp;*&nbsp; &lt;li&gt;onSelect&lt;/li&gt;</code><br>
+      <code>&nbsp;*&nbsp; &lt;li&gt;options&lt;/li&gt;</code><br>
+
+      <code>&nbsp;*&nbsp; &lt;li&gt;readonly&lt;/li&gt;</code><br>
+      <code>&nbsp;*&nbsp; &lt;li&gt;size&lt;/li&gt;</code><br>
+      <code>&nbsp;*&nbsp; &lt;li&gt;monospace&lt;/li&gt;</code><br>
+
+      <code>&nbsp;*&nbsp; &lt;li&gt;style&lt;/li&gt;</code><br>
+      <code>&nbsp;*&nbsp; &lt;li&gt;tabIndex&lt;/li&gt;</code><br>
+      <code>&nbsp;*&nbsp; &lt;li&gt;title&lt;/li&gt;</code><br>
+
+      <code>&nbsp;*&nbsp; &lt;li&gt;visible&lt;/li&gt;</code><br>
+      <code>&nbsp;* &lt;/ul&gt;</code><br>
+      <code>&nbsp;*</code><br>
+      <code>&nbsp;* @param props Key-Value pairs of properties.</code><br>
+
+      <code>&nbsp;*/</code><br>
+      <code>webui.@THEME@.widget.listbox.setProps = function(props) {</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp; if (props == null) {</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return false;</code><br>
+      <code>&nbsp;&nbsp;&nbsp; }</code><br>
+
+      <code>&nbsp;&nbsp; &nbsp;</code><br>
+      <code>&nbsp;&nbsp;&nbsp; // After widget has been initialized,
+save properties for later updates</code><br>
+      <code>&nbsp;&nbsp;&nbsp; if (this.updateProps == true) {</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+webui.@THEME@.widget.common.extend(this, props); </code><br>
+      <code>&nbsp;&nbsp;&nbsp; } </code><br>
+
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp; // Set flag indicating properties can be
+updated.</code><br>
+      <code>&nbsp;&nbsp;&nbsp; this.updateProps = true;</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp; // Initialize the proper style classes
+based on whether this is a jump listbox or not</code><br>
+      <code>&nbsp;&nbsp;&nbsp; this.initStyleClasses();</code><br>
+
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</code><br>
+      <code>&nbsp;&nbsp;&nbsp; // Set core properties on the
+&lt;span&gt; element. It takes care the following properties:</code><br>
+      <code>&nbsp;&nbsp;&nbsp; // className, id, style, visible</code><br>
+      <code>&nbsp;&nbsp;&nbsp;
+webui.@THEME@.widget.common.setCoreProps(this.domNode, props);</code><br>
+
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp; // If the listbox is readonly, then
+the selected value is rendered as a StaticText</code><br>
+      <code>&nbsp;&nbsp;&nbsp; // Otherwise, render it as a listbox</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp; if (props.readonly) {</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+webui.@THEME@.common.setVisibleElement(this.staticTextContainer,
+props.readonly);</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+webui.@THEME@.common.setVisibleElement(this.listContainer,
+!props.readonly);</code><br>
+      <code>&nbsp;&nbsp;&nbsp; }</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp; if (props.readonly == true) {</code><br>
+      <code></code><br>
+
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Render the
+selected value as a StaticText</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+webui.suntheme.widget.common.addFragment(this.staticTextContainer,
+this.getSelectedValue());</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp; } else { &nbsp;</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Render it as
+a normal listbox</code><br>
+
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Set the
+common properties, such as, accesskey, dir, lang, tabindex, title, on
+the &lt;select&gt; element</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+webui.@THEME@.widget.common.setCommonProps(this.listContainer, props);</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Set
+JavaScript properties, such as, onBlur, onClick, onDblClick, onFocus,
+onKeyDown, onKeyPress, onKeyup</code><br>
+
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // onMouseDown,
+onMouseOut, onMouseOver, onMouseUp, onMouseMove, onChange, onSelect on
+the &lt;select&gt; element</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+webui.@THEME@.widget.common.setJavaScriptProps(this.listContainer,
+props);</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Set the
+properties specific to the &lt;select&gt; element</code><br>
+
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.setSelectProps(this.listContainer, props);</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Add
+&lt;option&gt; and &lt;optgroup&gt; elements in the &lt;select&gt;
+
+element</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if
+(props.options) {</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.addOptions(props);</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</code><br>
+      <code></code><br>
+
+
+      <code>&nbsp;&nbsp;&nbsp; }</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp; // Set label if there is one</code><br>
+      <code>&nbsp;&nbsp;&nbsp; if (props.label) {</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+webui.suntheme.widget.common.addFragment(this.labelContainer,
+props.label);</code><br>
+
+      <code>&nbsp;&nbsp;&nbsp; }</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp; // Have a &lt;br/&gt; if the labelOnTop
+is true</code><br>
+      <code>&nbsp;&nbsp;&nbsp; if (this.label &amp;&amp;
+
+props.labelOnTop != null) { </code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+webui.@THEME@.common.setVisibleElement(this.brNode, props.labelOnTop);</code><br>
+      <code>&nbsp;&nbsp;&nbsp; }</code><br>
+      <code>&nbsp; &nbsp;</code><br>
+      <code>&nbsp;&nbsp;&nbsp; return true;</code><br>
+
+      <code>}</code></div>
+      </div>
+      <div style="margin-left: 40px;">
+      <div style="margin-left: 40px;"><code></code></div>
+      <br>
+See section 7.4.1 of <a target="_blank"
+ href="http://lockhart.east/woodstock/specs/ajax-architecture-spec.html#7.4.1">Ajax
+Architecture for Woodstock JavaServer Faces</a><br>
+      </div>
+      <h3><a name="7.4.2"></a>7.4.2 Properties</h3>
+
+      <div style="margin-left: 40px;"> Themed CSS selectors and other
+properties shall be added to the <code>props.js</code> file of the
+module.
+For example, <code>widget/props.js</code>
+includes the following listbox&nbsp; properties.<br>
+      <br>
+      <code>&nbsp;&nbsp;&nbsp; webui.@THEME@.widget.props = {<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...<br>
+      <br>
+      </code>
+      <div style="margin-left: 40px;"><code>&nbsp;&nbsp;&nbsp; // Listbox properties.<br>
+&nbsp;&nbsp;&nbsp; listbox: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; className:
+"MnuStd@THEME_CSS@",<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; disabledClassName:
+"MnuStdDis@THEME_CSS@",<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; monospaceClassName:
+"LstMno@THEME_CSS@",<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; monospaceDisabledClassName:
+"LstMnoDis@THEME_CSS@",<br>
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; optionClassName:
+"MnuStdOpt@THEME_CSS@",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; optionDisabledClassName:
+"MnuStdOptDis@THEME_CSS@",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; optionGroupClassName:
+"MnuStdOptGrp@THEME_CSS@",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; optionSelectedClassName:
+"MnuStdOptSel@THEME_CSS@",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; optionSeparatorClassName:
+"MnuStdOptSep@THEME_CSS@",<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; titleOptionAppender: "
+&amp;#8212;",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; titleOptionPreppender:
+"&amp;#8212; "<br>
+&nbsp;&nbsp;&nbsp; },<br>
+      <br>
+
+      </code><code><br>
+&nbsp;&nbsp;&nbsp; ...<br>
+      </code></div>
+      <br>
+See section 7.4.2 of <a target="_blank"
+ href="http://lockhart.east/woodstock/specs/ajax-architecture-spec.html#7.4.2">Ajax
+Architecture for Woodstock JavaServer Faces</a><br>
+
+      </div>
+      <div style="margin-left: 40px;"> </div>
+      <h3><a name="7.4.3"></a>7.4.3 Debugging</h3>
+      <div style="margin-left: 40px;"> Debugging
+shall be turned on via the debug attribute of the head tag. However, in
+order for the listbox to participate in the debug scheme, the<span
+ style="font-family: monospace;"> listbox</span><code>.js</code>
+file must be added to the <code>.../widget/props.js</code> file. For
+example:<br>
+
+      <br>
+      <div style="margin-left: 40px;"><code>// For debugging only,
+obtain all module resources before invoking</code><br>
+      <code>// dojo.hostenv.writeIncludes(). This will ensure that
+JavaScript</code><br>
+      <code>// files are accessible to JavaScript debuggers.</code><br>
+      <code>dojo.requireIf(djConfig.isDebug,
+"webui.@THEME@.widget.listbox");</code><code></code><br>
+      <code>...</code><br>
+
+      </div>
+      <br>
+See section 7.4.3 of <a target="_blank"
+ href="http://lockhart.east/woodstock/specs/ajax-architecture-spec.html#7.4.3">Ajax
+Architecture for Woodstock JavaServer Faces</a><br>
+      </div>
+      <h2><a name="8.0"></a>8.0 Component High Level Design (optional)<br>
+      </h2>
+      <div style="margin-left: 40px;">
+
+   <p>The listbox component is rendered as an XHTML <code>&lt;select&gt;</code>
+     element. The <code>&lt;option&gt;</code> elements within the 
+     <code>&lt;select&gt;</code> element are derived
+     from the <code>webuijsf:listbox</code> tag's <code>items</code> attribute.</p>
+
+     <p>Use the <code>items</code> attribute to specify
+ the options to be displayed in the listbox. The
+ value of the items attribute must be a JavaServer Faces EL
+ expression that identifies an array, a <code>java.util.Collection</code>
+ or a <code>java.util.Map</code> of <code>com.sun.webui.jsf.Option</code>.</p>
+ <p>Use the <code>multiple</code> attribute to
+ specify that a user can select more than one item.
+ By default <code>multiple</code> is set to false. If multiple 
+ selections are allowed, the model object property that is
+ specified in the <code>selected</code> attribute must be
+ either an array of primitives, an array of objects, or a subclass of <code>java.util.List</code>.</p>
+ <p>Use the <code>selected</code> attribute to associate the component
+ with a model object that represents the current choice, by setting the
+ value to a JavaServer Faces EL expression that corresponds to a property of a managed
+ bean. The first time the component is rendered, the options that correspond to the
+ value of the <code>selected</code> model object property are marked as selected,
+ using the <code>equals</code> method on the model object. </p>
+ <p>Use the <code>rows</code> attribute to specify
+ the number of list items that can be seen at once, without scrolling.</p> 
+ <p>The list items will be rendered using a monospace font if
+ the <code>monospace</code> attribute is set to true.</p>
+ <p>To optionally specify a label for the component, use the <code>label</code>
+ attribute, or specify a <code>label</code> facet.</p>
+
+For general Woodstock architecture information, see section 1.4 of <a target="_blank"
+ href="http://lockhart.east/woodstock/specs/ajax-architecture-spec.html#1.4">Ajax
+Architecture for Woodstock JavaServer Faces</a><a target="_blank"
+ href="http://lockhart.east/woodstock/specs/ajax-architecture-spec.html#1.4"></a>
+      </div>
+<h2><a name="9.0"></a>9.0 Issues</h2>
+<div style="margin-left: 40px;">TBD</div> </td>
+    </tr>
+  </tbody>
+</table>
+</BODY>
+</HTML>

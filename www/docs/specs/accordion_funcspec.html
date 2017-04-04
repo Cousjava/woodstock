@@ -1,0 +1,2652 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<!--
+      The contents of this file are subject to the terms
+      of the Common Development and Distribution License
+      (the License).  You may not use this file except in
+      compliance with the License.
+      
+      You can obtain a copy of the license at
+      https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      See the License for the specific language governing
+      permissions and limitations under the License.
+      
+      When distributing Covered Code, include this CDDL
+      Header Notice in each file and include the License file
+      at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      If applicable, add the following below the CDDL Header,
+      with the fields enclosed by brackets [] replaced by
+      you own identifying information:
+      "Portions Copyrighted [year] [name of copyright owner]"
+      
+      Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+    -->
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=windows-1252">
+  <title>Project Woodstock - Accordion Component Functional
+Specification</title>
+  <style type="text/css">
+H1 {color: #666699;}
+H2 {color: #666699;}
+H3 {color: #666699;}
+@import url(../../browser-uispec.css);
+.style2 {font-size: 18pt}
+  </style>
+</head>
+<body>
+<div class="MstDiv">
+<table class="MstTblBot" title="" border="0" cellpadding="0"
+ cellspacing="0" width="100%">
+  <tbody>
+    <tr>
+      <td class="MstTdTtl">
+      <div class="MstDivTtl">
+      <div class="Mst1TtlTxt">Project Woodstock</div>
+      </div>
+      <div class="Mst1SecDiv"> <span class="Mst1SecTxt style2">Component
+Functional Spec - Accordion<br>
+      </span></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="xsmall" align="right"><b><i><font size="2"><br>
+</font></i></b></div>
+<table class="Mst2Tbl" title="" border="0" cellpadding="0"
+ cellspacing="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <h2 style="font-weight: bold;"><a name="1.0"></a>1.0
+Component Description</h2>
+This document specifies the Accordion user interface component. There
+are
+two
+sets of interfaces in this component. A client side javascript
+interface that allows user to dynamically manipulate the widget and
+a server side JSF based component interface.<br>
+      <br>
+The accordion component is essentially a vertical set of tabs with a
+few significant differences. It generally tends to have a depth of one
+level unlike tabs where multilevel tabsets exist. Being rendered
+vertically there is space to
+accommodate more markup than simply the name of the tab. Thus an
+accordion tab can have a lot more information than a normal tab
+ususally
+does. <br>
+      <h3><span style="font-weight: bold;"><a name="1.1"></a>1.1
+Document Revision History</span><br>
+      </h3>
+      <table
+ style="width: 95%; text-align: left; margin-left: auto; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Revision</span></td>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Date</span></td>
+            <td style="width: 50%; text-align: center;"><span
+ style="font-weight: bold;">Synopsis</span></td>
+            <td style="width: 20%; text-align: center;"><span
+ style="font-weight: bold;">Author</span></td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">0.1</td>
+            <td style="text-align: center;">03/15/2007</td>
+            <td style="text-align: center;">
+            <div align="left">Initial Draft</div>
+            </td>
+            <td style="text-align: center;">
+            <div align="center">Ratnadeep Bhattacharjee<br>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">
+            <div align="center">0.2<br>
+            </div>
+            </td>
+            <td style="vertical-align: top;">
+            <div align="center">07/17/2007<br>
+            </div>
+            </td>
+            <td style="vertical-align: top;">Revised after code review
+and checkin<br>
+            </td>
+            <td style="vertical-align: top;">
+            <div align="center">Ratnadeep Bhattacharjee<br>
+            </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 style="font-weight: bold;"><a name="1.2"></a>1.2
+Relevant Documents</h3>
+      <ul>
+        <li>link to design spec (optional, expected when final)</li>
+        <li>link to test spec (required when final)</li>
+      </ul>
+      <h3><a name="1.3"></a>1.3 Definition of
+Terms (optional)</h3>
+      <ul>
+        <li>Accordion Container - the container of all accordion tabs.
+Also referred to as simply "Accordion".<br>
+        </li>
+        <li>Accordion Tab - a child element of the accordion, its a
+container that displays arbitrary elements; it expands when selected.
+It also has a label.<br>
+        </li>
+        <li>Accordion Tab Label - the label (may not be a Label widget)
+associated with a given accordion Tab.<br>
+        </li>
+        <li>Accordion Tab Content - the content of an accordion tab.
+This can be any arbitrary markup.<br>
+        </li>
+        <li>JSF - Java Server Faces</li>
+        <li>Ajax - Asynchronous Javascript and XML</li>
+        <li>Dojo - a Javascript/Ajax toolkit.</li>
+        <li>Dynamic Faces, JSF Extensions - Framework to support for
+Ajax in JSF.</li>
+        <li>JSON - Javascript Object Notation.</li>
+      </ul>
+      <br>
+      <h2><a name="2.0"></a>2.0 Requirements,
+goals, and assumptions</h2>
+      <h3><a name="2.1"></a>2.1 Requirements<br>
+      </h3>
+&nbsp;The UI and functional requirements hav been listed below.<br>
+      <h3><a name="2.1.1"></a>2.1.1 UI requirements<br>
+      </h3>
+The draft UI requirements specification for this component is currently
+available at:<br>
+      <br>
+      <a
+ href="http://xdesign.sfbay/people/prasant/swaed/accordionmenu.html">http://xdesign.sfbay/people/prasant/swaed/accordionmenu.html</a><br>
+      <br>
+      <h3><a name="2.1.2"></a>2.1.2 Functional
+requirements (required)</h3>
+The number of accordaion tabs selected/open at a given point in time
+should be configurable. By default, only one would be open.<br>
+      <span style="font-style: italic;"></span>Accordion tab content
+should be able to display any information from simple HTML markup to
+more complex components like trees.<br>
+It should be possible to assign a title/label to each accordion tab.
+The
+contents of this label should be configurable too.<br>
+Each Accordion tab should allow for the addition of functional
+entities like "edit", "help", etc.<br>
+It should be possible to show or hide an accordion tab.<br>
+The width of the accordion should be configurable. The height of each
+accordion tab including the label height should be configurable too.<br>
+The accordion should be able to resize itself when the browser window
+is resized.<br>
+It should be possible to change the look of accordion tabs based on the
+whether they are open, close or being moused over. <br>
+When swictching from one accordion tab to another it should be possible
+to configure whether a trip to the server needs to be made before
+moving to the new tab.<br>
+It should be possible to position an accordion anywhere in a browser
+window.<br>
+It should be possible for accordion tabs to themselves be accordion
+containers (a second level accordion).<br>
+It should be possible for developers to change the contents of a given
+accordion tab based on certain events (clicking on a "edit" button, for
+example)<br>
+It should be possible to refresh the contents of the Accordion or of
+each individual tab.<br>
+It should be possible to reorder the accordion tabs by drag and drop.<br>
+Selecting an accordion tab should trigger events that applications can
+listen to.<br>
+      <br>
+      <h3><a name="2.1.3"></a>2.1.3
+Performance requirements (optional)</h3>
+An accordion should perform optimally. In situations where the data for
+a given tab content is being loaded an appropriate message
+should be displayed in the content section until the data has been
+uploaded completely.<br>
+      <br>
+      <h3><a name="2.1.4"></a>2.1.4 Browser, platform requirements</h3>
+      <ul>
+        <li>The table of supported <a
+ href="https://woodstock.dev.java.net/docs/SupportedBrowers.htm">Browsers</a>.</li>
+        <li>The table of supported <a
+ href="https://woodstock.dev.java.net/docs/SupportedContainers.htm">Containers</a>.</li>
+      </ul>
+      <h3><a name="2.1.5"></a>2.1.5 Special
+requirements (optional)</h3>
+      <h3><a name="2.2"></a>2.2 Requirements Not Met (required, if you
+are not meeting
+a requirement)</h3>
+It may not be possible to meet all of the requirements described in
+2.1.2 in the first release of the widget.<br>
+      <br>
+      <h3><a name="2.3"></a>2.3 Assumptions
+(optional)</h3>
+      <br>
+      <h3><a name="2.4"></a>2.4 Goals
+(optional)</h3>
+      <br>
+      <h3><a name="2.5"></a>2.5 Non-goals
+(optional)</h3>
+&nbsp;<br>
+      <h2><a name="3.0"></a>3.0 Component Usage</h2>
+The accordion can be used for object based navigation as well as task
+based navigation. It is generally not recommended that accordions be
+used for non navigational purposes. Also, when the number of
+navigational tasks or objects gets too large one should consider using
+a tree or some other UI component as opposed to the accordion. <br>
+      <br>
+In the case of simple navigation the accordion tends to be on one frame
+(the left frame) and the objects/tasks to be navigated to on the other
+frame. <br>
+      <br>
+As mentioned above the component has two interfaces:<br>
+      <br>
+      <span style="font-weight: bold;">Client side Interface Usage:</span><br>
+      <br>
+      <span style="font-weight: bold;">a) <span
+ style="font-style: italic;">Using Woodstock's proprietory
+API:</span></span><br>
+      <br>
+      <pre id="line122"><big><span
+ style="font-family: Courier New,Courier,monospace;">&lt;script&gt;</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">dojo.require('webui.suntheme.widget.*');</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">webui.suntheme.widget.common.createWidget({</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">    "_widgetType": "webui.suntheme:accordion",</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">    "templatePath": "/path/to/templates/accordion.html",</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">    "visible": true,</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">    "_modules": ["webui.suntheme.widget.accordion"],</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">    "accordionTabs": [</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">        {</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">            "templatePath": "/path/to/templates/accordionTab.html",</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">            "_widgetType": "webui.suntheme:accordionTab",</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">            "label": "One",</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">            "tabContent": [{widget property list}, {widget property list}, ...],</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">            "_modules": ["webui.suntheme.widget.accordionTab"],</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">            "id": "accordionExample:acc1:tab1"</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">        },</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">        {</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">            "templatePath": "/path/to/templates/accordionTab.html",</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">            "_widgetType": "webui.suntheme:accordionTab",</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">            "label": "Two",</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">            "tabContent": [],</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">            "_modules": ["webui.suntheme.widget.accordionTab"],</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">            "id": "accordionExample:acc1:tab2"</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">        },</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">&nbsp;   ],</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">    "id": "accordionExample:acc1"</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">});</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">&lt;/</span></big><span
+ class="end-tag"><big><span
+ style="font-family: Courier New,Courier,monospace;">script&gt;</span></big><br><br></span></pre>
+      <small
+ style="font-family: Times New Roman,Times,serif; font-weight: bold;"><small><span
+ class="end-tag"><big><big>b) <span style="font-style: italic;">Using
+standar Dojo API:</span></big></big></span></small></small><br>
+      <span class="end-tag"></span>
+      <pre wrap="">	<big><span style="font-family: monospace;">&lt;head&gt;</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">	...</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">	&lt;script type="text/javascript"&gt;</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">	  var djConfig = {isDebug: true };</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">	&lt;/script&gt;</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">	&lt;script type="text/javascript" src="../../dojo.js"&gt;&lt;/script&gt;</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">	&lt;script type="text/javascript"&gt;</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">		dojo.require("dojo.widget.*");</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">	&lt;/script&gt;</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">		</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">	&lt;script&gt;</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">		var accordion;</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">		function init() {</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">	 	  accordion = dojo.widget.createWidget("webui.suntheme:accordion", null,</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">			dojo.byId("accordionShell"));</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">		  var label=["pane 1", "pane 2", "pane 3"];</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">		  for(i=0; i&lt;label.length; ++i) {</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">			var content = </span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">			  dojo.widget.createWidget("webui.suntheme:accordionTab", </span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">				{label: label[i], selected: i==1});</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">			if (i/2 == 0) {</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">			  content.setContent("this is " + label[i]);</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">			} else {</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">			  content.setHandler("handlerFunc");</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">			}</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">			accordion.addChild(content);</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">		}</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">		accordion.onResized();</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">		dojo.addOnLoad(init);</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">	&lt;/script&gt;</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">	...</span><br
+ style="font-family: monospace;"><span style="font-family: monospace;">	&lt;/head&gt;<br>	&lt;body&gt;<br>	   .....<br>	   .....<br></span></big></pre>
+      <pre wrap="">	      <big><span
+ style="font-family: Courier New,Courier,monospace;">&lt;h2&gt;Programatically created Accordion goes here:&lt;/h2&gt;</span><br
+ style="font-family: Courier New,Courier,monospace;"><span
+ style="font-family: Courier New,Courier,monospace;">	      &lt;div id="accordionShell" style="width: 400px; height: 400px;"&gt;&lt;/div&gt;</span></big><br>	      <big><span
+ style="font-family: Courier New,Courier,monospace;">.....<br>	   .....<br
+ style="font-family: Courier New,Courier,monospace;"></span><span
+ style="font-family: Courier New,Courier,monospace;">	&lt;/body&gt;</span></big></pre>
+      <span style="font-weight: bold;">JSF based interface usage:</span><br>
+      <br>
+&nbsp;<span style="font-family: Courier New,Courier,monospace;">
+&lt;webuijsf:accordion id="acc1" multipleSelect="true" &gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:accordionTab id="tab1" title="One" contentHeight="50px"
+&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:label id="label1" text="Label1"/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:staticText text="Contents on bucket 1"/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:accordionTab&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:accordionTab id="tab2" title="Two" contentHeight="50px"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:markup tag="p"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:staticText text="Contents on bucket 2"/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:markup&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:accordionTab&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:accordionTab id="tab3" title="Three"
+contentHeight="50px"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:markup tag="p"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:staticText text="Contents on bucket 3"/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:markup&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:accordionTab&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:accordionTab id="tab4" title="Four"
+contentHeight="50px"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:markup tag="p"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:staticText text="Contents on bucket 4"/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:markup&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:textField id="tf1" label="Search:" labelLevel="2"/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:accordionTab&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:accordionTab id="tab5" title="News"
+contentHeight="200px"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:tree id="MyTree" style="width:35em;"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:treeNode id="Node1" expanded="true" text="External
+URLs"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;f:facet name="image"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:image id="image" icon="TREE_SERVER" /&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/f:facet&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:treeNode id="Node1_1" text="Sun Microsystems, Inc."<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+url="http://www.sun.com" target="external"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;f:facet name="image"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:image id="image" icon="TREE_STORAGE_MAJOR" /&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/f:facet&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:treeNode&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:treeNode id="Node1_2" expanded="true" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+text="Search Engines"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:treeNode id="Node1_2_1" text="Google"<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+url="http://www.google.com" target="external"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;f:facet name="image"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:image id="image" url="/images/google.jpg"<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; height="16" width="16" /&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/f:facet&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:treeNode&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:treeNode id="Node1_2_2" text="Yahoo!" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+url="http://www.yahoo.com" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+imageURL="/images/yahoo.jpg" target="external"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:treeNode&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:treeNode id="Node1_2_3" text="Lycos"<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+url="http://www.lycos.com" target="external"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;f:facet name="image"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:image
+id="image"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+url="http://ly.lygo.com/ly/srch/hp/dog_web_34x35.gif" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+height="16" width="16" /&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/f:facet&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:treeNode&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:treeNode&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:treeNode&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:tree&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:accordionTab&gt; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:accordion&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;/td&gt;<br>
+      <br>
+      <br>
+&nbsp;&nbsp;&nbsp; &lt;!-- space between each example --&gt;<br>
+&nbsp;&nbsp;&nbsp;
+&lt;td&gt;&lt;div&gt;&amp;nbsp&amp;nbsp&amp;nbsp&lt;/div&gt;&lt;/td&gt;<br>
+      <br>
+      <br>
+&nbsp;&nbsp;&nbsp; &lt;!-- Accordion example #2 --&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;td width="500px"&gt;<br>
+      <br>
+&nbsp;&nbsp;&nbsp; &lt;div style="width:30%"&gt;Accordion occupying 30%
+of parent width with standard tab content<br>
+&nbsp; &nbsp;&nbsp; height = 100px and a saved view selector set at a
+fixed height = 100%. <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Multiple select is set to
+true.&lt;/div&gt;&lt;br /&gt;<br>
+      <br>
+&nbsp;&nbsp;&nbsp; &lt;!-- width override's default in CSS --&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;webuijsf:accordion id="acc2" style="width:30%"
+multipleSelect="true"&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+toggleControls="true" refreshButton="true"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:accordionTab id="tab1" title="One" &gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:label id="label1" text="Label1"/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:staticText text="Contents on bucket 1"/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:accordionTab&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:accordionTab id="tab2" title="Two" &gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:markup tag="p"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:staticText text="Contents on bucket 2"/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:markup&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:accordionTab&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:accordionTab id="tab3" title="Three" &gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:markup tag="p"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:staticText text="Contents on bucket 3"/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:markup&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:accordionTab&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:accordionTab id="tab4" title="Four" &gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:markup tag="p"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:staticText text="Contents on bucket 4"/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:markup&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:accordionTab&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:accordion&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;/td&gt;<br>
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;!-- space between each example --&gt;<br>
+&nbsp;&nbsp;&nbsp;
+&lt;td&gt;&lt;div&gt;&amp;nbsp&amp;nbsp&amp;nbsp&lt;/div&gt;&lt;/td&gt;<br>
+      <br>
+      <br>
+&nbsp;&nbsp;&nbsp; &lt;!-- Accordion example #3 --&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;td width="200px"&gt;<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div style="width:100%"&gt;Accordion
+occupying 100% of parent width with standard <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tab content height = 100px and a
+saved view selector that fits all items. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Multiple select set to
+false.&lt;/div&gt;&lt;br /&gt;<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;!-- width override's default in CSS
+--&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;webuijsf:accordion id="acc3" style="width:100%"
+toggleControls="true" refreshButton="true"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:accordionTab id="tab1" title="One" &gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:label id="label1" text="Label1"/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:staticText text="Contents on bucket 1"/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:accordionTab&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:accordionTab id="tab2" title="Two" &gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:staticText text="Contents on bucket 2"/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:accordionTab&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:accordionTab id="tab3" title="Three" &gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:staticText text="Contents on bucket 3"/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:accordionTab&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:accordionTab id="tab4" title="Four" &gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:staticText text="Contents on bucket 4"/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:accordionTab&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/webuijsf:accordion&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;/td&gt;<br>
+&nbsp;&nbsp; &lt;/tr&gt;<br>
+&nbsp;&nbsp; &lt;tr&gt;&lt;td&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;webuijsf:script&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; function submitForm() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var form =
+document.getElementById("accordionExample");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; form.submit();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; &lt;/webuijsf:script&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;!-- Primary Button --&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;/br&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;webuijsf:button primary="true"&nbsp;
+id="returnButton" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; text="Submit"
+onClick="return submitForm()"/&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;/td&gt;<br>
+&nbsp;&nbsp; &lt;/tr&gt;<br>
+&nbsp;&nbsp; &lt;tr&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;td&gt; &lt;p&gt; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Along with
+exhibiting basic accordion behavior this test case <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; also
+illustrates the fact that the state of the accordion tabs<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; is
+maintained when the form is submitted. Open or close arbitrary<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; accordion
+tabs and click the "Submit" button. The form should<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; reload
+with tabs in the same open/closed state they were in prior<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; to
+submission.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/p&gt;<br>
+&nbsp;&nbsp; &lt;/tr&gt;<br>
+&nbsp;&lt;/table&gt;<br>
+      </span><span style="font-family: Courier New,Courier,monospace;"></span>
+      <br>
+      <span style="font-style: italic; font-weight: bold;"></span>
+      <h2><a name="4.0"></a>4.0 Client Side Widget Interface</h2>
+This section outlines the client side API of the accordion and
+accordionTab Widget. As mentioned above, the accordion is a container
+widget that contains a number of accordionTab widgets. The
+term "accordionTab" and&nbsp; "tab" and "tabContent" refer to the same
+entity in the
+rest of this document.<br>
+      <br>
+Accordion extends Dojo's AccordionContainer widget. AccordionTab
+extends Dojo's ContentPane widget. While Dojo's version of the base
+widgets provide most of the functionality they do not support some
+features that the Woodstock widgets would provide. These include:<br>
+      <br>
+a) Allowing multiple accordion tabs to be open/selected at the same time<br>
+b) Expanding/collapsing/refreshing the Accordion<br>
+c) Associating toolbars, edit, help functionalities with each tab.<br>
+      <br>
+      <h3><a name="4.2"></a>4.1 Imported
+interfaces (Required, Final)</h3>
+This component imports the following interfaces:<br>
+      <br>
+      <table style="text-align: left; width: 100%;" border="1"
+ cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Interface Name<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Classification<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Reference<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 40%;">
+            <p>Comments<br>
+            </p>
+            </th>
+          </tr>
+          <tr>
+            <td>Javascript<br>
+            </td>
+            <td>Standard<br>
+            </td>
+            <td><br>
+            </td>
+            <td><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">XMLHttpRequest Object<br>
+            </td>
+            <td style="vertical-align: top;">Standard<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">Dojo<br>
+            </td>
+            <td style="vertical-align: top;">Unstable<br>
+            </td>
+            <td style="vertical-align: top;">dojotoolkit.org<br>
+            </td>
+            <td style="vertical-align: top;">Javascript and Ajax toolkit<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">JSON<br>
+            </td>
+            <td style="vertical-align: top;">Unstable<br>
+            </td>
+            <td style="vertical-align: top;">json.org<br>
+            </td>
+            <td style="vertical-align: top;">JSON API<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <span style="font-weight: bold;"></span>
+      <h3><a name="4.5"></a>4.2 Javascript
+interfaces (Required, Prelim)</h3>
+      <p>The main accordion javascript is the widget that publishes
+events
+that other javascript functions listen for in order to initiate the
+XMLHttp request during different stages of the autentication process.
+The response from the XHR is transmitted back to the widget for
+manipulation of the DOM node associated with the widget.&nbsp; <br>
+      </p>
+      <p>The Accordion Widget:<br>
+      </p>
+      <table style="text-align: left; width: 100%;" border="1"
+ cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><code>webui.suntheme.widget.accordion</code><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-style: italic;"></span>Primary&nbsp; accordion
+widget.&nbsp; Extends <span
+ style="font-family: Courier New,Courier,monospace; font-weight: bold;">dojo.widget.HtmlWidget</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><small><span
+ style="font-family: Courier New,Courier,monospace;">webui.suntheme.widget.accordionTab</span></small><br>
+            </td>
+            <td style="vertical-align: top;">Primary accordionTab
+widget. Extends <span
+ style="font-family: Courier New,Courier,monospace; font-weight: bold;">dojo.widget.Contentpane</span>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-family: monospace;">webui.suntheme.widget.accordion.selectChild</span></td>
+            <td style="vertical-align: top;">Javascript function to
+select a tab from among its children.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-family: monospace;">webui.suntheme.widget.accordion.setProps<br>
+            </span> </td>
+            <td style="vertical-align: top;">Used to update the domNode
+representing the accordion.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><small><span
+ style="font-family: Courier New,Courier,monospace;">webui.suntheme.widget.accordion.refresh</span></small></td>
+            <td style="vertical-align: top;">refresh the accordion
+widget<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; font-family: monospace;">webui.suntheme.widget.accordion.refresh.beginEventTopic<br>
+webui.suntheme.widget.accordion.refresh.endEventTopic<br>
+            </td>
+            <td style="vertical-align: top;">Publish events indicating
+the beginning and ending accordion refresh.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-family: monospace;">webui.suntheme.widget.accordion.dnd.beginEventTopic<br>
+            </span><span style="font-family: monospace;">webui.suntheme.widget.accordion.dnd.endEventTopic</span><br>
+            </td>
+            <td style="vertical-align: top;">Publish events indicating
+beginning and ending of drag and drop.<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+JSF Extension handler function:<br>
+      <br>
+      <table style="text-align: left; width: 100%;" border="1"
+ cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><code>webui.suntheme.widget.jsfx.accordion</code><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-family: Times New Roman,Times,serif;">Javascript to
+connect to the JSF based accordion component.</span><span
+ style="font-family: monospace;"><br>
+            <br>
+            </span><code></code></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <span style="font-weight: bold;"></span><span
+ style="font-style: italic;"></span><br>
+The Accordion Tab widget:<br>
+      <br>
+      <br>
+      <table style="text-align: left; width: 100%;" border="1"
+ cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><code>webui.suntheme.widget.accordionTab</code><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-style: italic;"></span>Primary&nbsp; accordionTab
+widget. Extends <span
+ style="font-family: Courier New,Courier,monospace; font-weight: bold;">dojo.widget.Contentpane</span><span
+ style="font-family: Courier New,Courier,monospace; font-weight: bold;"></span>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-family: monospace;">webui.suntheme.widget.accordionTab.setLabel<br>
+            <br>
+            </span><code></code></td>
+            <td style="vertical-align: top;">Set the lable of the
+tabContent. <br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-family: monospace;">webui.suntheme.widget.accordionTab.setContent</span></td>
+            <td style="vertical-align: top;">Set the tabContent.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-family: monospace;">webui.suntheme.widget.accordionTab.addMenu</span></td>
+            <td style="vertical-align: top;">Add a menu to the
+accordion tab (not yet implemented)<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-family: monospace;">webui.suntheme.widget.accordionTab.addInfo</span></td>
+            <td style="vertical-align: top;">Add info icon to tab
+content (not yet implemented)<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-family: monospace;">webui.suntheme.widget.accordionTab.setProps<br>
+            </span> </td>
+            <td style="vertical-align: top;">Update the domNode
+representing the tab.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><small><span
+ style="font-family: Courier New,Courier,monospace;">webui.suntheme.widget.accordionTab.refresh</span></small><br>
+            </td>
+            <td style="vertical-align: top;">function to refresh the
+widget<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; font-family: monospace;">webui.suntheme.widget.accordionTab.refresh.beginEventTopic<br>
+webui.suntheme.widget.accordionTab.refresh.endEventTopic<br>
+            </td>
+            <td style="vertical-align: top;">Publish events indicating
+the beginning and end of a tab refresh<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+JSF Extension handler function:
+      <table style="text-align: left; width: 100%;" border="1"
+ cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><code>webui.suntheme.widget.jsfx.accordionTab</code><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-family: Times New Roman,Times,serif;">Javascript to
+connect to the JSF based accordionTab component.</span><span
+ style="font-family: monospace;"><br>
+            <br>
+            </span><code></code></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <span style="font-weight: bold;"></span><span
+ style="font-style: italic;"></span><br>
+      <h3> </h3>
+      <h3><a name="4.6"></a>4.3 Theme
+resources keys (required, Final)</h3>
+TBD<br>
+      <h3><a name="4.6.1"></a>4.3.1 Style
+selectors</h3>
+suntheme/accordion.css is the place holder for all accordion and
+accordion tab related style selectors.<br>
+These are still in the process of being defined.<br>
+      <br>
+      <h3><a name="4.6.2"></a>4.3.2 Image
+resources</h3>
+Some grading related images would be required. These have not yet been
+finalized either.<br>
+      <br>
+      <h3><a name="4.6.3"></a>4.3.3 Javascript
+resources</h3>
+webui.suntheme.widget.accordion (widget/accordion.js)<br>
+webui.suntheme.widget.jsfx.accordion (widget/jsfx/accordion.js)<br>
+      <br>
+webui.suntheme.widget.accordionTab (widget/accordionTab.js)<br>
+webui.suntheme.widget.jsfx.accordionTab (widget/jsfx/accordionTab.js)<br>
+      <br>
+      <h3><a name="4.6.4"></a>4.3.4 Other
+resources</h3>
+accordion.html - HTML template used by the accordion widget.<br>
+accordionTab.html - HTML template used by each accordion Tab.<br>
+      <h3><a name="4.6.5"></a>4.3.5 Localized
+message keys</h3>
+      <br>
+      <h3><a name="4.7"></a>4.4 Component
+Extensibility</h3>
+These client side widgets are standard Dojo widgets and can be extended
+should someone choose to. The look of the widget can be changed by
+supplying alternative HTML template and/or CSS.<br>
+      <br>
+      <h2><a name="5.0"></a>5.0 - Server Side Interface<br>
+      </h2>
+The component would have a JSF based server side implementation. This
+section lays out this interface. The interface consist of a JSF
+components and a Dynamic Faces based Javascript implementation on the
+client side that acts as the link between the client side widget
+interface described above (section 4) and the JSF entities that will be
+described in this section.<br>
+      <br>
+One the server side the Accordion system would manifest as an Accordion
+container (simply called Accordion) that can contain a finite number of
+tabs (called AccordionTabs). These would be exposed as JSP custom tags
+with the following Tag Library Descriptors:<br>
+      <br>
+An Accordion container component com.sun.webui.jsf.component.Accordion
+is being defined. Its API is as follows:<br>
+      <br>
+A base TabContent component, com.sun.webui.jsf.component.TabContent, is
+being defined. This would serve as the base class for both Accordion
+and TabSet tabs. The API is as follows:<br>
+      <br>
+      <h3>5.1 Summary of server side API<br>
+      </h3>
+      <br>
+      <table style="text-align: left; width: 100%;" border="1"
+ cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Interface Name<big><span style="font-weight: bold;"></span></big>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Classification<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Reference<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 40%;">
+            <p>Comments <br>
+            </p>
+            </th>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Accordion API</span><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><big><span
+ style="font-weight: bold;"></span></big>webuijsf:accordion<br>
+            </td>
+            <td style="vertical-align: top;">unstable<br>
+            </td>
+            <td style="vertical-align: top;">Section 5.x<br>
+            </td>
+            <td style="vertical-align: top;">Accordion TLD <br>
+            </td>
+          </tr>
+          <tr>
+            <td>com.sun.webui.jsf.component.Accordion<br>
+            </td>
+            <td>unstable</td>
+            <td>Section 5.x</td>
+            <td>JSF component class</td>
+          </tr>
+          <tr>
+            <td>com.sun.webui.jsf.taglib.AccordionTag<br>
+            </td>
+            <td>unstable<br>
+            </td>
+            <td>Section 5.x<br>
+            </td>
+            <td>JSP Custom Tag implementation<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.ajax.AccordionRenderer<br>
+            </td>
+            <td style="vertical-align: top;">unstable<br>
+            </td>
+            <td style="vertical-align: top;">Section 5.x </td>
+            <td style="vertical-align: top;">Interface for Ajax
+rendering<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.widget.AccordionRenderer<br>
+            </td>
+            <td style="vertical-align: top;">unstable<br>
+            </td>
+            <td style="vertical-align: top;">Section 5.x </td>
+            <td style="vertical-align: top;">Interface for widget
+rendering<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.html.AccordionRenderer<br>
+            </td>
+            <td style="vertical-align: top;">unstable<br>
+            </td>
+            <td style="vertical-align: top;">Section 5.x </td>
+            <td style="vertical-align: top;">Designtime renderer
+interface<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Accordion Tab API</span></td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">webuijsf:accordionTab<br>
+            </td>
+            <td style="vertical-align: top;">unstable<br>
+            </td>
+            <td style="vertical-align: top;">Section 5.x<br>
+            </td>
+            <td style="vertical-align: top;">Accordion Tab's TLD<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.component.AccordionTab
+            </td>
+            <td style="vertical-align: top;">unstable<br>
+            </td>
+            <td style="vertical-align: top;">Section 5.x<br>
+            </td>
+            <td style="vertical-align: top;">A generic TabContent
+component<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.taglib.AccordionTab
+            </td>
+            <td style="vertical-align: top;">unstable<br>
+            </td>
+            <td style="vertical-align: top;">Section 5.x<br>
+            </td>
+            <td style="vertical-align: top;">JSP Custom Tag
+Implementation<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.ajax.AccordionTabRenderer
+            </td>
+            <td style="vertical-align: top;">unstable<br>
+            </td>
+            <td style="vertical-align: top;">Section 5.x<br>
+            </td>
+            <td style="vertical-align: top;">Tab renderer during Ajax
+requests </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.widget.AccordionTabRenderer</td>
+            <td style="vertical-align: top;">unstable<br>
+            </td>
+            <td style="vertical-align: top;">Section 5.x<br>
+            </td>
+            <td style="vertical-align: top;">TabContent Widget renderer<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.html.AccordionTabRenderer</td>
+            <td style="vertical-align: top;">unstable</td>
+            <td style="vertical-align: top;">Section 5.x</td>
+            <td style="vertical-align: top;">TabContent Designtime
+Renderer<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3><a name="4.2"></a></h3>
+&nbsp;
+      <h3>5.2 Imported API<br>
+      </h3>
+The server side implementation depends on (imports) the following API:<br>
+      <br>
+      <br>
+      <table style="text-align: left; width: 100%;" border="1"
+ cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Interface Name<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Classification<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Reference<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 40%;">
+            <p>Comments<br>
+            </p>
+            </th>
+          </tr>
+          <tr>
+            <td>jsf-api.jar</td>
+            <td>Standard</td>
+            <td>JSR 252</td>
+            <td>JSF components API library, version 1.2</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">Dynamic Faces<br>
+            </td>
+            <td style="vertical-align: top;">Standard<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">Used to submit partial JSF
+viewtrees.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">JSP 2.1<br>
+            </td>
+            <td style="vertical-align: top;">Standard<br>
+            </td>
+            <td style="vertical-align: top;">JSR 245<br>
+            </td>
+            <td style="vertical-align: top;">JSP custom tag library AP,
+version 2.1<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">JSON<br>
+            </td>
+            <td style="vertical-align: top;">Unstable<br>
+            </td>
+            <td style="vertical-align: top;">JSON.ORG<br>
+            </td>
+            <td style="vertical-align: top;">JSON API<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3><br>
+      </h3>
+      <br>
+      <h3>5.3 Tag Accordion</h3>
+      <hr> A container for one or more accordionTab elements. The
+currently selected element is specified
+via the {@code selected} property, which may be bound to a backing bean
+value. This will have an impact only the first time around -
+subsequently the users action on the client side will override this
+value.<br>
+      <br>
+      <h2><font size="-1">webuijsf</font> <br>
+Tag accordion</h2>
+      <hr>
+      <p>Use the <code>webuijsf:accordion</code> tag to display an
+accordion
+component in the rendered HTML page. An accordion can be thought of as
+a vertical tab set. It can contain one of more tabs each of which can
+contain virtually any HTML markup. In general accordions are used for
+navigational purposes - each tab contains links which when clicked
+takes the user to different sections (tasks) of the application. In
+general only one accorion tab can be open at any given time. This
+accordion, however, allows muliple tabs to be open simultaneously. In
+such situations the accordion also supports "expandAll" and
+"collapseAll" icons which have their usual meaning. An accordion can be
+refreshed if the application using it so desires. Each attribute of the
+accordion is described in detail in the TLD doccument. It is adviseable
+to use an alternate navigational component if the number of tabs in the
+accordion are exceeding ten.</p>
+      <p> Unless otherwise specified the accordion will nto display the
+"expand all", "collapse all" and "refresh" icons. One has to set the
+respective attributes, displayRefresh, expandCollapse to true. </p>
+      <p> </p>
+      <table border="1" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <td colspan="2"><font size="+2"><b>Tag Information</b></font></td>
+          </tr>
+          <tr>
+            <td>Tag Class</td>
+            <td>com.sun.webui.jsf.component.AccordionTag</td>
+          </tr>
+          <tr>
+            <td>TagExtraInfo Class</td>
+            <td><i>None</i></td>
+          </tr>
+          <tr>
+            <td>Body Content</td>
+            <td>JSP</td>
+          </tr>
+          <tr>
+            <td>Display Name</td>
+            <td><i>None</i></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table border="1" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <td colspan="5"><font size="+2"><b>Attributes</b></font></td>
+          </tr>
+          <tr>
+            <td><b>Name</b></td>
+            <td><b>Required</b></td>
+            <td><b>Request-time</b></td>
+            <td><b>Type</b></td>
+            <td><b>Description</b></td>
+          </tr>
+          <tr valign="top">
+            <td>binding</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> A ValueExpression that resolves to the UIComponent
+that corresponds to this tag. This binding allows the Java bean that
+contains the UIComponent to manipulate the UIComponent, its properties,
+and its children. </td>
+          </tr>
+          <tr valign="top">
+            <td>refreshButton</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Should be set to true if the accordion container is to
+display a refresh icon. A refresh icon would generally be provided on
+the accordion header. When clicked it would refresh the accordion and
+its tabs asynchronously. </td>
+          </tr>
+          <tr valign="top">
+            <td>multipleSelect</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Returns true if multiple tabs can be selected at the
+same time. By default this is set to false and only one accordion tab
+can be selected at any given time. Note that when only a single tab is
+selected the accordion will not supply expand/collapse icons even if
+the application developer provides facets for these. </td>
+          </tr>
+          <tr valign="top">
+            <td>toggleControls</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Should be set to true if the accordion container
+should display expandAll and collapseAll control features. Note that
+this makes sense only in the case wehere multipleSelect has been set to
+true. In the case of single select accordions only one tab can be open
+at any given time. </td>
+          </tr>
+          <tr valign="top">
+            <td>htmlTemplate</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Alternative HTML template to be used by this
+component. </td>
+          </tr>
+          <tr valign="top">
+            <td>loadOnSelect</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Returns true if the tabs should be loaded when first
+selected. Once loaded the tabs would not be reloaded until the
+container is refreshed or the user performs some action on tab in
+question. </td>
+          </tr>
+          <tr valign="top">
+            <td>styleClass</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> CSS style class(es) to be applied to the outermost
+HTML element when this component is rendered. </td>
+          </tr>
+          <tr valign="top">
+            <td>selectedTabs</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> An array of selected tabs. In some cases only a single
+tab can be selected in which case the array would contain just one tab.
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>style</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> CSS style(s) to be applied to the outermost HTML
+element when this component is rendered. </td>
+          </tr>
+          <tr valign="top">
+            <td>visible</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Use the visible attribute to indicate whether the
+component should be viewable by the user in the rendered HTML page. If
+set to false, the HTML code for the component is present in the page,
+but the component is hidden with style attributes. By default, visible
+is set to true, so HTML for the component HTML is included and visible
+to the user. If the component is not visible, it can still be processed
+on subsequent form submissions because the HTML is present.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>rendered</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Use the rendered attribute to indicate whether the
+HTML code for the component should be included in the rendered HTML
+page. If set to false, the rendered HTML page does not include the HTML
+for the component. If the component is not rendered, it is also not
+processed on any subsequent form submission. </td>
+          </tr>
+          <tr valign="top">
+            <td>id</td>
+            <td>false</td>
+            <td>true</td>
+            <td><code>java.lang.String</code></td>
+            <td>The id of the component.<i><br>
+            </i></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <hr><br>
+      <h3>5.4 Class com.sun.webui.jsf.component.Accordion</h3>
+      <br>
+      <pre>java.lang.Object<br>  <img
+ src="../../accDir/woodstock/webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by ">javax.faces.component.UIComponent<br>      <img
+ src="../../accDir/woodstock/webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by ">javax.faces.component.UIComponentBase<br>          <img
+ src="../../accDir/woodstock/webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by "><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/WebuiComponent.html"
+ title="class in com.sun.webui.jsf.component">com.sun.webui.jsf.component.WebuiComponent</a><br>              <img
+ src="../../accDir/woodstock/webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by "><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContainer.html"
+ title="class in com.sun.webui.jsf.component">com.sun.webui.jsf.component.TabContainer</a><br>                  <img
+ src="../../accDir/woodstock/webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by "><b>com.sun.webui.jsf.component.Accordion</b>
+      </pre>
+      <dl>
+        <dt><b>All Implemented Interfaces:</b> </dt>
+        <dd>javax.faces.component.NamingContainer,
+javax.faces.component.StateHolder</dd>
+      </dl>
+      <hr>
+      <dl>
+        <dt>
+          <pre>public class <b>Accordion</b><dt>extends <a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContainer.html"
+ title="class in com.sun.webui.jsf.component">TabContainer</a></dt></pre>
+        </dt>
+      </dl>
+      <p>An accordion container. It extends the TabContainer and adds
+some
+functionality that is specific to the Accordion. An accordion can be
+thought of as a vertical tab set. It can contain one of more accordion
+tabs each of which can contain virtually any HTML markup. In general
+accordions are used for navigational purposes - each tab contains links
+which when clicked takes the user to different sections (tasks) of the
+application. The Accordian allows one or more tabs to be open at any
+given time. When the accordion is configured to allow multiple tabs to
+be open at any given time it supports "expandAll" and "collapseAll"
+icons. The expandAll icon when clicked will expand all tabs, and
+colapseAll, will collapse all open tabs. An accordion can be refreshed.
+Refreshing the accordion will cause it to render itself and all its
+children again. The Accordion can also be refreshed to go through all
+the steps of the JSF lifecycle as opposed to just the render response
+phase. It is adviseable to use an alternate navigational component if
+the number of tabs in the accordion are exceeding ten. </p>
+      <p></p>
+      <p></p>
+      <hr>
+      <p><!-- =========== FIELD SUMMARY =========== --> <a
+ name="field_summary"><!-- --></a></p>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"> <b>Field
+Summary</b></font></th>
+          </tr>
+        </tbody>
+      </table>
+&nbsp;<a
+ name="fields_inherited_from_class_javax.faces.component.NamingContainer"><!-- --></a>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableSubHeadingColor" bgcolor="#eeeeff">
+            <th align="left"><b>Fields inherited from interface
+javax.faces.component.NamingContainer</b></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td><code>SEPARATOR_CHAR</code></td>
+          </tr>
+        </tbody>
+      </table>
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->&nbsp; <a
+ name="constructor_summary"><!-- --></a>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"> <b>Constructor
+Summary</b></font></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/Accordion.html#Accordion%28%29">Accordion</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a
+new Accordion.</td>
+          </tr>
+        </tbody>
+      </table>
+<!-- ========== METHOD SUMMARY =========== -->&nbsp; <a
+ name="method_summary"><!-- --></a>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"> <b>Method
+Summary</b></font></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;javax.faces.component.UIComponent</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/Accordion.html#getCollapseAllIcon%28com.sun.webui.theme.Theme,%20javax.faces.context.FacesContext%29">getCollapseAllIcon</a></b>(<a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/theme/Theme.html"
+ title="interface in com.sun.webui.theme">Theme</a>&nbsp;theme,
+javax.faces.context.FacesContext&nbsp;context)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return a
+component that implements a collapseAll icon.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;javax.faces.component.UIComponent</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/Accordion.html#getExpandAllIcon%28com.sun.webui.theme.Theme,%20javax.faces.context.FacesContext%29">getExpandAllIcon</a></b>(<a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/theme/Theme.html"
+ title="interface in com.sun.webui.theme">Theme</a>&nbsp;theme,
+javax.faces.context.FacesContext&nbsp;context)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return a
+component that implements a expandAll icon.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/Accordion.html#getFamily%28%29">getFamily</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the
+family for this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;javax.faces.component.UIComponent</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/Accordion.html#getRefreshIcon%28com.sun.webui.theme.Theme,%20javax.faces.context.FacesContext%29">getRefreshIcon</a></b>(<a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/theme/Theme.html"
+ title="interface in com.sun.webui.theme">Theme</a>&nbsp;theme,
+javax.faces.context.FacesContext&nbsp;context)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return a
+component that implements a refresh icon.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/Accordion.html#getRendererType%28%29">getRendererType</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the
+renderer type associated with this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/Accordion.html#isMultipleSelect%28%29">isMultipleSelect</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns
+true if multiple tabs can be selected, false otherwise.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/Accordion.html#isRefreshButton%28%29">isRefreshButton</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns
+true if the Accordion container contains a refresh icon.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/Accordion.html#isToggleControls%28%29">isToggleControls</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns
+true if the Accordion container contains expand/collapse controls.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/Accordion.html#restoreState%28javax.faces.context.FacesContext,%20java.lang.Object%29">restoreState</a></b>(javax.faces.context.FacesContext&nbsp;_context,
+java.lang.Object&nbsp;_state)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Restore the
+state of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/Accordion.html#saveState%28javax.faces.context.FacesContext%29">saveState</a></b>(javax.faces.context.FacesContext&nbsp;_context)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save the
+state of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/Accordion.html#setMultipleSelect%28boolean%29">setMultipleSelect</a></b>(boolean&nbsp;multipleSelect)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set to true
+if multiple tabs can be selected.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/Accordion.html#setRefreshButton%28boolean%29">setRefreshButton</a></b>(boolean&nbsp;refreshButton)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set to true
+if Accordion container should contain a refresh icons.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/Accordion.html#setToggleControls%28boolean%29">setToggleControls</a></b>(boolean&nbsp;toggleControls)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set to true
+if Accordion container should contain expand/collapse controls.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>5.5 Class com.sun.webui.jsf.component.TabContainer</h3>
+<!-- ========== METHOD SUMMARY =========== --> <br>
+      <pre>java.lang.Object<br>  <img
+ src="../../accDir/woodstock/webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by ">javax.faces.component.UIComponent<br>      <img
+ src="../../accDir/woodstock/webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by ">javax.faces.component.UIComponentBase<br>          <img
+ src="../../accDir/woodstock/webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by "><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/WebuiComponent.html"
+ title="class in com.sun.webui.jsf.component">com.sun.webui.jsf.component.WebuiComponent</a><br>              <img
+ src="../../accDir/woodstock/webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by "><b>com.sun.webui.jsf.component.TabContainer</b>
+      </pre>
+      <dl>
+        <dt><b>All Implemented Interfaces:</b> </dt>
+        <dd>javax.faces.component.NamingContainer,
+javax.faces.component.StateHolder</dd>
+      </dl>
+      <dl>
+        <dt><b>Direct Known Subclasses:</b> </dt>
+        <dd><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/Accordion.html"
+ title="class in com.sun.webui.jsf.component">Accordion</a></dd>
+      </dl>
+      <hr>
+      <dl>
+        <dt>
+          <pre>public class <b>TabContainer</b><dt>extends <a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/WebuiComponent.html"
+ title="class in com.sun.webui.jsf.component">WebuiComponent</a></dt><dt>implements javax.faces.component.NamingContainer</dt></pre>
+        </dt>
+      </dl>
+      <p>A container for one or more tabs, accordion tabs or menu item
+components. The currently selected element is specified via the <code>selected</code>
+property, which may be bound to a model value. Action listeners may be
+registered individually with a contained element; or, an action
+listener may be registered with the containing TabContainer, in which
+case it is notified of all tab selection actions. Each tab in the
+container can have arbitrary HTML elements or components or a
+combination of both. Typically a single tab or the entire container
+would go through the JSF lifecycle during an XHR request. However, in
+cases where a form with a contianer component is submitted the
+container and all its child components will go through the JSF
+lifecycle as usual. It is up to the application to decide what should
+be done in this scenario. </p>
+      <p></p>
+      <p></p>
+      <hr>
+      <p><!-- =========== FIELD SUMMARY =========== --> <a
+ name="field_summary"><!-- --></a></p>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"> <b>Field
+Summary</b></font></th>
+          </tr>
+        </tbody>
+      </table>
+&nbsp;<a
+ name="fields_inherited_from_class_javax.faces.component.NamingContainer"><!-- --></a>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableSubHeadingColor" bgcolor="#eeeeff">
+            <th align="left"><b>Fields inherited from interface
+javax.faces.component.NamingContainer</b></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td><code>SEPARATOR_CHAR</code></td>
+          </tr>
+        </tbody>
+      </table>
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->&nbsp; <a
+ name="constructor_summary"><!-- --></a>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"> <b>Constructor
+Summary</b></font></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContainer.html#TabContainer%28%29">TabContainer</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a
+new instance of the TabContainer.</td>
+          </tr>
+        </tbody>
+      </table>
+<!-- ========== METHOD SUMMARY =========== -->&nbsp; <a
+ name="method_summary"><!-- --></a>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"> <b>Method
+Summary</b></font></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>static&nbsp;<a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html"
+ title="class in com.sun.webui.jsf.component">TabContent</a></code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContainer.html#findChildTab%28com.sun.webui.jsf.component.TabContent,%20java.lang.String%29">findChildTab</a></b>(<a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html"
+ title="class in com.sun.webui.jsf.component">TabContent</a>&nbsp;tab,
+java.lang.String&nbsp;tabId)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the
+tab with the id specified that is a child of the tab specified.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContainer.html#getFamily%28%29">getFamily</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the
+family for this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContainer.html#getHtmlTemplate%28%29">getHtmlTemplate</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get
+alternative HTML template to be used by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;<a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html"
+ title="class in com.sun.webui.jsf.component">TabContent</a>[]</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContainer.html#getSelectedTabs%28%29">getSelectedTabs</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return an
+array of selected tab content.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContainer.html#getStyle%28%29">getStyle</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS
+style(s) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContainer.html#getStyleClass%28%29">getStyleClass</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS style
+class(es) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContainer.html#isLoadOnSelect%28%29">isLoadOnSelect</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns
+true if the tab should be loaded on select, false otherwise.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContainer.html#isVisible%28%29">isVisible</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContainer.html#restoreState%28javax.faces.context.FacesContext,%20java.lang.Object%29">restoreState</a></b>(javax.faces.context.FacesContext&nbsp;_context,
+java.lang.Object&nbsp;_state)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Restore the
+state of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContainer.html#saveState%28javax.faces.context.FacesContext%29">saveState</a></b>(javax.faces.context.FacesContext&nbsp;_context)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save the
+state of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContainer.html#setHtmlTemplate%28java.lang.String%29">setHtmlTemplate</a></b>(java.lang.String&nbsp;htmlTemplate)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set
+alternative HTML template to be used by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContainer.html#setLoadOnSelect%28boolean%29">setLoadOnSelect</a></b>(boolean&nbsp;loadOnSelect)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set to true
+if tabs should be loaded when selected.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContainer.html#setSelectedTab%28com.sun.webui.jsf.component.TabContent%29">setSelectedTab</a></b>(<a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html"
+ title="class in com.sun.webui.jsf.component">TabContent</a>&nbsp;selectedTab)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the
+selected flag on the tab that is currently selected and unselect the
+previously selected tab.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContainer.html#setSelectedTabs%28com.sun.webui.jsf.component.TabContent%5B%5D%29">setSelectedTabs</a></b>(<a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html"
+ title="class in com.sun.webui.jsf.component">TabContent</a>[]&nbsp;selectedTabs)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the
+array of selected tabs.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContainer.html#setStyle%28java.lang.String%29">setStyle</a></b>(java.lang.String&nbsp;style)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS
+style(s) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContainer.html#setStyleClass%28java.lang.String%29">setStyleClass</a></b>(java.lang.String&nbsp;styleClass)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS style
+class(es) to be applied to the outermost HTML element when this
+component is rendered.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContainer.html#setVisible%28boolean%29">setVisible</a></b>(boolean&nbsp;visible)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h2></h2>
+      <h3>5.6 Tag accordionTab</h3>
+      <hr>
+      <p>Use the <code>webuijsf:accordionTab</code> within the <code><a
+ href="../../accDir/woodstock/webui/tlddocs/webuijsf/accordion.html">webuijsf:accordion</a></code>
+tag to create an
+accordion tab within an accordion in the rendered HTML page. The <code>webuijsf:accordionTab</code>
+tag represents a container within which an arbitrary number of
+components can be placed.
+These components will render within the content area of the given tab
+inside the accordion. </p>
+      <hr>
+      <table border="1" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <td colspan="2"><font size="+2"><b>Tag Information</b></font></td>
+          </tr>
+          <tr>
+            <td>Tag Class</td>
+            <td>com.sun.webui.jsf.component.AccordionTabTag</td>
+          </tr>
+          <tr>
+            <td>TagExtraInfo Class</td>
+            <td><i>None</i></td>
+          </tr>
+          <tr>
+            <td>Body Content</td>
+            <td>JSP</td>
+          </tr>
+          <tr>
+            <td>Display Name</td>
+            <td><i>None</i></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table border="1" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <td colspan="5"><font size="+2"><b>Attributes</b></font></td>
+          </tr>
+          <tr>
+            <td><b>Name</b></td>
+            <td><b>Required</b></td>
+            <td><b>Request-time</b></td>
+            <td><b>Type</b></td>
+            <td><b>Description</b></td>
+          </tr>
+          <tr valign="top">
+            <td>binding</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> A ValueExpression that resolves to the UIComponent
+that corresponds to this tag. This binding allows the Java bean that
+contains the UIComponent to manipulate the UIComponent, its properties,
+and its children. </td>
+          </tr>
+          <tr valign="top">
+            <td>multipleSelect</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> This attribute is to handle the case where the
+AccordionTab is itself a container of AccordionTabs. Returns true if
+multiple tabs can be selected at the same time. By default this is set
+to false and only one accordion tab can be selected at any given time.
+Note that when only a single tab is selected the accordion will not
+supply expand/collapse icons even if the application developer provides
+facets for these. </td>
+          </tr>
+          <tr valign="top">
+            <td>contentHeight</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Height of each tab content. This height is applied to
+the style of the content section of AccordionTab. It can be either in
+pixels, em or en. By default the height is set to 100 pixels. </td>
+          </tr>
+          <tr valign="top">
+            <td>htmlTemplate</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Alternative HTML template to be used by this
+component. </td>
+          </tr>
+          <tr valign="top">
+            <td>styleClass</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> CSS style class(es) to be applied to the outermost
+HTML element of the TabContent. </td>
+          </tr>
+          <tr valign="top">
+            <td>selected</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Returns true if this tab is selected. False otherwise.
+Set to false by default. </td>
+          </tr>
+          <tr valign="top">
+            <td>title</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> The title of this tab. </td>
+          </tr>
+          <tr valign="top">
+            <td>style</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> CSS style(s) to be applied to the outermost HTML
+element when this component is rendered. </td>
+          </tr>
+          <tr valign="top">
+            <td>visible</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Use the visible attribute to indicate whether the
+component should be viewable by the user in the rendered HTML page. If
+set to false, the HTML code for the component is present in the page,
+but the component is hidden with style attributes. By default, visible
+is set to true, so HTML for the component HTML is included and visible
+to the user. If the component is not visible, it can still be processed
+on subsequent form submissions because the HTML is present.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>rendered</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Use the rendered attribute to indicate whether the
+HTML code for the component should be included in the rendered HTML
+page. If set to false, the rendered HTML page does not include the HTML
+for the component. If the component is not rendered, it is also not
+processed on any subsequent form submission. </td>
+          </tr>
+          <tr valign="top">
+            <td>id</td>
+            <td>false</td>
+            <td>true</td>
+            <td><code>java.lang.String</code></td>
+            <td>ID of the component.<i><br>
+            </i></td>
+          </tr>
+        </tbody>
+      </table>
+      <p><br>
+      </p>
+      <hr><br>
+      <br>
+      <h3>5.7 Class
+com.sun.webui.jsf.component.AccordionTab</h3>
+      <pre>java.lang.Object<br>  <img
+ src="../../accDir/woodstock/webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by ">javax.faces.component.UIComponent<br>      <img
+ src="../../accDir/woodstock/webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by ">javax.faces.component.UIComponentBase<br>          <img
+ src="../../accDir/woodstock/webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by "><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/WebuiComponent.html"
+ title="class in com.sun.webui.jsf.component">com.sun.webui.jsf.component.WebuiComponent</a><br>              <img
+ src="../../accDir/woodstock/webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by "><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html"
+ title="class in com.sun.webui.jsf.component">com.sun.webui.jsf.component.TabContent</a><br>                  <img
+ src="../../accDir/woodstock/webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by "><b>com.sun.webui.jsf.component.AccordionTab</b>
+      </pre>
+      <dl>
+        <dt><b>All Implemented Interfaces:</b> </dt>
+        <dd>javax.faces.component.NamingContainer,
+javax.faces.component.StateHolder</dd>
+      </dl>
+      <hr>
+      <dl>
+        <dt>
+          <pre>public class <b>AccordionTab</b><dt>extends <a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html"
+ title="class in com.sun.webui.jsf.component">TabContent</a></dt></pre>
+        </dt>
+      </dl>
+      <p>An accordion tab component. It extends the generic tabContent
+The
+AccordionTab component represents one tab in the accordion.
+AccordionTab components must be children of Accordion components. Each
+AccordionTab has a title and some content. The content can be an
+aribitrary set of components or some XHTML markup or both. The
+component would go through the usual JSF lifecycle when the Accordion
+is refreshed, the component itself is refreshed or the page containing
+the Accordion (hence, the component) is submitted. </p>
+      <p></p>
+      <p></p>
+      <hr>
+      <p><!-- =========== FIELD SUMMARY =========== --> <a
+ name="field_summary"><!-- --></a></p>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"> <b>Field
+Summary</b></font></th>
+          </tr>
+        </tbody>
+      </table>
+&nbsp;<a
+ name="fields_inherited_from_class_javax.faces.component.NamingContainer"><!-- --></a>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableSubHeadingColor" bgcolor="#eeeeff">
+            <th align="left"><b>Fields inherited from interface
+javax.faces.component.NamingContainer</b></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td><code>SEPARATOR_CHAR</code></td>
+          </tr>
+        </tbody>
+      </table>
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->&nbsp; <a
+ name="constructor_summary"><!-- --></a>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"> <b>Constructor
+Summary</b></font></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/AccordionTab.html#AccordionTab%28%29">AccordionTab</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a
+new AccordionTab.</td>
+          </tr>
+        </tbody>
+      </table>
+<!-- ========== METHOD SUMMARY =========== -->&nbsp; <a
+ name="method_summary"><!-- --></a>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"> <b>Method
+Summary</b></font></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/AccordionTab.html#getContentHeight%28%29">getContentHeight</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the
+content height for this tab.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/AccordionTab.html#getFamily%28%29">getFamily</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the
+family for this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/AccordionTab.html#getRendererType%28%29">getRendererType</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the
+renderer type associated with this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/AccordionTab.html#isMultipleSelect%28%29">isMultipleSelect</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns
+true if multiple tabs can be selected, false otherwise.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/AccordionTab.html#restoreState%28javax.faces.context.FacesContext,%20java.lang.Object%29">restoreState</a></b>(javax.faces.context.FacesContext&nbsp;_context,
+java.lang.Object&nbsp;_state)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Restore the
+state of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/AccordionTab.html#saveState%28javax.faces.context.FacesContext%29">saveState</a></b>(javax.faces.context.FacesContext&nbsp;_context)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save the
+state of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/AccordionTab.html#setContentHeight%28java.lang.String%29">setContentHeight</a></b>(java.lang.String&nbsp;contentHeight)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the
+content height for this tab.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/AccordionTab.html#setMultipleSelect%28boolean%29">setMultipleSelect</a></b>(boolean&nbsp;multipleSelect)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set to true
+if multiple tabs can be selected.</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3>5.8 Class
+com.sun.webui.jsf.component.TabContent</h3>
+      <pre>java.lang.Object<br>  <img
+ src="../../accDir/woodstock/webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by ">javax.faces.component.UIComponent<br>      <img
+ src="../../accDir/woodstock/webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by ">javax.faces.component.UIComponentBase<br>          <img
+ src="../../accDir/woodstock/webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by "><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/WebuiComponent.html"
+ title="class in com.sun.webui.jsf.component">com.sun.webui.jsf.component.WebuiComponent</a><br>              <img
+ src="../../accDir/woodstock/webui/javadocs/runtime/resources/inherit.gif"
+ alt="extended by "><b>com.sun.webui.jsf.component.TabContent</b>
+      </pre>
+      <dl>
+        <dt><b>All Implemented Interfaces:</b> </dt>
+        <dd>javax.faces.component.NamingContainer,
+javax.faces.component.StateHolder</dd>
+      </dl>
+      <dl>
+        <dt><b>Direct Known Subclasses:</b> </dt>
+        <dd><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/AccordionTab.html"
+ title="class in com.sun.webui.jsf.component">AccordionTab</a></dd>
+      </dl>
+      <hr>
+      <dl>
+        <dt>
+          <pre>public class <b>TabContent</b><dt>extends <a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/WebuiComponent.html"
+ title="class in com.sun.webui.jsf.component">WebuiComponent</a></dt><dt>implements javax.faces.component.NamingContainer</dt></pre>
+        </dt>
+      </dl>
+      <p>The TabContent component represents one tab in a TabContainer.
+TabContent must be a child of a TabContainer, or of another TabContent.
+Each TabContent has a title and content. The content can be an
+aribitrary set of components or some HTML markup or both. The component
+traverses the JSF lifecycle when the container is refreshed, the
+component itself is refreshed or the page containing the cotainer
+(hence, the component) is submitted. </p>
+      <p></p>
+      <p></p>
+      <hr>
+      <p><!-- =========== FIELD SUMMARY =========== --> <a
+ name="field_summary"><!-- --></a></p>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"> <b>Field
+Summary</b></font></th>
+          </tr>
+        </tbody>
+      </table>
+&nbsp;<a
+ name="fields_inherited_from_class_javax.faces.component.NamingContainer"><!-- --></a>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableSubHeadingColor" bgcolor="#eeeeff">
+            <th align="left"><b>Fields inherited from interface
+javax.faces.component.NamingContainer</b></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td><code>SEPARATOR_CHAR</code></td>
+          </tr>
+        </tbody>
+      </table>
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->&nbsp; <a
+ name="constructor_summary"><!-- --></a>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"> <b>Constructor
+Summary</b></font></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html#TabContent%28%29">TabContent</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a
+new instance of TabContent.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html#TabContent%28java.lang.String%29">TabContent</a></b>(java.lang.String&nbsp;title)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a
+new instance of TabContent with the text property set to the value
+specified.</td>
+          </tr>
+        </tbody>
+      </table>
+<!-- ========== METHOD SUMMARY =========== -->&nbsp; <a
+ name="method_summary"><!-- --></a>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"> <b>Method
+Summary</b></font></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html#getFamily%28%29">getFamily</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the
+family for this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html#getHtmlTemplate%28%29">getHtmlTemplate</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get
+alternative HTML template to be used by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html#getRendererType%28%29">getRendererType</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the
+renderer type associated with this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html#getStyle%28%29">getStyle</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS
+style(s) to be applied to the outermost div tag of the Tab's title.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html#getStyleClass%28%29">getStyleClass</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the
+CSS style class(es) that have been applied to the outermost HTML
+element of the Tab title.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;int</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html#getTabChildCount%28%29">getTabChildCount</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the
+number of children of this tab that are themselves tabs.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.util.List&lt;<a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html"
+ title="class in com.sun.webui.jsf.component">TabContent</a>&gt;</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html#getTabChildren%28%29">getTabChildren</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a
+list of all children of this tab that are themselves tabs.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;<a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContainer.html"
+ title="class in com.sun.webui.jsf.component">TabContainer</a></code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html#getTabContainer%28com.sun.webui.jsf.component.TabContent%29">getTabContainer</a></b>(<a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html"
+ title="class in com.sun.webui.jsf.component">TabContent</a>&nbsp;tab)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Utility
+method that returns the tabContainer instance that contains the tab
+specified.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html#getTitle%28%29">getTitle</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the
+title for this tab.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html#isSelected%28%29">isSelected</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns
+true if the tab is selected.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html#isVisible%28%29">isVisible</a></b>()</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html#restoreState%28javax.faces.context.FacesContext,%20java.lang.Object%29">restoreState</a></b>(javax.faces.context.FacesContext&nbsp;_context,
+java.lang.Object&nbsp;_state)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Restore the
+state of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html#saveState%28javax.faces.context.FacesContext%29">saveState</a></b>(javax.faces.context.FacesContext&nbsp;_context)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save the
+state of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html#setHtmlTemplate%28java.lang.String%29">setHtmlTemplate</a></b>(java.lang.String&nbsp;htmlTemplate)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set
+alternative HTML template to be used by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html#setSelected%28boolean%29">setSelected</a></b>(boolean&nbsp;selected)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set to true
+if this tab should be selected.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html#setSelectedTab%28com.sun.webui.jsf.component.TabContent%29">setSelectedTab</a></b>(<a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html"
+ title="class in com.sun.webui.jsf.component">TabContent</a>&nbsp;selectedTab)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the
+selected flag on the tab that is currently selected and unselect the
+previously selected tab.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html#setStyle%28java.lang.String%29">setStyle</a></b>(java.lang.String&nbsp;style)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS
+style(s) to be applied to the outermost div tag of the Tab title</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html#setStyleClass%28java.lang.String%29">setStyleClass</a></b>(java.lang.String&nbsp;styleClass)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS style
+class(es) to be applied to the outermost HTML element of the TabContent.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html#setTitle%28java.lang.String%29">setTitle</a></b>(java.lang.String&nbsp;title)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the
+title for this tab.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b><a
+ href="../../accDir/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/TabContent.html#setVisible%28boolean%29">setVisible</a></b>(boolean&nbsp;visible)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+          </tr>
+        </tbody>
+      </table>
+&nbsp;
+      <h2><a name="5.0"></a>6.0 - Design Time Support (required, Prelim)</h2>
+      <br>
+      <h3>6.1 Design-time Behavior</h3>
+The following design time renderers for the accordion and accordionTab
+would be supplied:<br>
+      <br>
+a) com.sun.webui.jsf.renderkit.html.AccordionRenderer<br>
+b) com.sun.webui.jsf.renderkit.html.AccordionTabRenderer<br>
+      <br>
+These renderes would generate HTML markup resembling the actual
+accordion container and the individual tabs.<br>
+      <h3>6.2 Design-time Classes and Interfaces</h3>
+Define all DesignTime classes (classes implementing against Creator
+interfaces), methods, and inheritance.&nbsp; Full functional
+descriptions are required, including a description of the semantics of
+each class and function. <br>
+      <br>
+      <span style="font-style: italic;">TBD.</span><br>
+      <h3>6.3 Localized message keys</h3>
+      <br>
+      <h3>6.4 Dependencies </h3>
+Standard dependencies apply.<br>
+      <br>
+      <h2><a name="7.0"></a>7.0 -
+Accessibility, Internationalization, Compliance
+(required)</h2>
+      <h3><a name="7.1"></a>7.1 Accessibility
+(A11Y)</h3>
+The Accordion container and tab widgets would be rendered by updating
+the DOM tree. However, this
+does not show the actual HTML markup upon doing a view source of the
+browser window. This will affect the accessibility of the widget.&nbsp;
+One should be able to tab from one accordion tab to the other<br>
+      <br>
+More information will be made available...<br>
+      <br>
+      <span style="font-weight: bold;"></span>
+      <h3><a name="7.2"></a>7.2
+Internationalization (I18N)</h3>
+The theme infrastructure is being used to support I18N.<br>
+      <br>
+      <h3><a name="7.3"></a>7.3 Level of XHTML Compliance</h3>
+      <ul>
+        <li>XHTML 1.0 Transitional?</li>
+        <li>XHTML 1.0 Strict?</li>
+        <li>XHTML 1.1?</li>
+      </ul>
+The level of XML compliance of the other widgets applies here too...<br>
+      <br>
+      <h2><a name="8.0"></a>8.0 Component High
+level design (optional)</h2>
+The accordion component consists of a container, referred to as the
+Accordion, and a set of contained elements referred to as the
+accordionTab. The container supports global functionalities such as:<br>
+      <br>
+a) rendering the outer framework<br>
+b) resizing the accordion as and when tabs get added/removed or when
+the window is resized<br>
+c) handle the animation as tabs are opened and closed. <br>
+d) handle drag and drop activities.<br>
+e) refresh the accordion and its contents.<br>
+f) handle expand all / collapse all.<br>
+&nbsp;<br>
+Each accordionTab performs the following functions:<br>
+      <br>
+a) Renders itself. <br>
+b) Figures out of the content needs to be loaded from the server and if
+so make an XHR to load the contents.<br>
+      <br>
+On the server side there is a Accordion component which can have any
+number of AccordionTab children. The component is only allowed to have
+AccordionTab as children. Any other type of child is disregarded. An
+AccordionTab component has a label that can be specified via&nbsp;
+facet
+as well. It can have any arbitrary aggregation of JSF components as its
+children. Needless to say, since the client side implementation has a
+fair amount of control the contents should ideally be widgets that have
+client side javascript based renderers.<br>
+      <br>
+      <br>
+      <span style="font-style: italic;">Client side design:</span><br>
+      <br>
+Since accordions in general do not have too many tabs this
+implementation sends across each of the tab content to the client. On
+the client side tabs are selected or hidden by manipulating the content
+domNode's style (visible:hidden). <br>
+      <br>
+The usual Dojo based widget architecture would be applied here too. In
+addition there is the Dynafaces based javascript that acts as the
+gateway between the client and the JSF based component.<br>
+      <br>
+The "refresh()" function would be used whenever possible to update the
+contents of a tab or to present a different view of a given tab if the
+user selected a menu item. refresh() will be invoked on the individual
+tab. App developers can invoke refresh() in another tab in situations
+where they want the old tab's contents be saved before a new tab is
+selected.<br>
+      <code></code><br>
+      <span style="font-style: italic;">Server side design:</span><br>
+      <br>
+If a form containing an accordion is submitted the container along with
+its children, the tabs, would go thru the JSF lifecycle just like any
+other component. In general the client side widget would invoke the
+refresh method on the container or one or more of the individual tabs
+in which case only those components (and their children) would go thru
+the lifecycle. Therein lies the real value of using Ajax in this widget.<br>
+      <br>
+      <br>
+      <h2><a name="9.0"></a>9.0 Issues</h2>
+      <span style="font-style: italic;"></span><span
+ style="font-weight: bold;"><span style="font-weight: bold;"></span></span>Support
+for menu items in accordionTabs have not been added yet. Also, there
+are some A11Y issues with the Accordion that need to be resolved.<span
+ style="font-weight: bold;"><br>
+      </span><span style="font-style: italic; font-weight: bold;"> <br>
+      </span></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">_________________________________________________________________________________________________________________________<br>
+      <span style="font-style: italic;">The contents of this file are
+subject to the terms&nbsp; of the Common Development and Distribution
+License&nbsp; (the License).&nbsp; You may not use this file except in </span><span
+ style="font-style: italic;">compliance with the License.&nbsp;&nbsp;</span><span
+ style="font-style: italic;"></span><span style="font-style: italic;">You
+can obtain a copy of the license at&nbsp;
+https://woodstock.dev.java.net/public/CDDLv1.0.html. See the License
+for the specific language governing </span><span
+ style="font-style: italic;">permissions and limitations under the
+License.</span><br style="font-style: italic;">
+      <span style="font-style: italic;">&nbsp;</span><br
+ style="font-style: italic;">
+      <span style="font-style: italic;">When distributing Covered Code,
+include this CDDL&nbsp; Header Notice in each file and include the
+License file&nbsp; at
+https://woodstock.dev.java.net/public/CDDLv1.0.html. If applicable, add
+the following below the CDDL Header,&nbsp; with the fields enclosed by
+brackets [] replaced by&nbsp; you own identifying information:&nbsp;
+"Portions Copyrighted [year] [name of copyright owner]"</span><br
+ style="font-style: italic;">
+      <br style="font-style: italic;">
+      <span style="font-style: italic;">Copyright 2007 Sun
+Microsystems, Inc. All rights reserved.</span><br
+ style="font-style: italic;">
+      <br style="font-style: italic;">
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div style="font-style: italic;" class="xsmall" align="right"><b><font
+ size="2"><br>
+</font></b></div>
+</body>
+</html>

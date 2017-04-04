@@ -1,0 +1,1324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <!--
+      The contents of this file are subject to the terms
+      of the Common Development and Distribution License
+      (the License).  You may not use this file except in
+      compliance with the License.
+      
+      You can obtain a copy of the license at
+      https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      See the License for the specific language governing
+      permissions and limitations under the License.
+      
+      When distributing Covered Code, include this CDDL
+      Header Notice in each file and include the License file
+      at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      If applicable, add the following below the CDDL Header,
+      with the fields enclosed by brackets [] replaced by
+      you own identifying information:
+      "Portions Copyrighted [year] [name of copyright owner]"
+      
+      Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+    -->
+<title>Project Woodstock - CheckboxGroup Component FS</title>
+<style type="text/css"> 
+/* <![CDATA[ */
+@import url(../../browser-uispec.css);
+.style2 {font-size: 18pt}
+  </style>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+</head>
+<body style="background-color: rgb(255, 255, 255);">
+<div class="MstDiv">
+<table class="MstTblBot" title="" border="0" cellpadding="0"
+ cellspacing="0" width="100%">
+  <tbody>
+    <tr>
+      <td class="MstTdTtl">
+      <div class="MstDivTtl">
+      <div class="Mst1TtlTxt">Project Woodstock</div>
+      </div>
+      <div class="Mst1SecDiv"> <span class="Mst1SecTxt style2">Component
+Functional Spec - CheckboxGroup<br>
+      </span></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<table class="Mst2Tbl" style="width: 100%;" title="" border="0"
+ cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td> <br>
+      <h2 style="font-weight: bold;"><a name="1.0"></a>1.0 Component
+Overview</h2>
+      <h3><span style="font-weight: bold;"><a name="1.1"></a>1.1
+Document Revision History</span></h3>
+      <table
+ style="width: 95%; text-align: left; margin-left: auto; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Revision</span></td>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Date</span></td>
+            <td style="width: 50%; text-align: center;"><span
+ style="font-weight: bold;">Synopsis</span></td>
+            <td style="width: 20%; text-align: center;"><span
+ style="font-weight: bold;">Author</span></td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">1.0<br>
+            </td>
+            <td style="text-align: center;">05/12/2007</td>
+            <td style="text-align: center;">Initial Draft</td>
+            <td style="text-align: center;">Gowri Tangirala<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 style="font-weight: bold;"><a name="1.2"></a>1.2 Component
+Description<br>
+      </h3>
+      <div style="margin-left: 40px;">The checkboxGroup component
+is a group of one or more individual checkbox elements with the
+same name. One or all checkboxes<br>
+can be selected in a group at any given time.<br>
+      </div>
+      <h3><a name="1.3"></a>1.3 Component Purpose</h3>
+      <div style="margin-left: 40px;">The component still maintains its
+original purpose However the new client side rendering will
+enable updating checkboxGroup component client side.</div>
+      <h3 style="font-weight: bold;"><a name="1.4"></a>1.4 Relevant
+Documents</h3>
+      <div style="margin-left: 40px;"> <a target="_blank"
+ href="ajax-architecture-spec.html">Ajax
+Architecture for Woodstock JavaServer Faces</a> </div>
+      <h3><a name="1.5"></a>1.5 Definition of Terms</h3>
+      <div style="margin-left: 40px;">
+      <div style="margin-left: 40px;">
+      <ul>
+        <li>HTML template - The file used to define HTML tags
+associated with a component</li>
+        <li>In-line JavaScript - JavaScript used to instantiate a <span
+ style="font-style: italic;">Dojo
+Widget</span>, located anywhere (i.e., in-line) in the rendered HTML
+page<br>
+        </li>
+        <li>JSF - JavaServer Faces</li>
+        <li>JSF component - The JSF <code>UIComponent</code>
+compliment to a <span style="font-style: italic;">JSP tag</span> and <span
+ style="font-style: italic;">JSF renderer</span></li>
+        <li>JSF facet - A facet is a subcomponent that has a specific
+purpose defined by its parent container<br>
+        </li>
+        <li>JSF renderer - The JSF <code>Renderer</code> compliment to
+a <span style="font-style: italic;">JSP
+tag</span> and <span style="font-style: italic;">JSF component</span><br>
+        </li>
+        <li>JSON - JavaScript Object Notation (i.e., object literals)
+defined using braces ({}) that contain a
+set of comma separated key value pairs</li>
+        <li>JSP tag - The JSF <code>UIComponentELTag</code> or <code>UIComponentELBodyTag</code>
+compliment
+to a <span style="font-style: italic;">JSF component</span>
+and <span style="font-style: italic;">JSF renderer</span><br>
+        </li>
+        <li>Subcomponent - A child component used to render a <span
+ style="font-style: italic;">complex component</span></li>
+        <li>Widget - Entity consisting of <span
+ style="font-style: italic;">widget JavaScript</span> and <span
+ style="font-style: italic;">CSS</span>, not necessarily based on the
+Dojo toolkit<span style="font-style: italic;"><br>
+          </span></li>
+        <li>Widget JavaScript - The JavaScript used to populate an <span
+ style="font-style: italic;">HTML template</span> and/or update
+component properties</li>
+        <li>Contents - JSON Array which contain JSON objects of sub
+components to be displayed inside the widget<br>
+        </li>
+        <li>Widget renderer - The <span style="font-style: italic;">JSF
+renderer</span> used to output <span style="font-style: italic;">in-line
+JavaScript</span> for
+instantiating a <span style="font-style: italic;">Dojo Widget</span></li>
+      </ul>
+      </div>
+.<br>
+      </div>
+      <h2><a name="2.0"></a>2.0 Requirements, goals, and assumptions</h2>
+      <h3><a name="2.1"></a>2.1 Requirements.</h3>
+      <h3><a name="2.1.1"></a>2.1.1 UI requirements</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.1.2"></a>2.1.2 Functional requirements</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N/A<br>
+      <div style="margin-left: 40px;">
+      <ul>
+      </ul>
+      </div>
+      <h3><a name="2.1.3"></a>2.1.3 Performance requirements</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.1.4"></a>2.1.4 Browser, platform requirements</h3>
+      <ul>
+        <li>The table of supported <a href="../SupportedBrowers.htm">Browsers</a>.</li>
+        <li>The table of supported <a href="../SupportedContainers.htm">Containers</a>.</li>
+      </ul>
+      <h3><a name="2.1.5"></a>2.1.5 Special requirements</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.2"></a>2.2 Requirements Not Met</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.3"></a>2.3 Assumptions</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="2.4"></a>2.4 Goals</h3>
+      <div style="margin-left: 40px;">N/A.</div>
+      <h3><a name="2.5"></a>2.5 Non-goals</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h2><a name="3.0"></a>3.0 Component Usage</h2>
+      <p>The checkboxGroup tag can be used in a
+JSP page the following way:<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;webuijsf:checkboxGroup
+id="cb2" items="#{rbcbGrp.array}" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+label="#{RbCbBean.label}" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+toolTip="#{RbCbBean.label}"/&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+      </p>
+      <br>
+This will output the necessary javascript needed to create the
+checkboxGroup
+widget on the client side. The output would look something like this.<br>
+      <code></code><code><br>
+      </code>
+      <pre style="white-space: -moz-pre-wrap;">&lt;script type="text/javascript"&gt;<br>webui.&lt;theme&gt;.widget.common.createWidget({<br>    "contents": [<br>        {<br>            "_widgetType": "webui.&lt;theme&gt;:checkbox",<br>            "templatePath": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/checkbox.html",<br>            "value": "Server",<br>            "label": {<br>                "level": 3,<br>                "_widgetType": "webui.&lt;theme&gt;:label",<br>                "templatePath": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/label.html",<br>                "value": "Server ",<br>                "requiredImage": {<br>                    "templatePath": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/image.html",<br>                    "_widgetType": "webui.&lt;theme&gt;:image",<br>                    "width": 7,<br>                    "height": 14,<br>                    "visible": true,<br>                    "src": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/images/other/required.gif",<br>                    "border": 0,<br>                    "alt": "Required",<br>                    "_modules": [<br>                        "webui.&lt;theme&gt;.widget.image",<br>                        "webui.&lt;theme&gt;.widget.jsfx.image"<br>                    ],<br>                    "id": "form1:cb2:cb2_0:cb2_0_label:cb2_0_label_required"<br>                },<br>                "required": false,<br>                "errorImage": {<br>                    "templatePath": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/image.html",<br>                    "_widgetType": "webui.&lt;theme&gt;:image",<br>                    "width": 11,<br>                    "height": 14,<br>                    "visible": true,<br>                    "src": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/images/alerts/error_small.gif",<br>                    "border": 0,<br>                    "alt": "Error",<br>                    "_modules": [<br>                        "webui.&lt;theme&gt;.widget.image",<br>                        "webui.&lt;theme&gt;.widget.jsfx.image"<br>                    ],<br>                    "id": "form1:cb2:cb2_0:cb2_0_label:cb2_0_label_error"<br>                },<br>                "visible": true,<br>                "valid": true,<br>                "_modules": [<br>                    "webui.&lt;theme&gt;.widget.label",<br>                    "webui.&lt;theme&gt;.widget.jsfx.label"<br>                ],<br>                "id": "form1:cb2:cb2_0:cb2_0_label",<br>                "htmlFor": "form1:cb2:cb2_0_cb"<br>            },<br>            "disabled": false,<br>            "visible": true,<br>            "image": {<br>                "_widgetType": "webui.&lt;theme&gt;:image",<br>                "templatePath": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/image.html",<br>                "visible": true,<br>                "border": 0,<br>                "src": "/testapp/rbcb/tree_server.gif",<br>                "_modules": [<br>                    "webui.&lt;theme&gt;.widget.image",<br>                    "webui.&lt;theme&gt;.widget.jsfx.image"<br>                ],<br>                "id": "form1:cb2:cb2_0:cb2_0_image"<br>            },<br>            "readOnly": false,<br>            "_modules": [<br>                "webui.&lt;theme&gt;.widget.checkbox",<br>                "webui.&lt;theme&gt;.widget.jsfx.checkbox"<br>            ],<br>            "name": "form1:cb2:cb2_0_cb",<br>            "id": "form1:cb2:cb2_0"<br>        },<br>        {<br>            "_widgetType": "webui.&lt;theme&gt;:checkbox",<br>            "templatePath": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/checkbox.html",<br>            "value": "Volume",<br>            "label": {<br>                "level": 3,<br>                "_widgetType": "webui.&lt;theme&gt;:label",<br>                "templatePath": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/label.html",<br>                "value": "Volume ",<br>                "requiredImage": {<br>                    "templatePath": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/image.html",<br>                    "_widgetType": "webui.&lt;theme&gt;:image",<br>                    "width": 7,<br>                    "height": 14,<br>                    "visible": true,<br>                    "src": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/images/other/required.gif",<br>                    "border": 0,<br>                    "alt": "Required",<br>                    "_modules": [<br>                        "webui.&lt;theme&gt;.widget.image",<br>                        "webui.&lt;theme&gt;.widget.jsfx.image"<br>                    ],<br>                    "id": "form1:cb2:cb2_1:cb2_1_label:cb2_1_label_required"<br>                },<br>                "required": false,<br>                "errorImage": {<br>                    "templatePath": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/image.html",<br>                    "_widgetType": "webui.&lt;theme&gt;:image",<br>                    "width": 11,<br>                    "height": 14,<br>                    "visible": true,<br>                    "src": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/images/alerts/error_small.gif",<br>                    "border": 0,<br>                    "alt": "Error",<br>                    "_modules": [<br>                        "webui.&lt;theme&gt;.widget.image",<br>                        "webui.&lt;theme&gt;.widget.jsfx.image"<br>                    ],<br>                    "id": "form1:cb2:cb2_1:cb2_1_label:cb2_1_label_error"<br>                },<br>                "visible": true,<br>                "valid": true,<br>                "_modules": [<br>                    "webui.&lt;theme&gt;.widget.label",<br>                    "webui.&lt;theme&gt;.widget.jsfx.label"<br>                ],<br>                "id": "form1:cb2:cb2_1:cb2_1_label",<br>                "htmlFor": "form1:cb2:cb2_1_cb"<br>            },<br>            "disabled": false,<br>            "visible": true,<br>            "image": {<br>                "_widgetType": "webui.&lt;theme&gt;:image",<br>                "templatePath": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/image.html",<br>                "visible": true,<br>                "border": 0,<br>                "src": "/testapp/rbcb/volumegroup_tree.gif",<br>                "_modules": [<br>                    "webui.&lt;theme&gt;.widget.image",<br>                    "webui.&lt;theme&gt;.widget.jsfx.image"<br>                ],<br>                "id": "form1:cb2:cb2_1:cb2_1_image"<br>            },<br>            "readOnly": false,<br>            "_modules": [<br>                "webui.&lt;theme&gt;.widget.checkbox",<br>                "webui.&lt;theme&gt;.widget.jsfx.checkbox"<br>            ],<br>            "name": "form1:cb2:cb2_0_cb",<br>            "id": "form1:cb2:cb2_1"<br>        },<br>        {<br>            "_widgetType": "webui.&lt;theme&gt;:checkbox",<br>            "templatePath": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/checkbox.html",<br>            "value": "Pool",<br>            "label": {<br>                "level": 3,<br>                "_widgetType": "webui.&lt;theme&gt;:label",<br>                "templatePath": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/label.html",<br>                "value": "Pool ",<br>                "requiredImage": {<br>                    "templatePath": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/image.html",<br>                    "_widgetType": "webui.&lt;theme&gt;:image",<br>                    "width": 7,<br>                    "height": 14,<br>                    "visible": true,<br>                    "src": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/images/other/required.gif",<br>                    "border": 0,<br>                    "alt": "Required",<br>                    "_modules": [<br>                        "webui.&lt;theme&gt;.widget.image",<br>                        "webui.&lt;theme&gt;.widget.jsfx.image"<br>                    ],<br>                    "id": "form1:cb2:cb2_2:cb2_2_label:cb2_2_label_required"<br>                },<br>                "required": false,<br>                "errorImage": {<br>                    "templatePath": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/image.html",<br>                    "_widgetType": "webui.&lt;theme&gt;:image",<br>                    "width": 11,<br>                    "height": 14,<br>                    "visible": true,<br>                    "src": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/images/alerts/error_small.gif",<br>                    "border": 0,<br>                    "alt": "Error",<br>                    "_modules": [<br>                        "webui.&lt;theme&gt;.widget.image",<br>                        "webui.&lt;theme&gt;.widget.jsfx.image"<br>                    ],<br>                    "id": "form1:cb2:cb2_2:cb2_2_label:cb2_2_label_error"<br>                },<br>                "visible": true,<br>                "valid": true,<br>                "_modules": [<br>                    "webui.&lt;theme&gt;.widget.label",<br>                    "webui.&lt;theme&gt;.widget.jsfx.label"<br>                ],<br>                "id": "form1:cb2:cb2_2:cb2_2_label",<br>                "htmlFor": "form1:cb2:cb2_2_cb"<br>            },<br>            "disabled": false,<br>            "visible": true,<br>            "image": {<br>                "_widgetType": "webui.&lt;theme&gt;:image",<br>                "templatePath": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/image.html",<br>                "visible": true,<br>                "border": 0,<br>                "src": "/testapp/rbcb/pool_tree.gif",<br>                "_modules": [<br>                    "webui.&lt;theme&gt;.widget.image",<br>                    "webui.&lt;theme&gt;.widget.jsfx.image"<br>                ],<br>                "id": "form1:cb2:cb2_2:cb2_2_image"<br>            },<br>            "readOnly": false,<br>            "_modules": [<br>                "webui.&lt;theme&gt;.widget.checkbox",<br>                "webui.&lt;theme&gt;.widget.jsfx.checkbox"<br>            ],<br>            "name": "form1:cb2:cb2_0_cb",<br>            "id": "form1:cb2:cb2_2"<br>        }<br>    ],<br>    "templatePath": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/rbcbGroup.html",<br>    "_widgetType": "webui.&lt;theme&gt;:rbcbGroup",<br>    "multiple": true,<br>    "label": {<br>        "level": 2,<br>        "templatePath": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/label.html",<br>        "_widgetType": "webui.&lt;theme&gt;:label",<br>        "value": "Checkbox Group ",<br>        "required": false,<br>        "requiredImage": {<br>            "_widgetType": "webui.&lt;theme&gt;:image",<br>            "templatePath": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/image.html",<br>            "width": 7,<br>            "height": 14,<br>            "visible": true,<br>            "border": 0,<br>            "src": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/images/other/required.gif",<br>            "_modules": [<br>                "webui.&lt;theme&gt;.widget.image",<br>                "webui.&lt;theme&gt;.widget.jsfx.image"<br>            ],<br>            "alt": "Required",<br>            "id": "form1:cb2:cb2_label:cb2_label_required"<br>        },<br>        "errorImage": {<br>            "_widgetType": "webui.&lt;theme&gt;:image",<br>            "templatePath": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/image.html",<br>            "width": 11,<br>            "height": 14,<br>            "visible": true,<br>            "border": 0,<br>            "src": "/testapp/theme/com/sun/webui/jsf/&lt;theme&gt;/images/alerts/error_small.gif",<br>            "_modules": [<br>                "webui.&lt;theme&gt;.widget.image",<br>                "webui.&lt;theme&gt;.widget.jsfx.image"<br>            ],<br>            "alt": "Error",<br>            "id": "form1:cb2:cb2_label:cb2_label_error"<br>        },<br>        "valid": true,<br>        "visible": true,<br>        "_modules": [<br>            "webui.&lt;theme&gt;.widget.label",<br>            "webui.&lt;theme&gt;.widget.jsfx.label"<br>        ],<br>        "id": "form1:cb2:cb2_label",<br>        "htmlFor": "form1:cb2:cb2_0_cb"<br>    },<br>    "disabled": false,<br>    "visible": true,<br>    "_modules": [<br>        "webui.&lt;theme&gt;.widget.rbcbGroup",<br>        "webui.&lt;theme&gt;.widget.jsfx.rbcbGroup"<br>    ],<br>    "id": "form1:cb2"<br>});<br>&lt;/script&gt;</pre>
+      <br>
+The checkboxGroup widget can be updated in the
+following way:<br>
+      <ul>
+        <li>Get an handle to to the checkboxGroup dom node. Note
+that the
+component id must be used here for getting the handle on the dom
+element rather than the client id.<br>
+          <code>var domNode =&nbsp;
+document.getElementById("form1:cbGroup1")</code></li>
+        <li>Use the getProps function that is available on the dom node
+to obtain all the properties that are set on that particular dom
+element.</li>
+        <code>&nbsp;var props = domNode.getProps(); // returns a json
+object.<br>
+        </code><li>Use the setProps function to specify the properties
+to be
+updated for the particular component as a json object.<br>
+          <code>&nbsp;domNode.setProps({disabled: true});<span
+ style="font-family: verdana,helvetica,arial,sans-serif;"></span></code></li>
+      </ul>
+      <h3> <a name="3.1"></a>3.1 Updating the component Asynchronously
+      </h3>
+      <div style="margin-left: 40px;">The checkboxGroup component
+also
+supports asynchronous updates. For example you could update the label
+of
+the component asynchronously the following way.<br>
+This example uses a text field whose value is bound to a backing bean.
+The checkboxGroup component's label value is also bound to the same
+backing
+bean. <br>
+When an user enters text in the text field, the corresponding text will
+be updated in the checkboxGroup. <br>
+      <br>
+Here is how the code looks like.<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+&lt;webuijsf:checkboxGroup id="cb3" items="#{rbcbGrp.array}" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+label="#{RbCbBean.label}"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+toolTip="#{RbCbBean.label}"/&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;br
+/&gt;&lt;br /&gt;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:textField id="textField1" label="Enter new label" <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+onKeyUp="refreshGroup('form1:cb3', 'form1:dynamicLabel1')"
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+text="#{RbCbBean.label}"/&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;br /&gt;&lt;br /&gt;&nbsp;&nbsp;&nbsp; <br>
+      <br>
+Note that the textField's onKeyUp attribute refers the refreshGroup
+javascript function.<br>
+This function will invoke the "refresh" function that is located on the
+html checkboxGroup element's dom.<br>
+The argument that is passed to the refresh function would be the client
+id of the text field.<br>
+Hence the javascript function would look something like this.<br>
+      <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+&lt;script type="text/javascript"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+function refreshGroup() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Get text to refresh.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+var domNode = document.getElementById("form1:cb3");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+domNode.refresh("form1:textField1"); // Update text field value and
+refresh.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/script&gt;<br>
+      <br>
+By default, the checkboxGroup component's ajax functionality is set
+to true.
+i.e. the ajaxify attribute of the checkboxGroup component returns
+true by
+default.<br>
+You can turn off the ajax functionality by setting the ajaxify
+attribute to false while creating the checkboxGroup component.<br>
+      <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;webuijsf:checkboxGroup id="cbgrp1"&nbsp;
+ajaxify="false" items="#{rbcbGrp.array}" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+selected="#{rbcbGrp.rb1selected}"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+label="#{RbCbBean.label}"&nbsp; /&gt;<br>
+      <br>
+The above created checkboxGroup component will not exhibit any ajax
+functionality.<br>
+      </div>
+      <h2>4.0 Component Interfaces</h2>
+      <h3><a name="4.1"></a>4.1 Exported interfaces table</h3>
+      <div style="margin-left: 40px;"><br>
+      </div>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Interface Name<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Classification<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Reference<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 40%;">
+            <p>Comments<br>
+            </p>
+            </th>
+          </tr>
+          <tr>
+            <td>themes/javascript/widget/rbcbGroup.js</td>
+            <td>Committed</td>
+            <td>Section 4.5</td>
+            <td>Javascript file for this component</td>
+          </tr>
+          <tr>
+            <td>themes/javascript/widget/jsfx/rbcbGroup.js </td>
+            <td>Committed</td>
+            <td><br>
+            </td>
+            <td>Javascript file for ajax functionality.<br>
+            </td>
+          </tr>
+          <tr>
+            <td>themes/javascript/widget/common.js </td>
+            <td>Private<br>
+            </td>
+            <td><br>
+            </td>
+            <td>Utility script for widgets<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.component.checkboxGroup.java</td>
+            <td style="vertical-align: top;">Committed<br>
+            </td>
+            <td style="vertical-align: top;">Section 4.3</td>
+            <td style="vertical-align: top;">JSF Component class<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.widget.checkboxGroupRenderer.java</td>
+            <td style="vertical-align: top;">Private<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">Widget renderer for
+checkboxGroup.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.html.checkboxGroup.java</td>
+            <td style="vertical-align: top;">Private<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">Designtime renderer for
+checkboxGroup.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.ajax.checkboxGroupRenderer.java</td>
+            <td style="vertical-align: top;">Private<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">Renderer to handle ajax
+requests.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com.sun.webui.jsf.renderkit.widget.SelectorGroupRenderer.java</td>
+            <td style="vertical-align: top;">Private<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">Base renderer class from
+which checkboxGroup inherits.<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3><a name="4.2"></a>4.2 Imported interfaces</h3>
+      <div style="margin-left: 40px;">
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Interface Name<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Classification<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 20%;">
+            <p>Reference<br>
+            </p>
+            </th>
+            <th style="vertical-align: top; width: 40%;">
+            <p>Comments<br>
+            </p>
+            </th>
+          </tr>
+          <tr>
+            <td>jsf-api.jar</td>
+            <td>Standard</td>
+            <td>JSR 127</td>
+            <td>JSF components API library, version 1.1</td>
+          </tr>
+          <tr>
+            <td>dojo-0.4.1-ajax.jar<br>
+            </td>
+            <td>Standard<br>
+            </td>
+            <td>dojotoolkit.org<br>
+            </td>
+            <td>the dojo toolkit library<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">json.jar<br>
+            </td>
+            <td style="vertical-align: top;">Standard<br>
+            </td>
+            <td style="vertical-align: top;"><font size="-1"><span
+ class="a">www.<b>json</b>.org</span></font> </td>
+            <td style="vertical-align: top;">The json library<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">prototype-1.5.0.jar<br>
+            </td>
+            <td style="vertical-align: top;">Standard<br>
+            </td>
+            <td style="vertical-align: top;"><font size="-1"><span
+ class="a">www.<b>prototype</b>js.org/</span></font> </td>
+            <td style="vertical-align: top;">The prototype javascript
+library<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <br>
+      <br>
+      <h3><a name="4.3"></a>4.3 Component interfaces</h3>
+      <br>
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"><b>Constructor
+Summary</b></font></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td><code><b>checkboxGroup</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default
+constructor.</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <div style="margin-left: 40px;">
+      <table summary="" border="1" cellpadding="3" cellspacing="0"
+ width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <th colspan="2" align="left"><font size="+2"> <b>Method
+Summary</b></font></th>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.int</code></font></td>
+            <td><code><b>getColumns</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Returns the
+number of columns.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getFamily</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Return the
+family for this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getFocusElementId</b>(</code><code>javax.faces.context.FacesContext
+context)</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the
+id of an HTML element suitable to receive the focus.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+            </td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getHtmlTemplate</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get
+alternative HTML template to be used by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;javax.faces.component.UIComponent</code></font></td>
+            <td><code><b>getIndicatorComponent</b>(javax.faces.context.FacesContext&nbsp;context,
+Label&nbsp;label)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return a
+component instance that can be referenced by a <code>Label</code> in
+order to evaluate the <code>required</code> and <code>valid</code>
+states of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getLabeledElementId</b>(javax.faces.context.FacesContext&nbsp;context)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the
+absolute ID of an HTML element suitable for use as the value of an HTML
+LABEL element's <code>for</code> attribute.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnBlur</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when this element loses focus.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnChange</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse click occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnFocus</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse double click occurs over this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getOnSelect</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when this component receives focus.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getPrimaryElementID</b>(javax.faces.context.FacesContext&nbsp;context)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Deprecated.</b>&nbsp;&nbsp;</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+            <td><code><b>getRendererType</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+            <td><code><b>getValue</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Returns the value<br>
+            </td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+            <td><code><b>isAjaxify</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test if
+default Ajax functionality should be turned off.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+            <td><code><b>isVisible</b>()</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>restoreState</b>(javax.faces.context.FacesContext&nbsp;_context,
+java.lang.Object&nbsp;_state)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Restore the
+state of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+            <td><code><b>saveState</b>(javax.faces.context.FacesContext&nbsp;_context)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save the
+state of this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setAjaxify</b>(boolean&nbsp;ajaxify)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set flag
+indicating to turn off default Ajax functionality.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setColumns</b>(int columns)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies
+the number of columns to be used to layout</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setHtmlTemplate</b>(java.lang.String&nbsp;htmlTemplate)</code>
+            <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set
+alternative HTML template to be used by this component.</td>
+          </tr>
+          <tr class="TableRowColor" bgcolor="white">
+            <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+            <td><code><b>setVisible</b>(boolean&nbsp;visible)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <br>
+      </div>
+      <h3><a name="4.4"></a>4.4 Tag interfaces</h3>
+      <div style="margin-left: 40px;">
+      <table border="1" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr class="TableHeadingColor" bgcolor="#ccccff">
+            <td colspan="5"><font size="+2"><b>Attributes</b></font></td>
+          </tr>
+          <tr>
+            <td><b>Name</b></td>
+            <td><b>Required</b></td>
+            <td><b>Request-time</b></td>
+            <td><b>Type</b></td>
+            <td><b>Description</b></td>
+          </tr>
+          <tr valign="top">
+            <td>binding</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> A ValueExpression that resolves to the UIComponent
+that corresponds to this tag. This binding allows the Java bean that
+contains the UIComponent to manipulate the UIComponent, its properties,
+and its children. </td>
+          </tr>
+          <tr valign="top">
+            <td>htmlTemplate</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Alternative HTML template to be used by this
+component. </td>
+          </tr>
+          <tr valign="top">
+            <td>ajaxify</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Flag indicating to turn off default Ajax
+functionality. Set ajaxify to false when providing a different Ajax
+implementation. </td>
+          </tr>
+          <tr valign="top">
+            <td>visible</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Use the visible attribute to indicate whether the
+component should be viewable by the user in the rendered HTML page. If
+set to false, the HTML code for the component is present in the page,
+but the component is hidden with style attributes. By default, visible
+is set to true, so HTML for the component HTML is included and visible
+to the user. If the component is not visible, it can still be processed
+on subsequent form submissions because the HTML is present.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>columns</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Defines how many columns may be used to layout the
+check boxes. The value must be greater than or equal to one. The
+default value is one. Invalid values are ignored and the value is set
+to one. </td>
+          </tr>
+          <tr valign="top">
+            <td>onDblClick</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when a mouse double click occurs
+over this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onKeyPress</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user presses and
+releases a key while the component has focus.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>rendered</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Use the rendered attribute to indicate whether the
+HTML code for the component should be included in the rendered HTML
+page. If set to false, the rendered HTML page does not include the HTML
+for the component. If the component is not rendered, it is also not
+processed on any subsequent form submission. </td>
+          </tr>
+          <tr valign="top">
+            <td>id</td>
+            <td>false</td>
+            <td>true</td>
+            <td><code>java.lang.String</code></td>
+            <td><i>No Description</i></td>
+          </tr>
+          <tr valign="top">
+            <td>onKeyUp</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user releases a key
+while the component has focus.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseUp</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user releases a mouse
+button while the mouse pointer is on the component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>styleClass</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>CSS style class(es) to be applied to the outermost HTML
+element when this component is rendered.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>items</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Specifies the options that the web application user can
+choose from. The value must be one of an array, Map or Collection whose
+members are all subclasses of<code>com.sun.webui.jsf.model.Option</code>.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>style</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>CSS style(s) to be applied to the outermost HTML element
+when this component is rendered.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onClick</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when a mouse click occurs over
+this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>toolTip</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Sets the value of the title attribute for the HTML
+element. The specified text will display as a tooltip if the mouse
+cursor hovers over the HTML element.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseDown</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user presses a mouse
+button while the mouse pointer is on the component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>converter</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> The converter attribute is used to specify a method to
+translate native property values to String and back for this component.
+The converter attribute value must be one of the following:
+            <ul>
+              <li>A JavaServer Faces EL expression that resolves to a
+backing bean or bean property that implements the <code>javax.faces.converter.Converter</code>
+interface; or </li>
+              <li>the ID of a registered converter (a String).</li>
+            </ul>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>required</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Flag indicating that an input value for this field is
+mandatory, and failure to provide one will trigger a validation error. </td>
+          </tr>
+          <tr valign="top">
+            <td>disabled</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Flag indicating that the user is not permitted to
+activate this component, and that the component's value will not be
+submitted with the form.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>validatorExpression</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> The validator attribute is used to specify a method in
+a backing bean to validate input to the component. The validator
+attribute value must be a JavaServer Faces EL expression that resolves
+to a public method with return type void. The method must take three
+parameters:
+            <ul>
+              <li>a <code>javax.faces.context.FacesContext</code></li>
+              <li>a <code>javax.faces.component.UIComponent</code>
+(the component whose data is to be validated)</li>
+              <li>a <code>java.lang.Object</code> containing the data
+to be validated. </li>
+            </ul>
+            <p>The backing bean where the method is defined must
+implement <code>java.io.Serializable</code> or <code>javax.faces.component.StateHolder</code>.</p>
+            <p>The method is invoked during the Process Validations
+Phase.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseOut</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when a mouse out movement occurs
+over this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseOver</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user moves the mouse
+pointer into the boundary of this component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>onMouseMove</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user moves the mouse
+pointer while over the component.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>selected</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>The object that represents the selections made from the
+available options. If multiple selections are allowed, this must be
+bound to an Object array, or an array of primitives.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>label</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>If set, a label is rendered adjacent to the component
+with the value of this attribute as the label text.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>immediate</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> Flag indicating that event handling for this component
+should be handled immediately (in Apply Request Values phase) rather
+than waiting until Invoke Application phase. </td>
+          </tr>
+          <tr valign="top">
+            <td>onKeyDown</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Scripting code executed when the user presses down on a
+key while the component has focus.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>labelLevel</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Sets the style level for the generated label, provided
+the label attribute has been set. Valid values are 1 (largest), 2 and 3
+(smallest). The default value is 2.</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>readOnly</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>If this attribute is set to true, the value of the
+component is rendered as text, preceded by the label if one was defined.</p>
+@deprecated The attribute is deprected starting from version 4.1 </td>
+          </tr>
+          <tr valign="top">
+            <td>valueChangeListenerExpression</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td> The <code>valueChangeListener</code> attribute is
+used to specify a method to handle an value-change event that is
+triggered when the user enters data in the input component. The value
+of the attribute value must be a JavaServer Faces EL expression that
+resolves to a backing bean method. The method must take a single
+parameter of type <code>javax.faces.event.ValueChangeEvent</code>, and
+its return type must be void. The backing bean where the method is
+defined must implement <code>java.io.Serializable</code> or <code>javax.faces.component.StateHolder</code>.
+            </td>
+          </tr>
+          <tr valign="top">
+            <td>tabIndex</td>
+            <td>false</td>
+            <td>false</td>
+            <td><code>java.lang.String</code></td>
+            <td>
+            <p>Position of this element in the tabbing order of the
+current document. Tabbing order determines the sequence in which
+elements receive focus when the tab key is pressed. The value must be
+an integer between 0 and 32767.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <br>
+      <br>
+      <br>
+      <h3><a name="4.5"></a>4.5 Javascript interfaces</h3>
+      <div style="margin-left: 40px;">
+      <div style="margin-left: 40px;">
+      <table
+ style="text-align: left; width: 100%; height: 100%; margin-left: auto; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td
+ style="vertical-align: top; font-weight: bold; font-style: italic;">Interface
+name</td>
+            <td
+ style="vertical-align: top; font-weight: bold; font-style: italic;">Type<br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold; font-style: italic;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">webui.@THEME@.widget.rbcbGroup<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Used for instantiating the
+widget<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.setProps</td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Use this function to
+change any of the following supported
+properties:
+            <ul>
+              <li>align<br>
+              </li>
+              <li>className</li>
+              <li>contents</li>
+              <li>dir</li>
+              <li>disabled</li>
+              <li>id</li>
+              <li>label</li>
+              <li>lang</li>
+              <li>name</li>
+              <li>readOnly</li>
+              <li>style</li>
+              <li>tabIndex</li>
+              <li>title</li>
+              <li>visible</li>
+            </ul>
+            <br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.setProps<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Store the properties of
+the element on the widget node.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.getProps<br>
+            </td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Get all the properties of
+the checkboxGroup that are set <br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">widget.getProps()<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Get the properties of the
+widget. This is used by domNode.getProps function<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.refresh<br>
+            </td>
+            <td style="vertical-align: top;">public<br>
+            </td>
+            <td style="vertical-align: top;">Update the checkboxGroup
+widget
+asynchronously.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.addChildren<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Used to add children to
+the checkboxGroup element.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">domNode.getClassName<br>
+            </td>
+            <td style="vertical-align: top;">private<br>
+            </td>
+            <td style="vertical-align: top;">Returns the style class
+name to be used for the enabled/disabled state of the checkboxGroup.<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+. &nbsp; &nbsp; &nbsp; &nbsp; <br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+Note:&nbsp;&nbsp; i) domNode over here refers to the html dom element.<br>
+&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp; &nbsp;&nbsp; ii) widget refers to the widget.<br>
+      <br>
+      </div>
+      <h3><a name="4.6"></a>4.6 Theme resources keys</h3>
+      <div style="margin-left: 40px;"><br>
+      </div>
+      <h3><a name="4.6.1"></a>4.6.1 Style selectors</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The style to be applied
+for the enabled state of checkboxGroup.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">The style to be applied
+for the disabled state of the checkboxGroup.<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="4.6.2"></a>4.6.2 Image resources</h3>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N/A<br>
+      <h3><a name="4.6.3"></a>4.6.3 Javascript resources</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/common.js</td>
+            <td style="vertical-align: top;">Javascript containing the
+common files for the widgets.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/rbcbGroup.js</td>
+            <td style="vertical-align: top;">Javascript for the
+checkboxGroup
+widget. <br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/jsfx/rbcbGroup.js</td>
+            <td style="vertical-align: top;">Javascript for the ajax
+implementation of checkboxGroup.<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Note: The &lt;theme&gt; tag is
+intended to be replaced with the theme
+name
+(e.g., suntheme).
+      <h3><a name="4.6.4"></a>4.6.4 Template resources</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Name</span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Description</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/templates/rbcbGroup.html
+            </td>
+            <td style="vertical-align: top;">The HTML template name for
+checkboxGroup widget </td>
+          </tr>
+        </tbody>
+      </table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Note: The &lt;theme&gt; tag is
+intended to be replaced with the theme
+name
+(e.g., suntheme).
+      <h3><a name="4.6.5"></a>4.6.5 Other resources</h3>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N/A<br>
+      <h3><a name="4.6.6"></a>4.6.6 Localized message keys</h3>
+      <div style="margin-left: 40px;">N/A<br>
+      </div>
+      <br>
+      <br>
+      <h3><a name="4.7"></a>4.7 Component Extensibility</h3>
+      <div style="margin-left: 40px;"><br>
+      </div>
+      <h2><a name="5.0"></a>5.0 - Creator Design Time Support</h2>
+      <h3><a name="5.1"></a>5.1 Design-time Behavior</h3>
+      <div style="margin-left: 40px;">The checkboxGroup component
+will
+continue to use the existing&nbsp; html
+renderer for design time behavior. Hence there will not be any change
+in the existing design time behavior. </div>
+      <h3><a name="5.2"></a>5.2 Design-time Classes and Interfaces</h3>
+      <div style="margin-left: 40px;">N/A </div>
+      <h3><a name="5.3"></a>5.3 Localized message keys</h3>
+      <div style="margin-left: 40px;">N/A<br>
+      </div>
+      <br>
+      <h3><a name="5.4"></a>5.4 Dependencies </h3>
+      <div style="margin-left: 40px;">N/A </div>
+      <h2><a name="6.0"></a>6.0 Component Dependencies</h2>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="6.1"></a>6.1 Component class dependencies</h3>
+      <div style="margin-left: 40px;">N/A</div>
+      <h3><a name="6.2"></a>6.2 Javascript dependencies</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N/A<br>
+      <br>
+      <h3><a name="6.3"></a>6.3 Infrastructure dependencies</h3>
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;The new client side checkboxGroup widget
+depends
+on
+the dojo infrastructure for rendering.<br>
+      <br>
+      <h3><a name="6.4"></a>6.4 Design time dependencies</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N/A<br>
+      <br>
+      <h2><a name="7.0"></a>7.0 - A11Y, I18n, Compliance, Debugging<br>
+      </h2>
+      <h3><a name="7.1"></a>7.1 Accessibility (A11Y)</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h3><a name="7.2"></a>7.2 Internationalization (I18N)</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h3><a name="7.3"></a>7.3 Level of XHTML Compliance</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h3><a name="7.4"></a>7.4 Javascript Compliance</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"<br>
+      <br>
+      </div>
+      <h3><a name="7.5"></a>7.5 Debugging</h3>
+      <div style="margin-left: 40px;">See "Woodstock components
+functional specification"</div>
+      <h2><a name="8.0"></a>8.0 Component High level design</h2>
+      <h3 style="margin-left: 40px;">8.1 Client side Widget:</h3>
+      <div style="margin-left: 40px;">The client side checkboxGroup
+widget makes use of the fillInTemplate
+function to generate a template based widget. The checkboxGroup
+widget
+first
+registers the
+setProps function on its widget in the fillInTemplate function
+and then makes a call to setProps function which sets the properties
+common to the checkboxGroup widget. A getProps() is also registered
+in
+the
+fillInTemplate which is used to retrieve attribute values which
+setProps() function uses. <br>
+      <br>
+      </div>
+      <h3 style="margin-left: 40px;">8.2 JSF Component Renderer:</h3>
+      <div style="margin-left: 40px;">checkboxGroup renderer out
+puts all the required properties which is used
+by checkboxGroup widget to render component. </div>
+      <h2>9.0 Issues</h2>
+      <div style="margin-left: 40px;">N/A</div>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

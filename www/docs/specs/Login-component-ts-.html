@@ -1,0 +1,1429 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <style type="text/css"> /* <![CDATA[ */
+ @import "/branding/css/tigris.css";
+ @import "/branding/css/inst.css";
+ /* ]]> */</style>
+  <link rel="stylesheet" type="text/css"
+ href="component-ts-template_files/print.css" media="print">
+  <script src="component-ts-template_files/tigris.js"
+ type="text/javascript"></script>
+  <script src="component-ts-template_files/alm.js"
+ type="text/javascript"></script>
+  <style type="text/css">
+    /* <![CDATA[ */
+    @import "/branding/css/alm.css";
+   /* ]]> */
+ </style>
+  <title>Project Woodstock -Login Component Test Specification</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <meta name="version" content="4.5.2.148.4">
+<!--
+      The contents of this file are subject to the terms
+      of the Common Development and Distribution License
+      (the License).  You may not use this file except in
+      compliance with the License.
+      
+      You can obtain a copy of the license at
+      https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      See the License for the specific language governing
+      permissions and limitations under the License.
+      
+      When distributing Covered Code, include this CDDL
+      Header Notice in each file and include the License file
+      at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      If applicable, add the following below the CDDL Header,
+      with the fields enclosed by brackets [] replaced by
+      you own identifying information:
+      "Portions Copyrighted [year] [name of copyright owner]"
+      
+      Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+    -->
+  <style type="text/css"> 
+/* <![CDATA[ */
+@import url(../../browser-uispec.css);
+.style2 {font-size: 18pt}
+  </style>
+  <link rel="stylesheet" type="text/css"
+ href="component-ts-template_files/theme.css">
+  <link rel="search" type="application/opensearchdescription+xml"
+ href="https://glassfish.dev.java.net/coolstuff/javanet/it.xml"
+ title="Java.net issue tracker">
+</head>
+<body class="composite" style="display: block;">
+<table style="font-family: times new roman;" id="main" border="0"
+ cellpadding="4" cellspacing="0" width="100%">
+  <big> </big><tbody>
+    <big> </big><tr>
+      <big> </big><td id="navcol"><big> </big>
+      <div class="strut"><big>&nbsp;</big></div>
+      <big> </big></td>
+      <big> </big><td id="midcol"><big> </big>
+      <div id="bodycol"><big> </big>
+      <div class="MstDiv"><big> </big>
+      <table class="MstTblBot" title="" border="0" cellpadding="0"
+ cellspacing="0" width="100%">
+        <big> </big><tbody>
+          <big> </big><tr>
+            <big> </big><td class="MstTdTtl"><big> </big>
+            <div style="color: rgb(255, 102, 0);" class="MstDivTtl"><big>
+            </big>
+            <div class="Mst1TtlTxt"><big>Project Woodstock</big></div>
+            <big> </big></div>
+            <big> </big>
+            <div class="Mst1SecDiv"><big> <span
+ class="Mst1SecTxt style2"><span style="color: rgb(255, 102, 0);">Login
+Component
+Test Specification </span><br>
+            </span></big></div>
+            <big> </big></td>
+            <big> </big></tr>
+          <big> </big>
+        </tbody><big> </big>
+      </table>
+      <big> </big></div>
+      <big> </big>
+      <table class="Mst2Tbl" style="width: 100%;" title="" border="0"
+ cellpadding="0" cellspacing="0">
+        <big> </big><tbody>
+          <big> </big><tr>
+            <big> </big><td><big> <br>
+            <br>
+            </big>
+            <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+              <big> </big><tbody>
+                <big> </big><tr>
+                  <big> </big><td
+ style="width: 15%; text-align: center;"><big><span
+ style="font-weight: bold;">Revision</span></big></td>
+                  <big> </big><td
+ style="width: 15%; text-align: center;"><big><span
+ style="font-weight: bold;">Date</span></big></td>
+                  <big> </big><td
+ style="width: 50%; text-align: center;"><big><span
+ style="font-weight: bold;">Synopsis</span></big></td>
+                  <big> </big><td
+ style="width: 20%; text-align: center;"><big><span
+ style="font-weight: bold;">Author</span></big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td style="text-align: center;"><big>0.1</big></td>
+                  <big> </big><td style="text-align: center;"><big>13/03/2008</big></td>
+                  <big> </big><td style="text-align: center;"><big>Initial
+Draft</big></td>
+                  <big> </big><td style="text-align: center;"><big>Khaja</big></td>
+                  <big> </big></tr>
+                <big> </big>
+              </tbody><big> </big>
+            </table>
+            <big> <br style="color: rgb(255, 102, 0);">
+&nbsp;&nbsp;&nbsp; <big><big><span
+ style="font-weight: bold; color: rgb(255, 102, 0);">Table of Contents:<br>
+            <br>
+            </span></big>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+ href="#1.0">1.0 Overview</a></big> </big>
+            <div style="margin-left: 40px;"><big>&nbsp;&nbsp; <a
+ href="#1.1">1.1 Component
+Description</a><br>
+            </big></div>
+            <big> </big>
+            <div style="margin-left: 40px;"><big>&nbsp;&nbsp;<a
+ href="#1.2">
+1.2 Relevant
+Documents</a><br>
+&nbsp;&nbsp; <a href="#1.3">1.3 Component Purpose</a><br>
+&nbsp;&nbsp; <a href="Login-component-ts-.html#1.3">1.4 Definition of
+Terms</a> </big></div>
+            <big>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+ href="#2.0">2.0
+Test Requirements</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#3.0">3.0
+Test Matrix</a><br>
+            </big>
+            <div style="margin-left: 40px;"><big>&nbsp;&nbsp; <a
+ href="#3.3">3.1 </a><a href="Login-component-ts-.html#3.3">UI
+Functional
+Tests </a><br>
+&nbsp;&nbsp; <a href="#3.4">3.2 Selenium Tests</a><br>
+&nbsp;&nbsp; <a href="#3.5">3.3 XHTML</a><br>
+&nbsp;&nbsp; <a href="#3.6">3.4 API Tests</a><br>
+&nbsp;&nbsp; <a href="#3.7">3.5 Design Time Tests</a><br>
+            </big></div>
+            <big>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+ href="#4.0">4.0
+Automation</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#5.0">5.0
+Approval</a><br>
+            </big>
+            <h2 style="font-weight: bold;"><span
+ style="font-family: serif; font-weight: bold;">&nbsp;&nbsp;&nbsp;</span></h2>
+            <h2 style="font-weight: bold;">&nbsp; <span
+ style="font-family: serif; font-weight: bold;"><big
+ style="color: rgb(255, 102, 0);">1.0 Overview</big></span></h2>
+            <big>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <font style="font-family: times new roman;" size="3"><big>This
+test specification describes the approach to
+be taken when testing the rendering of the 4.2 Project Woodstock Login
+Component.</big></font> </big>
+            <h3 style="font-weight: bold;"><big><a name="1.1"></a><span
+ style="color: rgb(255, 102, 0);">1.1
+Component
+Description</span><br>
+            </big></h3>
+            <big> </big>
+            <div style="margin-left: 40px;"><big>This document
+specifies the
+Login user interface component. There are
+two
+sets of interfaces in this component. A visual interface that both the
+user and&nbsp; the web
+application developer sees and a back end interface that
+application developers and authentication service providers need to be
+aware of. <br>
+            <br>
+This component is heavily dependent on the Java Authentication and
+Authorization Service (JAAS) - specifically the authentication part of
+JAAS. The login presentation layer and a corresponding JAAS based
+authentication service is currently part of the webconsole's
+infrastructure. Internally within Sun a lot of the web applications are
+not able to or are
+unwilling to be part of this console and, hence, take advantage of its
+authentication service. These
+applications still need users to authenticate before
+being allowed to run the application. Other web applications
+may need an authentication presentation mechanism for primary or
+secondary authentication or even a portal channel for authentication.
+Most if not all of these
+situations can be addressed by an independent login presentation
+component. This component up levels the pluggable
+authentication mechanism to the web layer.<br>
+            <br>
+Ajax is being used in this component in order to allow the
+authentication infrastructure to drive the presentation - this was not
+possible before because of the nature of the web environment - a HTTP
+get had to be done before any meaningful HTTP post could occur which
+meant the first login page to be displayed was not being driven by the
+auth infrastructure. Various tweaks including dummy presentation layers
+were put in place to get around these problems earlier. </big></div>
+            <big> </big>
+            <h3><big><a name="1.3"></a><span
+ style="color: rgb(255, 102, 0);">1.2
+Component Purpose</span></big></h3>
+            <big> </big>
+            <div style="margin-left: 40px;"><big>There were two main
+purposes of this component:<br>
+            <br>
+a) To allow the actual authentication service to drive the
+presentation. <br>
+            <br>
+b) To have a component that is not tied to any presentation framework.
+So far every authentication technology that was part of the login
+pages had its own presentation layer. This component obviates the need
+for such a page.<br>
+            </big></div>
+            <big> </big>
+            <h3 style="font-weight: bold;"><big><a name="1.4"></a><span
+ style="color: rgb(255, 102, 0);">1.3
+Relevant
+Documents</span></big></h3>
+            <big> </big>
+            <ul>
+              <big> </big><li><big><a
+ href="http://ucsd.sfbay.sun.com/projects/hci-admin/uispec3_0/index.html"
+ target="_blank">Sun Web Application Guidelines</a></big></li>
+              <big> </big><li><big>link to previous version functional
+spec (if relevant)</big></li>
+              <big> </big><li><big>link to UI design spec (required)</big></li>
+              <big> </big><li><big>links to other relevant specs (add
+as necessary)</big></li>
+              <big> </big>
+            </ul>
+            <big> </big>
+            <div style="margin-left: 40px;"><big><br>
+            </big></div>
+            <big> </big>
+            <h3><big><a name="1.5"></a><span
+ style="color: rgb(255, 102, 0);">1.4
+Definition of Terms</span></big></h3>
+            <big> </big>
+            <div style="margin-left: 40px;"><big> </big>
+            <ul>
+              <big> </big><li><big>JSF - Java Server Faces</big></li>
+              <big> </big><li><big>Ajax - Asynchronous Javascript and
+XML</big></li>
+              <big> </big><li><big>Dojo - a Javascript/Ajax toolkit.</big></li>
+              <big> </big><li><big>JAAS - Java Authentication and
+Authorization service
+(http://<font size="-1"><big><span class="a">java.sun.com/products/<b>jaas</b>)</span></big></font></big></li>
+              <big> </big><li><big>LoginModule - A JAAS interface.</big></li>
+              <big> </big><li><big>LoginContext - A JAAS interface.</big></li>
+              <big> </big><li><big>Callback - A JAAS interface.</big></li>
+              <big> </big><li><big>Dynamic Faces, JSF Extensions -
+Framework to support
+for
+Ajax in JSF.</big></li>
+              <big> </big><li><big>JSON - Javascript Object Notation.</big></li>
+              <big> </big>
+            </ul>
+            <big> </big></div>
+            <big> </big>
+            <h2><big><a name="2.0"></a><span
+ style="color: rgb(255, 102, 0);">2.0
+Test Requirements</span></big></h2>
+            <big> </big>
+            <div style="margin-left: 40px;"><big>The Login
+component will be tested to meet the following requirements, standards,
+and tests: </big>
+            <ul>
+              <big> </big><li><big>SWAED Web App Guidelines compliant </big></li>
+              <big> </big><li><big>Fully A11Y compliant by GA</big></li>
+              <big> </big><li><big>I18N compliant by GA</big></li>
+              <big> </big><li><big>XHTML transitional compliant by GA</big></li>
+              <big> </big><li><big>GUI functional test requirements</big></li>
+              <big> </big><li><big>JSP test requirements</big></li>
+              <big> </big><li><big>API test requirements</big></li>
+              <big> </big>
+            </ul>
+            <big> </big></div>
+            <big> </big>
+            <h3><big><a name="2.1"></a><span
+ style="color: rgb(255, 102, 0);">2.1
+Tools and Methods:</span></big></h3>
+            <big> </big>
+            <div style="margin-left: 40px;"><big>The Login component
+will be tested using the the
+following tools and methods: </big>
+            <ul>
+              <big> </big><li><big>GUI tests will be performed on
+platform and browser
+configurations
+identified here:</big></li>
+              <big> </big>
+              <ul>
+                <big> </big><li><big>The table of supported <a
+ href="https://woodstock.dev.java.net/docs/SupportedBrowers.htm">Browsers</a>.</big></li>
+                <big> </big>
+              </ul>
+              <big> </big>
+              <ul>
+                <big> </big><li><big>The table of supported <a
+ href="https://woodstock.dev.java.net/docs/SupportedContainers.htm">Containers</a>.</big></li>
+                <big> </big>
+              </ul>
+              <big> </big><li><big>Functional and BUI tests will be
+automated<span style="text-decoration: underline;"></span></big></li>
+              <big> </big><li><big>API tests will be written for each
+method in the
+classes of the component</big></li>
+              <big> </big><li><big>Automated tests will be integrated
+into a test
+harness and
+run nightly as a regression suite</big></li>
+              <big> </big><li><big>Automated code coverage goal of 80%
+(at GA) will be
+achieved as outlined in
+the project test plan </big></li>
+              <big> </big>
+            </ul>
+            <big> </big></div>
+            <big> </big>
+            <h3><big><a name="2.2"></a><span
+ style="color: rgb(255, 102, 0);">2.2
+Issue Tracking</span></big></h3>
+            <div style="margin-left: 40px;"><big>Bugs will be filed
+using
+Bug tracker (Issuezilla) and entered against
+the proper Project Woodstock Revision and component category.</big></div>
+            <big> <br>
+            </big>
+            <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+              <big> </big><tbody>
+                <big> </big><tr>
+                  <big> </big><td style="vertical-align: top;"><span
+ style="font-weight: bold;">Product:</span><br>
+                  </td>
+                  <big> </big><td style="vertical-align: top;">Woodstock<br>
+                  </td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td
+ style="vertical-align: top; font-weight: bold;"><span
+ style="font-weight: bold;">Category:</span><br>
+                  </td>
+                  <big> </big><td style="vertical-align: top;">Components<br>
+                  </td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td
+ style="vertical-align: top; font-weight: bold;"><span
+ style="font-weight: bold;">Subcategory:</span><br>
+                  </td>
+                  <big> </big><td style="vertical-align: top;">&nbsp;Login
+Component&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <br>
+                  </td>
+                  <big> </big></tr>
+                <big> </big>
+              </tbody>
+            </table>
+            <h2><big><a name="4.0"></a><span
+ style="color: rgb(255, 102, 0);">3.0
+Test Matrix</span><br>
+            </big></h2>
+            <div style="margin-left: 40px;"><big>The following are
+definitions of the fields used in the test case matrix:</big></div>
+            <big> <br>
+            </big>
+            <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+              <big> </big><tbody>
+                <big> </big><tr>
+                  <big> </big><td
+ style="vertical-align: top; font-weight: bold;"><big>Test
+Case ID</big></td>
+                  <big> </big><td style="vertical-align: top;">Unique
+identifier for each test case<br>
+                  </td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td style="vertical-align: top;"><big><span
+ style="font-weight: bold;">Test Case Synopsis</span><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;">Description
+of the test case<br>
+                  </td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td style="vertical-align: top;"><span
+ style="font-weight: bold;">User Defined Fields</span><br>
+                  </td>
+                  <big> </big><td style="vertical-align: top;">Defined
+by
+the test engineer to allow for flexibility in writing the test case<br>
+                  </td>
+                  <big> </big></tr>
+                <big> </big>
+              </tbody><big> </big>
+            </table>
+            <big> <br>
+            </big>
+            <div style="margin-left: 40px;"><big> </big>
+            <div style="text-align: center;"><big> </big></div>
+            <big> <br>
+            </big></div>
+            <big> </big>
+            <h3><big><a name="3.3"></a><span
+ style="color: rgb(255, 102, 0);">3.1
+GUI Functional Tests</span><br>
+            </big></h3>
+            <big> <a class="header"><br>
+            </a> </big>
+            <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+              <big> </big><tbody>
+                <big> </big><tr>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big><a class="header">Test
+Case ID</a><br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big><a class="header">Test
+Case Synopsis</a><br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big><a class="header">Solaris<br>
+Firefox</a><br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big><a class="header">Solaris<br>
+NS7</a><br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big><a class="header">Linux<br>
+Firefox</a><br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big><a class="header">Linux<br>
+NS7</a><br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big><a class="header">Windows<br>
+IE</a><br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big><a class="header">Windows<br>
+Firefox</a><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big>MAC
+Safari <br>
+Client-only <br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big><a class="header">Comments</a><br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><big>GUI-01<br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big>The
+login component
+should be able to authenticate a user before any
+application page can be seen.<br>
+                  <span
+ style="font-weight: bold; text-decoration: underline;"><br>
+To
+Test:</span><br style="font-weight: bold;">
+1. Launch Example app in a browser.<br>
+http://&lt;hostname:port&gt;/example/faces/index.jsp <br>
+go to Login Component example<br
+ style="font-weight: bold; text-decoration: underline;">
+2.Click on&nbsp; basic login example<br>
+2.Enter the randomly generated string <br>
+                  <br>
+                  <span
+ style="font-weight: bold; text-decoration: underline;">Verification</span><span
+ style="text-decoration: underline;">:</span><br>
+Verify that login succeeds for correct string, and fails for keys other
+than randomly generated string </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><big><a
+ class="header">GUI-02 </a> </big></td>
+                  <big> </big><td style="vertical-align: top;"><big>The
+login component
+should be able to authenticate a user anytime in
+the application.<br>
+                  <br>
+                  <span
+ style="font-weight: bold; text-decoration: underline;">To
+Test:</span><br style="font-weight: bold;">
+1. Launch Example app in a browser.<br>
+http://&lt;hostname:port&gt;/example/faces/index.jsp <br>
+go to Login Component example<br>
+2.Click on <span class="BcmTxt_sun4">Login example using two
+LoginModule implementations.</span><br
+ style="font-weight: bold; text-decoration: underline;">
+3.Enter<span style="font-weight: bold;"></span> the required details<span
+ style="font-weight: bold; text-decoration: underline;"><br>
+                  <br>
+Verification</span><span style="text-decoration: underline;">:</span><br>
+Verify that user can be logged in only if the he gives correct answer
+to
+the question login should fail otherwise and a proper&nbsp; error
+message should be displayed<br>
+                  <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><big><a
+ class="header">GUI-03 </a> </big></td>
+                  <big> </big><td style="vertical-align: top;"><big>The
+login component
+should allow the application to redirect to
+any URL after successful authentication.<br>
+                  <span
+ style="font-weight: bold; text-decoration: underline;"><br>
+To
+Test:</span><br style="font-weight: bold;">
+1. Launch Example app in a browser.<br>
+http://&lt;hostname:port&gt;/example/faces/index.jsp <br>
+go to Login Component example<br>
+2.Click on secondary login example<br>
+                  <span
+ style="font-weight: bold; text-decoration: underline;"><br>
+Verification</span><span style="text-decoration: underline;">:</span><br>
+Verify that the user is taken to CommonTask example (in this example
+only ) upon successful&nbsp; authentication.<br>
+                  <br>
+                  <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td style="vertical-align: top;"><big>GUI-04</big></td>
+                  <big> </big><td style="vertical-align: top;"><big>The
+login component
+should be pluggable to use different authentication
+technology infrastructures.<br>
+                  <span
+ style="font-weight: bold; text-decoration: underline;"><br>
+To
+Test:</span><br style="font-weight: bold;">
+1. Launch Example app in a browser.<br>
+http://&lt;hostname:port&gt;/example/faces/index.jsp <br>
+go to Login Component example<br
+ style="font-weight: bold; text-decoration: underline;">
+                  <span
+ style="font-weight: bold; text-decoration: underline;">Verification</span><span
+ style="text-decoration: underline;">:</span><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td style="vertical-align: top;"><big>GUI-05</big></td>
+                  <big> </big><td style="vertical-align: top;"><big>The
+scope of an
+authentication being used by the login component should
+be specifiable by the application developer.<br>
+                  <br>
+                  <span
+ style="font-weight: bold; text-decoration: underline;">To
+Test:</span><br style="font-weight: bold;">
+1. Launch Example app in a browser.<br>
+http://&lt;hostname:port&gt;/example/faces/index.jsp <br>
+go to Login Component example<br
+ style="font-weight: bold; text-decoration: underline;">
+                  <span
+ style="font-weight: bold; text-decoration: underline;"><br>
+Verification</span><span style="text-decoration: underline;">:</span><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td style="vertical-align: top;"><big>GUI-06</big></td>
+                  <big> </big><td style="vertical-align: top;"><big>The
+login component
+should be usable in a portal environment.<br>
+                  <br>
+                  <span
+ style="font-weight: bold; text-decoration: underline;">To
+Test:</span><br style="font-weight: bold;">
+1. Launch Example app in a browser.<br>
+http://&lt;hostname:port&gt;/example/faces/index.jsp <br>
+go to Login Component example<br
+ style="font-weight: bold; text-decoration: underline;">
+                  <span
+ style="font-weight: bold; text-decoration: underline;"><br>
+Verification</span><span style="text-decoration: underline;">:</span><br>
+                  <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td style="vertical-align: top;"><big>GUI-07</big></td>
+                  <big> </big><td style="vertical-align: top;"><big>Upon
+successful
+authentication the login component should allow
+applications to access the authenticated user data.<br>
+                  <br>
+                  <span
+ style="font-weight: bold; text-decoration: underline;">To
+Test:</span><br style="font-weight: bold;">
+1. Launch Example app in a browser.<br>
+http://&lt;hostname:port&gt;/example/faces/index.jsp <br>
+go to Login Component example<br>
+2.Click on secondary login example<br
+ style="font-weight: bold; text-decoration: underline;">
+                  <span
+ style="font-weight: bold; text-decoration: underline;"><br>
+Verification</span><span style="text-decoration: underline;">:</span><br>
+Verify that the user is taken to the URL specified upon
+successful&nbsp; authentication and the user is able to perform .all
+the operations on authenticated user data<br>
+                  <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big>
+              </tbody><big> </big>
+            </table>
+            <big> <br>
+            <br>
+            </big>
+            <h3><big><a name="3.4"></a><span
+ style="color: rgb(255, 102, 0);">3.2
+Selenium Tests</span></big></h3>
+            <big>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="header">This section identifies the automated BUI
+tests
+written against the Login JSP pages (example.war).<br>
+            <br>
+            </a><a class="header"> </a> </big>
+            <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+              <big> </big><tbody>
+                <big> </big><tr>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big><a class="header">Test
+Case ID</a><br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big><a class="header">Test
+Case Synopsis</a><br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><big>Test<br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big>API&nbsp;
+Approval
+and Integration Into Test Harness Complete </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><big><a
+ class="header">Selenium-01 </a> </big></td>
+                  <big> </big><td style="vertical-align: top;"><big>Tests
+the "X" Login
+Component
+jsp in this manner:<br>
+                  <br>
+Testing for xyz attributes completed with this test. </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><big><a
+ class="header">Selenium-02 </a> </big></td>
+                  <big> </big><td style="vertical-align: top;"><big>Tests
+the "X" Login
+Component in this manner:<br>
+                  <br>
+Testing for xyz attributes completed with this test. </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td style="vertical-align: top;"><big>Selenium-03</big></td>
+                  <big> </big><td style="vertical-align: top;"><big>Tests
+the "X" Login
+Component&nbsp; in this manner:<br>
+                  <br>
+Testing for xyz attributes completed with this test.</big></td>
+                  <big> </big></tr>
+                <big> </big>
+              </tbody><big> </big>
+            </table>
+            <big> <br>
+            </big>
+            <h3><big><a name="3.5"></a><span
+ style="color: rgb(255, 102, 0);">3.3
+XHTML Tests</span></big></h3>
+            <big> <br>
+            </big>
+            <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+              <big> </big><tbody>
+                <big> </big><tr>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big><a class="header">Test
+Case ID</a><br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big><a class="header">Test
+Case Synopsis</a><br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big><a class="header">Solaris<br>
+Firefox</a><br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big><a class="header">Solaris<br>
+NS7</a><br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big><a class="header">Linux<br>
+Firefox</a><br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big><a class="header">Linux<br>
+NS7</a><br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big><a class="header">Windows<br>
+IE</a><br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big><a class="header">Windows<br>
+Firefox</a><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big>MAC
+Safari <br>
+Client-only <br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big><a class="header">Comments</a><br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><big>XHTML-01<br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  <big><a class="header"><font size="3"><big><big>Launch
+a browser and go
+to&nbsp;<b> </b></big></big></font></a><a class="moz-txt-link-freetext"
+ href="http://validator.w3.org/">http://validator.w3.org/</a><small>&nbsp;&nbsp;</small><a
+ class="header"> </a> </big></big>
+                  <ul>
+                    <big><big> </big></big><li><big><big> <font
+ size="3"><big><big>Click the tab "Validate by
+File Upload"</big></big></font> </big></big></li>
+                    <big><big> </big></big>
+                  </ul>
+                  <big> </big>
+                  <ul>
+                    <big><big> </big></big><li><big><big> </big></big>
+                      <p><big><big><font size="3"><big><big>In
+the
+File field,
+or click browse, locate the Login Component HTML/JSP&nbsp; page<br>
+                      </big></big></font></big></big></p>
+                      <big><big> </big></big></li>
+                    <big><big> </big></big>
+                  </ul>
+                  <big> </big>
+                  <ul>
+                    <big><big> </big></big><li><big><big> </big></big>
+                      <p><big><big><font size="3"><big><big>Click
+"check." </big></big></font> </big></big></p>
+                      <big><big> </big></big></li>
+                    <big><big> </big></big>
+                  </ul>
+                  <big> </big>
+                  <ul>
+                    <big><big> </big></big>
+                  </ul>
+                  <big> </big>
+                  <ul>
+                    <big><big> </big></big><li><big><big> </big></big>
+                      <p
+ style="margin-bottom: 0cm; font-style: normal; text-decoration: none;"><big><big>
+                      <font color="#000000"><font size="3"><big><big>Manually
+review the list for any compliance issues. File bugs where appropriate.</big></big></font></font></big></big></p>
+                      <big><big> </big></big></li>
+                    <big><big> </big></big>
+                  </ul>
+                  <big> </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big>
+              </tbody><big> </big>
+            </table>
+            <big> <a class="header"><br>
+            </a> </big>
+            <h3><big><a name="3.6"></a><span
+ style="color: rgb(255, 102, 0);">3.4
+API Tests</span></big></h3>
+            <big> </big>
+            <div style="margin-left: 40px;"><big>API level unit tests
+will
+be written by QA, calling each method written
+for the component.&nbsp; These tests include both positive
+and negative value arguments.&nbsp; The goal is to look for consistent
+and proper behavior, making sure range limits are met, and correct
+error reporting is handed by the class. The API tests will be
+incorporated into the internal test harness and run nightly. &nbsp;
+Nightly test results will be posted and available for review.&nbsp;
+JCOV, the java
+code coverage tool, will be used to ensure that we meet the code
+coverage goales for milestones and GA in particular.</big></div>
+            <big> <br>
+            </big>
+            <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+              <big> </big><tbody>
+                <big> </big><tr>
+                  <big> </big><td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"
+ width="89"><big> </big>
+                  <div align="center"><big>Date </big></div>
+                  <big> </big></td>
+                  <big> </big><td style="vertical-align: top;"
+ width="395"><big> </big>
+                  <div align="center"><big>API Approval and Integration
+Into
+Test Harness Complete </big></div>
+                  <big> </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big>
+              </tbody><big> </big>
+            </table>
+            <big> <br>
+            <br>
+            <br>
+            </big>
+            <h3><big> <a name="3.7"></a><span
+ style="color: rgb(255, 102, 0);">3.5 Design-Time Functional Tests</span></big></h3>
+            <br>
+            <br>
+            <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+              <big> </big><tbody>
+                <big> </big><tr>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big> <a
+ class="header">Test Case ID </a> <br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big> <a
+ class="header">Test Case Synopsis </a> <br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big> <a
+ class="header">Solaris <br>
+Firefox </a> <br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big> <a
+ class="header">Solaris <br>
+Netscape </a> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big>Solaris
+                  <br>
+Mozilla <br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big> <a
+ class="header">Linux <br>
+Firefox </a> <br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big> <a
+ class="header">Linux <br>
+Netscape </a> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big>Linux
+                  <br>
+Mozilla <br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big> <a
+ class="header">Windows <br>
+IE </a> <br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big> <a
+ class="header">Windows <br>
+Firefox </a> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big>MAC
+Safari <br>
+Client-only <br>
+                  </big></td>
+                  <big> </big><td
+ style="vertical-align: top; text-align: center;"><big> <a
+ class="header">Comments </a> <br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><big>DT-01
+                  <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big>The
+Login component
+appears on the palette.&nbsp; <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><big>
+                  <a class="header">DT-02 <br>
+                  </a> </big></td>
+                  <big> </big><td style="vertical-align: top;"><big>All
+properties for
+the Login are visible and editable once the Login is dropped on the
+page. <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><big>
+                  <a class="header">DT-03 <br>
+                  </a> </big></td>
+                  <big> </big><td style="vertical-align: top;"><big>Dynamic
+help will
+display topics associated with only the Login
+component. <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td style="vertical-align: top;"><big>DT-04
+                  <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big>The
+Login Component
+can be dragged and dropped onto the
+designer.&nbsp; RETEST with click-click, double-click and Right-click
+-&gt;Add to page <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td style="vertical-align: top;"><big>DT-05
+                  <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big>Changes
+made to
+properties should be visible in the designer and at
+runtime.&nbsp; <br>
+                  <br>
+If you run into a property that could use another dialog to guide
+the user through entering values, an RFE should be logged.&nbsp; <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td style="vertical-align: top;"><big>DT-06
+                  <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big>Refactoring
+Tests: <br>
+                  <br>
+All components should support: <br>
+                  <br>
+Cut and Paste <br>
+Copy Paste <br>
+Delete <br>
+Rename <br>
+Move <br>
+Resize <br>
+Aligning <br>
+Save <br>
+                  <br>
+On the same page, a different page, or a page in a sub-folder. <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td style="vertical-align: top;"><big>DT-07<br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big>Login
+Tooltips show
+upcorrectly in the palette. <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big> <br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big>
+              </tbody><big> </big>
+            </table>
+            <big> <a class="header"> </a> </big>
+            <h2><br>
+            </h2>
+            <h2><big><a name="4.0"></a><span
+ style="color: rgb(255, 102, 0);">4.0
+Automation Implementation</span><br>
+            </big></h2>
+            <big> </big>
+            <div style="margin-left: 40px;"><big>These are the QA
+milestones
+for automated tests. The dates indicate when the
+corresponding milestones have been met.</big></div>
+            <big> <br>
+            </big>
+            <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+              <big> </big><tbody>
+                <big> </big><tr>
+                  <big> </big><td style="vertical-align: top;"
+ width="98"><big> </big>
+                  <div align="center"><big><a class="header">Category</a><br>
+                  </big></div>
+                  <big> </big></td>
+                  <big> </big><td style="vertical-align: top;"
+ width="108"><big> </big>
+                  <div align="center"><big><a class="header">Completion
+Date</a><br>
+                  </big></div>
+                  <big> </big></td>
+                  <big> </big><td style="vertical-align: top;"
+ width="99"><big> </big>
+                  <div align="center"><big><a class="header">Date
+Accepted</a><br>
+                  </big></div>
+                  <big> </big></td>
+                  <big> </big><td style="vertical-align: top;"
+ width="133"><big> </big>
+                  <div align="center"><big><a class="header">Comments</a><br>
+                  </big></div>
+                  <big> </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td style="vertical-align: top;"><big><a
+ class="header">API
+Tests</a> </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td style="vertical-align: top;"><big>JavaScriptLint
+                  <br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td style="vertical-align: top;"><big>Selenium<br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big>
+              </tbody><big> </big>
+            </table>
+            <big> <br>
+            <br>
+            </big>
+            <h2><big><a name="5.0"></a><span
+ style="color: rgb(255, 102, 0);">5.0
+Approval </span><br>
+            </big></h2>
+            <big> </big>
+            <div style="margin-left: 40px;"><big>The following
+sign-offs are
+required for document acceptance .</big></div>
+            <big> <br>
+            </big>
+            <table
+ style="width: 50%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+              <big> </big><tbody>
+                <big> </big><tr>
+                  <big> </big><td style="vertical-align: top;"
+ width="153"><big><a class="header">Approver
+Role</a><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"
+ width="126"><big><a class="header">Approver
+Name</a><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"
+ width="81"><big><a class="header">Date</a><br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td style="vertical-align: top;"><big><a
+ class="header">Quality
+Engineer (peer)</a><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td style="vertical-align: top;"><big><a
+ class="header">Component
+Engineer</a> </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big><tr>
+                  <big> </big><td style="vertical-align: top;"><big><a
+ class="header">Manager</a> </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big><td style="vertical-align: top;"><big><br>
+                  </big></td>
+                  <big> </big></tr>
+                <big> </big>
+              </tbody><big> </big>
+            </table>
+            <big> <br>
+            <br>
+            </big></td>
+            <big> </big></tr>
+          <big> </big>
+        </tbody><big> </big>
+      </table>
+      <big> </big></div>
+      <big> </big></td>
+      <big> </big></tr>
+    <big> </big>
+  </tbody>
+</table>
+</body>
+</html>

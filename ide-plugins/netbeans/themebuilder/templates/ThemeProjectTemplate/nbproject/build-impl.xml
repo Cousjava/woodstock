@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+*** GENERATED FROM project.xml - DO NOT EDIT  ***
+***         EDIT ../build.xml INSTEAD         ***
+
+For the purpose of easier reading the script
+is divided into following sections:
+
+  - initialization
+  - jar
+  - cleanup
+
+-->
+<project name="theme-impl" default="jar" basedir="..">
+    
+    <!-- Initialization target -->
+    
+    <target name="init" description="Initialize the build script">
+        <property file="nbproject/private/private.properties"/>
+        <property file="${user.properties.file}"/>
+        <property file="nbproject/project.properties"/>
+    </target>
+    
+    <!-- Build targets -->
+    
+    <target name="jar" depends="init,build-theme,build-js-theme" description="Build JAR."/>
+    
+    <target name="clone-theme" description="Cloning the Theme">
+        <ant antfile="build.xml"  target="cloneTheme" dir="template" inheritAll="true" >
+            <property file="${basedir}/nbproject/project.properties"/>
+        </ant>
+    </target>
+    
+    <target name="build-theme" description="Building the Theme">
+                 
+        <!-- call build.xml in the template directory to build the theme -->
+        <ant antfile="build.xml"  target="buildTheme" dir="template" inheritAll="true">
+            <property file="${basedir}/nbproject/project.properties"/>
+            <property name="webui.jar" value="${libs.woodstock-components.classpath}"/>
+        </ant>
+    </target>
+    
+    <target name="build-js-theme" description="Building the Javascript Theme">
+                 
+        <!-- call build.xml in the template directory to build the javascript theme -->
+        <ant antfile="build.xml" target="buildJsTheme" dir="template" inheritAll="true">
+            <property file="${basedir}/nbproject/project.properties"/>
+            <property name="webui.jar" value="${libs.woodstock-components.classpath}"/>
+            <property name="json-jar" value="${libs.woodstock-components.classpath}"/>
+        </ant>
+    </target>
+    
+    <target name="build-l10n" description="Building the L10N jars">
+                 
+        <!-- call build.xml in the template directory to build the L10N jars -->
+        <ant antfile="build.xml" target="buildL10nTheme" dir="template" inheritAll="true">
+            <property file="${basedir}/nbproject/project.properties"/>
+            <property name="webui.jar" value="${libs.woodstock-components.classpath}"/>
+            <property name="json-jar" value="${libs.woodstock-components.classpath}"/>
+        </ant>
+        <ant antfile="build.xml" target="buildL10nJars" dir="template" inheritAll="true">
+            <property file="${basedir}/nbproject/project.properties"/>
+            <property name="webui.jar" value="${libs.woodstock-components.classpath}"/>
+            <property name="json-jar" value="${libs.woodstock-components.classpath}"/>
+        </ant>
+        <ant antfile="build.xml" target="buildL10nJsTheme" dir="template" inheritAll="true">
+            <property file="${basedir}/nbproject/project.properties"/>
+            <property name="webui.jar" value="${libs.woodstock-components.classpath}"/>
+            <property name="json-jar" value="${libs.woodstock-components.classpath}"/>
+        </ant>
+    </target>
+    
+    <target name="build-jsdoc" description="Building the Javascript Docs">
+                 
+        <!-- call build.xml in the template directory to build the javascript theme -->
+        <ant antfile="build.xml" target="jsdoc" dir="template" inheritAll="true">
+            <property file="${basedir}/nbproject/project.properties"/>
+            <property name="webui.jar" value="${libs.woodstock-components.classpath}"/>
+            <property name="json-jar" value="${libs.woodstock-components.classpath}"/>
+        </ant>
+    </target>
+    
+    <!-- Clean target -->
+    
+    <target name="clean" description="Clean build products.">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+</project>
+   

@@ -1,0 +1,3340 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <!--
+      The contents of this file are subject to the terms
+      of the Common Development and Distribution License
+      (the License).  You may not use this file except in
+      compliance with the License.
+      
+      You can obtain a copy of the license at
+      https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      See the License for the specific language governing
+      permissions and limitations under the License.
+      
+      When distributing Covered Code, include this CDDL
+      Header Notice in each file and include the License file
+      at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      If applicable, add the following below the CDDL Header,
+      with the fields enclosed by brackets [] replaced by
+      you own identifying information:
+      "Portions Copyrighted [year] [name of copyright owner]"
+      
+      Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+    -->
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+  <title>Project Woodstock - Common Task Page FS</title>
+  
+  <style type="text/css">
+	<!--
+		@page { size: 8.5in 11in; margin: 0.79in }
+		TD P { margin-bottom: 0.08in }
+		H1 { margin-bottom: 0.08in; color: #666699 }
+		P { margin-bottom: 0.08in }
+		H2 { margin-bottom: 0.08in; color: #666699 }
+		H2.western { font-family: "Albany", sans-serif; font-size: 14pt; font-style: italic }
+		H2.cjk { font-family: "HG Mincho Light J"; font-size: 14pt; font-style: italic }
+		H2.ctl { font-family: "Arial Unicode MS"; font-size: 14pt; font-style: italic }
+		H3 { margin-bottom: 0.08in; color: #666699 }
+		H3.western { font-family: "Albany", sans-serif }
+		H3.cjk { font-family: "HG Mincho Light J" }
+		H3.ctl { font-family: "Arial Unicode MS" }
+		TH P { margin-bottom: 0.08in; font-style: italic }
+	-->
+	@import url(../../browser-uispec.css);
+	.style2 {font-size: 18pt}	
+	</style></head><body dir="ltr" lang="en-US">
+
+<p> </p>
+<div class="MstDiv">
+  <table class="MstTblBot" title="" border="0" cellpadding="0"
+ cellspacing="0" width="100%">
+    <tbody>
+      <tr>
+        <td class="MstTdTtl"><div class="MstDivTtl">
+            <div class="Mst1TtlTxt">Project Woodstock</div>
+          </div>
+            <div class="Mst1SecDiv"> <span class="Mst1SecTxt style2">Component Functional Spec - Common Task Page <br>
+          </span></div></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<p align="left" style="margin-bottom: 0in">&nbsp;</p>
+<h2 class="western" align="left"><b>1.0 Component Description</b></h2>
+<p align="left">The Common Tasks Section is used to enhance usability
+of a product. Applications may have user interfaces that present
+large list of systems, network devices, storage arrays, and data
+files with complicated relationships. Users must first understand the
+relationships among objects to perform a certain task. They must also
+know the sequence of operations required by the application to
+accomplish their work task. The Common Tasks Section aims at
+simplyfing the task. The task page breaks down a set of features into
+a set of common tasks which the user can choose from. Objects to be
+affected are selected as part of those tasks, and sequence is either
+automatic within the task or directly shown on the Common Tasks
+Section.</p>
+<p align="left">The Common Tasks Section delivered by woodstock will
+act
+as a place from where users can invoke the tasks they wish to
+perform. <br>
+</p>
+<p align="left">A commonTasksSection is made up of three jsp custom
+tags.<br>
+</p>
+&nbsp;&nbsp;&nbsp; a) &lt;webuijsf:commonTasksSection&gt;<br>
+&nbsp;&nbsp;&nbsp; b) &lt;webuijsf:commonTasksGroup&gt;<br>
+&nbsp;&nbsp;&nbsp; c) &lt;webuijsf:commonTask&gt;<br>
+<br>
+The defenition of each of the custom tag, its usage and its puproses
+are explained in the rest of the document.<br>
+<br>
+<table border="2" bordercolor="#000000" cellpadding="4" cellspacing="0" width="665">
+  <col width="151"> <col width="187"> <col width="190"> <col width="101"> <thead> <tr valign="top">
+    <th width="151">
+    <p align="left">Revision</p>
+    </th>
+    <th width="187">
+    <p align="left">Date</p>
+    </th>
+    <td width="190">
+    <p align="left"><b>Synopsis</b></p>
+    </td>
+    <td width="101">
+    <p align="left"><b>Author</b></p>
+    </td>
+  </tr>
+  </thead> <tbody>
+    <tr>
+      <td style="vertical-align: top;">1.0<br>
+      </td>
+      <td style="vertical-align: top;">23/02/2007<br>
+      </td>
+      <td style="vertical-align: top;">Functional specification
+document.<br>
+      </td>
+      <td style="vertical-align: top;">Venkatesh Babu<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p align="left"><br>
+<br>
+</p>
+<h3 class="western" align="left">1.2 Definition of Terms (optional)</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.3.1&nbsp; JSF -
+JavaServer Faces. See <a href="http://java.sun.com/javaee/javaserverfaces/" target="_blank">http://java.sun.com/javaee/javaserverfaces/</a>
+for more details on JSF.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.3.2&nbsp; CommonTask
+- A visual object which when clicked, takes the user to a place from
+where he can manage/initiate a task. <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 1.3.3&nbsp;
+CommonTasksGroup - Acts as a visual container for commonTasks that are
+grouped together by some common criteria.<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 1.3.4 CommonTasksSection -
+A visual container where CommonTaskGroup objects can be
+positioned appropriately.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.3.4&nbsp; infoPanel
+- A
+toggleable container which shows more information about a particular
+common task.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.3.5&nbsp;
+Preferences page - A page where user preferences can be set. The user
+can specify here which common tasks he would like to see in the common
+tasks section.<br>
+<h2 class="western" align="left">2.0 Requirements, goals, and
+assumptions</h2>
+<h3 class="western" align="left">2.1 Requirements (required)</h3>
+<p align="left">This section defines the requirements (both functional
+and non-functional) for the Common Tasks Section. <br>
+</p>
+<h3 class="western" align="left">2.1.1 Visual representation<br>
+</h3>
+<p><br>
+</p>
+<p align="left"><img style="width: 598px; height: 619px;" alt="common task page image" src="ctp-functional-spec_files/inlineHelp-1a.jpg"><br>
+</p>
+<h3 class="western" align="left">2.1.2 Functional requirements
+(required)</h3>
+<p align="left">The functionalities exhibited by a common tasks section
+are :<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2.1.2.1 Display a title for
+the Common Tasks Section .<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 2.1.2.2 Display an inline help
+for the Common Tasks Section.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2.1.2.3 Display grouped
+common tasks inside the common tasks section.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2.1.2.4 Display an info
+panel for each common task present in the
+common tasks section. This would give information about a particular
+task
+with which it is associated with.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2.1.2.5 An icon/image can be
+optionally displayed for a commonTask element. This should be
+displayed along with
+the text for each common task.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2.1.2.6 The common tasks
+section must be able to arrange the layout of the common tasks group
+evenly. This will mean that the number of common tasks in each column
+of the common tasks section are same.<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 2.1.2.7 Clicking on a particular
+commonTask takes a user to that particular commonTask.<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 2.1.2.8 Opening another infoPanel
+on the commonTasksSection closes any existing open infoPanels. An open
+infoPanel can also be closed by clicking on the close link on the top
+right portion of the infoPanel.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2.1.2.9 The number of
+columns for a commonTasksSection is customizable.<br>
+</p>
+<p align="left"></p>
+<p align="left"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+2.1.2.6 Relationship with other components :-</b></p>
+<ol start="5">
+  <p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+2.1.2.6.1 The common tasks which are marked as selected in the
+preferences page should only be shown in the common tasks page.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+2.1.2.6.2&nbsp; Explore the possibility of making the infoPanel as a
+separate component. If this is possible, use this for rendering the
+drop down info panel. </p>
+</ol>
+<h3 class="western" align="left">2.1.3 Performance requirements
+(optional)</h3>
+<p align="left">None</p>
+<h3 class="western" align="left">2.1.4 Browser, platform requirements<br>
+</h3>
+<p align="left"><br>
+</p>
+<table border="1" bordercolor="#000000" cellpadding="4" cellspacing="0" width="100%">
+  <col width="128*"> <col width="128*"> <thead> <tr valign="top">
+    <th width="50%">
+    <p align="left">Client OS</p>
+    </th>
+    <td width="50%">
+    <p align="left"><b>Supported Browsers</b></p>
+    </td>
+  </tr>
+  </thead> <tbody>
+    <tr valign="top">
+      <td width="50%">
+      <p align="left"><font face="Albany">Windows 98, Windows XP,
+Windows 2000, Windows Server 2003</font></p>
+      </td>
+      <td width="50%">
+      <p align="left">Internet Explorer: 5.5 and above<br>
+Mozilla 1.4 and above<br>
+Netscape 6.2 and above<br>
+FireFox 1.0 and above</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="50%">
+      <p align="left"><font face="Albany">Solaris 8, 9, 10<br>
+Sparc and x86</font></p>
+      </td>
+      <td width="50%">
+      <p align="left">Mozilla 1.4 and above<br>
+Netscape 6.2 and above<br>
+FireFox 1.0 and above</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="50%">
+      <p align="left"><font face="Albany">MacOS X</font></p>
+      </td>
+      <td width="50%">
+      <p align="left">Mozilla 1.4 and above<br>
+FireFox 1.0 and above</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="50%">
+      <p align="left"><font face="Albany">RedHat AS 3.0, 4.0</font></p>
+      </td>
+      <td width="50%">
+      <p align="left">Mozilla 1.4 and above</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="50%">
+      <p align="left"><font face="Albany">SuSE 8.0 and above</font></p>
+      </td>
+      <td width="50%">
+      <p align="left">Mozilla 1.4 and above</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p style="margin-bottom: 0in;" align="left"><br>
+</p>
+<h3 class="western" align="left">2.1.5 Special requirements (optional)</h3>
+<h3 class="western" align="left">2.2 Requirements Not Met (required, if
+you are not meeting a requirement)</h3>
+<p align="left">None</p>
+<h3 class="western" align="left">2.3 Assumptions (optional)</h3>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2.3.1 Common
+tasks shall be grouped together in some
+fashion so that the user can intutively understand.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2.3.2 Common task groups
+shall not
+nest. Only commontasks can
+be added as children to a tasks group<br>
+</p>
+<h3 class="western" align="left">2.4 Goals (optional)</h3>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 2.4.1 The developer must be able
+to specify his own custom title and inline help for the common tasks
+section.<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 2.4.2 The developer shall be able
+to customize the commonTask component by specifying his own component
+instead of a hyperlink that redirects the user to a particular
+commonTask.<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; <br>
+<h3 class="western" align="left">2.5 Non-goals (optional)</h3>
+<p align="left">None</p>
+<h2 class="western" align="left">3.0 Component Usage</h2>
+<p align="left">The custom tag &lt;webuijsf:commonTasksSection&gt;
+renders a common task section. A common tasks section would consist
+of a number of grouped common tasks. Selecting on a particular common
+task would
+either open a pop up window or take him to another page depending on
+how the task is configured. Each taskgroup will be denoted
+by a &lt;webuijsf:commonTasksGroup&gt; custom tag. Each task that is
+present in a commonTaskGroup will be specified with the help of a
+&lt;webuijsf:commonTask&gt; custom tag.<br>
+</p>
+<p align="left">To get&nbsp; background for the common tasks page as
+shown in the visual representation section(2.1.1) the
+&lt;webuijsf:body&gt; tag should have<br>
+CTS_BACKGROUND style class identifier as one of its style class values.<br>
+</p>
+<p align="left">This can be specified as:<br>
+<span style="font-style: italic;">&lt;webuijsf:body
+styleClass="#{themeStyles.CTS_BACKGROUND}"&gt;</span><br>
+</p>
+<p align="left"><b>3.1 Displaying an help for the common tasks section.<br>
+</b></p>
+<p align="left">An "help"&nbsp; facet should be used for defining a
+custom inline
+help for the common tasks section. <br>
+Alternatively, the helpText attribute of the
+&lt;webuijsf:commonTasksSection&gt; custom tag can also be used for
+replacing the inline help string that comes up by default.<br>
+If this facet or the helpText attribute is not used, a
+default inline help will be shown which instructs the user on how to
+use the common tasks page.<br>
+</p>
+<span style="font-style: italic;">&lt;webuijsf:commonTasksSection
+id=”taskPage”
+title= "#{tasks.tskTtl}" &gt;</span><br style="font-style: italic;">
+<span style="font-weight: bold; font-style: italic;">&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;f:facet
+name=”help”&gt;</span><br style="font-weight: bold; font-style: italic;">
+<span style="font-weight: bold; font-style: italic;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:helpInline id ="pageHelp" text="#task.hlpTxt"/&gt;</span><br style="font-weight: bold; font-style: italic;">
+<span style="font-weight: bold; font-style: italic;">&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/f:facet&gt;</span><br style="font-style: italic;">
+<span style="font-style: italic;">&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:commonTaskGroup
+id="taskGroup1"&nbsp;
+title="#{tasks.grpTtl}"&gt;</span><br style="font-style: italic;">
+<span style="font-style: italic;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:commonTask id="task1"
+text="#{tasks.tskTxt1}" actionExpression=”task1” /&gt;</span><br style="font-style: italic;">
+<span style="font-style: italic;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:commonTask id="task2"
+text="#{tasks.tskTxt2}" actionExpression=”task2” /&gt;</span><br style="font-style: italic;">
+<span style="font-style: italic;">&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:commonTaskGroup&gt;</span><br style="font-style: italic;">
+<span style="font-style: italic;">&lt;/webuijsf:commonTasksSection&gt;</span><br>
+<br>
+<br>
+<p align="left"><font color="#000000"><b>
+3.2 Representing common tasks with
+the commonTask custom tag</b></font></p>
+<p align="left">Each common task on the common tasks
+section is
+represented with a &lt;webuijsf:commonTask&gt; custom jsp tag. The
+default representation of a common task can be customized using the
+taskAction facet (see
+3.1.1). If the infoPanel related attributes are specified, then an "i"
+icon is shown which when clicked opens an infoPanel that contains
+details about the commonTask. Customizing the infoPanel is dealt with
+in section 3.3</p>
+<p align="left">Here is an default case of using the commonTask custom
+tag.</p>
+<p align="left"><span style="font-style: italic;">&lt;webuijsf:commonTasksSection
+id="ctp1"
+title="#{tasks.tskTtl}"&gt;</span><br style="font-style: italic;">
+<span style="font-style: italic;">&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:commonTaskGroup
+id="taskGroup1"&nbsp;
+title="#{tasks.grpTtl}"&gt;</span><br style="font-style: italic;">
+<span style="font-style: italic;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp; &nbsp;&nbsp;
+&lt;webuijsf:commonTask id="task1"
+text="#{tasks.tskTxt1}" actionExpression=”foo” /&gt;</span><br style="font-style: italic;">
+<span style="font-style: italic;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:commonTask id="task2"
+text="#{tasks.tskTxt2}" actionExpression=”bar” /&gt;</span><br style="font-style: italic;">
+<span style="font-style: italic;">&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:commonTaskGroup&gt;</span><br style="font-style: italic;">
+<span style="font-style: italic;">&lt;/webuijsf:commonTasksSection&gt;</span><br>
+</p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">3.2.1 Using the "taskAction" facet to
+specify a commonTask.</span><br>
+</p>
+<div style="margin-left: 80px;">&nbsp;
+When a commonTask object is created using its attributes, an anchor
+html element is used to represent the "link" part of the commonTask
+object. When the user clicks on this, he will be redirected to the
+appropriate task.&nbsp; This action element can be overridden by
+the developer using the taskAction facet. <br>
+</div>
+<p align="left"></p>
+<p align="left"><span style="font-style: italic;">&lt;webuijsf:commonTaskGroup
+id="taskGroup1"&nbsp; title="#{tasks.grpTtl}"&gt;</span><br style="font-style: italic;">
+<span style="font-style: italic;">&nbsp;&nbsp;&nbsp; &nbsp;
+&nbsp;&nbsp; &lt;webuijsf:commonTask
+id="task1" &gt;</span><br style="font-style: italic;">
+<span style="font-style: italic;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="font-weight: bold; font-style: italic;">&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;f:facet
+name=”taskAction”&gt;</span><br style="font-weight: bold; font-style: italic;">
+<span style="font-weight: bold; font-style: italic;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&lt;webuijsf:hyperlink id="taskLink" text="#{tasks.facetLink}"
+actionExpression="linkAction"/&gt;</span><br style="font-weight: bold; font-style: italic;">
+<span style="font-weight: bold; font-style: italic;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/f:facet&gt;</span><br style="font-style: italic;">
+<span style="font-style: italic;">&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:commonTask id="task2”
+text="#{tasks.tskTxt2}" onClick= “popup()”/&gt;</span><br style="font-style: italic;">
+<span style="font-style: italic;">&lt;/webuijsf:commonTaskGroup&gt;</span><br>
+</p>
+<p align="left"><b>3.3 Creating the infoPanel for the commonTask.</b></p>
+<p style="" align="left">Each commonTask object can
+have an info panel specified to it which gives information related to
+the task that the commonTask object represents. The text that has to
+go into this panel can be given as a part of the commonTask
+attributes “infoTitle” and “infoText”or as facets as described in the
+next section. This info panel
+can also have an hyperlink at the bottom. This link can be specified
+with the help of “infoLinkUrl” and “infoLinkText” attributes.
+This link directs the user to a source of information which has
+much more detailed information about the related task. <br>
+</p>
+<p style="text-decoration: none;" align="left"><i><b>Example:</b></i></p>
+<p style="font-style: italic;" align="left">&lt;webuijsf:commonTaskGroup
+id="taskGroup1"&nbsp; title="#{tasks.grpTtl}"&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;webuijsf:commonTask id="task1"
+text="#{tasks.tskTxt1}"actionExpression=”foo” &gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;webuijsf:commonTask id="task2”
+text="#{tasks.tskTxt2}" onClick= “popup()”&nbsp;
+<span style="font-weight: bold;">infoLinkUrl="http://www.google.com"
+infoLinkText=#{task.lnkTxt2}" infoText=#{task.tskTxt3}"
+infoTitle=”#{task.infTtl}” </span>/&gt;<br>
+&lt;/webuijsf:commonTaskGroup&gt;</p>
+<p style="margin-left: 40px;" align="left"><font size="3"><b>3.3.1
+Specifying Info Panel content
+through facets.</b></font></p>
+<p style="margin-left: 40px;" align="left"><b>i) infoLink Facet</b></p>
+<p style="margin-left: 40px;" align="left">The link that is specified
+at the bottom of the info
+panel can be customized with the help of the infoLink facet. This
+facet if specified will take precedence over the infoLinkUrl and the
+infoLinkText attributes provided for the
+&lt;webuijsf:commonTask&gt;&nbsp; custom jsp
+tag.</p>
+<p style="margin-left: 40px;" align="left"><i><b>Example:</b></i></p>
+<p style="margin-left: 40px; font-style: italic;" align="left">&lt;webuijsf:commonTaskGroup
+id="taskGroup1"&nbsp;&nbsp;
+groupTitle="#{tasks.grpTtl}"&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;webuijsf:task id="task1"
+text="#{tasks.tskTxt1}" actionExpression=”foo”
+infoText="#{task.infTxt}" infoTitle="#{task.infTtl}"&gt;<br>
+<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;f:facet name = “infoLink”&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:hyperlink id=”help”
+text=</b>"#{task.lnkTxt2}" <b>actionExpression=”infoLink”/&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/f:facet&gt;</b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/webuijsf:task&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;webuijsf:task id="task2"
+text="#{tasks.tskTxt2}" actionExpression=”task2” /&gt;<br>
+&lt;/webuijsf:commonTaskGroup&gt;</p>
+<div style="margin-left: 40px;"><br>
+</div>
+<p style="margin-left: 40px;" align="left"><b>ii. infoPanel Facet</b></p>
+<p style="margin-left: 40px;" align="left">Use the infoPanel facet to
+define the content and layout of the info panel. If the “infoPanel”
+facet is defined, any commonTask tag attributes related to the info
+panel that are specified will be ignored.</p>
+<p style="margin-left: 40px;" align="left"><i><b>Example:</b></i></p>
+<p style="margin-left: 40px;" align="left"><span style="font-style: italic;">&lt;webuijsf:commonTasksSection
+id="ctp1"
+title="#{tasks.tskTtl}"&gt;</span><br style="font-style: italic;">
+<span style="font-style: italic;">&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:commonTasksGroup id="taskGroup1"&nbsp;
+title="#{tasks.grpTtl}"&gt;</span><br style="font-style: italic;">
+<span style="font-style: italic;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:commonTask
+id="task1"
+text="#{tasks.tskTxt1}" actionExpression=”foo” /&gt;</span><br style="font-style: italic;">
+<span style="font-style: italic;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:commonTask
+id="task2"
+text="#{tasks.tskTxt2}" onClick="popup()"&nbsp; &gt;</span><br style="font-style: italic;">
+<b style="font-style: italic;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;f:facet name="infoPanel"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:panelGroup
+id=”myPanelGroup”&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:staticText
+id=”text1” text=</b><span style="font-style: italic;">#{task.pnlTxt}"</span><b style="font-style: italic;">/&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;webuijsf:hyperlink
+id="link" text=</b><span style="font-style: italic;">#{task.tlnkTxt2}" </span><b style="font-style: italic;">actionExpression=”facetLink”/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:panelGroup&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/f:facet&gt;</b><br style="font-style: italic;">
+<span style="font-style: italic;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:commonTask&gt;</span><br style="font-style: italic;">
+<span style="font-style: italic;">&nbsp;&nbsp;&nbsp;
+&lt;/webuijsf:commonTasksGroup&gt;</span><br style="font-style: italic;">
+<span style="font-style: italic;">&lt;/webuijsf:commonTasksSection&gt;</span><br>
+</p>
+<h2 class="western" align="left">4.0 Component Interfaces</h2>
+<h3 class="western" align="left">4.1 Exported interfaces table
+(Required, Prelim)</h3>
+<p align="left"><br>
+</p>
+<table border="2" bordercolor="#000000" cellpadding="4" cellspacing="0" width="100%">
+  <col width="128*"> <col width="64*"> <col width="64*"> <thead> <tr valign="top">
+    <th width="50%">
+    <p align="left">Interface Name</p>
+    </th>
+    <th width="25%">
+    <p align="left">Classification</p>
+    </th>
+    <th width="25%">
+    <p align="left">Comments</p>
+    </th>
+  </tr>
+  </thead> <tbody>
+    <tr valign="top">
+      <td width="50%">
+      <p align="left">CommonTasksSection.js</p>
+      </td>
+      <td width="25%">
+      <p align="left">stable</p>
+      </td>
+      <td width="25%">
+      <p align="left">Javascript file for this component</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="50%">
+      <p align="left">CommonTasksSection.java</p>
+      </td>
+      <td width="25%">
+      <p align="left">stable</p>
+      </td>
+      <td width="25%">
+      <p align="left">JSF component class for the CommonTasksSection
+tag.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="50%">
+      <p align="left">CommonTasksSectionRenderer.java</p>
+      </td>
+      <td width="25%">
+      <p align="left"><font size="3">stable</font></p>
+      </td>
+      <td width="25%">
+      <p align="left"><font size="3">Renderer class for the
+CommonTasksSection component.</font></p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="50%">
+      <p align="left">CommonTasksGroup.java</p>
+      </td>
+      <td width="25%">
+      <p align="left"><font size="3">stable</font></p>
+      </td>
+      <td width="25%">
+      <p align="left"><font size="3">JSF component class for the
+CommonTasksGroup.</font></p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="50%">
+      <p align="left">CommonTasksGroupRenderer.java</p>
+      </td>
+      <td width="25%">
+      <p align="left"><font size="3"><br>
+stable<br>
+      </font></p>
+      </td>
+      <td width="25%">
+      <p align="left"><font size="3">Renderer class for the
+CommonTasksGroup component.</font></p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="50%">
+      <p align="left">CommonTask.java</p>
+      </td>
+      <td width="25%">
+      <p align="left"><font size="3">stable</font></p>
+      </td>
+      <td width="25%">
+      <p align="left"><font size="3">JSF component which represents a
+commonTask.<br>
+      </font></p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="50%">
+      <p align="left">CommonTaskRenderer.java</p>
+      </td>
+      <td width="25%">
+      <p align="left"><font size="3">stable</font></p>
+      </td>
+      <td width="25%">
+      <p align="left"><font size="3">Renders a CommonTask on to a
+CommonTasksSection.</font></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p align="left"><br>
+</p>
+<h3 class="western" align="left">4.2 Imported interfaces (Required,
+Final)</h3>
+<table border="1" bordercolor="#000000" cellpadding="4" cellspacing="0" width="100%">
+  <col width="64*"> <col width="64*"> <col width="64*"> <col width="64*"> <thead> <tr valign="top">
+    <th width="25%">
+    <p align="left">Interface Name</p>
+    </th>
+    <th width="25%">
+    <p align="left">Classification</p>
+    </th>
+    <th width="25%">
+    <p align="left">Reference</p>
+    </th>
+    <th width="25%">
+    <p align="left">Comments</p>
+    </th>
+  </tr>
+  </thead> <tbody>
+    <tr valign="top">
+      <td width="25%">
+      <p align="left">jsf-api.jar</p>
+      </td>
+      <td width="25%">
+      <p align="left">Standard</p>
+      </td>
+      <td width="25%">
+      <p align="left">JSR 252</p>
+      </td>
+      <td width="25%">
+      <p align="left">JSF components API library, version 1.2</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p align="left"><br>
+</p>
+<h3 class="western" align="left">4.3 Component interfaces (Required,
+Prelim) <br>
+</h3>
+<br>
+Note: Please refer to the component javadocs for a complete set of
+component interfaces.<br>
+<br>
+<span style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp; 4.3.1&nbsp;
+CommonTasksSection.java</span><br>
+<br>
+<table summary="" border="1" cellpadding="3" cellspacing="0" width="100%">
+  <tbody>
+    <tr class="TableHeadingColor" bgcolor="#ccccff">
+      <th colspan="2" align="left"><font size="+2"><b>Field Summary</b></font></th>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>static&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html#HELP_INLINE_FACET">HELP_INLINE_FACET</a></b></code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inline help
+text facet</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>static&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html#SECTION_HELP">SECTION_HELP</a></b></code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+&nbsp;<a name="fields_inherited_from_class_javax.faces.component.NamingContainer"><!-- --></a>
+<table summary="" border="1" cellpadding="3" cellspacing="0" width="100%">
+  <tbody>
+    <tr class="TableSubHeadingColor" bgcolor="#eeeeff">
+      <th align="left"><b>Fields inherited from interface
+javax.faces.component.NamingContainer</b></th>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td><code>SEPARATOR_CHAR</code></td>
+    </tr>
+  </tbody>
+</table>
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->&nbsp;
+<a name="constructor_summary"><!-- --></a>
+<table summary="" border="1" cellpadding="3" cellspacing="0" width="100%">
+  <tbody>
+    <tr class="TableHeadingColor" bgcolor="#ccccff">
+      <th colspan="2" align="left"><font size="+2"> <b>Constructor
+Summary</b></font></th>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html#CommonTasksSection%28%29">CommonTasksSection</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a
+new instance of CommonTasksSection</td>
+    </tr>
+  </tbody>
+</table>
+<!-- ========== METHOD SUMMARY =========== -->&nbsp;
+<a name="method_summary"><!-- --></a>
+<table summary="" border="1" cellpadding="3" cellspacing="0" width="100%">
+  <tbody>
+    <tr class="TableHeadingColor" bgcolor="#ccccff">
+      <th colspan="2" align="left"><font size="+2"> <b>Method Summary</b></font></th>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;int</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html#getColumns%28%29">getColumns</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify the
+number of task columns to display in the common tasks section.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;int</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html#getCommonTaskCount%28%29">getCommonTaskCount</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the
+total number of <a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html" title="class in com.sun.webui.jsf.component"><code>CommonTask</code></a>s
+that are present in a <a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html" title="class in com.sun.webui.jsf.component"><code>CommonTasksSection</code></a>
+This gives the number of visible <a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html" title="class in com.sun.webui.jsf.component"><code>CommonTask</code></a>
+elements and does not take into account the ones that have rendered or
+visible attribute set to false.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html#getFamily%28%29">getFamily</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the
+family for this component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;javax.faces.component.UIComponent</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html#getHelp%28javax.faces.context.FacesContext%29">getHelp</a></b>(javax.faces.context.FacesContext&nbsp;context)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the
+help facet for the <a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html" title="class in com.sun.webui.jsf.component"><code>CommonTasksSection</code></a>.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html#getHelpText%28%29">getHelpText</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The help
+text to be displayed for the common tasks section.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html#getStyle%28%29">getStyle</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS
+style(s) to be applied to the outermost HTML element when this
+component is rendered.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html#getStyleClass%28%29">getStyleClass</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS style
+class(es) to be applied to the outermost HTML element when this
+component is rendered.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html#getTitle%28%29">getTitle</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The title
+text to be displayed for the common tasks section.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html#isVisible%28%29">isVisible</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html#restoreState%28javax.faces.context.FacesContext,%20java.lang.Object%29">restoreState</a></b>(javax.faces.context.FacesContext&nbsp;_context,
+java.lang.Object&nbsp;_state)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Restore the
+state of this component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html#saveState%28javax.faces.context.FacesContext%29">saveState</a></b>(javax.faces.context.FacesContext&nbsp;_context)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save the
+state of this component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html#setColumns%28int%29">setColumns</a></b>(int&nbsp;columns)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify the
+number of task columns to display in the common tasks section.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html#setHelpText%28java.lang.String%29">setHelpText</a></b>(java.lang.String&nbsp;helpText)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The help
+text to be displayed for the common tasks section.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html#setId%28java.lang.String%29">setId</a></b>(java.lang.String&nbsp;id)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The
+component identifier for this component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html#setRendered%28boolean%29">setRendered</a></b>(boolean&nbsp;rendered)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+rendered attribute to indicate whether the HTML code for the component
+should be included in the rendered HTML page.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html#setStyle%28java.lang.String%29">setStyle</a></b>(java.lang.String&nbsp;style)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS
+style(s) to be applied to the outermost HTML element when this
+component is rendered.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html#setStyleClass%28java.lang.String%29">setStyleClass</a></b>(java.lang.String&nbsp;styleClass)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS style
+class(es) to be applied to the outermost HTML element when this
+component is rendered.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html#setTitle%28java.lang.String%29">setTitle</a></b>(java.lang.String&nbsp;title)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The title
+text to be displayed for the common tasks section.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksSection.html#setVisible%28boolean%29">setVisible</a></b>(boolean&nbsp;visible)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+    </tr>
+  </tbody>
+</table>
+&nbsp;
+<br>
+<span style="font-weight: bold;">&nbsp;&nbsp;&nbsp; 4.3.2 &nbsp;
+CommonTask.java</span><br>
+<br>
+<table summary="" border="1" cellpadding="3" cellspacing="0" width="100%">
+  <tbody>
+    <tr class="TableHeadingColor" bgcolor="#ccccff">
+      <th colspan="2" align="left"><font size="+2"><b>Field Summary</b></font></th>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>static&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#COMMONTASK_FACET">COMMONTASK_FACET</a></b></code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Task
+facet identifier</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>static&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#INFOLINK_FACET">INFOLINK_FACET</a></b></code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Info link
+facet identifier</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>static&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#INFOPANEL_FACET">INFOPANEL_FACET</a></b></code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Info panel
+facet identifier</td>
+    </tr>
+  </tbody>
+</table>
+&nbsp;<a name="fields_inherited_from_class_javax.faces.component.UICommand"><!-- --></a>
+<table summary="" border="1" cellpadding="3" cellspacing="0" width="100%">
+  <tbody>
+    <tr class="TableSubHeadingColor" bgcolor="#eeeeff">
+      <th align="left"><b>Fields inherited from class
+javax.faces.component.UICommand</b></th>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td><code>COMPONENT_FAMILY, COMPONENT_TYPE</code></td>
+    </tr>
+  </tbody>
+</table>
+&nbsp;<a name="fields_inherited_from_class_javax.faces.component.NamingContainer"><!-- --></a>
+<table summary="" border="1" cellpadding="3" cellspacing="0" width="100%">
+  <tbody>
+    <tr class="TableSubHeadingColor" bgcolor="#eeeeff">
+      <th align="left"><b>Fields inherited from interface
+javax.faces.component.NamingContainer</b></th>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td><code>SEPARATOR_CHAR</code></td>
+    </tr>
+  </tbody>
+</table>
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->&nbsp;
+<a name="constructor_summary"><!-- --></a>
+<table summary="" border="1" cellpadding="3" cellspacing="0" width="100%">
+  <tbody>
+    <tr class="TableHeadingColor" bgcolor="#ccccff">
+      <th colspan="2" align="left"><font size="+2"> <b>Constructor
+Summary</b></font></th>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#CommonTask%28%29">CommonTask</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a
+new instance of Task</td>
+    </tr>
+  </tbody>
+</table>
+<!-- ========== METHOD SUMMARY =========== -->&nbsp;
+<a name="method_summary"><!-- --></a>
+<table summary="" border="1" cellpadding="3" cellspacing="0" width="100%">
+  <tbody>
+    <tr class="TableHeadingColor" bgcolor="#ccccff">
+      <th colspan="2" align="left"><font size="+2"> <b>Method Summary</b></font></th>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getFamily%28%29">getFamily</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the
+family for this component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getIcon%28%29">getIcon</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify a
+theme key for an image to be displayed in front of the text for the
+task.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;int</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getImageHeight%28%29">getImageHeight</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify the
+height in pixels of the image that is specified with the imageUrl
+attribute</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getImageUrl%28%29">getImageUrl</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The path to
+an image to be displayed in front of the text for the task.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;int</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getImageWidth%28%29">getImageWidth</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify the
+width in pixels of the image that is specified with the imageUrl
+attribute.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;javax.faces.component.UIComponent</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getInfoLink%28%29">getInfoLink</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks
+whether a facet has been specified for the <a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/Hyperlink.html" title="class in com.sun.webui.jsf.component"><code>Hyperlink</code></a><br>
+inside the info panel.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getInfoLinkText%28%29">getInfoLinkText</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify the
+text for the link that is displayed at the bottom of the task's
+information panel.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getInfoLinkUrl%28%29">getInfoLinkUrl</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify the
+URL for the link that is displayed at the bottom of the task's
+information panel.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;javax.faces.component.UIComponent</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getInfoPanel%28%29">getInfoPanel</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks
+whether a facet has been specified for the infoPanel.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getInfoText%28%29">getInfoText</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify the
+text to be displayed in the information panel for this task.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getInfoTitle%28%29">getInfoTitle</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify the
+title text to be displayed in the information panel for this task.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getOnBlur%28%29">getOnBlur</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when this element loses focus.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getOnClick%28%29">getOnClick</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse click occurs over this component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getOnDblClick%28%29">getOnDblClick</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse double click occurs over this component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getOnFocus%28%29">getOnFocus</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when this component receives focus.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getOnKeyDown%28%29">getOnKeyDown</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user presses down on a key while the component
+has focus.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getOnKeyPress%28%29">getOnKeyPress</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user presses and releases a key while the
+component has focus.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getOnKeyUp%28%29">getOnKeyUp</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user releases a key while the component has
+focus.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getOnMouseDown%28%29">getOnMouseDown</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user presses a mouse button while the mouse
+pointer is on the component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getOnMouseMove%28%29">getOnMouseMove</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user moves the mouse pointer while it is over
+the component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getOnMouseOut%28%29">getOnMouseOut</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user moves the mouse pointer off this component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getOnMouseOver%28%29">getOnMouseOver</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user moves the mouse pointer into the boundary
+of this component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getOnMouseUp%28%29">getOnMouseUp</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user releases a mouse button while the mouse
+pointer is on the component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getStyle%28%29">getStyle</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS
+style(s) to be applied to the outermost HTML element when this
+component is rendered.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getStyleClass%28%29">getStyleClass</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS style
+class(es) to be applied to the outermost HTML element when this
+component is rendered.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;int</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getTabIndex%28%29">getTabIndex</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position of
+this element in the tabbing order of the current document.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getTarget%28%29">getTarget</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The
+resource at the specified URL is displayed in the frame that is
+specified with the target attribute.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;javax.faces.component.UIComponent</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getTaskAction%28%29">getTaskAction</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a
+component that represents the action element for the <a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html" title="class in com.sun.webui.jsf.component"><code>CommonTask</code></a>.<br>
+When the user clicks on this action element, it takes him to the
+corresponding task.<br>
+In the default case, when no facet is specified,<br>
+an hyperlink is created, with the default styles <br>
+applied to it and is returned back to the invoking function.<br>
+      </td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getText%28%29">getText</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The text to
+be displayed for the task.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getTitle%28%29">getTitle</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The title.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getToolTip%28%29">getToolTip</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the
+value of the title attribute for the HTML element.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getValue%28%29">getValue</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;javax.el.ValueExpression</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#getValueExpression%28java.lang.String%29">getValueExpression</a></b>(java.lang.String&nbsp;name)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the <code>ValueExpression</code>
+stored for the specified name (if any), respecting any property aliases.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#isDisabled%28%29">isDisabled</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indicates
+that activation of this component by the user is not currently
+permitted.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#isImmediate%28%29">isImmediate</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Flag
+indicating that event handling for this component should be handled
+immediately (in Apply Request Values phase) rather than waiting until
+Invoke Application phase.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#isVisible%28%29">isVisible</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#restoreState%28javax.faces.context.FacesContext,%20java.lang.Object%29">restoreState</a></b>(javax.faces.context.FacesContext&nbsp;_context,
+java.lang.Object&nbsp;_state)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Restore the
+state of this component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#saveState%28javax.faces.context.FacesContext%29">saveState</a></b>(javax.faces.context.FacesContext&nbsp;_context)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save the
+state of this component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setDisabled%28boolean%29">setDisabled</a></b>(boolean&nbsp;disabled)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indicates
+that activation of this component by the user is not currently
+permitted.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setIcon%28java.lang.String%29">setIcon</a></b>(java.lang.String&nbsp;icon)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify a
+theme key for an image to be displayed in front of the text for the
+task.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setImageHeight%28int%29">setImageHeight</a></b>(int&nbsp;imageHeight)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify the
+height in pixels of the image that is specified with the imageUrl
+attribute</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setImageUrl%28java.lang.String%29">setImageUrl</a></b>(java.lang.String&nbsp;imageUrl)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The path to
+an image to be displayed in front of the text for the task.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setImageWidth%28int%29">setImageWidth</a></b>(int&nbsp;imageWidth)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify the
+width in pixels of the image that is specified with the imageUrl
+attribute.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setImmediate%28boolean%29">setImmediate</a></b>(boolean&nbsp;immediate)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Flag
+indicating that event handling for this component should be handled
+immediately (in Apply Request Values phase) rather than waiting until
+Invoke Application phase.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setInfoLinkText%28java.lang.String%29">setInfoLinkText</a></b>(java.lang.String&nbsp;infoLinkText)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify the
+text for the link that is displayed at the bottom of the task's
+information panel.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setInfoLinkUrl%28java.lang.String%29">setInfoLinkUrl</a></b>(java.lang.String&nbsp;infoLinkUrl)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify the
+URL for the link that is displayed at the bottom of the task's
+information panel.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setInfoText%28java.lang.String%29">setInfoText</a></b>(java.lang.String&nbsp;infoText)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify the
+text to be displayed in the information panel for this task.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setInfoTitle%28java.lang.String%29">setInfoTitle</a></b>(java.lang.String&nbsp;infoTitle)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify the
+title text to be displayed in the information panel for this task.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setOnBlur%28java.lang.String%29">setOnBlur</a></b>(java.lang.String&nbsp;onBlur)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when this element loses focus.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setOnClick%28java.lang.String%29">setOnClick</a></b>(java.lang.String&nbsp;onClick)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse click occurs over this component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setOnDblClick%28java.lang.String%29">setOnDblClick</a></b>(java.lang.String&nbsp;onDblClick)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when a mouse double click occurs over this component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setOnFocus%28java.lang.String%29">setOnFocus</a></b>(java.lang.String&nbsp;onFocus)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when this component receives focus.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setOnKeyDown%28java.lang.String%29">setOnKeyDown</a></b>(java.lang.String&nbsp;onKeyDown)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user presses down on a key while the component
+has focus.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setOnKeyPress%28java.lang.String%29">setOnKeyPress</a></b>(java.lang.String&nbsp;onKeyPress)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user presses and releases a key while the
+component has focus.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setOnKeyUp%28java.lang.String%29">setOnKeyUp</a></b>(java.lang.String&nbsp;onKeyUp)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user releases a key while the component has
+focus.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setOnMouseDown%28java.lang.String%29">setOnMouseDown</a></b>(java.lang.String&nbsp;onMouseDown)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user presses a mouse button while the mouse
+pointer is on the component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setOnMouseMove%28java.lang.String%29">setOnMouseMove</a></b>(java.lang.String&nbsp;onMouseMove)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user moves the mouse pointer while it is over
+the component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setOnMouseOut%28java.lang.String%29">setOnMouseOut</a></b>(java.lang.String&nbsp;onMouseOut)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user moves the mouse pointer off this component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setOnMouseOver%28java.lang.String%29">setOnMouseOver</a></b>(java.lang.String&nbsp;onMouseOver)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user moves the mouse pointer into the boundary
+of this component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setOnMouseUp%28java.lang.String%29">setOnMouseUp</a></b>(java.lang.String&nbsp;onMouseUp)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting
+code executed when the user releases a mouse button while the mouse
+pointer is on the component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setStyle%28java.lang.String%29">setStyle</a></b>(java.lang.String&nbsp;style)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS
+style(s) to be applied to the outermost HTML element when this
+component is rendered.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setStyleClass%28java.lang.String%29">setStyleClass</a></b>(java.lang.String&nbsp;styleClass)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS style
+class(es) to be applied to the outermost HTML element when this
+component is rendered.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setTabIndex%28int%29">setTabIndex</a></b>(int&nbsp;tabIndex)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position of
+this element in the tabbing order of the current document.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setTarget%28java.lang.String%29">setTarget</a></b>(java.lang.String&nbsp;target)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The
+resource at the specified URL is displayed in the frame that is
+specified with the target attribute.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setText%28java.lang.Object%29">setText</a></b>(java.lang.Object&nbsp;text)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The text to
+be displayed for the task.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setTitle%28java.lang.String%29">setTitle</a></b>(java.lang.String&nbsp;title)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The title.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setToolTip%28java.lang.String%29">setToolTip</a></b>(java.lang.String&nbsp;toolTip)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the
+value of the title attribute for the HTML element.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setValueExpression%28java.lang.String,%20javax.el.ValueExpression%29">setValueExpression</a></b>(java.lang.String&nbsp;name,
+javax.el.ValueExpression&nbsp;binding)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the <code>ValueExpression</code>
+stored for the specified name (if any), respecting any property aliases.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTask.html#setVisible%28boolean%29">setVisible</a></b>(boolean&nbsp;visible)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+    </tr>
+  </tbody>
+</table>
+&nbsp;<a name="methods_inherited_from_class_com.sun.webui.jsf.component.WebuiCommand"><!-- --></a>
+<table summary="" border="1" cellpadding="3" cellspacing="0" width="100%">
+  <tbody>
+    <tr class="TableSubHeadingColor" bgcolor="#eeeeff">
+      <th align="left"><b>Methods inherited from class
+com.sun.webui.jsf.component.<a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/WebuiCommand.html" title="class in com.sun.webui.jsf.component">WebuiCommand</a></b></th>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td><code><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/WebuiCommand.html#broadcast%28javax.faces.event.FacesEvent%29">broadcast</a>,
+      <a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/WebuiCommand.html#getAction%28%29">getAction</a>,
+      <a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/WebuiCommand.html#getActionExpression%28%29">getActionExpression</a>,
+      <a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/WebuiCommand.html#getActionListener%28%29">getActionListener</a>,
+      <a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/WebuiCommand.html#getActionListenerExpression%28%29">getActionListenerExpression</a>,
+      <a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/WebuiCommand.html#setActionListenerExpression%28javax.el.MethodExpression%29">setActionListenerExpression</a>,
+      <a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/WebuiCommand.html#setId%28java.lang.String%29">setId</a>,
+      <a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/WebuiCommand.html#setRendered%28boolean%29">setRendered</a></code></td>
+    </tr>
+  </tbody>
+</table>
+&nbsp;<a name="methods_inherited_from_class_javax.faces.component.UICommand"><!-- --></a>
+<table summary="" border="1" cellpadding="3" cellspacing="0" width="100%">
+  <tbody>
+    <tr class="TableSubHeadingColor" bgcolor="#eeeeff">
+      <th align="left"><b>Methods inherited from class
+javax.faces.component.UICommand</b></th>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td><code>addActionListener, getActionListeners, queueEvent,
+removeActionListener, setAction, setActionExpression,
+setActionListener, setValue</code></td>
+    </tr>
+  </tbody>
+</table>
+&nbsp;<a name="methods_inherited_from_class_javax.faces.component.UIComponentBase"><!-- --></a>
+<p><span style="font-weight: bold;"></span><br>
+</p>
+<p>&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">4.3.3
+CommonTasksGroup.java<br>
+</span></p>
+<p><font size="+2"><b>Field Summary</b></font>
+&nbsp;<a name="fields_inherited_from_class_javax.faces.component.NamingContainer"><!-- --></a>
+</p>
+<table summary="" border="1" cellpadding="3" cellspacing="0" width="100%">
+  <tbody>
+    <tr class="TableSubHeadingColor" bgcolor="#eeeeff">
+      <th align="left"><b>Fields inherited from interface
+javax.faces.component.NamingContainer</b></th>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td><code>SEPARATOR_CHAR</code></td>
+    </tr>
+  </tbody>
+</table>
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->&nbsp;
+<a name="constructor_summary"><!-- --></a>
+<table summary="" border="1" cellpadding="3" cellspacing="0" width="100%">
+  <tbody>
+    <tr class="TableHeadingColor" bgcolor="#ccccff">
+      <th colspan="2" align="left"><font size="+2"> <b>Constructor
+Summary</b></font></th>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksGroup.html#CommonTasksGroup%28%29">CommonTasksGroup</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a
+new instance of CommonTaskGroup</td>
+    </tr>
+  </tbody>
+</table>
+<!-- ========== METHOD SUMMARY =========== -->&nbsp;
+<a name="method_summary"><!-- --></a>
+<table summary="" border="1" cellpadding="3" cellspacing="0" width="100%">
+  <tbody>
+    <tr class="TableHeadingColor" bgcolor="#ccccff">
+      <th colspan="2" align="left"><font size="+2"> <b>Method Summary</b></font></th>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksGroup.html#getFamily%28%29">getFamily</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the
+family for this component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksGroup.html#getStyle%28%29">getStyle</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS
+style(s) to be applied to the outermost HTML element when this
+component is rendered.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksGroup.html#getStyleClass%28%29">getStyleClass</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS style
+class(es) to be applied to the outermost HTML element when this
+component is rendered.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.String</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksGroup.html#getTitle%28%29">getTitle</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The title
+text to be displayed for the common tasks group.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;boolean</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksGroup.html#isVisible%28%29">isVisible</a></b>()</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksGroup.html#restoreState%28javax.faces.context.FacesContext,%20java.lang.Object%29">restoreState</a></b>(javax.faces.context.FacesContext&nbsp;_context,
+java.lang.Object&nbsp;_state)</code> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Restore the
+state of this component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;java.lang.Object</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksGroup.html#saveState%28javax.faces.context.FacesContext%29">saveState</a></b>(javax.faces.context.FacesContext&nbsp;_context)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save the
+state of this component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksGroup.html#setId%28java.lang.String%29">setId</a></b>(java.lang.String&nbsp;id)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The
+component identifier for this component.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksGroup.html#setRendered%28boolean%29">setRendered</a></b>(boolean&nbsp;rendered)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+rendered attribute to indicate whether the HTML code for the component
+should be included in the rendered HTML page.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksGroup.html#setStyle%28java.lang.String%29">setStyle</a></b>(java.lang.String&nbsp;style)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS
+style(s) to be applied to the outermost HTML element when this
+component is rendered.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksGroup.html#setStyleClass%28java.lang.String%29">setStyleClass</a></b>(java.lang.String&nbsp;styleClass)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CSS style
+class(es) to be applied to the outermost HTML element when this
+component is rendered.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksGroup.html#setTitle%28java.lang.String%29">setTitle</a></b>(java.lang.String&nbsp;title)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The title
+text to be displayed for the common tasks group.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><font size="-1"> <code>&nbsp;void</code></font></td>
+      <td><code><b><a href="file:///net/odyssey.india.sun.com/space/venky/woodstock-opensource/woodstock/webui/javadocs/runtime/com/sun/webui/jsf/component/CommonTasksGroup.html#setVisible%28boolean%29">setVisible</a></b>(boolean&nbsp;visible)</code>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the
+visible attribute to indicate whether the component should be viewable
+by the user in the rendered HTML page.</td>
+    </tr>
+  </tbody>
+</table>
+&nbsp;
+<br>
+<p></p>
+<font size="+2">
+</font>
+<h3 class="western" align="left">4.4 Tag interfaces (required, Prelim)</h3>
+<br>
+<table border="1" cellpadding="3" cellspacing="0" width="100%">
+  <tbody>
+    <tr class="TableHeadingColor" bgcolor="#ccccff">
+      <td colspan="2"><font size="+2"><b>Tag Information</b></font></td>
+    </tr>
+    <tr>
+      <td>Tag Class</td>
+      <td>com.sun.webui.jsf.component.CommonTasksSectionTag</td>
+    </tr>
+    <tr>
+      <td>TagExtraInfo Class</td>
+      <td><i>None</i></td>
+    </tr>
+    <tr>
+      <td>Body Content</td>
+      <td>JSP</td>
+    </tr>
+    <tr>
+      <td>Display Name</td>
+      <td><i>None</i></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<table border="1" cellpadding="3" cellspacing="0" width="100%">
+  <tbody>
+    <tr class="TableHeadingColor" bgcolor="#ccccff">
+      <td colspan="5"><font size="+2"><b>Attributes</b></font></td>
+    </tr>
+    <tr>
+      <td><b>Name</b></td>
+      <td><b>Required</b></td>
+      <td><b>Request-time</b></td>
+      <td><b>Type</b></td>
+      <td><b>Description</b></td>
+    </tr>
+    <tr valign="top">
+      <td>binding</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td> A ValueExpression that resolves to the UIComponent that
+corresponds to this tag. This binding allows the Java bean that
+contains the UIComponent to manipulate the UIComponent, its properties,
+and its children. </td>
+    </tr>
+    <tr valign="top">
+      <td>styleClass</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>CSS style class(es) to be applied to the outermost HTML
+element when this component is rendered.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>title</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>The title text to be displayed for the common tasks section.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>visible</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Use the visible attribute to indicate whether the component
+should be viewable by the user in the rendered HTML page. If set to
+false, the HTML code for the component is present in the page, but the
+component is hidden with style attributes. By default, visible is set
+to true, so HTML for the component HTML is included and visible to the
+user. If the component is not visible, it can still be processed on
+subsequent form submissions because the HTML is present.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>style</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>CSS style(s) to be applied to the outermost HTML element when
+this component is rendered.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>rendered</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td> Use the rendered attribute to indicate whether the HTML code
+for the component should be included in the rendered HTML page. If set
+to false, the rendered HTML page does not include the HTML for the
+component. If the component is not rendered, it is also not processed
+on any subsequent form submission. </td>
+    </tr>
+    <tr valign="top">
+      <td>columns</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Specify the number of task columns to display in the common
+tasks section. </p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>id</td>
+      <td>false</td>
+      <td>true</td>
+      <td><code>java.lang.String</code></td>
+      <td><i>No Description</i></td>
+    </tr>
+    <tr valign="top">
+      <td>helpText</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>The help text to be displayed for the common tasks section.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<br>
+<br>
+<table border="1" cellpadding="3" cellspacing="0" width="100%">
+  <tbody>
+    <tr class="TableHeadingColor" bgcolor="#ccccff">
+      <td colspan="2"><font size="+2"><b>Tag Information</b></font></td>
+    </tr>
+    <tr>
+      <td>Tag Class</td>
+      <td>com.sun.webui.jsf.component.CommonTaskTag</td>
+    </tr>
+    <tr>
+      <td>TagExtraInfo Class</td>
+      <td><i>None</i></td>
+    </tr>
+    <tr>
+      <td>Body Content</td>
+      <td>JSP</td>
+    </tr>
+    <tr>
+      <td>Display Name</td>
+      <td><i>None</i></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<table border="1" cellpadding="3" cellspacing="0" width="100%">
+  <tbody>
+    <tr class="TableHeadingColor" bgcolor="#ccccff">
+      <td colspan="5"><font size="+2"><b>Attributes</b></font></td>
+    </tr>
+    <tr>
+      <td><b>Name</b></td>
+      <td><b>Required</b></td>
+      <td><b>Request-time</b></td>
+      <td><b>Type</b></td>
+      <td><b>Description</b></td>
+    </tr>
+    <tr valign="top">
+      <td>binding</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td> A ValueExpression that resolves to the UIComponent that
+corresponds to this tag. This binding allows the Java bean that
+contains the UIComponent to manipulate the UIComponent, its properties,
+and its children. </td>
+    </tr>
+    <tr valign="top">
+      <td>onDblClick</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Scripting code executed when a mouse double click occurs over
+this component.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>onKeyPress</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Scripting code executed when the user presses and releases a
+key while the component has focus.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>target</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>The resource at the specified URL is displayed in the frame
+that is specified with the target attribute. Values such as "_blank"
+that are valid for the target attribute of a HTML anchor element are
+also valid for this attribute in this component</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>onFocus</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Scripting code executed when this component receives focus. An
+element receives focus when the user selects the element by pressing
+the tab key or clicking the mouse.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>infoTitle</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Specify the title text to be displayed in the information
+panel for this task. </p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>onKeyUp</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Scripting code executed when the user releases a key while the
+component has focus.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>onMouseUp</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Scripting code executed when the user releases a mouse button
+while the mouse pointer is on the component.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>styleClass</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>CSS style class(es) to be applied to the outermost HTML
+element when this component is rendered.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>icon</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Specify a theme key for an image to be displayed in front of
+the text for the task. The key <code>CTS_OVERVIEW</code> will generate
+an image that can be used to mark tasks that are for overview
+information about the task</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>style</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>CSS style(s) to be applied to the outermost HTML element when
+this component is rendered.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>onClick</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Scripting code executed when a mouse click occurs over this
+component.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>infoLinkText</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Specify the text for the link that is displayed at the bottom
+of the task's information panel. </p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>onBlur</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Scripting code executed when this element loses focus.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>toolTip</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Sets the value of the title attribute for the HTML element.
+The specified text will display as a tooltip if the mouse cursor hovers
+over the HTML element.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>onMouseDown</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Scripting code executed when the user presses a mouse button
+while the mouse pointer is on the component.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>imageHeight</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Specify the height in pixels of the image that is specified
+with the imageUrl attribute </p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>imageUrl</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>The path to an image to be displayed in front of the text for
+the task. If both icon and imageUrl are provided, the icon takes
+precedence over the path specified for the image.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>onMouseOut</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Scripting code executed when the user moves the mouse pointer
+off this component.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>onMouseOver</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Scripting code executed when the user moves the mouse pointer
+into the boundary of this component.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>infoText</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Specify the text to be displayed in the information panel for
+this task. </p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>onMouseMove</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Scripting code executed when the user moves the mouse pointer
+while it is over the component.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>text</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>The text to be displayed for the task.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>imageWidth</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Specify the width in pixels of the image that is specified
+with the imageUrl attribute. </p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>visible</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Use the visible attribute to indicate whether the component
+should be viewable by the user in the rendered HTML page. If set to
+false, the HTML code for the component is present in the page, but the
+component is hidden with style attributes. By default, visible is set
+to true, so HTML for the component HTML is included and visible to the
+user. If the component is not visible, it can still be processed on
+subsequent form submissions because the HTML is present.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>infoLinkUrl</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Specify the URL for the link that is displayed at the bottom
+of the task's information panel. </p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>onKeyDown</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Scripting code executed when the user presses down on a key
+while the component has focus.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>tabIndex</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Position of this element in the tabbing order of the current
+document. Tabbing order determines the sequence in which elements
+receive focus when the tab key is pressed. The value must be an integer
+between 0 and 32767.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>actionExpression</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td> MethodExpression representing the application action to
+invoke when this component is activated by the user. The expression
+must evaluate to a either a String or a public method that takes no
+parameters, and returns a String (the logical outcome) which is passed
+to the NavigationHandler for this application. </td>
+    </tr>
+    <tr valign="top">
+      <td>actionListenerExpression</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td> Use the actionListenerExpression attribute to cause the
+component to fire an event. The value must be an EL expression and it
+must evaluate to the name of a public method that takes an ActionEvent
+parameter and returns void. </td>
+    </tr>
+    <tr valign="top">
+      <td>rendered</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td> Use the rendered attribute to indicate whether the HTML code
+for the component should be included in the rendered HTML page. If set
+to false, the rendered HTML page does not include the HTML for the
+component. If the component is not rendered, it is also not processed
+on any subsequent form submission. </td>
+    </tr>
+    <tr valign="top">
+      <td>id</td>
+      <td>false</td>
+      <td>true</td>
+      <td><code>java.lang.String</code></td>
+      <td><i>No Description</i></td>
+    </tr>
+  </tbody>
+</table>
+<h3 class="western" align="left"><br>
+</h3>
+<h3 class="western" align="left"><br>
+</h3>
+<h3 class="western" align="left"><br>
+</h3>
+<table border="1" cellpadding="3" cellspacing="0" width="100%">
+  <tbody>
+    <tr class="TableHeadingColor" bgcolor="#ccccff">
+      <td colspan="2"><font size="+2"><b>Tag Information</b></font></td>
+    </tr>
+    <tr>
+      <td>Tag Class</td>
+      <td>com.sun.webui.jsf.component.CommonTasksGroupTag</td>
+    </tr>
+    <tr>
+      <td>TagExtraInfo Class</td>
+      <td><i>None</i></td>
+    </tr>
+    <tr>
+      <td>Body Content</td>
+      <td>JSP</td>
+    </tr>
+    <tr>
+      <td>Display Name</td>
+      <td><i>None</i></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<table border="1" cellpadding="3" cellspacing="0" width="100%">
+  <tbody>
+    <tr class="TableHeadingColor" bgcolor="#ccccff">
+      <td colspan="5"><font size="+2"><b>Attributes</b></font></td>
+    </tr>
+    <tr>
+      <td><b>Name</b></td>
+      <td><b>Required</b></td>
+      <td><b>Request-time</b></td>
+      <td><b>Type</b></td>
+      <td><b>Description</b></td>
+    </tr>
+    <tr valign="top">
+      <td>binding</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td> A ValueExpression that resolves to the UIComponent that
+corresponds to this tag. This binding allows the Java bean that
+contains the UIComponent to manipulate the UIComponent, its properties,
+and its children. </td>
+    </tr>
+    <tr valign="top">
+      <td>styleClass</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>CSS style class(es) to be applied to the outermost HTML
+element when this component is rendered.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>title</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>The title text to be displayed for the common tasks group.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>visible</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>Use the visible attribute to indicate whether the component
+should be viewable by the user in the rendered HTML page. If set to
+false, the HTML code for the component is present in the page, but the
+component is hidden with style attributes. By default, visible is set
+to true, so HTML for the component HTML is included and visible to the
+user. If the component is not visible, it can still be processed on
+subsequent form submissions because the HTML is present.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>style</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td>
+      <p>CSS style(s) to be applied to the outermost HTML element when
+this component is rendered.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>rendered</td>
+      <td>false</td>
+      <td>false</td>
+      <td><code>java.lang.String</code></td>
+      <td> Use the rendered attribute to indicate whether the HTML code
+for the component should be included in the rendered HTML page. If set
+to false, the rendered HTML page does not include the HTML for the
+component. If the component is not rendered, it is also not processed
+on any subsequent form submission. </td>
+    </tr>
+    <tr valign="top">
+      <td>id</td>
+      <td>false</td>
+      <td>true</td>
+      <td><code>java.lang.String</code></td>
+      <td><i>No Description</i></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h3 class="western" align="left">4.4.1 Individual tag attributes
+descriptions (optional)</h3>
+None.<br>
+<h3 class="western" align="left">4.5 Javascript interfaces (required,
+Prelim)</h3>
+None. <br>
+<br>
+<h3 class="western" align="left">4.6 Theme resources keys (required,
+Final?)</h3>
+<h3 class="western" align="left"><font color="#000000"><font size="3"><b>4.6.1
+Style selectors</b></font></font></h3>
+<p align="left">Work in progress. These selectors are not final and
+will be changes as soon as latest selectors become available.</p>
+<table border="1" bordercolor="#000000" cellpadding="4" cellspacing="0" width="100%">
+  <col width="85*"> <col width="85*"> <col width="85*"> <thead> <tr valign="top">
+    <th width="33%">
+    <p align="left">Key</p>
+    </th>
+    <th width="33%">
+    <p align="left">Style </p>
+    </th>
+    <th width="33%">
+    <p align="left">Description</p>
+    </th>
+  </tr>
+  </thead> <tbody>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CTS_TASK&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; <br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">commonTask_4</p>
+      </td>
+      <td width="33%">Styleclass for a common task.<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CTS_GROUP</p>
+      </td>
+      <td width="33%">
+      <p align="left">commonTaskGroup_4<br>
+      </p>
+      </td>
+      <td width="33%">Styleclass for a common tasks group<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CTS_SECTION</p>
+      </td>
+      <td width="33%">
+      <p align="left">commonTaskSection_4<br>
+      </p>
+      </td>
+      <td width="33%">Styleclass for a common tasks section<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CTS_HEADER</p>
+      </td>
+      <td width="33%">
+      <p align="left">header<br>
+      </p>
+      </td>
+      <td width="33%">Styleclass for the header portion of a common
+tasks section.<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CTS_TASK_MORE</p>
+      </td>
+      <td width="33%">
+      <p align="left">more</p>
+      </td>
+      <td width="33%">Styleclass for the "more" link that appears at
+the bottom of an info panel.<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CTS_SECTION_HELP</p>
+      </td>
+      <td width="33%">
+      <p align="left">help</p>
+      </td>
+      <td width="33%">Styleclass for the help that appears below the
+heading of the common tasks section.<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CTS_TASK_LEFT</p>
+      </td>
+      <td width="33%">
+      <p align="left">left</p>
+      </td>
+      <td width="33%">Styleclass for the left part of a common task.<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CTS_TASK_CENTER</p>
+      </td>
+      <td width="33%">
+      <p align="left">center</p>
+      </td>
+      <td width="33%">Styleclass for the center part of a common task.</td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CTS_TASK_RIGHT</p>
+      </td>
+      <td width="33%">
+      <p align="left">right</p>
+      </td>
+      <td width="33%">Styleclass for the right part of a common task.</td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CTS_TASK_BACKGROUND</p>
+      </td>
+      <td width="33%">
+      <p align="left">background</p>
+      </td>
+      <td width="33%">Background styleclass for a common task.<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CTS_TASK_INFOPANEL</p>
+      </td>
+      <td width="33%">
+      <p align="left">infoPanel</p>
+      </td>
+      <td width="33%">Style class for the info panel.<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CTS_TASK_CONTENT</p>
+      </td>
+      <td width="33%">
+      <p align="left">content</p>
+      </td>
+      <td width="33%">Style class for the content that comes in a
+common task<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CTS_INFOPANEL_CLOSE</p>
+      </td>
+      <td width="33%">
+      <p align="left">close</p>
+      </td>
+      <td width="33%">Style class for the close image link that comes
+in an info panel.<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CTS_TASK_INFO</p>
+      </td>
+      <td width="33%">
+      <p align="left">info</p>
+      </td>
+      <td width="33%">Style class for the info panel.<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CTS_TASK_BULLET</p>
+      </td>
+      <td width="33%">
+      <p align="left">bullet</p>
+      </td>
+      <td width="33%">Style class for the overview image that can be
+specified in a common task.<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CTS_TOP_BOX</p>
+      </td>
+      <td width="33%">
+      <p align="left">TskScnTpBx</p>
+      </td>
+      <td width="33%">Styleclass for a common tasks section.<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CTS_TEXT_BGROUND&nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp; &nbsp;&nbsp; <br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">TskScnTxtBg</p>
+      </td>
+      <td width="33%">Styleclass for the text background of a common
+tasks section.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">CTS_LEFT_BOTTOM<br>
+      </td>
+      <td style="vertical-align: top;">TskScnLftBtm<br>
+      </td>
+      <td style="vertical-align: top;">Style class for the left bottom
+part of a common tasks section.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">CTS_LEFT_TOP<br>
+      </td>
+      <td style="vertical-align: top;">TskScnLftTp<br>
+      </td>
+      <td style="vertical-align: top;">Style class for the left top
+part of a common tasks section</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">CTS_RIGHT_BOTTOM<br>
+      </td>
+      <td style="vertical-align: top;">TskScnRghtBtm<br>
+      </td>
+      <td style="vertical-align: top;">Style class for the right bottom
+of the common tasks section<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">CTS_RIGHT_TOP<br>
+      </td>
+      <td style="vertical-align: top;">TskScnRghtTp<br>
+      </td>
+      <td style="vertical-align: top;">Style class for the right top of
+the common tasks section.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">CTS_RIGHT_BORDER<br>
+      </td>
+      <td style="vertical-align: top;">TskScnRghtBrdr<br>
+      </td>
+      <td style="vertical-align: top;">Style class for the right border<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">CTS_PADDING<br>
+      </td>
+      <td style="vertical-align: top;">TskScnTskPdng<br>
+      </td>
+      <td style="vertical-align: top;">Style class for padding in a
+common task.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">CTS_BACKGROUND<br>
+      </td>
+      <td style="vertical-align: top;">commonTaskbgColor<br>
+      </td>
+      <td style="vertical-align: top;">Background color for a common
+tasks section.<br>
+This gives a bluish background for a common tasks page. Used with the
+body tag.<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p align="left"><br>
+<br>
+<font color="#000000"><font size="3"><b>4.6.2 Image Resources</b></font></font></p>
+<p align="left"><font color="#000000"> </font>
+</p>
+<table border="1" bordercolor="#000000" cellpadding="4" cellspacing="0" width="100%">
+  <col width="85*"> <col width="85*"> <col width="85*"> <thead> <tr valign="top">
+    <th width="33%">
+    <p align="left">Key</p>
+    </th>
+    <th width="33%">
+    <p align="left">Image</p>
+    </th>
+    <th width="33%">
+    <p align="left">Description</p>
+    </th>
+  </tr>
+  </thead> <tbody>
+    <tr valign="top">
+      <td width="33%">CTS_SPACER_IMAGE<br>
+      </td>
+      <td width="33%">spacer.gif<br>
+      </td>
+      <td width="33%">Spacer image.<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">CTS_RIGHT_TOGGLE<br>
+      </td>
+      <td width="33%">rightToggle.gif<br>
+      </td>
+      <td width="33%">The default "i" image which when clicked opens an
+info panel.<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">CTS_RIGHT_TOGGLE_EMPTY<br>
+      </td>
+      <td width="33%">rightToggleEmpty.gif<br>
+      </td>
+      <td width="33%">The place holder image which is used when no info
+panel is associated with a task.<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">CTS_RIGHT_TOGGLE_OVER<br>
+      </td>
+      <td width="33%">rightToggle-rollover.gif<br>
+      </td>
+      <td width="33%">The "i" image that is shown when a mouse over
+happens.<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">CTS_RIGHT_TOGGLE_SELECTED<br>
+      </td>
+      <td width="33%">rightToggle-selected.gif<br>
+      </td>
+      <td width="33%">The "i" image that is shown when a particular "i"
+image is clicked to open an info panel.<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">CTS_PANEL_CLOSE<br>
+      </td>
+      <td width="33%">close.gif<br>
+      </td>
+      <td width="33%">The close image that is used for closing the info
+panel.<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">CTS_OVERVIEW<br>
+      </td>
+      <td width="33%">bullet.png<br>
+      </td>
+      <td width="33%">The over view icon that can be used along with
+each common task.<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p align="left"><br>
+</p>
+<h3 class="western" align="left">4.6.3 Javascript resources</h3>
+<p align="left">CommonTasksSection.js – Javascript source for the
+tasks page.</p>
+<h3 class="western" align="left">4.6.4 Other resources</h3>
+<p align="left">None</p>
+<h3 class="western" align="left">4.6.5 Localized message keys</h3>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 4.6.5.1
+commonTasks.sectionTitle – Default common tasks section<br>
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; 4.6.5.2 commonTasks.groupTitle
+– Default title for the common task groups<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 4.6.5.3 commonTasks.pageHelp –
+Default help text for the common tasks section.&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b><br>
+</b>
+<h2 class="western" align="left">5.0 - Creator Design Time Support
+(required, Prelim)</h2>
+<h2 class="western" align="left">5.1 Design Time Behavior</h2>
+<p align="left">Each of the tags commonTasksSection, commonTasksGroup
+and commonTask is draggable on to the design canvas. The
+commonTasksGroup component can be dragged on to the
+commonTasksSection component. The commonTask component can be placed
+either as a child to the commonTasksSection component or the
+commonTasksGroup component.<br>
+</p>
+<p align="left">When a commonTasksSection component is initially
+rendered on to the design canvas, it consists of the default title,
+default inline help and some space where task groups and tasks can be
+dragged on to the component. It also contains an initital
+commonTasksGroup component with a commonTask inside it. The user can
+thereafter drag more number of task groups/tasks on to the design
+palette. As the number of taskgroups and tasks increases, the width
+of the this component can be increased by resizing the component.<br>
+</p>
+<p align="left">The position of the commonTaskGroups/commonTasks on the
+commonTasksSection is determined by the commonTasksSection. Once the
+user has dragged and dropped a component on to the commonTasksSection,
+he cannot control the position of the component. It will be up to the
+commonTaskSection component to determine where the component should be
+placed.<br>
+</p>
+<p align="left">When a commonTasksGroup component is dragged on to the
+commonTasksSection, a default title&nbsp; would be assigned to it.
+Users can drag on commonTask to this commonTasksGroup component. When
+a commonTask component is dragged on to the commonTasksGroup
+component, a default text&nbsp; will be assigned to it, which can
+be changed thro the palette. There will not be any visual
+representation of the toggled info panel. If the corresponding
+attributes for this panel are supplied by the user, then this panel
+will show up during the run time.<br>
+</p>
+<p align="left"><span style="font-weight: bold; font-style: italic;">Note:</span>
+As of current release, the common task components are not a part of the
+visual web pack.<br>
+</p>
+<p align="left">Properties in the designtime palette: <br>
+</p>
+<p align="left"><br>
+<br>
+</p>
+<table style="page-break-inside: avoid;" border="1" cellpadding="5" cellspacing="4" width="100%">
+  <col width="85*"> <col width="85*"> <col width="85*"> <thead> <tr valign="top">
+    <th width="33%">
+    <p>Component</p>
+    </th>
+    <th width="33%">
+    <p>Attribute </p>
+    </th>
+    <th width="33%">
+    <p>Attribute Type</p>
+    </th>
+  </tr>
+  </thead> <tbody>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">commonTasksSection</p>
+      </td>
+      <td width="33%">
+      <p align="left">id</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">title</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">helpText</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">columns<br>
+      </td>
+      <td style="vertical-align: top;">integer<br>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">style</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">styleClass</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">rendered</p>
+      </td>
+      <td width="33%">
+      <p align="left">boolean</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">visible</p>
+      </td>
+      <td width="33%">
+      <p align="left">boolean</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">binding</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">commonTasksGroup</p>
+      </td>
+      <td width="33%">
+      <p align="left">id</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">title</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">style</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">styleClass</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">rendered</p>
+      </td>
+      <td width="33%">
+      <p align="left">boolean</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">visible</p>
+      </td>
+      <td width="33%">
+      <p align="left">boolean</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">binding</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">commonTask</p>
+      </td>
+      <td width="33%">
+      <p align="left">id</p>
+      </td>
+      <td width="33%">
+      <p align="left"><a name="DDE_LINK4"></a>text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">actionExpression</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">actionExpressionListener</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">binding</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">icon</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">imageHeight</p>
+      </td>
+      <td width="33%">
+      <p align="left">numerical</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%"><br>
+      </td>
+      <td width="33%">
+      <p align="left">imageUrl</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%"><br>
+      </td>
+      <td width="33%">
+      <p align="left">imageWidth</p>
+      </td>
+      <td width="33%">
+      <p align="left">numerical</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">infoLinkText</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">infoLinkUrl</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">infoText</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">infoTitle</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">rendered</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">style</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">styleClass</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">target</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">tooltip</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">url</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">visible</p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left"><br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">onXXX attributes.(Mouse, key event related)<br>
+      </p>
+      </td>
+      <td width="33%">
+      <p align="left">text</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p align="left"><br>
+<br>
+</p>
+<h2 class="western" align="left">5.2 Design-time classes and interfaces</h2>
+<table style="page-break-inside: avoid;" border="1" cellpadding="5" cellspacing="4" width="100%">
+  <col width="84*"> <col width="86*"> <col width="85*"> <thead> <tr valign="top">
+    <th width="33%">
+    <p>Class name</p>
+    </th>
+    <th width="34%">
+    <p>Classification</p>
+    </th>
+    <th width="33%">
+    <p>Description </p>
+    </th>
+  </tr>
+  </thead> <tbody>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CommonTasksSectionBeanInfo</p>
+      </td>
+      <td width="34%">Stable</td>
+      <td width="33%">
+      <p align="left">Provides static meta data for the
+commonTasksSection component.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CommonTasksSectionDesignInfo</p>
+      </td>
+      <td width="34%">
+      <p align="left">Stable</p>
+      </td>
+      <td width="33%">
+      <p align="left">Describes how the commonTasksSection component
+should behave during design time.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CommonTasksGroupBeanInfo</p>
+      </td>
+      <td width="34%">
+      <p align="left">Stable</p>
+      </td>
+      <td width="33%">
+      <p align="left">Provides static meta data for the
+commonTasksGroup component.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CommonTasksGroupDesignInfo</p>
+      </td>
+      <td width="34%">
+      <p align="left">Stable</p>
+      </td>
+      <td width="33%">
+      <p align="left">Describes how the commonTasksGroup should behave
+during design time.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CommonTaskBeanInfo</p>
+      </td>
+      <td width="34%">
+      <p align="left">Stable</p>
+      </td>
+      <td width="33%">
+      <p align="left">Provides static meta data for the commonTask
+component </p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CommonTaskDesignInfo</p>
+      </td>
+      <td width="34%">
+      <p align="left">Stable</p>
+      </td>
+      <td width="33%">
+      <p align="left">Describes how the component should behave during </p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CommonTasksSectionDesignTimeRenderer</p>
+      </td>
+      <td width="34%">
+      <p align="left">Stable</p>
+      </td>
+      <td width="33%">
+      <p align="left">Renders the common tasks section on to the design
+canvas.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CommonTasksGroupDesignTimeRenderer</p>
+      </td>
+      <td width="34%">
+      <p align="left">Stable</p>
+      </td>
+      <td width="33%">
+      <p align="left">Renders the common tasks group on to the design
+canvas</p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p align="left">CommonTaskDesignTimeRenderer</p>
+      </td>
+      <td width="34%">
+      <p align="left">Stable</p>
+      </td>
+      <td width="33%">
+      <p align="left">Renders the task element on to the design canvas</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p align="left"><br>
+<br>
+</p>
+<h2 class="western" align="left">5.3 Localized Message Keys</h2>
+<p align="left">Please refer to 4.6.5 for a list of localized message
+keys from the commonTasksSection component.<br>
+Additionally, the following would be used</p>
+<p align="left">commonTasks.taskText – Default task text to come up
+when a commonTask component is first dragged on to the page.</p>
+<h2 class="western" align="left">6.0 Component Dependencies</h2>
+<p align="left"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+6.0.1&nbsp;&nbsp;&nbsp;&nbsp; If a preferences component exists, then
+the tasks that are shown on this page depend on the preferences made by
+the user on the preferences page.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+6.0.2&nbsp;&nbsp;&nbsp;&nbsp; Hyperlink component – CommonTask
+component uses the hyperlink to render the link that takes an user to a
+particular task. It also renders an hyperlink at the bottom of the info
+panel.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 6.0.3 &nbsp; &nbsp;
+HelpInline component – Renders the inline help for the
+commonTasksSection.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 6.0.4&nbsp;&nbsp;
+&nbsp; StaticText component – Render some of the styles for the
+commonTask and the text in the commonTask component.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 6.0.5
+&nbsp;&nbsp;&nbsp; ImageHyperlink, Image, icon components – Renders
+the images that come along with the task, the close link in the info
+panel and the “i” icon.</p>
+<h3 class="western" align="left">6.1 Component class dependencies</h3>
+<p align="left">None</p>
+<h3 class="western" align="left">6.2 Javascript dependencies</h3>
+<p align="left">None</p>
+<h3 class="western" align="left">6.3 Infrastructure dependencies</h3>
+<p align="left">None</p>
+<h3 class="western" align="left">6.4 Design time dependencies</h3>
+&nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;
+<h2 class="western" align="left">7.0 - Accessibility,
+Internationalization, Compliance (required)</h2>
+<h3 class="western" align="left">7.1 Accessibility (A11Y)</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+7.1.1 Each common task must have an corresponding "alt" text associated
+with it.<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 7.1.2 Tabbing on each task must
+take it to its corresponding "i" icon. If that does not exist, it must
+take it to the next commontask available for that common tasks group.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7.1.3 While navigating
+through the keyboard, if an info panel is open, the control must first
+go to the links inside the info panel before proceeding to the next
+task for the common tasks group.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7.1.4&nbsp; Skip hyperlinks must
+be available for each common tasks group. This would enable the user to
+skip a particular task group if he so wants to.<br>
+<h3 class="western" align="left">7.2 Internationalization (I18N)</h3>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7.2.1
+The title and the inline text for the for the common tasks section must
+have appropriate localized text.<br>
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 7.2.2&nbsp; The common
+tasks group title should have appropriate localized text.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7.2.3&nbsp; The text
+for each task element and in the info
+panel should have appropriate localized text.<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
+</p>
+<h3 class="western" align="left">7.3 Level of XHTML Compliance</h3>
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; 7.3.1 XHTML 1.0 Transitional<span style="font-style: italic;"><span style="font-weight: bold;"></span></span><br>
+<p style="margin-left: 40px;"><br>
+<br>
+</p>
+
+</body></html>

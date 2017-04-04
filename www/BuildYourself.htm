@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <!--
+      The contents of this file are subject to the terms
+      of the Common Development and Distribution License
+      (the License).  You may not use this file except in
+      compliance with the License.
+      
+      You can obtain a copy of the license at
+      https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      See the License for the specific language governing
+      permissions and limitations under the License.
+      
+      When distributing Covered Code, include this CDDL
+      Header Notice in each file and include the License file
+      at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      If applicable, add the following below the CDDL Header,
+      with the fields enclosed by brackets [] replaced by
+      you own identifying information:
+      "Portions Copyrighted [year] [name of copyright owner]"
+      
+      Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+    -->
+<title>Project Woodstock - Build the Source Yourself</title>
+<link href="browser-uispec.css" type="text/css" rel="stylesheet">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body bgcolor="#FFFFFF">
+<script src="js/uispec_js.js" type="text/javascript"></script>
+<div align="right" class="security-text"><a href="#skipnav" title="Skip Navigation Links"></a></div>
+<div class="MstDiv">
+  <table class="MstTblBot" width="100%" border="0" cellpadding="0" cellspacing="0" title="">
+
+    <tr>
+      <td class="MstTdTtl"><div class="MstDivTtl">
+          <div class="Mst1TtlTxt">Project Woodstock - Build the Source Yourself </div>
+        </div>
+        <div class="Mst1SecDiv"> <a href="index.html"><font color=#FFFFFF>Home Page</a> &gt;  <strong>How to build and deploy the components and example application </strong></div></td>
+    </tr>
+  </table>
+</div>
+
+<h3>Build the Source</h3>
+The Project Woodstock source code distribution includes the code for the components and an example application that demonstrates how to use the components API.&nbsp; See <a href="#SWrequirements">Software Requirements</a> for dependencies needed to build the source.<br>
+<br>
+Before you can download the source code, you will first need to:
+<ul>
+  <li><a href="https://www.dev.java.net/servlets/Join">Register</a> for an account on java.net</li>
+  <li>Install <a href="https://www.dev.java.net/nonav/scdocs/ddCVS.html">CVS</a> on your machine</li>
+</ul>
+To download the source code:
+<ul>
+  <li><a href="https://woodstock.dev.java.net/servlets/ProjectSource">Checkout</a> the source</li>
+</ul>
+To build from the command line, presuming you checked out the code into &lt;myWorkspace&gt;:
+<ul>
+  <li>ant -f &lt;myWorkspace&gt;/woodstock/master/build.xml<br>
+  </li>
+</ul>
+Alternatively, the Woodstock code comes complete with Netbeans 5.5 compatible project files such that each project can be loaded and build seperately within the Netbeans IDE:
+<ul>
+  <li>Launch netbeans. This task is different for each OS, so consult the Netbeans documentation.</li>
+  <li>From the File Menu, choose: Open Project</li>
+  <li>In the Open Project dialog, navigate to &lt;myWorkspace&gt;/woodstock</li>
+  <li>Select one of the available projects: <span style="font-style: italic;">example</span>, <span style="font-style: italic;">themes</span>, or <span style="font-style: italic;">webui</span>.&nbsp; If you choose <span style="font-style: italic;">example</span>, then <span style="font-style: italic;">themes</span> and <span style="font-style: italic;">webui</span> are loaded automatically.</li>
+  <li>Click the Open Project Folder button</li>
+  <li>In the Projects pane, right click on each project and select the Build Project menu item.&nbsp; The projects must be built in this order:&nbsp; <span style="font-style: italic;">webui</span>, <span style="font-style: italic;">themes</span>, <span style="font-style: italic;">example</span>.<br>
+  </li>
+</ul>
+<p>You can deploy &lt;myWorkspace&gt;/woodstock/example/dist/example.war to any supported web container container using<br>
+  the mechanisms available for that container, or thru Netbeans.
+    <br>
+</p>
+<h3><span style="font-style: italic;"><a name="SWrequirements"></a></span>Software Requirements</h3>
+<p><span style="font-weight: bold;">Java EE 5 Container that supports JSF 1.2 </span> - Project Woodstock supports these <a href="docs/SupportedContainers.htm">J2EE 5 Containers</a>.  The easiest way to get everything you need to develop apps using the Woodstock components is to get the latest <a href="http://www.netbeans.info/downloads/index.php">Netbeans</a> 5.5 or 6 IDE bundled with App Server 9 or Tomcat 6. You can also download GlassFish from <a href="http://glassfish.dev.java.net/public/downloadsindex.html">here</a>.</p>
+<p><span style="font-weight: bold;">JDK 1.5.0</span> -The Java version should be at least 1.5.0_06, with 1.5.0_08 recommended.&nbsp;&nbsp; If you will be using the Visual Web Pack, 1.5.0_08 is required.</p>
+<span style="font-weight: bold;">Ant 1.7</span> - This Ant version is included in NetBeans 6.0. If not using NetBeans, you can get Ant 1.7 from the <a href="http://ant.apache.org/">Apache Ant site</a>. <br>
+<p><span style="font-weight: bold;">Netbeans&nbsp; 5.5 </span>- Netbeans is not required to use the components, but is recommended because of its source level debugging, and full featured editor for building web applications.&nbsp; If you use Netbeans, it should be at least version 5.5<span style="text-decoration: line-through;"></span>.&nbsp; You can download various different bundles that contain Netbeans 5.5 from <a href="http://www.netbeans.org/downloads/index.html">netbeans.org</a>.<br>
+</p>
+</BODY>
+</HTML>

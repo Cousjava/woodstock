@@ -1,0 +1,1491 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><!--
+The contents of this file are subject to the terms
+of the Common Development and Distribution License
+(the License). You may not use this file except in
+compliance with the License.
+You can obtain a copy of the license at
+https://woodstock.dev.java.net/public/CDDLv1.0.html.
+See the License for the specific language governing
+permissions and limitations under the License.
+When distributing Covered Code, include this CDDL
+Header Notice in each file and include the License file
+at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+If applicable, add the following below the CDDL Header,
+with the fields enclosed by brackets [] replaced by
+you own identifying information:
+"Portions Copyrighted [year] [name of copyright owner]"
+Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+-->
+
+
+<title>Project Woodstock - Component FS Template</title><style type="text/css"> /* <![CDATA[ */
+@import url(../../browser-uispec.css);
+.style2 {font-size: 18pt}
+</style>
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type"></head>
+<body style="background-color: rgb(255, 255, 255);">
+<div class="security-text" align="right"></div>
+<div class="MstDiv">
+<table class="MstTblBot" title="" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td class="MstTdTtl">
+<div class="MstDivTtl">
+<div class="Mst1TtlTxt">Project Woodstock</div>
+</div>
+<div class="Mst1SecDiv"> <span class="Mst1SecTxt style2">Component Functional Spec - Rating
+</span></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<table class="Mst2Tbl" style="width: 100%;" title="" border="0" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td> <br>
+<h2 style="font-weight: bold;"><a name="1.0"></a>1.0
+Component Overview</h2>
+<h3><span style="font-weight: bold;"><a name="1.1"></a>1.1 Document Revision History</span></h3>
+<table style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td style="width: 15%; text-align: center;"><span style="font-weight: bold;">Revision</span></td>
+<td style="width: 15%; text-align: center;"><span style="font-weight: bold;">Date</span></td>
+<td style="width: 50%; text-align: center;"><span style="font-weight: bold;">Synopsis</span></td>
+<td style="width: 20%; text-align: center;"><span style="font-weight: bold;">Author</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">01/25/2008</td>
+<td style="text-align: center;">Initial Draft</td>
+<td style="text-align: center;">Bob Yennaco</td>
+</tr>
+<tr>
+<td style="text-align: center;">0.2</td>
+<td style="text-align: center;">02/26/2008</td>
+<td style="text-align: center;">updated based
+on feedback from Bill &amp; after some prototyping</td>
+<td style="text-align: center;">Bob Yennaco</td>
+</tr><tr><td style="text-align: center;">0.3</td><td style="text-align: center;">03/07/2008</td><td style="text-align: center;">updated based on feedback from Dan</td><td style="text-align: center;">Bob Yennaco</td></tr><tr><td style="text-align: center;">0.4</td><td style="text-align: center;">03/28/2008</td><td style="text-align: center;">remove event.state topics</td><td style="text-align: center;">Bob Yennaco</td></tr><tr><td style="text-align: center;">0.5</td><td style="text-align: center;">06/09/2008</td><td style="text-align: center;">add event for grade select</td><td style="text-align: center;">Bob Yennaco</td></tr>
+</tbody>
+</table>
+<h3 style="font-weight: bold;"><a name="1.2"></a>1.2
+Component Description<br>
+</h3>
+<div style="margin-left: 40px;">The
+Rating component displays a series of images, each of which signifies a
+rating (or grade) level. &nbsp;There are two sets of interfaces in
+this
+component: A client side javascript interface that allows user to
+dynamically manipulate the widget and a server side JSF based component
+interface.</div>
+<h3><a name="1.3"></a>1.3 Component
+Purpose</h3>
+<div style="margin-left: 40px;">The Rating component
+is intended to be
+used in cases where it desireable for the user to be able to assign a
+rating to an item. &nbsp;The user need only click on one of a
+series of
+images to assign a rating. &nbsp;This component was originally made
+available as part of <a href="https://blueprints.dev.java.net/">Blueprints</a>
+project (now obsolete), but which has been requested to be integrated
+into the Woodstock component library and made available in the <a href="http://www.netbeans.org/features/web/web-app.html">VisualWeb
+interface of Netbeans</a>.</div>
+<h3 style="font-weight: bold;"><a name="1.4"></a>1.4
+Relevant Documents</h3>
+<ul>
+<li><a href="https://blueprints.dev.java.net/complib/v2/ratings.html"><span></span></a><a href="https://blueprints.dev.java.net/complib/v2/ratings.html">Blueprints
+Rating Component</a> </li>
+<li>link to test spec (required for final revision)</li>
+<li><a href="https://woodstock.dev.java.net/docs/specs/ajax-architecture-spec.html">Ajax
+Architecture for Woodstock JavaServer Faces</a></li>
+<li><a href="https://woodstock.dev.java.net/docs/specs/ajax-architecture-example.html">Ajax
+Architecture Example for Woodstock JavaServer Faces</a></li>
+</ul>
+<h3><a name="1.5"></a>1.5 Definition of
+Terms</h3>
+<div style="margin-left: 40px;">See section 1.3 of <a href="https://woodstock.dev.java.net/docs/specs/ajax-architecture-spec.html">Ajax
+Architecture for Woodstock JavaServer Faces</a><br>
+<br>
+The following terms are applicable only to the rating component:<br>
+<ul>
+<li>Normal (or user) mode - the visual showing the user's
+grade</li>
+<li>Average mode - the visual showing the average grade.</li>
+</ul>
+</div>
+<h2><a name="2.0"></a>2.0 Requirements,
+goals, and assumptions</h2>
+<h3><a name="2.1"></a>2.1 Requirements</h3>
+<div style="margin-left: 40px;">Netbeans evangelists
+state that
+developers are asking for the Blueprints rating component to be
+included on the Visual Web pallette in Netbeans. Additionally, they
+would like a rating component for use on the netbeans.org portal.</div>
+<h3><a name="2.1.1"></a>2.1.1 UI
+requirements</h3>
+<div style="margin-left: 40px;">See <a href="http://webdev2.sun.com/bp-rating/faces/index.jsp">Blueprints
+example</a> and <a href="http://plugins.netbeans.org/PluginPortal/">Netbeans
+Plugin Catalog portal</a>.<br>
+<br>
+The following diagram shows many of the possible rating component
+configurations:<br>
+<img style="width: 527px; height: 495px;" alt="" src="ratings.gif"><span style="text-decoration: underline;"></span><br>
+<br>
+No other UI requirements or guidelines are available at this time.<br>
+<br>
+<a name="2.1.1-behavior"></a>There
+are some client-side behavioral characteristics which are important to
+highlight here. Hovering over any image BUT the mode toggle image (the
+"people" image) shows a preview of what you'll get if
+you eventually click on it.&nbsp; For example, if the current grade
+is
+4,
+then the 1st 4 stars are color-filled.&nbsp; If you hover over star
+#3,
+then
+the 1st 3 stars will be color-filled.&nbsp; When you move the mouse
+off
+that
+star #3, then the preview goes away and you see 4 color-filled stars
+again. &nbsp;Hovering over the mode toggle image shows a preview of
+the
+other mode.
+</div>
+<h3><a name="2.1.2"></a>2.1.2 Functional
+requirements</h3>
+<div style="margin-left: 40px;">Although no formal
+requirements have
+been provided, we can extract the following requirements based on the
+Blueprint rating component:<br>
+<br>
+2.1.2.1 Must support a configureable number of grades (stars).<br>
+2.1.2.2 Must optionally allow the user to be able to indicate no
+interest in the rating.<br>
+2.1.2.3 Must optionally allow the user to clear his/her grade.<br>
+2.1.2.4 Must optionally allow switching the component to show the
+average grade of several user grade settings.<br>
+2.1.2.5 Must optionally allow specification of custom hover text to be
+rendered upon mouseover on each image.<br>
+2.1.2.6 Must optionally allow specification of acknowledgement hover
+text to be displayed upon mouseclick on each image.<br>
+2.1.2.7 Must be able to render read-only, so that the user cannot
+select a grade or view the average grade.<br>
+2.1.2.8 Must allow the developer to register Javascript callback
+functions when any image is clicked.<br>
+<br>
+</div>
+<h3><a name="2.1.3"></a>2.1.3
+Performance requirements</h3>
+<div style="margin-left: 40px;">This component is a
+highly interactive
+client-side component and therefore must not negatively impact normal
+user interaction with the mouse.</div>
+<h3><a name="2.1.4"></a>2.1.4 Browser,
+platform requirements</h3>
+<ul>
+<li>The table of supported <a href="../SupportedBrowers.htm">Browsers</a>.</li>
+<li>The table of supported <a href="../SupportedContainers.htm">Containers</a>.</li>
+</ul>
+<h3><a name="2.1.5"></a>2.1.5 Special
+requirements</h3>
+<div style="margin-left: 40px;">2.1.5.1 Shall not be
+dependent on the underlying JSF framework.<br>
+2.1.5.2 Javascript shall not include references to server-side
+frameworks (JSF, JSP, Dynamic Faces).</div>
+<h3><a name="2.2"></a>2.2 Requirements
+Not Met</h3>
+<div style="margin-left: 40px;">N/A</div>
+<h3><a name="2.3"></a>2.3 Assumptions</h3>
+<div style="margin-left: 40px;">2.3.1 The Dojo
+toolkit shall be used to create template based widgets.<br>
+2.3.2 JSON shall be used to define client-side widget properties.<br>
+2.3.3 The locale does not change during Ajax requests.<br>
+</div>
+<h3>2.4 Goals</h3>
+<div style="margin-left: 40px;">N/A</div>
+<h3><a name="2.5"></a>2.5 Non-goals</h3>
+<div style="margin-left: 40px;">It is not a goal to
+allow the developer
+to directly configure custom images for the component.
+&nbsp;However
+such capability can be achieved by customizing the theme.</div>
+<h2><a name="3.0"></a>3.0 Component Usage</h2>
+<div style="margin-left: 40px;">
+<p>The most typical way to use a
+Woodstock component is with a JSP tag. &nbsp;For example, the
+Rating
+component usage in a JSP page might look like this:</p>
+<pre> <code> &lt;webuijsf:rating id="rating" <br>      autoSubmit="true"<br>      maxGrade="#{RatingBean.maxGrade}"<br>      includeNotInterested="true" <br>      includeClear="true"<br>      gradeHoverTexts="#{RatingBean.gradeHoverTexts}"<br>      notInterestedHoverText="#{RatingBean.notInterestedHoverText}"<br>      clearHoverText="#{RatingBean.clearHoverText}"<br>      gradeAcknowledgedText="#{RatingBean.gradeAcknowledgedText}"<br>      averageGrade="#{RatingBean.averageGrade}"<br>      grade="#{RatingBean.grade}" /&gt;</code><br></pre>
+where the attribute values are defined in the RatingBean as follows:<br>
+<pre> import com.sun.webui.jsf.component.Rating;<br><br> <code> public class RatingBean {<br></code><code></code><code> </code><code> </code><code>    private int maxGrade = 5;<br></code><code> </code><code> </code><code>    private int grade = Rating.CLEAR_GRADE; // initially clear<br>      private double averageGrade = 0.0;<br>      private int gradeSum = 0; // sum of all grade selections<br>      private int numGrades = 0; // total number of grades<br><br></code><code> </code><code> </code><code>    private String[] gradeHoverTexts = {<br></code><code> </code><code> </code><code> </code><code>       "Hate it",<br></code><code> </code><code> </code><code> </code><code>       "Below Average",<br></code><code> </code><code> </code><code> </code><code>       "Average",<br></code><code> </code><code> </code><code> </code><code>       "Above Average",<br></code><code> </code><code> </code><code> </code><code>       "Love it"<br></code><code>    </code><code> </code><code> };<br></code><code><br></code><code> </code><code> </code><code>    public int getMaxGrade() {<br></code><code> </code><code> </code><code> </code><code>       return maxGrade;<br></code><code> </code><code> </code><code>    }<br><br></code><code> </code><code> </code><code>    public String[] getGradeHoverTexts() {<br></code><code> </code><code> </code><code> </code><code>       return gradeHoverTexts;<br></code><code> </code><code> </code><code>    }<br><br></code><code> </code><code> </code><code>    public String getNotInterestedHoverText() {<br></code><code> </code><code> </code><code> </code><code>       return "Not Interested";<br></code><code> </code><code> </code><code>    }<br><br></code><code> </code><code> </code><code>    public String getClearHoverText() {<br></code><code> </code><code> </code><code> </code><code>       return "Clear Rating";<br></code><code> </code><code> </code><code>    }<br><br></code><code> </code><code> </code><code>    public String getGradeAcknowledgedText() {<br></code><code> </code><code> </code><code> </code><code>       return "Thank you!";<br></code><code> </code><code> </code><code>    }<br><br></code><code> </code><code> </code><code>    public int getGrade() {<br></code><code> </code><code> </code><code> </code><code>       return grade;<br></code><code> </code><code> </code><code>    }<br><br></code><code> </code><code> </code><code>    public void setGrade(int grade) {<br></code><code> </code><code> </code><code> </code><code>       this.grade = grade;<br> <br>          // Not interested nor clear grade factors into average grade.<br>          if (this.grade == Rating.NOT_INTERESTED_GRADE) || </code><code>this.grade == Rating.CLEAR_GRADE)</code><code> {<br>              return;<br>          } <br> <br>          gradeSum += grade;<br>          numGrades++;<br></code><code>    </code><code> </code><code> }<br><br>      public double getAverageGrade() {<br>          if (numGrades == 0)<br>              return 0.0;<br> <br>          // Compute average grade, rounded to neaest .001<br>          averageGrade = (double)gradeSum / numGrades;<br>          averageGrade = Math.rint(averageGrade * 1000) / 1000;<br>          return averageGrade;<br>      }<br> </code><code> </code><code>}</code></pre>
+Using
+the JSP tag, all the in-line JavaScript necessary to generate a Dojo
+widget is automatically output in the rendered HTML page. This includes
+the name of the desired widget, any localized and themed properties
+required to populate the HTML template, and any JavaScript files (e.g.,
+widget JavaScript) necessary to support the Dojo Widget. &nbsp;So
+the
+above example would yield:<br>
+<pre> <code> </code><code>webui.suntheme.widget.common._createWidget("spanID",{<br></code><code> </code><code> </code><code> "id": "form:rating",<br>   "autoSubmit" : true,<br></code><code></code><code> </code><code> </code><code> "maxGrade": 5,<br></code><code> </code><code> </code><code> "grade": </code><code>0</code><code>,<br>   "averageGrade": 0.0,<br></code><code>&nbsp;</code><code></code><code>  "widgetType": "webui.suntheme.widget.rating",<br>   "includeNotInterested": true,<br> </code><code>  "includeClear": true,<br></code><code>&nbsp;</code><code></code><code>  "gradeHoverTexts": [<br></code><code> </code><code> </code><code> </code><code>  "Hate It",<br></code><code> </code><code> </code><code> </code><code>  "Below Average",<br></code><code> </code><code> </code><code> </code><code>  "Average",<br></code><code> </code><code> </code><code> </code><code>  "Above Average",<br></code><code> </code><code> </code><code> </code><code>  "Love It"<br></code><code> </code><code> </code><code> ],<br></code><code> </code><code> </code><code> "notInterestedHoverText": "Not Interested",<br></code><code> </code><code> </code><code> "clearHoverText": "Clear Rating",<br></code><code> </code><code> </code><code> "gradeAcknowledgedText": "Thank you!"<br></code><code> </code><code> });</code><br></pre>
+This
+JavaScript can also be coded directly by web app developers who cannot,
+or do not want to, use the JSP and/or JSF frameworks.<br>
+</div>
+<h2><a name="4.0"></a>4.0 Component
+Interfaces</h2>
+<h3><a name="4.1"></a>4.1 Exported
+interfaces table</h3>
+<br>
+<table style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<th style="vertical-align: top; width: 20%;">
+<p>Interface Name<br>
+</p>
+</th>
+<th style="vertical-align: top; width: 20%;">
+<p>Classification<br>
+</p>
+</th>
+<th style="vertical-align: top; width: 20%;">
+<p>Reference<br>
+</p>
+</th>
+<th style="vertical-align: top; width: 40%;">
+<p>Comments<br>
+</p>
+</th>
+</tr>
+<tr>
+<td>com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/rating.js</td>
+<td>Committed</td>
+<td>Section 4.5</td>
+<td>Javascript file for this component</td>
+</tr>
+<tr>
+<td>com.sun.webui.jsf.component.Rating.java<br>
+</td>
+<td>Committed</td>
+<td>Section 4.3</td>
+<td>JSF component class</td>
+</tr>
+<tr>
+<td>com.sun.webui.jsf.renderkit.ajax.RatingRenderer.java
+</td>
+<td>Private<br>
+</td>
+<td><br>
+</td>
+<td>ajax renderer for this component </td>
+</tr>
+<tr>
+<td>com.sun.webui.jsf.renderkit.widget.RatingRenderer.java</td>
+<td>Private</td>
+<td></td>
+<td>widget renderer for this component</td>
+</tr>
+<tr>
+<td>com.sun.webui.jsf.renderkit.html.RatingRenderer.java</td>
+<td>Private</td>
+<td></td>
+<td>design-time renderer for this component</td>
+</tr>
+</tbody>
+</table>
+<h3><a name="4.2"></a>4.2 Imported
+interfaces</h3>
+<br>
+<table style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<th style="vertical-align: top; width: 20%;">
+<p>Interface Name<br>
+</p>
+</th>
+<th style="vertical-align: top; width: 20%;">
+<p>Classification<br>
+</p>
+</th>
+<th style="vertical-align: top; width: 20%;">
+<p>Reference<br>
+</p>
+</th>
+<th style="vertical-align: top; width: 40%;">
+<p>Comments<br>
+</p>
+</th>
+</tr>
+<tr>
+<td>jsf-api.jar</td>
+<td>Standard</td>
+<td>JSR 127</td>
+<td>JSF components API library, version 1.2</td>
+</tr>
+<tr>
+<td>json-2.jar</td>
+<td>Standard</td>
+<td>www.json.org</td>
+<td>The JavaScript Object Notation library</td>
+</tr>
+<tr>
+<td>com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/common.js</td>
+<td>Private</td>
+<td></td>
+<td>Utility script for widgets</td>
+</tr>
+</tbody>
+</table>
+<br><div style="margin-left: 80px;">Note: The
+&lt;theme&gt; tag is intended to be replaced with the theme
+name (e.g., suntheme).</div><h3><a name="4.3"></a>4.3 Component
+interfaces</h3>
+<div style="margin-left: 40px;"><span style="font-weight: bold;">com.sun.webui.jsf.component</span><br>
+<big><big><span style="font-weight: bold;">Class
+Rating</span></big></big><br>
+<br>
+<code>java.lang.Object<br>
+&nbsp; extended by javax.faces.component.UIComponent<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; extended by
+javax.faces.component.UIComponentBase<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+extended by javax.faces.component.UIOutput<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+extended by javax.faces.component.UIInput<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+extended by com.sun.webui.jsf.component.WebuiInput<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+extended <span style="font-weight: bold;">by
+com.sun.webui.jsf.component.Rating</span></code><br>
+<br>
+<span style="font-weight: bold;">All Implemented
+Interfaces:</span><br>
+&nbsp;&nbsp;&nbsp;
+javax.faces.component.EditableValueHolder,
+javax.faces.component.StateHolder, javax.faces.component.ValueHolder<br>
+<br>
+<code>public class <span style="font-weight: bold;">Rating</span><br>
+extends WebuiInput</code><br>
+<br>
+</div>
+<table style="text-align: left; width: 95%; margin-left: 40px; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td style="background-color: rgb(51, 204, 255);" colspan="2"><span style="font-weight: bold;">Field
+Summary</span></td>
+</tr>
+<tr>
+<td>static int</td>
+<td><span style="font-weight: bold;">CLEAR_GRADE</span><br>
+&nbsp; &nbsp; The value of a grade when it is marked "cleared".</td>
+</tr>
+<tr>
+<td>static int</td>
+<td><span style="font-weight: bold;">NOT_INTERESTED_GRADE</span><br>
+&nbsp; &nbsp; The value of a grade when it is marked "not interested".</td>
+</tr>
+</tbody>
+</table>
+<br>
+
+<table style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td style="background-color: rgb(51, 204, 255);"><span style="font-weight: bold;">Constructor Summary</span></td>
+</tr>
+<tr>
+<td><span style="font-weight: bold;">Rating</span>
+&nbsp; create new instance of Rating</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table style="text-align: left; width: 95%; margin-left: 40px; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td style="background-color: rgb(51, 204, 255);" colspan="2"><span style="font-weight: bold;">Method
+Summary</span></td>
+</tr>
+<tr>
+<td>double</td>
+<td><span style="font-weight: bold;">getAverageGrade</span>()<br>
+&nbsp; &nbsp; Get the average grade the general user population
+has assigned to the item. &nbsp;Will be between 0.0 and the maximum
+grade and rounded to the nearest 1/2 grade.</td>
+</tr>
+<tr>
+<td>String</td>
+<td><span style="font-weight: bold;">getClearAcknowledgedText</span>()<br>
+&nbsp; &nbsp; Returns the acknowledged text for the clear
+control. &nbsp;Returns null if not set.</td>
+</tr>
+<tr>
+<td>String</td>
+<td><span style="font-weight: bold;">getClearHoverText</span>()<br>
+&nbsp; &nbsp; Returns the hover text for the clear control.
+&nbsp;Returns null if not set.</td>
+</tr>
+<tr>
+<td>int</td>
+<td><span style="font-weight: bold;">getGrade</span>()<br>
+&nbsp; &nbsp;
+Return the grade (number of "stars") the user has
+assigned the item. For "not interested", the value returned
+is&nbsp; <code>Rating.NOT_INTERESTED_GRADE</code>, and
+for a "clear" grade the value returned is <code>Rating.CLEAR_GRADE</code>.</td>
+</tr>
+<tr>
+<td>String</td>
+<td><span style="font-weight: bold;">getGradeAcknowledgedText</span>()<br>
+&nbsp; &nbsp; Return the text that is displayed after clicking
+on a grade component.</td>
+</tr>
+<tr>
+<td>String[]</td>
+<td><span style="font-weight: bold;">getGradeHoverTexts</span>()<br>
+&nbsp; &nbsp; Returns the hover texts that are used for
+the grade controls, ordered from lowest to highest rating.
+&nbsp;That is, the first element of the returned array will be the
+hover text associated with the lowest
+rating; &nbsp;the last element with the highest rating.
+&nbsp;Returns null if no texts have been set.</td>
+</tr>
+<tr>
+<td>int</td>
+<td><span style="font-weight: bold;">getMaxGrade</span>()<br>
+&nbsp; &nbsp; Return the maximum grade (number of "stars") this
+rating instance allows.</td>
+</tr>
+<tr>
+<td>String[]</td>
+<td><span style="font-weight: bold;">getModeToggleAcknowledgedTexts</span>()<br>
+&nbsp; &nbsp; Returns the acknowledged texts that are used for
+the
+mode toggle control. &nbsp;The first element of the returned array
+is the acknowledged text displayed after clicking on the mode toggle
+control
+to preview the user's rating (nomal mode). &nbsp;The second
+element is the text displayed&nbsp;after clicking on the mode
+toggle control to preview the average
+rating (average mode). &nbsp;If at least one of the texts has been
+specified but one has not, then null is returned in the array element
+for the missing text. &nbsp;Returns null if no acknowledged texts
+have
+been specified.</td>
+</tr>
+<tr>
+<td>String[]</td>
+<td><span style="font-weight: bold;">getModeToggleHoverTexts</span>()<br>
+&nbsp; &nbsp; Returns the hover texts that are used for the
+mode toggle control. &nbsp;The first element of the returned array
+is the hover text displayed when hovering over the mode toggle control
+to preview the user's rating (nomal mode). &nbsp;The second
+element is the text displayed when hovering to preview the average
+rating (average mode). &nbsp;If at least one of the texts has been
+specified but one has not, then null is returned in the array element
+for the missing text. &nbsp;Returns null if no hover texts have
+been specified.</td>
+</tr>
+<tr>
+<td>String</td>
+<td><span style="font-weight: bold;">getNotInterestedAcknowledgedText</span>()<br>
+&nbsp; &nbsp; Returns the acknowledged text used for the "not
+interested" control. &nbsp;Returns null is not set.</td>
+</tr>
+<tr>
+<td>String</td>
+<td><span style="font-weight: bold;">getNotInterestedHoverText</span>()<br>
+&nbsp; &nbsp; Returns the hover text used for the "not
+interested" control. &nbsp;Returns null if not set.</td>
+</tr>
+<tr><td>boolean</td><td><span style="font-weight: bold;">isAutoSubmit</span>()<br>&nbsp;
+&nbsp;&nbsp;Return true if the grade is automatically submitted to the
+server via an Ajax request immediately after the grade is selected,
+false if not.</td></tr><tr>
+<td>boolean</td>
+<td><span style="font-weight: bold;">isGradeReadOnly</span>()<br>
+&nbsp; &nbsp; Return true if the grade of this rating component
+can be changed by the user, false if not. </td>
+</tr>
+<tr>
+<td>boolean</td>
+<td><span style="font-weight: bold;">isInAverageMode</span>()<br>
+&nbsp; &nbsp; Return true if the component is
+rendered displaying the average grade, false if component is
+rendered displaying the user's grade (normal mode).</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td><span style="font-weight: bold;">isIncludeClear</span>()<br>
+&nbsp; &nbsp; Return true if a control to clear the user's
+rating is rendered, false if not.</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td><span style="font-weight: bold;">isIncludeModeToggle</span>()<br>
+&nbsp; &nbsp; Return true if a control to toggle the mode (to
+show the average rating or the user's rating) is rendered, false if not.</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td><span style="font-weight: bold;">isIncludeNotInterested</span>()<br>
+&nbsp; &nbsp; Return true if a control to&nbsp;allow the
+user to assign a "not interested" rating is rendered, false if not.</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td><span style="font-weight: bold;">isIncludeText</span>()<br>
+&nbsp; &nbsp; Return true if an area to show hover text or
+post-click acknowledged text is rendered, false if not.</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td><span style="font-weight: bold;">isModeReadOnly</span>()<br>
+&nbsp; &nbsp; Return true if the mode of this rating component
+can be changed by the user (via the mode toggle control), false if not.</td>
+</tr>
+<tr><td>void</td><td><span style="font-weight: bold;">setAutoSubmit</span>(boolean autoSubmit)<br>&nbsp;
+&nbsp; Set whether the grade is automatically submitted to the server
+via an Ajax request immediately after the grade is selected. &nbsp;The
+default is false - it is NOT automatically submitted.</td></tr><tr>
+<td>void</td>
+<td><span style="font-weight: bold;">setAverageGrade</span>(double
+averageGrade)<br>
+&nbsp; &nbsp; Set the
+average grade the general user population has assigned to the item.
+&nbsp;Must be between 0.0 and the maximum grade. &nbsp;The
+default is 0.</td>
+</tr>
+<tr>
+<td>void</td>
+<td><span style="font-weight: bold;">setClearAcknowledgedText</span>(String
+ackText)<br>
+&nbsp; &nbsp; Set the acknowledged text for the clear control.</td>
+</tr>
+<tr>
+<td>void</td>
+<td><span style="font-weight: bold;">setClearHoverText</span>(String
+hoverText)<br>
+&nbsp; &nbsp; Set the hover text&nbsp;for the clear control.</td>
+</tr>
+<tr>
+<td>void</td>
+<td><span style="font-weight: bold;">setGrade</span>(int
+grade)<br>
+&nbsp; &nbsp; Set the grade (number of "stars") the user has
+assigned the item. Use
+<code>Rating.NOT_INTERESTED_GRADE</code> for
+"not interested" and
+<code>Rating.CLEAR_GRADE</code> for a "clear"
+grade (effectively, set it to 0). &nbsp;The default is
+<code>Rating.CLEAR_GRADE</code>.</td>
+</tr>
+<tr>
+<td>void</td>
+<td><span style="font-weight: bold;">setGradeAcknowledgedText</span>(String
+ackText)<br>
+&nbsp; &nbsp; Set the text that is displayed after clicking on
+a grade component.</td>
+</tr>
+<tr>
+<td>void</td>
+<td><span style="font-weight: bold;">setGradeHoverTexts</span>(String[]
+hoverTexts)<br>
+&nbsp; &nbsp; Set the hover texts that will be used for
+the grade controls, ordered from lowest to highest rating.
+&nbsp;That is, hoverTexts[0] will be the hover text associated with
+the lowest rating; &nbsp;hoverTexts[hoverTexts.length-1] with the
+highest rating. &nbsp;Null can be specified as a member of the
+array. &nbsp;There are no defaults.</td>
+</tr>
+<tr>
+<td>void</td>
+<td><span style="font-weight: bold;">setGradeReadOnly</span>(boolean
+readOnly)<br>
+&nbsp; &nbsp; Set whether the grade of this rating component
+can be changed by the user. &nbsp;The default is false - it is NOT
+read-only, and therefore can be changed by the user.</td>
+</tr>
+<tr>
+<td>void</td>
+<td><span style="font-weight: bold;">setInAverageMode</span>(boolean
+inAverageMode)<br>
+&nbsp; &nbsp; &nbsp;Set whether the component will be
+rendered displaying the average grade. &nbsp;The default is false,
+the component will be rendered showing the user's rating (normal mode).</td>
+</tr>
+<tr>
+<td>void</td>
+<td><span style="font-weight: bold;">setIncludeClear</span>(boolean
+includeClear)<br>
+&nbsp; &nbsp; Set whether a control to clear the user's rating
+should be displayed. &nbsp;The default is true.</td>
+</tr>
+<tr>
+<td>void</td>
+<td><span style="font-weight: bold;">setIncludeModeToggle</span>(boolean
+includeModeToggle)<br>
+&nbsp; &nbsp; Set whether a control to toggle the mode (to show
+the average rating or the user's rating) should be rendered.
+&nbsp;The default is false.</td>
+</tr>
+<tr>
+<td>void</td>
+<td><span style="font-weight: bold;">setIncludeNotInterested</span>(boolean
+includeNotInterested)<br>
+&nbsp; &nbsp; Set whether a control to allow the user to assign
+a "not interested" rating should be rendered. &nbsp;The default is
+true.</td>
+</tr>
+<tr>
+<td>void</td>
+<td><span style="font-weight: bold;">setIncludeText</span>(boolean
+includeText)<br>
+&nbsp; &nbsp; Set whether an area for hover or post-click
+acknowledged text should be rendered.
+&nbsp;The default is true.</td>
+</tr>
+<tr>
+<td>void</td>
+<td><span style="font-weight: bold;">setMaxGrade</span>(int
+maxGrade)<br>
+&nbsp; &nbsp; Set the maximum grade (number of "stars") this
+rating instance allows. &nbsp;There is no default, and so must be
+set.</td>
+</tr>
+<tr>
+<td>void</td>
+<td><span style="font-weight: bold;">setModeReadOnly</span>(boolean
+readOnly)<br>
+&nbsp;
+&nbsp; Set whether the mode of this rating component can be changed
+by the
+user (via the mode toggle control). &nbsp;The default is false - it
+is NOT read-only, and therefore can be
+changed by the user.</td>
+</tr>
+<tr>
+<td>void</td>
+<td><span style="font-weight: bold;">setModeToggleAcknowledgedTexts</span>(String[]
+acknowledgedTexts)<br>
+&nbsp; &nbsp; Sets the acknowledged texts to be used for the
+mode
+toggle control.
+&nbsp;The first element of the array is the acknowledged text
+displayed after clicking on the mode toggle control to preview the
+user's
+rating (normal mode). &nbsp;The second element is the text
+displayed after clicking to preview the average rating (average mode).
+&nbsp;
+&nbsp;Null can be specified as a member of the array.</td>
+</tr>
+<tr>
+<td>void</td>
+<td><span style="font-weight: bold;">setModeToggleHoverTexts</span>(String[]
+hoverTexts)<br>
+&nbsp; &nbsp; Sets the hover texts to be used for the mode
+toggle control.
+&nbsp;The first element of the array is the hover text
+displayed
+when hovering over the mode toggle control to preview the user's
+rating (normal mode). &nbsp;The second element is the text
+displayed when
+hovering to preview the average rating (normal mode). &nbsp;
+&nbsp;Null can be specified as a member of the array.</td>
+</tr>
+<tr>
+<td>void</td>
+<td><span style="font-weight: bold;">setNotInterestedAcknowledgedText</span>(String
+ackText)<br>
+&nbsp; &nbsp; Set the acknowledged text for the "not
+interested" control.</td>
+</tr>
+<tr>
+<td>void</td>
+<td><span style="font-weight: bold;">setNotInterestedHoverText</span>(String
+hoverText)<br>
+&nbsp; &nbsp; Set the hover text for the "not interested"
+control.</td>
+</tr>
+</tbody>
+</table>
+<h3><a name="4.4"></a>4.4 Tag interfaces</h3>
+<br>
+<table style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td style="vertical-align: top;"><span style="font-weight: bold;">Name</span><br>
+</td>
+<td style="vertical-align: top;"><span style="font-weight: bold;">Required</span><br>
+</td>
+<td style="vertical-align: top;"><span style="font-weight: bold;">Request-time</span><br>
+</td>
+<td style="vertical-align: top;"><span style="font-weight: bold;">Type</span><br>
+</td>
+<td style="vertical-align: top;"><span style="font-weight: bold;">Description</span><br>
+</td>
+</tr>
+<tr><td>autoSubmit</td><td>false</td><td>false</td><td>java.lang.String</td><td>Indicates
+whether the grade is automatically submitted to the server via an Ajax
+request immediately after the grade is selected. &nbsp;The default is
+false - it is NOT automatically submitted.</td></tr><tr>
+<td>averageGrade</td>
+<td>false</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>The
+average grade the general user population has assigned to the item.
+&nbsp;Must be between 0.0 and the maximum grade.
+&nbsp;&nbsp;This
+attribute should be set to a value binding expression that corresponds
+to a
+property of a managed bean so it can be updated whenever a grade is
+clicked and the grade property is updated asynchronously.</td>
+</tr>
+<tr>
+<td style="vertical-align: top;">binding<br>
+</td>
+<td style="vertical-align: top;">false<br>
+</td>
+<td style="vertical-align: top;">false<br>
+</td>
+<td style="vertical-align: top;">java.lang.String<br>
+</td>
+<td style="vertical-align: top;">A
+ValueExpression that resolves to the UIComponent that corresponds to
+this tag. This binding allows the Java bean that contains the
+UIComponent to manipulate the UIComponent, its properties, and its
+children.<br>
+</td>
+</tr>
+<tr>
+<td>clearAcknowledgedText</td>
+<td>false</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>The acknowledged text for the clear control.
+&nbsp;There is no default.</td>
+</tr>
+<tr>
+<td>clearHoverText</td>
+<td>false</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>The hover text&nbsp;for the clear control.
+&nbsp;There is no default.</td>
+</tr>
+<tr>
+<td>grade</td>
+<td>false</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>The grade (number of "stars") the user has
+assigned the item. &nbsp;This attribute should be set to a value binding expression
+that corresponds to a
+property of a managed bean so it can be updated whenever a grade is
+clicked. &nbsp;A managed bean can set the value to <code>Rating.NOT_INTERESTED_GRADE</code> for a not interested grade and <code>Rating.CLEAR_GRADE</code> for a cleared (effectively, set it to 0) grade.</td>
+</tr>
+<tr>
+<td>gradeAcknowledgedText</td>
+<td>false</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>The text that is displayed after clicking on
+a grade component. &nbsp;There is no default.</td>
+</tr>
+<tr>
+<td>gradeHoverTexts</td>
+<td>false</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>The hover texts that will be used for
+the grade controls, ordered from lowest to highest rating.
+&nbsp;The attribute's value must be a JavaServer Faces EL
+expression
+that evaluates to an array of <code>java.lang.String</code>.
+&nbsp;The first element will be the hover text associated with
+the lowest rating; &nbsp;the last element with the
+highest rating. &nbsp;Null can be specified as a member of the
+array. &nbsp;There are no defaults.</td>
+</tr>
+<tr>
+<td>gradeReadOnly</td>
+<td>false</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>Indicates whether the grade of this rating
+component
+can be changed by the user. &nbsp;The default is false - it is NOT
+read-only, and therefore can be changed by the user.</td>
+</tr>
+<tr>
+<td>id</td>
+<td>false</td>
+<td>true</td>
+<td>java.lang.String</td>
+<td>The component ID</td>
+</tr>
+<tr>
+<td>inAverageMode</td>
+<td>false</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>Indicates whether the component will be
+rendered displaying the average grade. &nbsp;The default is false,
+the component will be rendered showing the user's rating (normal mode).</td>
+</tr>
+<tr>
+<td>includeClear</td>
+<td>false</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>Indicates whether a control to clear the user's
+rating
+should be displayed. &nbsp;The default is true.</td>
+</tr>
+<tr>
+<td>includeModeToggle</td>
+<td>false</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>Indicates
+whether a control to toggle the mode (to show the average rating or the
+user's rating) should be rendered.&nbsp; The default is false.</td>
+</tr>
+<tr>
+<td>includeNotInterested</td>
+<td>false</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>Indicates whether a control to allow the user to
+assign
+a "not interested" rating should be rendered. &nbsp;The default is
+true.</td>
+</tr>
+<tr>
+<td>includeText</td>
+<td>false</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>Indicates whether an area for hover or post-click
+acknowledeged text should be rendered.
+&nbsp;The default is true.</td>
+</tr>
+<tr>
+<td>maxGrade</td>
+<td>true</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>The maximum grade (number of "stars") this
+rating instance allows. &nbsp;There is no default,&nbsp;and so
+must be
+set.</td>
+</tr>
+<tr>
+<td>modeReadOnly</td>
+<td>false</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>Indicates whether the mode of this rating
+component
+can be changed by the user. &nbsp;The default is false - it is NOT
+read-only, and therefore can be changed by the user.</td>
+</tr>
+<tr>
+<td>modeToggleAcknowledgedTexts</td>
+<td>false</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>The acknowledged texts to be used for the mode
+toggle control.
+&nbsp;The attribute's value must be a JavaServer Faces EL
+expression
+that evaluates to an array of <code>java.lang.String</code>.
+&nbsp;The first element of the returned array is the acknowledged
+text
+displayed after clicking the mode toggle control to preview the user's
+rating (normal mode). &nbsp;The second element is the text
+displayed after clicking to preview the average rating (average mode).
+&nbsp;
+&nbsp;Null can be specified as a member of the array.
+&nbsp;There are no defaults.</td>
+</tr>
+<tr>
+<td>modeToggleHoverTexts</td>
+<td>false</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>The hover texts to be used for the mode
+toggle control. &nbsp;The
+attribute's value must be a JavaServer Faces EL expression that
+evaluates to an array of&nbsp;<code>java.lang.String</code>.
+&nbsp;The first element of the returned array is the hover text
+displayed
+when hovering over the mode toggle control to preview the user's
+rating (normal mode). &nbsp;The second element is the text
+displayed when
+hovering to preview the average rating (average mode). &nbsp;
+&nbsp;Null can be specified as a member of the array.
+&nbsp;There are no defaults.<br>
+</td>
+</tr>
+<tr>
+<td>notInterestedAcknowledgedText</td>
+<td>false</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>The acknowledged text for the "not interested"
+control. &nbsp;There is no default.</td>
+</tr>
+<tr>
+<td>notInterestedHoverText</td>
+<td>false</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>The hover text for the "not interested"
+control. &nbsp;There is no default.</td>
+</tr>
+<tr>
+<td>rendered</td>
+<td>false</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>Use the rendered attribute to indicate whether
+the HTML code for the component should be included in the rendered HTML
+page. If set to false, the rendered HTML page does not include the HTML
+for the component. If the component is not rendered, it is also not
+processed on any subsequent form submission.</td>
+</tr>
+<tr>
+<td>styleClass</td>
+<td>false</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>CSS style class(es) to be applied to the
+outermost HTML element when this component is rendered.</td>
+</tr>
+<tr>
+<td>style</td>
+<td>false</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>CSS style(s) to be applied to the outermost HTML
+element when this component is rendered.</td>
+</tr>
+<tr>
+<td>tabIndex</td>
+<td>false</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>Describes
+the position of this element in the tabbing order of the current
+document. Tabbing order determines the sequence in which elements
+receive focus when the tab key is pressed. The value must be an integer
+between 0 and 32767.</td>
+</tr>
+<tr>
+<td>visible</td>
+<td>false</td>
+<td>false</td>
+<td>java.lang.String</td>
+<td>Use the visible attribute to indicate whether the
+component should be viewable by the user in the rendered HTML page. If
+set to false, the HTML code for the component is present in the page,
+but the component is hidden with style attributes. By default, visible
+is set to true, so HTML for the component HTML is included and not
+visible to the user. If the component is not visible, it can still be
+processed on subsequent form submissions because the HTML is present.</td>
+</tr>
+</tbody>
+</table>
+<h3><a name="4.5"></a>4.5 Javascript
+interfaces</h3>
+<table style="text-align: left; width: 100%; height: 100%; margin-left: 40px; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td style="vertical-align: top; font-weight: bold; font-style: italic;">Interface
+name</td>
+<td style="vertical-align: top; font-weight: bold; font-style: italic;">Type<br>
+</td>
+<td style="vertical-align: top;"><span style="font-weight: bold; font-style: italic;">Description</span><br>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top;">webui.@THEME@.widget.rating<br>
+</td>
+<td style="vertical-align: top;">private<br>
+</td>
+<td style="vertical-align: top;">Used for
+instantiating the
+widget<br>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top;">webui.@THEME@.widget.jsfx.rating</td>
+<td style="vertical-align: top;">private<br>
+</td>
+<td style="vertical-align: top;">Used for
+handling ajax
+request/response<br>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top;">domNode.setProps(props)</td>
+<td style="vertical-align: top;">public<br>
+</td>
+<td style="vertical-align: top;">Use this
+function to
+change any of the following supported
+properties:<br>
+<ul>
+<li>autoSubmit</li><li>averageGrade</li>
+<li>clearAcknowledgedText</li>
+<li>clearHoverText</li>
+<li>grade</li>
+<li>gradeAcknowledgedText</li>
+<li>gradeHoverTexts</li>
+<li>gradeReadOnly</li>
+<li>inAverageMode</li>
+<li>includeClear</li>
+<li>includeModeToggle</li>
+<li>includeNotInterested</li>
+<li>includeText</li>
+<li>maxGrade</li>
+<li>modeReadOnly</li>
+<li>modeToggleAcknowledgedTexts</li>
+<li>modeToggleHoverTexts</li>
+<li>notInterestedAcknowledgedText</li>
+<li>notInterestedHoverText</li>
+<li>tabIndex</li>
+<li>id</li>
+<li>visible</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top;">widget.setProps()<br>
+</td>
+<td style="vertical-align: top;">private<br>
+</td>
+<td style="vertical-align: top;">Store the
+properties of
+the element on the widget node.<br>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top;">domNode.getProps()<br>
+</td>
+<td style="vertical-align: top;">public<br>
+</td>
+<td style="vertical-align: top;">Use this
+function to get
+widget properties. See <code>setProps()</code>
+function for a list of supported properties.&nbsp; </td>
+</tr>
+<tr>
+<td style="vertical-align: top;">widget.getProps()<br>
+</td>
+<td style="vertical-align: top;">private<br>
+</td>
+<td style="vertical-align: top;">Get the
+properties of the widget. This is used by domNode.getProps function<br>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top;">domNode.refresh(execute)<br>
+</td>
+<td style="vertical-align: top;">public<br>
+</td>
+<td style="vertical-align: top;">Use this
+function to
+asynchronously refresh the component.<br>
+<ul><li>[optional] execute: Comma separated string containing a
+list
+of
+client
+ids against which the <code>execute</code> portion of the
+request
+processing lifecycle must be run.</li></ul><ul>
+<ul>
+
+</ul>
+</ul>
+</td>
+</tr>
+<tr><td>domNode.submit(execute)</td><td>public</td><td>Use this function to asynchronously submit the selected grade.<br><ul><li>[optional] execute: Comma separated string containing a
+list
+of
+client
+ids against which the <code>execute</code> portion of the
+request
+processing lifecycle must be run.</li></ul></td></tr><tr><td>domNode.subscribe(topic, obj, func)</td><td>public</td><td>Use this function to subscribe to an event topic.<br><ul><li>topic: The event topic to subscribe to</li><li>obj: The object in which a function will be invoked, or null for default scope</li><li>func: The name of a function on context, or a&nbsp;function reference to invoke when event topic is published</li></ul></td></tr><tr><td>webui.@THEME@.widget.rating.event.refresh.beginTopic</td><td>public</td><td>Event topic published before asynchronously refreshing the component. Supported properties include:<br><ul><li>[optional] execute - list of the components to be executed along with this component</li><li>id - The client id to process the event for</li></ul></td></tr><tr><td>webui.@THEME@.widget.rating.event.refresh.endTopic</td><td>public</td><td>Event topic published after asynchronously refreshing the component. Supported properties include:<br><ul><li>props - JSON object containing properties of the component. See setProps() function for details on properties and their usage.</li></ul></td></tr><tr><td>webui.@THEME@.widget.rating.event.submit.beginTopic</td><td>public</td><td>Event topic published before asynchronously submitting the selected grade. Supported properties include:<br><ul><li>[optional] execute - list of the components to be executed along with this component</li><li>id - The client id of the rating component</li><li>value - The value (grade) of the rating component</li></ul></td></tr><tr><td>webui.@THEME@.widget.rating.event.submit.endTopic</td><td>public</td><td>Event topic published after asynchronously submitting the selected grade. Supported properties include:<br><ul><li>id - The client id of the rating component</li><li>averageGrade - The updated average grade of the rating component</li></ul></td></tr><tr><td>webui.@THEME@.widget.rating.event.grade.selectedTopic</td><td>public</td><td>Event topic published after selecting a grade. Supported properties include:<br><ul><li>id - The client id of the rating component</li></ul></td></tr>
+</tbody>
+</table>
+<span style="font-style: italic;"><span style="font-weight: bold;"><br></span></span><div style="margin-left: 80px;">Note: The @THEME@ tag is intended to be replaced with the theme
+name (e.g., suntheme).<br></div>
+<h3><a name="4.6"></a>4.6 Theme
+resources keys</h3>
+<h3><a name="4.6.1"></a>4.6.1 Style
+selectors</h3>
+<br>
+<table style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td style="vertical-align: top;"><span style="font-weight: bold;">Name</span><br>
+</td>
+<td style="vertical-align: top;"><span style="font-weight: bold;">Description</span><br>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top;">RATING_TEXT_CONTAINER<br>
+</td>
+<td style="vertical-align: top;">Styles
+applied to the area containing the hover text and acknowledgement text.<br>
+</td>
+</tr>
+<tr>
+<td>RATING_CONTROL_CONTAINER</td>
+<td>Styles applied to the area containing the images.</td>
+</tr>
+<tr>
+<td>RATING_SPACER_NODE</td>
+<td>Styles applied to the spacer area between the
+grade images and the clear image.</td>
+</tr>
+<tr>
+<td>RATING_NOT_INTERESTED_ON_IMAGE</td>
+<td>Styles applied to the&nbsp;"not interested"
+image to indicate the user is not interested in this rating.<br>
+</td>
+</tr>
+<tr>
+<td>RATING_NOT_INTERESTED_OFF_IMAGE</td>
+<td>Styles applied to the "not interested" image to
+indicate the user is interested in this rating.</td>
+</tr>
+<tr>
+<td>RATING_GRADE_FULL_IMAGE</td>
+<td>Styles applied to each grade image reflecting a
+user's grade selection.</td>
+</tr>
+<tr>
+<td>RATING_GRADE_EMPTY_IMAGE</td>
+<td>Styles applied to each grade image that does not
+reflect a user's grade selection.</td>
+</tr>
+<tr>
+<td>RATING_GRADE_AVG_FULL_IMAGE</td>
+<td>Styles applied to each grade image reflecting an
+average grade selection that is exactly one of the available grades</td>
+</tr>
+<tr>
+<td>RATING_GRADE_AVG_HALF_IMAGE</td>
+<td>Styles applied to each grade image reflecting an
+average grade selection that is between 2 consecutive available grades.</td>
+</tr>
+<tr>
+<td>RATING_CLEAR_ON_IMAGE</td>
+<td>Styles applied to the clear image when hovering
+over the clear image.</td>
+</tr>
+<tr>
+<td>RATING_CLEAR_OFF_IMAGE</td>
+<td>Styles applied to the clear image when not
+hovering over the clear image.</td>
+</tr>
+<tr>
+<td>RATING_MODE_NORMAL_IMAGE</td>
+<td>Styles applied to the mode toggle image to
+indicate displaying the user's rating (normal mode).</td>
+</tr>
+<tr>
+<td>RATING_MODE_AVERAGE_IMAGE</td>
+<td>Styles applied to the mode toggle image to
+indicate displaying the average rating (average mode).</td>
+</tr>
+</tbody>
+</table>
+<br>
+<h3><a name="4.6.2"></a>4.6.2 Image
+resources</h3>
+<br>
+<table style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td style="vertical-align: top;"><span style="font-weight: bold;">Name</span><br>
+</td>
+<td style="vertical-align: top;"><span style="font-weight: bold;">Description</span><br>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top;">RATING_AVG_GRADE_FULL<br>
+</td>
+<td style="vertical-align: top;">Image used to
+represent an average grade that is exactly one of the available grades<br>
+</td>
+</tr>
+<tr>
+<td>RATING_AVG_GRADE_HALF</td>
+<td>Image used to represent an average grade that is
+between 2 of the available grades.</td>
+</tr>
+<tr>
+<td>RATING_CLEAR_OFF</td>
+<td>Image used for the "clear" rating.</td>
+</tr>
+<tr>
+<td>RATING_CLEAR_ON</td>
+<td>Image used for the "clear" rating upon mouseover
+of the area containing the clear image.</td>
+</tr>
+<tr>
+<td>RATING_NOT_INTERESTED_OFF</td>
+<td>Image used for the "not interested" rating.</td>
+</tr>
+<tr>
+<td>RATING_NOT_INTERESTED_ON</td>
+<td>Image used for the "not interested" rating when
+the user has selected this rating, or on mouseover when has not
+selected it.</td>
+</tr>
+<tr>
+<td>RATING_GRADE_EMPTY</td>
+<td>Image used to represent a non-selected grade.</td>
+</tr>
+<tr>
+<td>RATING_GRADE_FULL</td>
+<td>Image used to represent a selected grade.</td>
+</tr>
+<tr>
+<td>RATING_MODE_AVG</td>
+<td>Image used for the mode toggle area when widget
+is showing the average grade.</td>
+</tr>
+<tr>
+<td>RATING_MODE_NORMAL</td>
+<td>Image used for the mode toggle area when widget
+is showing the user's grade.</td>
+</tr>
+</tbody>
+</table>
+<br>
+<h3><a name="4.6.3"></a>4.6.3 Javascript
+resources</h3>
+<br>
+<table style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td style="vertical-align: top;"><span style="font-weight: bold;">Name</span><br>
+</td>
+<td style="vertical-align: top;"><span style="font-weight: bold;">Description</span><br>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/rating.js<br>
+</td>
+<td style="vertical-align: top;">Javascript
+containing the rating widget resources<br>
+</td>
+</tr>
+<tr>
+<td>com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/common.js</td>
+<td>Javascript containing the common code and
+utilities for the widgets</td>
+</tr>
+<tr>
+<td>com/sun/webui/jsf/&lt;theme&gt;/javascript/widget/jsfx/rating.js</td>
+<td>Javascript for ajax requests</td>
+</tr>
+</tbody>
+</table>
+<br>
+<div style="margin-left: 80px;">Note: The
+&lt;theme&gt; tag is intended to be replaced with the theme
+name (e.g., suntheme).<br>
+</div>
+<br>
+<h3><a name="4.6.4"></a>4.6.4 Template
+resources</h3>
+<br>
+<table style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td style="vertical-align: top;"><span style="font-weight: bold;">Name</span><br>
+</td>
+<td style="vertical-align: top;"><span style="font-weight: bold;">Description</span><br>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top;">com/sun/webui/jsf/&lt;theme&gt;/templates/rating.html<br>
+</td>
+<td style="vertical-align: top;">The HTML
+template name for this widget<br>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<div style="margin-left: 80px;">Note: The
+&lt;theme&gt; tag is intended to be replaced with the theme
+name (e.g., suntheme).<br>
+</div>
+<br>
+<h3><a name="4.6.5"></a>4.6.5 Other
+resources</h3>
+<br>
+<table style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td style="vertical-align: top;"><span style="font-weight: bold;">Name</span><br>
+</td>
+<td style="vertical-align: top;"><span style="font-weight: bold;">Description</span><br>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top;">N/A<br>
+</td>
+<td style="vertical-align: top;"><br>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<h3><a name="4.6.6"></a>4.6.6 Localized
+message keys</h3>
+<br>
+<table style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td style="vertical-align: top;"><span style="font-weight: bold;">Name</span><br>
+</td>
+<td style="vertical-align: top;"><span style="font-weight: bold;">Description</span><br>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top;">N/A<br>
+</td>
+<td style="vertical-align: top;"><br>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<h3><a name="4.7"></a>4.7 Component
+Extensibility</h3>
+<div style="margin-left: 40px;">The component is
+extensible only with the realm of customizing the theme to use
+different grading images.</div>
+<h2><a name="5.0"></a>5.0 - Netbeans
+Visual Web
+Design Time Support</h2>
+<h3><a name="5.1"></a>5.1 Design-time
+Behavior</h3>
+<div style="margin-left: 40px;">See section <a href="https://woodstock.dev.java.net/docs/specs/ajax-architecture-spec.html#5.1">5.1
+of Ajax Architecture for Woodstock JavaServer Faces</a> </div>
+<h3><a name="5.2"></a>5.2 Design-time
+Classes and Interfaces</h3>
+<div style="margin-left: 40px;">See section <a href="https://woodstock.dev.java.net/docs/specs/ajax-architecture-spec.html#5.2">5.2
+of Ajax Architecture for Woodstock JavaServer Faces</a> </div>
+<h3><a name="5.3"></a>5.3 Localized
+message keys</h3>
+<div style="margin-left: 40px;">N/A<br>
+</div>
+<br>
+<h3><a name="5.4"></a>5.4 Dependencies </h3>
+<div style="margin-left: 40px;">N/A </div>
+<h2><a name="6.0"></a>6.0 Component
+Dependencies</h2>
+<h3><a name="6.1"></a>6.1 Component
+class dependencies</h3>
+<div style="margin-left: 40px;">N/A</div>
+<h3><a name="6.2"></a>6.2 Javascript
+dependencies</h3>
+<div style="margin-left: 40px;">See section <a href="https://woodstock.dev.java.net/docs/specs/ajax-architecture-spec.html#6.2">6.2
+of Ajax Architecture for Woodstock JavaServer Faces</a></div>
+<h3><a name="6.3"></a>6.3 Infrastructure
+dependencies</h3>
+<div style="margin-left: 40px;">See section <a href="https://woodstock.dev.java.net/docs/specs/ajax-architecture-spec.html#6.3">6.3
+of Ajax Architecture for Woodstock JavaServer Faces</a></div>
+<h3><a name="6.4"></a>6.4 Design time
+dependencies</h3>
+<div style="margin-left: 40px;">N/A </div>
+<h2><a name="7.0"></a>7.0 - A11Y, I18n,
+Compliance, Debugging<br>
+</h2>
+<h3><a name="7.1"></a>7.1 Accessibility
+(A11Y)</h3>
+<div style="margin-left: 40px;">Accessibility
+support will be provided
+in the following ways. &nbsp;The widget will function as the ARIA
+role
+"radiogroup".
+<ul>
+<li>Alternate descriptions (via alt, title, &nbsp;or
+longdesc attribute) will be provided for all images.</li>
+<li>Keyboard focus can be added to tab navigation via <span style="font-weight: bold;">tabindex</span> attribute.</li>
+<li>Once the widget receives focus, left/right arrows can
+be used to navigate to the previous/next image.</li>
+<li>Entering the right arrow key when focus is on the
+last image will set focus to the first image.</li>
+<li>Entering the left arrow key when focus is on the
+first image will set focus to the last image.</li>
+<li>Tabbing
+into the widget will set focus to the image representing the grade.
+&nbsp;If there is no grade (or the grade had been cleared), then
+focus
+is set to the first (if Tabbing) or last (if Shift-Tabbing) image.</li>
+<li>Entering
+spacebar on a grade image selects that grade. &nbsp;Entering
+spacebar
+on the mode toggle image&nbsp;toggles the display mode.</li>
+</ul>With respect to <a href="rating-fs.html#2.1.1-behavior">widget behavior</a>,
+when navigating to each star via the arrow keys, each image that
+receives focus acts the same as when hovering - show a preview of what
+you'd get if you eventually hit the spacebar.&nbsp; This presents a
+problem in that while navigating thru the widget with the
+arrows, you can never see what the current state actually is unless you
+tab out of the widget.&nbsp; This is where it differs from a
+radiobutton group. &nbsp; Therefore Control+Arrow can be used to move
+focus from one grade to the next without showing a preview or selecting
+a grade.
+</div>
+<h3><a name="7.2"></a>7.2
+Internationalization (I18N)</h3>
+<div style="margin-left: 40px;">See section <a href="https://woodstock.dev.java.net/docs/specs/ajax-architecture-spec.html#7.2">7.2
+of Ajax Architecture for Woodstock JavaServer Faces</a></div>
+<h3><a name="7.3"></a>7.3 Level of XHTML
+Compliance</h3>
+<div style="margin-left: 40px;">See section <a href="https://woodstock.dev.java.net/docs/specs/ajax-architecture-spec.html#7.3">7.3
+of Ajax Architecture for Woodstock JavaServer Faces</a></div>
+<h3><a name="7.4"></a>7.4 Javascript
+Compliance</h3>
+<div style="margin-left: 40px;">See sections <a href="https://woodstock.dev.java.net/docs/specs/ajax-architecture-spec.html#7.4.1">7.4.1</a>
+and <a href="https://woodstock.dev.java.net/docs/specs/ajax-architecture-spec.html#7.4.2">7.4.2</a>
+of Ajax Architecture for WoodstockJavaServer Faces</div>
+<h3><a name="7.5"></a>7.5 Debugging</h3>
+<div style="margin-left: 40px;">See section <a href="https://woodstock.dev.java.net/docs/specs/ajax-architecture-spec.html#7.4.3">7.4.3
+of Ajax Architecture for Woodstock JavaServer Faces</a></div>
+<h2><a name="8.0"></a>8.0 Component High
+level design</h2>
+<div style="margin-left: 40px;">Discuss any major
+design features that
+may be relevent to supporting the functionality of your
+component.&nbsp; A reference to an external design specification
+can be
+used.&nbsp; For small components or changes to an existing
+component,
+this section can be used instead of a design document.<br>
+<br>
+Note that this is high level design, so low level details, such as
+private methods and pseudo code should not be included.&nbsp;
+Features
+like client side scripts and events might be relevent.</div>
+<h2><a name="9.0"></a>9.0 Issues</h2>
+<div style="margin-left: 40px;">&nbsp; </div>
+</td>
+</tr>
+</tbody>
+</table>
+</body></html>

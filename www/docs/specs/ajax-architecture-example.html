@@ -1,0 +1,1148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <!--
+      The contents of this file are subject to the terms
+      of the Common Development and Distribution License
+      (the License).  You may not use this file except in
+      compliance with the License.
+      
+      You can obtain a copy of the license at
+      https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      See the License for the specific language governing
+      permissions and limitations under the License.
+      
+      When distributing Covered Code, include this CDDL
+      Header Notice in each file and include the License file
+      at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      If applicable, add the following below the CDDL Header,
+      with the fields enclosed by brackets [] replaced by
+      you own identifying information:
+      "Portions Copyrighted [year] [name of copyright owner]"
+      
+      Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+    -->
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>AJAX Architecture Example for Woodstock JavaServer Faces Components</title>
+
+<style type="text/css"> 
+/* <![CDATA[ */
+@import url(../../browser-uispec.css);
+.style2 {font-size: 18pt}
+</style>
+
+</head>
+
+<body>
+<div class="MstDiv">
+  <table class="MstTblBot" width="100%" border="0" cellpadding="0" cellspacing="0" title="">
+
+    <tr>
+      <td class="MstTdTtl"><div class="MstDivTtl">
+          <div class="Mst1TtlTxt">Project Woodstock</div>
+        </div>
+        <div class="Mst1SecDiv"> <span class="Mst1SecTxt style2">AJAX Architecture Example for Project Woodstock Components</span></div></td>
+    </tr>
+  </table>
+</div>
+
+
+
+      <br>
+      <h2><a name="1.0"></a>1.0 Description</h2>
+      <div style="margin-left: 40px;">This document describes
+implementation details not covered in the high level design found in
+the <a href="ajax-architecture-spec.html">AJAX Architecture for Project Woodstock  Components</a> document.<br>
+</div>
+      <h3><a name="1.1"></a><span style="font-weight: bold;">1.1
+Document Revision History</span><br>
+      </h3>
+      <table style="width: 95%; text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="width: 15%; text-align: center;"><span style="font-weight: bold;">Revision</span></td>
+            <td style="width: 15%; text-align: center;"><span style="font-weight: bold;">Date</span></td>
+            <td style="width: 50%; text-align: center;"><span style="font-weight: bold;">Synopsis</span></td>
+            <td style="width: 20%; text-align: center;"><span style="font-weight: bold;">Author</span></td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">1.0<br>
+            </td>
+            <td style="text-align: center;">07/28/2006</td>
+            <td style="text-align: left;">Initial Draft</td>
+            <td style="text-align: center;">Dan Labrecque
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; text-align: center;">1.1
+            </td>
+            <td style="vertical-align: top; text-align: center;">08/06/2006<br>
+            </td>
+            <td style="vertical-align: top;">Updated with latest
+Dynamic Faces API name changes.</td>
+            <td style="vertical-align: top; text-align: center;">Dan
+Labrecque
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; text-align: center;">1.2
+            </td>
+            <td style="vertical-align: top; text-align: center;">08/16/2006
+            </td>
+            <td style="vertical-align: top;">Updated to use Dynamic
+Faces <code>immediate</code>
+property.
+            </td>
+            <td style="vertical-align: top; text-align: center;">Dan
+Labrecque
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; text-align: center;">1.3<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">02/15/2007<br>
+            </td>
+            <td style="vertical-align: top;">Updated to reflect source
+code in Woodstock repository</td>
+            <td style="vertical-align: top; text-align: center;">Dan
+Labrecque
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 style="font-weight: bold;"><a name="1.2"></a>1.2
+Relevant Documents</h3>
+  <ul>
+    <li><a target="_blank" href="ajax-architecture-spec.html">AJAX
+Architecture for Project Woodstock Component</a></li>
+  </ul>
+      <h3><a name="1.3"></a>1.3 Definition of
+Terms</h3>
+      <div style="margin-left: 40px;">See the <a target="_blank" href="ajax-architecture-spec.html#1.3">Definition of Terms</a> section
+of the AJAX Architecture for Woodstock JavaServer Faces Components
+document. </div>
+      <h2><a name="2.0"></a>2.0 Example<br>
+      </h2>
+      <div style="margin-left: 40px;">This document demonstrates an
+auto-validate <a href="https://woodstock.dev.java.net/files/documents/6231/54436/ajax-architecture-example.tar.Z">example app</a>
+which implements a text field, alert, label, and image widgets. Not
+only
+do these widgets follow the architecture described in the <a target="_blank" href="ajax-architecture-spec.html">AJAX
+Architecture for ProjectWoodstock Components</a> document,
+but it shows
+how a web app developer can establish a relationship between widgets in
+order to update multiple locations of a page without a refresh. For
+example, if a text field value is found to be invalid, the alert,
+label, and various images are all updated at the same time.<br>
+      <br>
+In this example, a credit card number is validated when ever the user
+tabs out of the text field or clicks elsewhere in the page. Since AJAX
+is used to asynchronously validate the user's entry, the page does not
+need to be re-rendered. Instead, only a couple places in the page shall
+be selectively updated. For example, if the user's entry is found to be
+invalid, the text field label changes from black to red and an error
+icon is shown next to the label. In addition, an error message is
+displayed at the top of the page via an in-line alert. However, if the
+user then enters a valid number, the text field label changes from red
+to black and the error icon is hidden. Further, the error message,
+displayed at the top of the page, is removed. For example:<br>
+      <br>
+      <div style="text-align: center;"><img alt="" src="file://///Bigblock.east.sun.com/dspell/sac/ajax-architecture-example_files/invalid.gif" style="width: 402px; height: 210px;"><br>
+      <br>
+      <div style="text-align: left;">The example is available as a <a target="_blank" href="http://www.netbeans.info/downloads/download.php?type=5.5">Netbeans
+5.5</a> project which runs on Sun Java System Application Server 9
+(i.e., Glassfish). Note that the project library paths (i.e., jar file
+locations) may need to be resolved for the new project location. Other
+than that, simply choose the
+"Run Main Project" option from the "Run" menu.<br>
+      </div>
+      </div>
+</div>
+      <h3><a name="2.1"></a>2.1 JSF Component<br>
+      </h3>
+      <div style="margin-left: 40px;">To properly render a client-side,
+      <span style="font-style: italic;">Dojo widget</span>, the <span style="font-style: italic;">JSF Component</span> must implement the <code>Widget</code>
+interface. The <code>Widget</code> interface is implemented by
+any UIComponent that wants to be a client-side widget. In this design,
+the <code>Widget</code> interface affects the behavior of the <code>encodeBegin,
+      </code><code>encodeChildren,</code>
+and <code>encodeEnd</code> methods of the <code>com.sun.webui.jsf.renderkit.widget.RendererBase</code>
+class.<br>
+      <br>
+Overriding the <code>getRendererType</code>
+method of JSF's <code>UIComponentBase</code> class may also be
+required to
+select the
+appropriate render kit. The <code>getRendererType</code> method found
+in the
+generated tag code overrides any value set in the component
+constructor. This method will determine
+if the components is dealing with an AJAX based request and return the
+appropriate renderer type. For example:<br>
+      <br>
+      <div style="margin-left: 40px;"><code>public String
+getRendererType() {<br>
+&nbsp;&nbsp;&nbsp; if (AsyncResponse.isAjaxRequest()) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return
+"com.sun.webui.jsf.ajax.TextField";<br>
+&nbsp;&nbsp;&nbsp; } else {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return
+super.getRendererType();<br>
+&nbsp;&nbsp;&nbsp; }<br>
+}</code><code></code><br>
+      </div>
+      </div>
+      <h3><a name="2.2"></a>2.2 Widget Renderer</h3>
+      <h3><a name="2.2.1"></a>2.2.1 Renderer</h3>
+      <div style="margin-left: 40px;"><code></code><code></code>Similar
+to previous versions of Woodstock, this example also uses a <span style="font-style: italic;">subcomponent</span> architecture.
+However, instead of rendering HTML markup, the <span style="font-style: italic;">widget renderer</span> outputs JavaScript
+markup. In this example, the widget renderer is used to render both
+stand alone and <span style="font-style: italic;">subcomponents</span>.
+When rendering a stand alone component, <span style="font-style: italic;">in-line JavaScript</span>, <span style="font-style: italic;">event listener JavaScript</span>,
+and <span style="font-style: italic;">widget JavaScript</span> are
+output by the <span style="font-style: italic;">widget renderer</span>
+in order to instantiate a <span style="font-style: italic;">Dojo Widget</span>.
+However, if the parent of this <span style="font-style: italic;">JSF
+component</span> implements <code>Widget</code>, it indicates that the
+      <span style="font-style: italic;">JSF component</span> is used as
+a <span style="font-style: italic;">subcomponent</span> and shall
+be rendered client-side. When dealing with<span style="font-style: italic;"> subcomponents</span>, the <span style="font-style: italic;">widget renderer</span> will not output <span style="font-style: italic;">in-line JavaScript</span> because the
+parent <span style="font-style: italic;">widget renderer</span> will
+do that itself. Instead, the <span style="font-style: italic;">widget
+renderer</span> will only output a JSON object containing component
+properties.</div>
+      <div style="margin-left: 40px;"><br>
+As an example of how a stand alone component is rendered, consider the
+image tag below. <span style="font-style: italic;"></span>The web app
+developer
+may specify either a themed
+image (as shown below) or the URL path to the image source. If a themed
+image is provided,
+the localized properties such as alt text, tool
+tip, height, etc. shall be output in a JSON object.<br>
+      <br>
+      <div style="margin-left: 40px;"><code>&lt;webuijsf:image
+id="image" icon="LABEL_INVALID_ICON" /&gt;</code><br>
+      </div>
+      <br>
+In this scenario, the parent of this <span style="font-style: italic;">JSF
+component</span> does not implement <code>Widget</code>. Therefore, a
+JSON object containing component properties is output in the rendered
+HTML page with <span style="font-style: italic;">in-line JavaScript</span>
+used to
+instantiate the <span style="font-style: italic;">Dojo
+widget</span>. When the browser loads the requested JSP page, the
+JavaScript is evaluated and Dojo invokes the <code>fillInTemplate</code>
+function of <span style="font-style: italic;">widget JavaScript</span>.
+The <span style="font-style: italic;">widget JavaScript</span> reads
+the provided JSON object and the <span style="font-style: italic;">HTML
+template</span> is populated with component properties. An example of
+the <span style="font-style: italic;">in-line JavaScript</span> output
+by this <span style="font-style: italic;">widget renderer</span> is
+shown below.<br>
+      <span style="font-family: monospace;"></span>
+      <div style="margin-left: 40px;">
+      <pre id="line20">dojo.require('webui.suntheme.widget.*');<br>webui.suntheme.widget.common.createWidget({<br>    "_widgetType": "webui.suntheme:image",<br>    "templatePath": "/<span style="font-family: monospace;"><code>&lt;appname&gt;</code></span>/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/image.html",<br>    "width": 11,<br>    "height": 14,<br>    "visible": true,<br>    "src": "<span style="font-family: monospace;"><code>/&lt;appname&gt;/theme/com/sun/web/ui/&lt;theme&gt;/images/alerts/error_small.gif</code></span>",<br>    "alt": "Success",<br>    "_modules": ["webui.suntheme.widget.image"],<br>    "id": "<span style="font-family: monospace;"><code>form1:image</code></span>"<br>});</pre>
+      <span style="font-family: monospace;"><code></code></span><span style="font-family: monospace;"><code></code></span></div>
+      <div style="margin-left: 40px;"><code></code><code></code> </div>
+As an example of how a <span style="font-style: italic;">subcomponent</span>
+is rendered, consider the error and required images output by the label
+tag below<span style="font-style: italic;"></span>.
+If the web app developer specifies the <code>requiredIndicator</code>&nbsp;<span style="font-style: italic;"></span>attribute<span style="font-style: italic;"></span>, an image is output next to the
+label indicating that user input is required. If a
+validation error occurs, for the component specified by the <code>for</code>
+attribute, an error image is output to the left of the label.<br>
+      <br>
+      <div style="margin-left: 40px;"><code>&lt;webuijsf:label
+id="label" text="This is a label" requiredIndicator="true"&gt;</code><code></code><br>
+      </div>
+      <br>
+The label is considered a <span style="font-style: italic;">complex
+component</span> because not only does it
+output its own properties,
+but properties for two <span style="font-style: italic;">subcomponent</span>
+images. This means that the parent of the required and error images is
+the label. And since the label implements the <code>Widget</code>
+interface, it indicates that the required and error images are used as <span style="font-style: italic;">subcomponents</span> and shall be
+rendered client-side. Therefore, the <span style="font-style: italic;">widget
+renderer</span> for both images<span style="font-style: italic;"></span>
+will only output JSON objects containing component properties and omit
+the <span style="font-style: italic;">in-line JavaScript</span>
+associated with a stand alone component. The <span style="font-style: italic;">widget renderer</span> for the label,
+however, will output a JSON object containing component properties and
+the <span style="font-style: italic;">in-line JavaScript</span> used
+to instantiate a <span style="font-style: italic;">Dojo Widget</span>.<br>
+      <br>
+In this example, an additional JSON object has been created for each
+image <span style="font-style: italic;">subcomponent</span> used by
+the label. Each of these objects are appended to the JSON object
+containing label properties. This is
+similar
+to the <span style="font-style: italic;">subcomponent</span>
+architecture used in the JATO based tag library, where HTML markup is
+obtained from individual tags in order to create a <span style="font-style: italic;">complex component</span>. However, instead
+of
+outputting HTML markup, JSON
+objects are output containing all the necessary data to render a
+component client-side. The <span style="font-style: italic;">widget
+JavaScript</span> reads
+these JSON objects and the <span style="font-style: italic;">HTML
+template</span> is populated with component properties. An example of
+the <span style="font-style: italic;">in-line JavaScript</span>
+output by this <span style="font-style: italic;">widget renderer</span>
+is shown below.<br>
+      <pre style="margin-left: 40px;" id="line20"><code>dojo.require('webui.suntheme.widget.*');<br>webui.suntheme.widget.common.createWidget({<br>    "level": 2,<br>    "errorStyleClass": "ConErrLblTxt_sun4",<br>    "templatePath": "/</code><span style="font-family: monospace;"><code>&lt;appname&gt;</code></span><code>/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/label.html",<br>    "_widgetType": "webui.suntheme:label",<br>    "value": "Ex: 4111 1111 1111 1111",<br>    "required": false,<br>    "valid": true,<br>    "levelThreeStyleClass": "LblLev3Txt_sun4",<br>    "id": "form1:label1",<br>    "requiredImage": {<br>        "_widgetType": "webui.suntheme:image",<br>        "templatePath": "/</code><span style="font-family: monospace;"><code>&lt;appname&gt;</code></span><code>/theme/com/sun/webui/jsf/</code><code>&lt;theme&gt;</code><code>/templates/image.html",<br>        "width": 7,<br>        "height": 14,<br>        "visible": true,<br>        "src": "/</code><span style="font-family: monospace;"><code>&lt;appname&gt;</code></span><code>/theme/com/sun/webui/jsf/</code><code>&lt;theme&gt;</code><code>/images/other/required.gif",<br>        "alt": "Required",<br>        "_modules": ["webui.suntheme.widget.image"],<br>        "id": "form1:label1:label1_required"<br>    },<br>    "levelTwoStyleClass": "LblLev2Txt_sun4",<br>    "errorImage": {<br>        "_widgetType": "webui.suntheme:image",<br>        "templatePath": "/</code><span style="font-family: monospace;"><code>&lt;appname&gt;</code></span><code>/theme/com/sun/webui/jsf/</code><code>&lt;theme&gt;</code><code>/templates/image.html",<br>        "width": 11,<br>        "height": 14,<br>        "visible": true,<br>        "src": "/</code><span style="font-family: monospace;"><code>&lt;appname&gt;</code></span><code>/theme/com/sun/webui/jsf/</code><code>&lt;theme&gt;</code><code>/images/alerts/error_small.gif",<br>        "alt": "Error",<br>        "_modules": ["webui.suntheme.widget.image"],<br>        "id": "form1:label1:label1_error"<br>    },<br>    "levelOneStyleClass": "LblLev1Txt_sun4",<br>    "_modules": ["webui.suntheme.widget.label"]<br>});</code></pre>
+Note that either one of
+the image <span style="font-style: italic;">subcomponents</span>
+may be defined using a <span style="font-style: italic;">JSF facet</span>.
+A <span style="font-style: italic;">JSF facet</span> may contain any
+type of component, including Woodstock, JSF, and/or custom components.
+Further, these components
+may or may not render client-side using <span style="font-style: italic;">in-line JavaScript</span> to instantiate a
+      <span style="font-style: italic;">Dojo Widget</span>. Most
+components existing today, if not all, will output HTML. Therefore,
+the <span style="font-style: italic;">widget renderer</span> must
+render <span style="font-style: italic;">JSF facets</span> similarly,
+regardless if client-side rendering is used or not.<br>
+      <br>
+As an example, say that a web app developer has provided a <span style="font-style: italic;">JSF facet</span> to override the required
+image of
+a label. If an <code>Image</code> component is provided, the <span style="font-style: italic;">widget renderer</span> will output a JSON
+object containing component properties. This is because
+the parent of the <span style="font-style: italic;">JSF Facet</span>
+(i.e.,
+the label) implements the <code>Widget</code> interface and the <span style="font-style: italic;">widget renderer</span> handles <span style="font-style: italic;">subcomponents</span> appropriately.
+However, if the developer uses a custom component or overrides the <span style="font-style: italic;">JSF renderer</span>, HTML may be output
+instead. In either case, the rendered output is still appended to the
+JSON object
+containing label properties.<br>
+      <br>
+In this example, <span style="font-style: italic;">JSF components</span>
+will either output HTML or <span style="font-style: italic;">in-line
+JavaScript</span> used to instantiate a <span style="font-style: italic;">Dojo Widget</span>. However, the output is
+always buffered using a custom JSF <code>ResponseWriter</code>. When
+ever a <span style="font-style: italic;">JSF component</span> is
+rendered, the existing JSF <code>ResponseWriter</code> is set aside
+and a custom <code>ResponseWriter</code> is set in the JSF <code>FacesContext</code>.
+Using the buffered string, a JSON object is
+created and appended to label component properties using the <code>requiredImage</code>
+key. However, if a JSON object was not created, because HTML has been
+output instead,
+the string is simply assigned to the <code>requiredImage</code> key.
+An
+example of this <span style="font-style: italic;">in-line JavaScript</span>
+is shown below.<br>
+      <div style="margin-left: 40px;">
+      <pre id="line194">dojo.require('webui.suntheme.widget.*');<br>webui.suntheme.widget.common.createWidget({<br>    "level": 2,<br>    "errorStyleClass": "ConErrLblTxt_sun4",<br>    "templatePath": "/&lt;appname&gt;/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/label.html",<br>    "_widgetType": "webui.suntheme:label",<br>    "value": "Server-side &lt;h:grahicImage",<br>    "required": true,<br>    "valid": true,<br>    "levelThreeStyleClass": "LblLev3Txt_sun4",<br>    "id": "form1:label3",<br>    "requiredImage": "&lt;img id=\"form1:label3:image3\" src=\"/&lt;appname&gt;/theme/com/sun/webui/jsf/&lt;theme&gt;/images/alerts/error_small.gif\" /&gt;",<br>    "levelTwoStyleClass": "LblLev2Txt_sun4",<br>    "errorImage": {<br>        "_widgetType": "webui.suntheme:image",<br>        "templatePath": "/&lt;appname&gt;/theme/com/sun/webui/jsf/&lt;theme&gt;/templates/image.html",<br>        "width": 11,<br>        "height": 14,<br>        "visible": true,<br>        "src": "/&lt;appname&gt;/theme/com/sun/webui/jsf/&lt;theme&gt;/images/alerts/error_small.gif",<br>        "alt": "Error",<br>        "_modules": ["webui.suntheme.widget.image"],<br>        "id": "form1:label3:label3_error"<br>    },<br>    "levelOneStyleClass": "LblLev1Txt_sun4",<br>    "_modules": ["webui.suntheme.widget.label"]<br>});</pre>
+      <code></code> </div>
+      <br>
+      </div>
+      <div style="margin-left: 40px;">In the example above, the <code>requiredImage</code>
+property has been assigned an HTML
+string instead of a JSON object containing image properties. On the
+client, the <span style="font-style: italic;">widget JavaScript</span>
+can easily distinguish between a string
+(i.e., HTML markup) or a JSON object. If this
+property contains a string, the <span style="font-style: italic;">widget
+JavaScript</span> assigns it appropriately via the <code>webui.&lt;theme&gt;.widget.common.addFragment</code>
+function. This functions ensures that any JavaScript contained in the
+HTML string is evaluated properly.<br>
+      </div>
+      <h3><a name="2.2.2"></a>2.2.2 RendererBase<br>
+      </h3>
+      <div style="margin-left: 40px;">The <code>com.sun.webui.jsf.renderkit.widget.</code><code>RenderBase</code>
+class is intended to be used by the <span style="font-style: italic;">widget
+renderer</span>
+to output <span style="font-style: italic;">in-line JavaScript</span>
+used to instantiate a <span style="font-style: italic;">Dojo Widget</span>
+and/or a JSON object containing component properties. If the parent of
+the given <span style="font-style: italic;">JSF component</span>
+implements the <code>Widget</code> interface, it indicates that this
+is a <span style="font-style: italic;">subcomponent</span> and
+shall be rendered client side. When dealing with a <span style="font-style: italic;">subcomponent</span>, the <span style="font-style: italic;">widget renderer</span> must not output <span style="font-style: italic;">in-line JavaScript</span>, only a JSON
+object may be output. This is accomplished via the<span style="font-family: monospace;"> </span><code></code><code>encodeEnd</code><code>
+      </code>method of <code>Renderer</code> class. For example:<br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp; public void encodeEnd(FacesContext
+context, UIComponent component)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+throws IOException {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (context == null ||
+component == null) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+throw new NullPointerException();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!component.isRendered())
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Get writer.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ResponseWriter writer =
+context.getResponseWriter();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String widgetType =
+((Widget) component).getWidgetType();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; boolean isSubComponent =
+component.getParent() instanceof Widget;<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Render for JSF facets,
+but not subcomponents.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!isSubComponent
+&amp;&amp; widgetType != null) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //
+Render temporary place holder to position widget in page -- <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //
+ultimately replaced by document fragment.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+writer.startElement("span", component);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+writer.writeAttribute("id", component.getClientId(context), null);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+writer.endElement("span");<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //
+Render enclosing tag -- must be located after div.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+writer.write("\n");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+writer.startElement("script", component);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+writer.writeAttribute("type", "text/javascript", null);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+writer.write("\n");<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //
+Render JavaScript to instantiate Dojo widget.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+writer.write(JavaScriptUtilities.getModule("widget.*"));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+writer.write("\n");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+writer.write(JavaScriptUtilities.getModuleName(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+"widget.common.createWidget"));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+writer.write("(");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; try {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //
+Always render properties.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+writer.write(getProperties(context, component).toString(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+JavaScriptUtilities.INDENT_FACTOR));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } catch (JSONException e) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+e.printStackTrace();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Render for JSF facets,
+but not subcomponents.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!isSubComponent
+&amp;&amp; widgetType != null) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //
+Render enclosing tag.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+writer.write(");\n");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+writer.endElement("script");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+writer.write("\n");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; }</code><br>
+      <br>
+The <code>Renderer</code> class also overrides the <code>encodeBegin</code>
+and <code>encodeChildren</code> methods, but they do not render
+anything. For example:<br>
+      <br>
+      <code>&nbsp;&nbsp;&nbsp; public void encodeBegin(FacesContext
+context, UIComponent component) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+throws IOException {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Do nothing...<br>
+&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp;&nbsp; public void encodeChildren(FacesContext context,
+UIComponent component)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+throws IOException {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Do nothing... Children
+are rendered when obtaining component <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // properties via the
+encodeBegin method.<br>
+&nbsp;&nbsp;&nbsp; }<br>
+      </code><br>
+Regardless if<span style="font-family: monospace;"> </span><code></code><span style="font-style: italic;">subcomponents</span> are used or not, the <span style="font-style: italic;">widget renderer</span> always
+outputs a JSON object containing component properties. In the example
+below, the <code>getProperties</code>
+method of the <span style="font-style: italic;">widget renderer</span>
+is invoked and a JSON object is returned. The <code>getProperties</code>
+method of the <span style="font-style: italic;">widget renderer</span>
+collects all component and subcomponent properties to appends them
+to the JSON object. For example:<br>
+      <br>
+      <code>&nbsp;&nbsp;&nbsp; protected JSONObject
+getProperties(FacesContext context,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+UIComponent component) throws IOException, JSONException {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TextField2 field =
+(TextField2) component;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String id =
+field.getClientId(context);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Theme theme =
+ThemeUtilities.getTheme(context);<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Set rendered value.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if
+(field.getSubmittedValue() == null) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ConversionUtilities.setRenderedValue(component, field.getValue());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; JSONObject json = new
+JSONObject();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; json.put("name",
+id.concat(((Field) component).INPUT_ID))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+.put("disabled", field.isDisabled())<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+.put("value", field.getValueAsString(context))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+.put("valid", field.isValid())<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+.put("className", theme.getStyleClass(ThemeStyles.TEXT_FIELD))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+.put("disabledClassName",
+theme.getStyleClass(ThemeStyles.TEXT_FIELD_DISABLED))<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+.put("templatePath", (templatePath != null)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+? templatePath <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+: getTheme().getPathToTemplate(ThemeTemplates.TEXTFIELD)<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Append label properties.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+WidgetUtilities.addProperties(json, "label",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+WidgetUtilities.renderComponent(context,
+field.getLabelComponent(context, "")));<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Add core and attribute
+properties.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+addAttributeProperties(attributes, component, json);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; setCoreProperties(context,
+component, json);<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return json;<br>
+&nbsp;&nbsp;&nbsp; }</code><br>
+      </div>
+      <h3><a name="2.2.3"></a>2.2.3 WidgetUtilities</h3>
+      <h3></h3>
+      <div style="margin-left: 40px;"><code></code>In some cases, <span style="font-style: italic;">JSF
+components</span> may not render client-side and only output HTML
+(e.g., when rendering <span style="font-style: italic;">JSF facets</span>).
+Therefore, the output of a rendered <span style="font-style: italic;">JSF
+component</span> must be buffered in order to append the value as a
+component property. This is accomplished using a custom JSF <code>ResponseWriter</code>.
+When
+ever a <span style="font-style: italic;">JSF component</span> is
+rendered, the existing JSF <code>ResponseWriter</code> is set aside
+and a custom <code>ResponseWriter</code> is set in the JSF <code>FacesContext</code>.
+This is similar to how the JSF <code>ViewHandler</code> captures
+content, where a custom <code>ResponseWriter</code> is used to buffer
+strings output by rendered <span style="font-style: italic;">JSF
+components</span>. For example:<br>
+      <br>
+      <span style="font-family: monospace;"><code>&nbsp;&nbsp;&nbsp;
+public static String renderComponent(FacesContext context,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+UIComponent component) throws IOException, JSONException {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (component == null ||
+!component.isRendered()) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return null;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Initialize Writer to
+buffer rendered output.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ResponseWriter oldWriter =
+context.getResponseWriter();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Writer strWriter =
+initStringWriter(context);<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Render component and
+restore writer.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+RenderingUtilities.renderComponent(component, context);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+context.setResponseWriter(oldWriter);<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return strWriter.toString();
+// Return buffered output.<br>
+&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp;&nbsp; protected static Writer
+initStringWriter(FacesContext context) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (context == null) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return null;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Get render kit.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RenderKitFactory
+renderFactory = (RenderKitFactory)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+FactoryFinder.getFactory(FactoryFinder.RENDER_KIT_FACTORY);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RenderKit renderKit =
+renderFactory.getRenderKit(context,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+context.getViewRoot().getRenderKitId());<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Get writers.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ResponseWriter oldWriter =
+context.getResponseWriter();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Writer strWriter = new
+FastStringWriter(1024);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ResponseWriter newWriter =
+null;<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Initialize new writer.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (null != oldWriter) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+newWriter = oldWriter.cloneWithWriter(strWriter);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ExternalContext extContext = context.getExternalContext();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ServletRequest request = (ServletRequest) extContext.getRequest();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+newWriter = renderKit.createResponseWriter(strWriter, null,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+request.getCharacterEncoding());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Set new writer in context.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+context.setResponseWriter(newWriter);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return strWriter;<br>
+&nbsp;&nbsp;&nbsp; }</code><br>
+      <br>
+      </span>Using the buffered string, a JSON object is
+created and appended to component properties using the given key. If a
+JSON object cannot be created, because HTML has been output,
+the string object is assigned to the given key. For example:<br>
+      <br>
+      <div style="margin-left: 40px;"><code>public static void
+addProperties(JSONObject json, String key,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String value) throws
+JSONException {<br>
+&nbsp;&nbsp;&nbsp; if (value != null) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; try {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //
+If JSON text is given, append a new JSONObject.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+json.put(key, new JSONObject(value));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } catch (JSONException e) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //
+Append HTML string.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+json.put(key, value);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; }<br>
+}</code><code></code><br>
+      </div>
+      </div>
+      <div style="margin-left: 40px;"><br>
+Note that the output of <span style="font-style: italic;">JSF
+components</span> is buffered in order to use the JSON API. If the <span style="font-style: italic;">widget renderer</span> were to output to
+the JSF <code>ResponseWriter</code> directly, JSON objects (i.e., the
+output of <span style="font-style: italic;">subcomponents</span>)
+could not be appended to existing component properties. Once all data
+has been appended to the JSON object contain component properties,
+structured JavaScript data can be output to the JSF <code>ResponseWriter</code>.
+However, structured JavaScript data can also be written manually
+without JSON APIs. Although tedious and prone to errors, buffering
+rendered output would not be necessary.<br>
+      </div>
+      <h3><a name="2.3"></a>2.3 Dojo Widget<br>
+      </h3>
+      <h3><a name="2.3.1"></a>2.3.1 HTML Template<br>
+      </h3>
+      <div style="margin-left: 40px;"><code></code><code></code>There
+are typically two parts that make up a <span style="font-style: italic;">Dojo widget</span>; an <span style="font-style: italic;">HTML template</span>
+and <span style="font-style: italic;">widget JavaScript</span>. The <span style="font-style: italic;">HTML template</span> is a simple file made
+up of HTML tags and which may have attributes, called Dojo attach
+points. In the case of the <span style="font-style: italic;">HTML
+template</span> below, there are
+multiple Dojo attach points: <code>domNode, requiredImageContainer</code>,<span style="font-family: monospace;"> errorImageContainer</span><code></code>,
+and <code>valueContainer</code>. The <code>domNode</code> is
+the top level Dojo attach point where component properties are
+typically assigned to the DOM. This includes default properties
+associated with the HTML
+element, <span style="font-style: italic;">CSS</span> styles, etc. The
+      <code>requiredImageContainer</code>
+and <code>errorImageContainer</code> are Dojo attach points for the
+error
+and required images used by the label. Finally, the <code>valueContainer</code>
+holds the value (i.e., text) of the label.<br>
+      <br>
+      <div style="margin-left: 40px;"><span style="font-family: monospace;"><code>&lt;label
+dojoAttachPoint="domNode"&gt;</code></span><br>
+      <span style="font-family: monospace;"><code>&nbsp;&nbsp;&nbsp;
+&lt;span dojoAttachPoint="requiredImageContainer"&gt;&lt;/span&gt;</code></span><br>
+      <span style="font-family: monospace;"><code>&nbsp;&nbsp;&nbsp;
+&lt;span dojoAttachPoint="errorImageContainer"&gt;&lt;/span&gt;</code></span><br>
+      <span style="font-family: monospace;"><code>&nbsp;&nbsp;&nbsp;
+&lt;span dojoAttachPoint="valueContainer"&gt;&lt;/span&gt;</code></span><br>
+      <span style="font-family: monospace;"><code>&lt;/label&gt;</code></span><br>
+      <span style="font-family: monospace;"></span></div>
+      </div>
+      <h3><a name="2.3.2"></a>2.3.2 Widget JavaScript<br>
+      </h3>
+      <div style="margin-left: 40px;">The <span style="font-style: italic;">widget JavaScript</span> is used
+solely to fill in the <span style="font-style: italic;">HTML template</span>
+and update widget properties. The <code>fillInTemplate</code> function
+reads
+properties provided to the <span style="font-style: italic;">Dojo
+Widget</span> and assigns values to each Dojo attach point,
+ultimately resulting in a DOM object.<br>
+      <br>
+      <div style="margin-left: 40px;"><code>webui.suntheme.widget.label
+= function() {<br>
+&nbsp;&nbsp;&nbsp; this.widgetType = "label";<br>
+&nbsp;&nbsp;&nbsp; dojo.widget.Widget.call(this);<br>
+      <br>
+&nbsp;&nbsp;&nbsp; /**<br>
+&nbsp;&nbsp;&nbsp;&nbsp; * This function is used to generate a template
+based widget.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; */<br>
+&nbsp;&nbsp;&nbsp; this.fillInTemplate = function() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Set ids.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (this.id) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.requiredImageContainer.id = this.id + "_requiredImageContainer";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.errorImageContainer.id = this.id + "_errorImageContainer";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.valueContainer.id = this.id + "_valueContainer";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Set public functions.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.domNode.setProps =
+webui.suntheme.widget.label.setProps;<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Set private functions
+(private functions/props prefixed with "_").<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.domNode._getClassName =
+webui.suntheme.widget.label.getClassName;<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Set properties.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.domNode.setProps({<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+errorImage: this.errorImage,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+errorStyleClass: this.errorStyleClass,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+htmlFor: this.htmlFor,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; id:
+this.id,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+level: (this.level &gt; 0) ? this.level : 2,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+levelOneStyleClass: this.levelOneStyleClass,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+levelThreeStyleClass: this.levelThreeStyleClass,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+levelTwoStyleClass: this.levelTwoStyleClass,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+required: (this.required != null) ? this.required : false,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+requiredImage: this.requiredImage,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+valid: (this.valid != null) ? this.valid : true,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+value: this.value<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; });<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return true;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+}</code><br>
+      </div>
+      <br>
+In the example below, properties are assigned to the HTML element
+(i.e., DOM object<span style="font-style: italic;"></span>) via the <code>setProps</code>
+function. The given properties are saved using the <code>_props</code>
+variable, which is assigned to the top level HTML element. This is
+particularly important when the component is
+updated later on and default properties may need to be referenced
+(e.g., when en/disabling a component and styles change). <br>
+      <br>
+      <div style="margin-left: 40px;"><code>webui.suntheme.widget.label.setProps
+= function(props) {</code><br>
+      <code>&nbsp;&nbsp;&nbsp; if (props == null) {</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return false;</code><br>
+      <code>&nbsp;&nbsp;&nbsp; }</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp; // Save properties for later updates.</code><br>
+      <code>&nbsp;&nbsp;&nbsp; if (this._props) {</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Object.extend(this._props, props); // Override existing values, if any.</code><br>
+      <code>&nbsp;&nbsp;&nbsp; } else {</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this._props =
+props;</code><br>
+      <code>&nbsp;&nbsp;&nbsp; }</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp; // Set attributes.</code><br>
+      <code>&nbsp;&nbsp;&nbsp;
+webui.suntheme.widget.common.setCoreProperties(this, props);</code><br>
+      <code>&nbsp;&nbsp;&nbsp;
+webui.suntheme.widget.common.setJavaScriptProperties(this, props);</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp; if (props.htmlFor) {
+this.setAttribute("for", props.htmlFor); }</code><br>
+      <code>&nbsp;&nbsp;&nbsp; if (props.value) {
+this.setAttribute("value", props.value); }</code><br>
+      <code>&nbsp;&nbsp;&nbsp; this.className = this._getClassName();</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp; // Set widget properties.</code><br>
+      <code>&nbsp;&nbsp;&nbsp; var widget = dojo.widget.byId(this.id);</code><br>
+      <code>&nbsp;&nbsp;&nbsp; if (widget == null) {</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return false;</code><br>
+      <code>&nbsp;&nbsp;&nbsp; }</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp; // Set label value.</code><br>
+      <code>&nbsp;&nbsp;&nbsp; if (props.value) {</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+webui.suntheme.widget.common.addFragment(widget.valueContainer,
+props.value);</code><br>
+      <code>&nbsp;&nbsp;&nbsp; }</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp; // Set required image.</code><br>
+      <code>&nbsp;&nbsp;&nbsp; if (props.requiredImage) {</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+webui.suntheme.widget.common.addFragment(widget.requiredImageContainer,
+props.requiredImage);</code><br>
+      <code>&nbsp;&nbsp;&nbsp; }</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp; // Set error image.</code><br>
+      <code>&nbsp;&nbsp;&nbsp; if (props.errorImage) {</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+webui.suntheme.widget.common.addFragment(widget.errorImageContainer,
+props.errorImage);</code><br>
+      <code>&nbsp;&nbsp;&nbsp; }</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp; // Show error image.</code><br>
+      <code>&nbsp;&nbsp;&nbsp; widget =
+dojo.widget.byId(this._props.errorImage.id);</code><br>
+      <code>&nbsp;&nbsp;&nbsp; if (widget) {</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+widget.domNode.setProps({visible: !this._props.valid});</code><br>
+      <code>&nbsp;&nbsp;&nbsp; }</code><br>
+      <code></code><br>
+      <code>&nbsp;&nbsp;&nbsp; // Show required image.</code><br>
+      <code>&nbsp;&nbsp;&nbsp; widget =
+dojo.widget.byId(this._props.requiredImage.id);</code><br>
+      <code>&nbsp;&nbsp;&nbsp; if (widget) {</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+widget.domNode.setProps({visible: this._props.required});</code><br>
+      <code>&nbsp;&nbsp;&nbsp; }</code><br>
+      <code>&nbsp;&nbsp;&nbsp; return true;</code><br>
+      <code>}</code><br>
+      </div>
+      <br>
+This means
+that when a component or web app developer needs to update a component,
+a minimal amount of properties need to be specified. For example, using
+the following JavaScript function, only the property that is actually
+changing
+needs to be provided. The JavaScript function below takes
+a JSON object containing one or more component
+properties. For example:<br>
+      <br>
+      <div style="margin-left: 40px;"><code>document.getElementById(</code><code>"form1:label").setProps(</code><code>{<br>
+&nbsp;&nbsp;&nbsp; valid: false<br>
+});</code><code></code><br>
+      </div>
+      </div>
+      <h3><a name="2.4"></a>2.4 Event Listener JavaScript</h3>
+      <div style="margin-left: 40px;">In some cases, a <span style="font-style: italic;">Dojo Widget</span>
+may also include default <span style="font-style: italic;">event
+listener JavaScript</span>. The default
+implementation will interact directly with the <span style="font-style: italic;">Dynamic Faces JavaScript</span> API to
+generate AJAX requests; however, this could also be
+implemented using Shale Remoting. The default implementation is
+intentionally
+written separately from the <span style="font-style: italic;">widget
+JavaScript</span> so that developers may
+provide their own custom AJAX implementations, instead of forcing
+dependency on JSP, JSF, and/or Dynamic Faces. Therefore, the <span style="font-style: italic;">widget JavaScript</span> file does not
+make any references to code or URLs dealing with JSP, JSF, and/or
+Dynamic Faces.<br>
+      <br>
+In the example below, the <span style="font-style: italic;">event
+listener JavaScript</span> subscribes to a Dojo event when the
+JavaScript fie is evaluated by the browser.
+When ever the user tabs out of the text field, this event will be
+published by the Dojo widget and the <code>validate</code> function
+will be invoked. Using the <code>DynaFaces.fireAjaxTransaction</code>
+API of
+the <span style="font-style: italic;">Dynamic Faces JavaScript</span>
+library, an AJAX request is generated. This includes the <span style="font-style: italic;">JSF
+component</span> ID to process the <span style="font-style: italic;">Dynamic
+Faces
+life cycle</span> over and a JavaScript call back function
+(i.e., the <span style="font-family: monospace;">replaceElement</span><code></code>
+property)
+to be
+invoked when the <span style="font-style: italic;">Dynamic Faces
+JavaScript</span>
+receives the AJAX response from the server. After receiving the
+response, Dynamic Faces invokes the given call back function and a JSON
+string is evaluated. The widget is then updated with data
+from the JSON object and a&nbsp; new Dojo event is published,
+indicating that the
+component has been validated. In this example, this Dojo event may be
+used
+by an in-line alert to display validation error messages.<br>
+      <br>
+      <div style="margin-left: 40px;"><code></code><code>webui.suntheme.widget.jsfx.textField
+= {<br>
+&nbsp;&nbsp;&nbsp; /**<br>
+&nbsp;&nbsp;&nbsp;&nbsp; * This function is used to process validation
+events.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; *<br>
+&nbsp;&nbsp;&nbsp;&nbsp; * @param evt Event generated by text field.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; */<br>
+&nbsp;&nbsp;&nbsp; processValidationEvent: function(evt) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (evt == null) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return false;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var domNode;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (evt.currentTarget) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+domNode = evt.currentTarget;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return false;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Ensure we have a valid
+element node.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var src =
+document.getElementById(domNode.id);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (domNode.parentNode ==
+null) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return false;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Generate AJAX request
+using the JSF Extensions library.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; new
+DynaFaces.fireAjaxTransaction((src) ? src : document.forms[0], {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+execute: "none",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+render: domNode.parentNode.id, // id + "_field" does not exist in
+component tree.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+replaceElement: webui.suntheme.widget.jsfx.textField.update });<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return true;<br>
+&nbsp;&nbsp;&nbsp; },<br>
+      <br>
+&nbsp;&nbsp;&nbsp; /**<br>
+&nbsp;&nbsp;&nbsp;&nbsp; * This function is used to update widgets.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; *<br>
+&nbsp;&nbsp;&nbsp;&nbsp; * @param elementId The HTML element Id.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; * @param content The content returned by the
+AJAX response.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; * @param closure The closure argument provided
+to DynaFaces.fireAjaxTransaction.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; * @param xjson The zjson argument provided to
+DynaFaces.fireAjaxTransaction.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; */<br>
+&nbsp;&nbsp;&nbsp; update: function(elementId, content, closure, xjson)
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (elementId == null ||
+content == null) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return false;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Parse JSON text.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var json =
+JSON.parse(content);<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Update text field.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var domNode =
+document.getElementById(elementId);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; domNode.setProps({<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+valid: json.valid<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; });<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Publish an event for
+custom AJAX implementations to listen for. For<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // example, an alert
+component may need to be updated when ever a text<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // field value is found to
+be invalid.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+webui.suntheme.widget.textField.validation.publishEndEvent(json);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return true;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+}<br>
+      <br>
+// Listen for Dojo Widget events.<br>
+dojo.event.topic.subscribe(webui.suntheme.widget.textField.validation.beginEventTopic,<br>
+&nbsp;&nbsp;&nbsp; webui.suntheme.widget.jsfx.textField,
+"processValidationEvent");</code><br>
+      </div>
+      </div>
+      <h3><a name="2.5"></a>2.5 AJAX Renderer</h3>
+      <div style="margin-left: 40px;">The <span style="font-style: italic;">AJAX
+renderer</span> is used obtain data
+asynchronously, via the Dynamic Faces framework, for updating <span style="font-style: italic;">Dojo widgets</span> during an AJAX
+request. In this example, the <span style="font-style: italic;">AJAX
+renderer</span> gathers component properties for an auto-validate text
+field. Since Dynamic Faces has already processed the life cycle over
+the <span style="font-style: italic;">JSF component</span>, the user's
+entry has
+been validated. The code below simply invokes the <code>isValid</code>
+method of the <span style="font-style: italic;">JSF component</span>
+and appends the value to a JSON object. In addition, <code>FacesMessages</code>
+are gathered so they can be displayed to the user via an in-line alert.<br>
+      <br>
+Note that Dynamic Faces shall automatically include any <code>FacesMessages</code>
+objects in the response. Thus, this information will be available
+client-side without the <span style="font-style: italic;">AJAX renderer</span>
+sending it back itself. Unfortunately, this has not been implemented,
+yet.<br>
+      <br>
+      <div style="margin-left: 40px;"><code>public void
+encodeEnd(FacesContext context, UIComponent component)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throws IOException {<br>
+&nbsp;&nbsp;&nbsp; if (context == null || component == null) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throw new
+NullPointerException();<br>
+&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp;&nbsp; try {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; boolean valid = ((TextField)
+component).isValid();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; JSONObject json = new
+JSONObject();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; json.put("valid", valid);<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!valid) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Iterator msgs = context.getMessages(component.getClientId(context));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if
+(msgs.hasNext()) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+FacesMessage msg = (FacesMessage) msgs.next();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+json.put("detail", msg.getDetail());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+json.put("summary", msg.getSummary());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+json.put("severity", msg.getSeverity());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+json.write(context.getResponseWriter());<br>
+&nbsp;&nbsp;&nbsp; } catch(JSONException e) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e.printStackTrace();<br>
+&nbsp;&nbsp;&nbsp; }<br>
+}<br>
+      </code></div>
+      </div>
+      <h3><a name="2.6"></a>2.6 Dynamic Faces JavaScript<br>
+      </h3>
+      <div style="margin-left: 40px;">Dynamic Faces exposes the JSF request
+processing life cycle to AJAX based components by providing both a JavaScript
+library and server side extension to the JSF life cycle. The Dynamic Faces
+framework is automatically configured by including a jar in the web
+server class path. However, the web app developer must specify the <code>javax.faces.LIFECYCLE_ID</code>
+parameter when defining the Faces servlet in the web.xml file. For example:<br>
+      <br>
+      <div style="margin-left: 40px;"><code>&lt;servlet&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp; &lt;servlet-name&gt;Faces
+Servlet&lt;/servlet-name&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;
+&lt;servlet-class&gt;javax.faces.webapp.FacesServlet&lt;/servlet-class&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp; &lt;init-param&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;param-name&gt;javax.faces.LIFECYCLE_ID&lt;/param-name&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&lt;param-value&gt;com.sun.faces.lifecycle.PARTIAL&lt;/param-value&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp; &lt;/init-param&gt;</code><br>
+      <code>&nbsp;&nbsp;&nbsp;
+&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;</code><br>
+      <code>&lt;/servlet&gt;</code><br>
+      </div>
+      <br>
+AJAX functionality is typically enabled using the <span style="font-style: italic;">Dynamic Faces
+JavaScript</span> library and the on* JavaScript attributes of a <span style="font-style: italic;">JSP tag</span>. For
+example:<br>
+      <br>
+      <div style="margin-left: 40px;"><code>&lt;h:commandButton
+value="Add Item" action="#{orderEntry.addProduct}" onclick="new
+DynaFaces.fireAjaxTransaction(this); return false;"/&gt;</code></div>
+      <div style="text-align: left; margin-left: 40px;"> </div>
+      <br>
+In the example above, an AJAX request is sent to the server along with
+all values in the
+current form. In this example, the entire request processing life cycle
+will be run and the Dynamic Faces life cycle will decide which parts of
+the
+view root will be processed. In most cases; however, the
+life cycle will be run over a specific sub view. In the example below,
+the Dynamic Faces life cycle is processed over the sub view for
+client id <code>form1:field</code>.<br>
+      <br>
+      <span style="font-family: monospace;"></span>
+      <div style="margin-left: 40px;"><code></code><code> new
+DynaFaces.fireAjaxTransaction(this, { render: 'form1:field',
+replacementHook: '</code><code>webuijsf.widget.jsfx.textField.update</code><code>'
+});</code><span style="font-family: monospace;"><br>
+      </span></div>
+      <br>
+Instead of rendering the entire <span style="font-style: italic;">JSF
+component</span> tree, only the <span style="font-style: italic;">AJAX
+renderer</span> associated with
+the specified <span style="font-style: italic;">JSF component</span>
+will be run. Typically, the <span style="font-style: italic;">Dynamic
+Faces
+JavaScript</span> library expects to
+receive newly rendered HTML in the
+response;
+however, the <span style="font-style: italic;">AJAX renderer</span>
+outputs JSON properties for AJAX
+requests. And instead of
+updating the <code>innerHTML</code> property of a div tag with newly
+rendered HTML,
+the <span style="font-style: italic;">Dynamic Faces JavaScript</span>
+will invoke a JavaScript call back function provided by the
+component developer and defined in the <span style="font-style: italic;">event
+listener JavaScript</span>.<br>
+      <br>
+Note that Dynamic Faces does not currently support immediate behavior.
+For example, an auto-validate text field must validate the user's
+entry, but the model value cannot be updated until the user clicks on a
+button. In this scenario, Dynamic Faces will process the life cycle
+over
+the <span style="font-style: italic;">JSF component</span>, but it
+invokes all phases, including the update model phase. It would be very
+useful if Dynamic Faces provided an immediate property so that the <span style="font-style: italic;">Dynamic Faces life cycle</span> is not
+processed for the update model and invoke application phases. In this
+case, Dynamic Faces would jump to the render response phase so the <span style="font-style: italic;">AJAX renderer</span> could test if the <span style="font-style: italic;">JSF component</span> was valid or not.</div>
+</body></html>

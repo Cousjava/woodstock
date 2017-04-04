@@ -1,0 +1,1087 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <!--
+      The contents of this file are subject to the terms
+      of the Common Development and Distribution License
+      (the License).  You may not use this file except in
+      compliance with the License.
+      
+      You can obtain a copy of the license at
+      https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      See the License for the specific language governing
+      permissions and limitations under the License.
+      
+      When distributing Covered Code, include this CDDL
+      Header Notice in each file and include the License file
+      at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      If applicable, add the following below the CDDL Header,
+      with the fields enclosed by brackets [] replaced by
+      you own identifying information:
+      "Portions Copyrighted [year] [name of copyright owner]"
+      
+      Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+    -->
+<title>Project Woodstock - Component FS Template</title>
+<style type="text/css"> 
+/* <![CDATA[ */
+@import url(../../browser-uispec.css);
+.style2 {font-size: 18pt}
+  </style>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+</head>
+<body bgcolor="#ffffff">
+<div class="security-text" align="right"><a href="#skipnav"
+ title="Skip Navigation Links"></a></div>
+<div class="MstDiv">
+<table class="MstTblBot" title="" border="0" cellpadding="0"
+ cellspacing="0" width="100%">
+  <tbody>
+    <tr>
+      <td class="MstTdTtl">
+      <div class="MstDivTtl">
+      <div class="Mst1TtlTxt">Project Woodstock</div>
+      </div>
+      <div class="Mst1SecDiv"> <span class="Mst1SecTxt style2">Component
+Test Spec Template (Put component name and version number here) </span></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<table class="Mst2Tbl" style="width: 100%;" title="" border="0"
+ cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td> <br>
+      <h2 style="font-weight: bold;"><a name="1.0"></a>1.0 Overview</h2>
+      <h3><span style="font-weight: bold;"><a name="1.1"></a>1.1
+Document Revision History</span></h3>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Revision</span></td>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Date</span></td>
+            <td style="width: 50%; text-align: center;"><span
+ style="font-weight: bold;">Synopsis</span></td>
+            <td style="width: 20%; text-align: center;"><span
+ style="font-weight: bold;">Author</span></td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">0.1</td>
+            <td style="text-align: center;">mm/dd/yyyy</td>
+            <td style="text-align: center;">Initial Draft</td>
+            <td style="text-align: center;">Your name</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 style="font-weight: bold;"><a name="1.2"></a>1.2 Component
+Description<br>
+      </h3>
+      <div style="margin-left: 40px;">Describe the component or
+the major changes to an existing component at a high level; basically,
+what the component is and what it does.</div>
+      <h3><a name="1.3"></a>1.3 Component Purpose</h3>
+      <div style="margin-left: 40px;">Describe the overall purpose of the component and/or the problems it is
+trying to solve.&nbsp; Why are you adding this component or making
+major changes to the component?&nbsp; How doyou expect it to be used?</div>
+      <h3 style="font-weight: bold;"><a name="1.4"></a>1.4 Relevant
+Documents</h3>
+      <ul>
+        <li>link to external
+reference of SWAED guidelines (coming)</li>
+        <li>link to previous version functional spec (if relevent)</li>
+        <li>link to UI design spec (required)</li>
+        <li>links to other relevent specs (add as necessary)</li>
+      </ul>
+<div style="margin-left: 40px;">Links to related reference documents can be added in an Appendix at the
+end of the spec; that is, these links are important to understanding
+this specification or our supporting documents specific to this
+component, such as the UI design document and test specification.</div>
+      <h3><a name="1.5"></a>1.5 Definition of Terms</h3>
+<div style="margin-left: 40px;">Define terminology specific to your component or framework.&nbsp;&nbsp;
+It is expected that most reviewers will be familiar with the basic
+technical and industry-wide defined terminology; such as Ajax, Dynamic
+Faces, etc.</div>
+      <h2><a name="2.0"></a>2.0 Test Requirements</h2>
+<div style="margin-left: 40px;">The &lt;XXX&gt;
+component will be tested to meet the following requirements, standards,
+and tests:
+      <ul>
+        <li>SWAED Web App Guidelines compliant </li>
+        <li>Fully A11Y compliant by GA</li>
+        <li>I18N compliant by GA</li>
+        <li>XHTML transitional compliant by GA</li>
+        <li>GUI functional test requirements</li>
+        <li>JSP test requirements</li>
+        <li>API test requirements</li>
+      </ul></div>
+      <h3><a name="2.1"></a>2.1 Tools and Methods:</h3>
+<div style="margin-left: 40px;">The &lt;XXX&gt; component will be tested using the the
+following tools and methods:
+      <ul>
+        <li>GUI tests will be performed on platform and browser
+configurations
+identified here:</li>
+        <ul>
+          <li>The table of supported <a href="../SupportedBrowers.htm">Browsers</a>.</li>
+        </ul>
+        <ul>
+          <li>The table of supported <a
+ href="../SupportedContainers.htm">Containers</a>.</li>
+        </ul>
+        <li>Functional and BUI tests will be automated<span
+ style="text-decoration: underline;"></span></li>
+        <li>API tests will be written for each method in the
+classes of the component</li>
+        <li>Automated tests will be integrated into a test harness and
+run nightly as a regression suite</li>
+        <li>Automated code coverage goal of 80% (at GA) will be
+achieved as outlined in
+the project test plan
+        </li>
+      </ul></div>
+      <h3><a name="2.2"></a>2.2 Issue Tracking
+      </h3>
+&nbsp;
+      <br>
+<div style="margin-left: 40px;">Bugs will be filed using Bugtracker (Issuezilla) and entered against
+the proper Project Woodstock Revision and component category.</div>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+          <tr>
+            <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Product:</span><br>
+            </small></td>
+            <td style="vertical-align: top;"><small>woodstock<br>
+            </small></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;"><small><span
+ style="font-weight: bold;">Category:</span><br>
+            </small></td>
+            <td style="vertical-align: top;"><small>components<br>
+            </small></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;"><small><span
+ style="font-weight: bold;">Subcategory:</span><br>
+            </small></td>
+            <td style="vertical-align: top;"><small>&nbsp;&lt;enter
+applicable_subcategory</small></td>
+          </tr>
+      </table>
+      <br>
+      <h2><a name="3.0"></a>3.0 Test Matrix</h2>
+      <br>
+<div style="margin-left: 40px;">The following are definitions of the fields used in the test case matrix:</div>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">Test
+Case ID</td>
+            <td style="vertical-align: top;"><small>Unique
+identifier for each test case<br>
+            </small></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Test Case Synopsis</span><br>
+            </td>
+            <td style="vertical-align: top;"><small>Description
+of the test case<br>
+            </small></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">User Defined Fields</span><br>
+            </small></td>
+            <td style="vertical-align: top;"><small>Defined by
+the test engineer to allow for flexibility in writing the test case<br>
+            </small></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      </div>
+      <h3><a name="3.1"></a>3.1 Web Guidelines Compliancy Tests<br>
+      </h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case ID</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case Synopsis</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+NS7</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+NS7</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+IE</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top;">MAC Safari <br>
+Client-only <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Comments</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);">UI-01<br>
+            </td>
+            <td style="vertical-align: top;"> <br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><a
+ class="header"><br>
+            </a> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><a
+ class="header"><br>
+            </a> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-left: 40px;">
+      <div style="text-align: center;"> </div>
+      <br>
+      </div>
+      <h3><a name="2.2"></a>3.2 A11Y&nbsp; Tests<br>
+      </h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case ID</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case Synopsis</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+NS7</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+NS7</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+IE</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top;">MAC Safari <br>
+Client-only <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Comments</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);">A11Y-01<br>
+            </td>
+            <td style="vertical-align: top;"> <br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><a
+ class="header"><br>
+            </a> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><a
+ class="header"><br>
+            </a> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-left: 40px;"></div>
+      <br>
+      <h3><a name="3.3"></a>3.3&nbsp; I18N Tests<br>
+        <br>
+      </h3>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case ID</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case Synopsis</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+NS7</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+NS7</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+IE</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top;">MAC Safari <br>
+Client-only <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Comments</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);">I18N-01<br>
+            </td>
+            <td style="vertical-align: top;"> <br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><a
+ class="header"><br>
+            </a> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><a
+ class="header"><br>
+            </a> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="3.4"></a>3.4 GUI Functional Tests<br>
+      </h3>
+      <a class="header"><br>
+      </a>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case ID</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case Synopsis</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+NS7</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+NS7</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+IE</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top;">MAC Safari <br>
+Client-only <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Comments</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);">GUI-01<br>
+            </td>
+            <td style="vertical-align: top;"> <br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><a
+ class="header"><br>
+            </a> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><a
+ class="header"><br>
+            </a> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="3.5"></a>3.5 Jsp Tests</h3>
+      <a class="header"><br>
+      </a>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case ID</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case Synopsis</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+NS7</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+NS7</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+IE</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top;">MAC Safari <br>
+Client-only <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Comments</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);">JSP-01<br>
+            </td>
+            <td style="vertical-align: top;"> <br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><a
+ class="header"><br>
+            </a> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><a
+ class="header"><br>
+            </a> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="3.6"></a>3.6 XHTML Tests</h3>
+      <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case ID</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case Synopsis</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+NS7</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+NS7</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+IE</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top;">MAC Safari <br>
+Client-only <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Comments</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);">XHTML-01<br>
+            </td>
+            <td style="vertical-align: top;"> <br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><a
+ class="header"><br>
+            </a> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><a
+ class="header"><br>
+            </a> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <a class="header"><br>
+      </a>
+      <h3><a name="3.6"></a>3.7 API Tests</h3>
+      <div style="margin-left: 40px;">API level unit tests will
+be written by QA, calling each method written
+for the component.&nbsp; These tests include both positive
+and negative value arguments.&nbsp; The goal is to look for consistent
+and proper behavior, making sure range limits are met, and correct
+error reporting is handed by the class. The API tests will be
+incorporated into the internal test harness and run nightly. &nbsp;
+Nightly test results will be posted and available for review.&nbsp;
+JCOV, the java
+code coverage tool, will be used to ensure that we meet the code
+coverage goales for milestones and GA in particular.</div>
+ <br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td width="89"
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><div align="center">Date
+      
+          </div></td>
+            <td width="395" style="vertical-align: top;"><div align="center">API Approval
+  and Integration Into Test Harness Complete </div></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h2><a name="4.0"></a>4.0 Automation Implementation<br>
+      </h2>
+<div style="margin-left: 40px;">These are the QA milestones for automated tests. The dates indicate when the
+corresponding milestones have been met.</div><br>
+      
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td width="98" style="vertical-align: top;"><div align="center"><a class="header">Category</a><br>
+            </div></td>
+            <td width="108" style="vertical-align: top;"><div align="center"><a class="header">Completion Date</a><br>
+            </div></td>
+            <td width="99" style="vertical-align: top;"><div align="center"><a class="header">Date
+  Accepted</a><br>
+            </div></td>
+            <td width="133" style="vertical-align: top;"><div align="center"><a class="header">Comments</a><br>
+            </div></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><a class="header">API Tests</a>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><a class="header">JSP Tests</a>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><a class="header">Silk
+Tests</a> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">JavaScriptLint <br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+     
+      <br>
+      <br>
+      <h2><a name="5.0"></a>5.0 Approval <br>
+      </h2>
+<div style="margin-left: 40px;">The following sign-offs are required for document acceptance.</div><br>
+      <table
+ style="width: 95%; text-align: left; margin-left: 40px; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td width="153" style="vertical-align: top;"><a class="header">Approver
+Role</a><br>
+            </td>
+            <td width="126" style="vertical-align: top;"><a class="header">Approver
+Name</a><br>
+            </td>
+            <td width="81" style="vertical-align: top;"><a class="header">Date</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><a class="header">Quality
+Engineer (peer)</a><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><a class="header">Component
+Engineer</a> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><a class="header">Manager</a>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <br>
+      <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,492 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <!--
+      The contents of this file are subject to the terms
+      of the Common Development and Distribution License
+      (the License).  You may not use this file except in
+      compliance with the License.
+      
+      You can obtain a copy of the license at
+      https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      See the License for the specific language governing
+      permissions and limitations under the License.
+      
+      When distributing Covered Code, include this CDDL
+      Header Notice in each file and include the License file
+      at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      If applicable, add the following below the CDDL Header,
+      with the fields enclosed by brackets [] replaced by
+      you own identifying information:
+      "Portions Copyrighted [year] [name of copyright owner]"
+      
+      Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+    -->
+<title>Project Woodstock - Theme Functional Spec</title>
+<style type="text/css"> 
+/* <![CDATA[ */
+@import url(../../browser-uispec.css);
+.style2 {font-size: 18pt}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body bgcolor="#FFFFFF">
+<script src="../../js/uispec_js.js" type="text/javascript"></script>
+<div align="right" class="security-text"><a href="#skipnav" title="Skip Navigation Links"></a></div>
+<div class="MstDiv">
+  <table class="MstTblBot" width="100%" border="0" cellpadding="0" cellspacing="0" title="">
+
+    <tr>
+      <td class="MstTdTtl"><div class="MstDivTtl">
+          <div class="Mst1TtlTxt">Project Woodstock</div>
+        </div>
+        <div class="Mst1SecDiv"> <span class="Mst1SecTxt style2">Theme Functional Specification </span></div></td>
+    </tr>
+  </table>
+</div>
+
+<table border="0" cellpadding="0" cellspacing="0" class="Mst2Tbl" style="width: 100%;" title="">
+  <tbody>
+    <tr>
+      
+	  <td><br><h2 style="font-weight: bold;"><a name="1.0"></a>1.0 Description</h2>
+        <div style="margin-left: 40px;">This specification refers mainly to the Theme software subsystem that provides the Theme capability to components and applications. This specification mainly describes the Theme subsystem design, interfaces, and how the interfaces can be used to provide a level of extensibility to the developer to augment an existing component theme.&nbsp; </div>
+        <h3><span style="font-weight: bold;"><a name="1.1"></a>1.1 Document Revision History</span><br>
+        </h3>
+        <table style="width: 95%; text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+          <tbody>
+            <tr>
+              <td style="width: 15%; text-align: center;"><span style="font-weight: bold;">Revision</span></td>
+              <td style="width: 15%; text-align: center;"><span style="font-weight: bold;">Date</span></td>
+              <td style="width: 50%; text-align: center;"><span style="font-weight: bold;">Synopsis</span></td>
+              <td style="width: 20%; text-align: center;"><span style="font-weight: bold;">Author</span></td>
+            </tr>
+            <tr>
+              <td style="vertical-align: top;"><div align="center">2.1<br>
+              </div></td>
+              <td style="vertical-align: top;"><div align="center">03/14/2007<br>
+              </div></td>
+              <td style="vertical-align: top;">Misc edits to remove template cruft<br>
+              </td>
+              <td style="vertical-align: top;"><div align="center">Richard Ratta <br>
+              </div></td>
+            </tr>
+            <tr>
+              <td style="vertical-align: top;"><div align="center">2.0<br>
+              </div></td>
+              <td style="vertical-align: top;"><div align="center">03/02/2007<br>
+              </div></td>
+              <td style="vertical-align: top;">Updated to reflect implementation; misc edits.<br>
+              </td>
+              <td style="vertical-align: top;"><div align="center">Richard Ratta</div></td>
+            </tr>
+            <tr>
+              <td style="text-align: center; vertical-align: top;">1.1</td>
+              <td style="vertical-align: top;"><div align="center">09/16/2006<br>
+              </div></td>
+              <td style="vertical-align: top;">Add updated interface specifications; misc edits.<br>
+              </td>
+              <td style="vertical-align: top;"><div align="center">Richard Ratta</div></td>
+            </tr>
+            <tr>
+              <td style="text-align: center;">1.0<br>
+              </td>
+              <td style="text-align: center;">05/30/2006</td>
+              <td style="text-align: center;"><div align="left">Initial Draft</div></td>
+              <td style="text-align: center;"><div align="center">Richard Ratta<br>
+              </div></td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 style="font-weight: bold;"><a name="1.2"></a>1.2 Relevant Documents</h3>
+        <ul>
+          <li>Web Application Guidelines (available soon) </li>
+          <li>            <a href="http://www.w3.org/TR/CSS21/">Cascading Style Sheets, level 2 revision 1</a></li>
+          <li><a href="http://www.w3.org/TR/html401/">HTML 4.01 Specification</a></li>
+          <li><a href="http://jcp.org/en/jsr/detail?id=53">JSR 53: Java Servlet 2.3 and JavaServer Pages 1.2 Specifications</a></li>
+        </ul>
+        <h3><a name="1.3"></a>1.3 Definition of Terms
+        </h3>
+        <ul>
+          <li>Theme - a set of characteristics that define the aesthetic appearance, layout and in some cases behavior of a set of components. Sometimes "Theme" refers to the subsystem vs. the content that defines a theme. The context in which the term is used will make the meaning clear.</li>
+          <li><span style="color: rgb(0, 0, 0);">Core Theme or Default Theme - the theme as referenced by the components. It is specified by the&nbsp; application as the default theme, or specified and shared by a web container, or by virtue of being available to an application at runtime. If the theme is not explicitly specified then it is chosen by the theme subsystem. The chosen theme becomes the core or default theme.</span><br>
+          </li>
+          <li>CSS - Cascading Style Sheet. A CSS file is a set of CSS selectors and definitions that define the appearance of HTML elements. When a given CSS file is included in an HTML page via the "link" element, the definitions within the CSS file affect the elements on that HTML page. See the <a href="http://www.w3.org/TR/CSS21/">Cascading Style Sheets, level 2 revision 1</a> for more information.</li>
+          <li>Woodstock - (formerly Sun Java Web User Interface Components)</li>
+        </ul>
+        <h2><a name="2.0"></a>2.0 Requirements, goals, and assumptions</h2>
+        <h3><a name="2.1"></a>2.1 Requirements</h3>
+        <ul>
+          <li>In general, all Portlets on the page will use the same theme; that is, no mixing of themes among the Portlets.&nbsp;</font></li>
+          <li>Don't force a particular look and feel on the components; remove "policy" from the component renderers.&nbsp; Find and fix the 80% obvious cases to be cleaned up.&nbsp;</font></li>
+          <li>It should be easy to configure components to use a different image when the mouse hovers over the button, or when the button is pressed. Instead of the page developer having to write JavaScript event handlers, the component API should include attributes to specify the different images, something like "imageOnMouseOver" "imageOnMouseDown"... (rr. Need richer set of visual characteristics for components)</font> </li>
+          <li>Components are being created outside the scope of the Woodstock component set. The theme must support the existence of a "sparse" theme. A sparse theme is a theme that is structurally similar to a&nbsp; core theme, but does not typically contain resources for the Woodstock component set, only for the component or components created external to the Woodstock set. This requires that the Theme subsystem support the existence of multiple theme jars where some theme jars are designated as "sparse" and possibly taking precedence over the core theme. Satisfying this requirement can be&nbsp; interpreted supporting a "plug-in" like architecture for components that are created externally to the Woodstock set. <span style="font-style: italic; color: rgb(255, 0, 0);"></span><span style="color: rgb(255, 0, 0);"><span style="color: rgb(0, 0, 0);"></span></span></li>
+          <li>A versioning scheme that can discriminate between versions of theme jars and enforce a relationship between a given version of a component set and the theme it was implemented or based on.</li>
+        </ul>
+        <h3><a name="2.1.1"></a>2.1.1 UI Requirements
+        </h3>
+        <ul>
+          <li>There are no specific SWAED requirements as to the functionality of the Theme. However it is the Theme that provides the mechanism whereby the SWAED look and feel is made available to the components and applications at runtime.</li>
+        </ul>
+        <h3><a name="2.1.2"></a>2.1.2 Functional Requirements
+        </h3>
+        <ul>
+          <li>A Theme must be able to provide a UI Guidelines (to be published) look and feel to all components and applications that reference the theme. This implies that interfaces are available to components and applications that provide&nbsp; data for the those aspects of a component or application that are defined by the UI Guidelines. </li>
+          <li>The Theme  look and feel policy, as is practical given the current component implementation environment, must be available for specification by the application developer and most importantly not hard coded in compiled runtime code. Some characteristics may not lend themselves to runtime specification, but as much as possible theme characteristics must be available for specification by the application developer possibly not at runtime but via a resource bundle.</li>
+          <li>The Theme must allow the application developer to redefine theme characteristics in whole or in part without modifying the core or default theme. This is referred to as "augmenting a theme". This includes defining resources that may not be in the core or default theme but referenced by components written by the application developer that are not part of the Woodstock component set but reference the interfaces exposed by the Theme in order to obtain those resources.</li>
+          <li>The Theme must support a variety of runtime environments particularly Portlet, JSF, JSP and for "service processors". The Theme should not be bound to any one technology such as JSF, JSP, Tomcat, etc. Interfaces must exist that can be implemented for the various runtime environments if necessary.</li>
+          <li>The Theme must provide interfaces for tools to acquire those characteristics that can be specified by the application developer. This may be inherent in the component or renderer implementation as defined by theme interfaces.<span style="color: rgb(102, 0, 204);"> <span style="font-style: italic;">This issue is not addressed in this specification.</span></span></li>
+          <li>The Theme must support the existence of multiple Theme sources, commonly provided in jars, and ResourceBundles or Properties files where some jars are "sparse" and support a subset of components, whose resources may not be supported in the core Theme jar.</li>
+        </ul>
+        <h3><a name="2.1.3"></a>2.1.3 Performance requirements
+        </h3>
+        <ul>
+          <li>Should not overly impede startup performance.</li>
+          <li>Should not introduce a large memory footprint.
+          </li>
+        </ul>
+        <h3><a name="2.1.4"></a>2.1.4 Browser, platform requirements</h3>
+                    <ul>
+              <li>The table of supported <a href="../SupportedBrowers.htm">Browsers</a>.</li>
+              <li>The table of supported <a href="../SupportedContainers.htm">Containers</a>.  </li>
+        </ul>        
+        <h3><a name="2.1.5"></a>2.1.5 Special requirements
+</h3>
+<ul>
+  <li>The Theme subsystem must not be dependent on JSF and available for use by non-JSF and non-JSP pages.
+  </li>
+</ul>
+<h3><a name="2.2"></a>2.2 Requirements Not Met
+</h3>
+<ul>
+  <li>The Theme subsystem cannot completely meet any requirement of assured backward compatibility. An earlier version of a Theme cannot be guaranteed to operate correctly when referenced by a set of components created based on a later version of a Theme. Any custom theme based on a given version of a Theme must be ported to be compatible and up to date with a later version of that Theme and of a set of components based on the later theme. This is based on two facts:
+      <ol>
+        <li>A given theme characteristic may no longer be relevant for a given component.</li>
+        <li>A new theme characteristic may be introduced that is not defined in a previous version of a theme</li>
+      </ol>
+  </li>
+  <li>It is not clear if this spec will address requirement #35. The functionality issues addressed by this spec will mostly relate to augmenting a given theme without reimplementing the theme. Adding theme features to a given component may be beyond this spec and addressed by modifications to an individual component. However when there are theme characteristics an application will be able to override them.</li>
+</ul>
+<h3><a name="2.3"></a>2.3 Assumptions</h3>
+<ul>
+  <li>There is an assumption that a Theme will always be provided. Either explicitly with the released components, or provided as a customized theme. If a Theme is not present the components (at this&nbsp; stage of development will not run without Exceptions.)</li>
+  <li>In order to obtain resources from a Jar given the current implementation strategy, the HTTP server must be a servlet container, to efficiently server resources that exist in Jar files.</li>
+</ul>
+<h3><a name="2.4"></a>2.4 Goals
+</h3>
+<ul>
+  <li>The Theme subsystem will support web applications that are not necessarily JSF or JSP web applications. Theme resources should be available to any HTML page. The Theme subsystem will be available to HTML pages via a Servlet. There are also server side runtime interfaces. <span style="font-style: italic;"><span style="color: rgb(102, 0, 204);"><span style="color: rgb(0, 0, 0);">(However "servlets" imply java on the server. Essentially what is needed is the ability to redirect any HTML request that reflects a specific URL pattern, to a "process" that can decode the URL and provide the requested resource as a stream to the user agent).</span></span></span></li>
+</ul>
+<h3>2.5 Non-goals</h3>
+<ul>
+  <li>Provide scopes in which the developer can augment the core theme<span style="font-style: italic;">.</span> While this specification does not define how various scopes will be achieved it and the implementation lays the groundwork for such functionality.<span style="font-style: italic;"><span style="font-style: italic;"></span></span></li>
+</ul>
+<h2><a name="3.0"></a>3.0 Subsystem Usage</h2>
+<div style="margin-left: 40px;"><br>
+  A Theme is used to express a consistent aesthetic appearance across an application. This occurs since each component has much of its appearance defined in the theme. The definition of this appearance takes the form of images, CSS files, text and resource property files. The values in these resources are changed to effect a different theme.<br>
+  <br>
+  This functional specification redefines a theme to include resources that can be specified externally to a core or default theme, to augment the core or default theme. There are two use cases that are addressed.
+  <ol>
+    <li>The application additional resources at the application configuration level in the form of&nbsp; ResourceBundles (typically in the form of Properties files) specifying theme characteristics for the application or for overriding theme characteristics of a component.</li>
+    <li>Third party component developers (component developers outside the confines of the Woodstock component set) implement a Service Provider Interface that provides a list of ResourceBundles (typically in the form of Properties files) that define theme characteristics of their components. These resource can be delivered in the same Jar as the components.<span style="font-style: italic;"><span style="color: rgb(102, 0, 204);"></span></span></li>
+  </ol>
+  This strategy works by ensuring that additional theme resources are available on the application's classpath.<br>
+  <br>
+  The component or runtime infrastructure supporting the theme subsystem initializes the theme subsystem by creating an instance of the appropriate ThemeFactory implementation. The ThemeFactory performs the appropriate tasks to instantiate a particular theme based on configuration information and the runtime environment.<br>
+</div>
+<h2>4.0 Subsystem Interfaces</h2>
+<h3><a name="4.1"></a>4.1 Exported interfaces table
+</h3>
+<blockquote>
+  <p>Similar to ARC interface table.&nbsp; Include interface name (used throughout this spec to refer to that specific interface), stability classification (Stable, Unstable, Private), reference to section of spec describing the interface (forward link), and optional comments.</p>
+</blockquote>
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <th style="vertical-align: top; width: 20%;"> <p>Interface Name<br>
+      </p></th>
+      <th style="vertical-align: top; width: 20%;"> <p>Classification<br>
+      </p></th>
+      <th style="vertical-align: top; width: 20%;"> <p>Reference<br>
+      </p></th>
+      <th style="vertical-align: top; width: 40%;"> <p>Comments<br>
+      </p></th>
+    </tr>
+    <tr>
+      <td>com.sun.webui.theme.Theme</td>
+      <td>Committed</td>
+      <td>          <a href="https://woodstock.dev.java.net/source/browse/woodstock/webui/src/runtime/com/sun/webui/theme/Theme.java">Source</a><br>
+      </td>
+      <td>An interface to obtain theme resources. <br>
+      </td>
+    </tr>
+    <tr>
+      <td>com.sun.webui.theme.ThemeServlet<br>
+      </td>
+      <td>Committed<br>
+      </td>
+      <td>          <a href="https://woodstock.dev.java.net/source/browse/woodstock/webui/src/runtime/com/sun/webui/theme/ThemeServlet.java">Source</a><br>
+      </td>
+      <td>The ThemeServlet provides theme resources typically from client side references to&nbsp; a resource. This usually results in delivery of the actual image or file referenced. This is a<br>
+        concrete implementation.<br>
+      </td>
+    </tr>
+    <tr>
+      <td>com.sun.webui.theme.ThemeFactory<br>
+      </td>
+      <td>Committed<br>
+      </td>
+      <td>          <a href="https://woodstock.dev.java.net/source/browse/woodstock/webui/src/runtime/com/sun/webui/theme/ThemeFactory.java">Source</a><br>
+      </td>
+      <td><span style="color: rgb(0, 0, 0);">An Interface that </span>manages the instantiation of the Theme subsystem. There may be a framework specific implementation.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">com.sun.webui.theme.ThemeContext<br>
+      </td>
+      <td style="vertical-align: top;">Committed<br>
+      </td>
+      <td style="vertical-align: top;">          <a href="https://woodstock.dev.java.net/source/browse/woodstock/webui/src/runtime/com/sun/webui/theme/ThemeContext.java">Source</a><br>
+      </td>
+      <td style="vertical-align: top;"><span style="color: rgb(0, 0, 0);">An abstract class that </span>provides the configuration data to instantiate a theme subsystem. <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">com.sun.webui.theme.ThemeService<br>
+      </td>
+      <td style="vertical-align: top;">Committed<br>
+      </td>
+      <td style="vertical-align: top;">          <a href="https://woodstock.dev.java.net/source/browse/woodstock/webui/src/runtime/com/sun/webui/theme/ThemeService.java">Source</a><br>
+      </td>
+      <td style="vertical-align: top;">An abstract class for the ThemeService Service Provider Interface<br>
+      </td>
+    </tr>
+    <tr>
+      <th colspan="4" style="vertical-align: top;"><br>
+      </th>
+    </tr>
+  </tbody>
+</table>
+<h3><a name="4.2"></a>4.2 Imported interfaces </h3>
+<br>
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <th style="vertical-align: top; width: 20%;"> <p>Interface Name<br>
+      </p></th>
+      <th style="vertical-align: top; width: 20%;"> <p>Classification<br>
+      </p></th>
+      <th style="vertical-align: top; width: 20%;"> <p>Reference<br>
+      </p></th>
+      <th style="vertical-align: top; width: 40%;"> <p>Comments<br>
+      </p></th>
+    </tr>
+    <tr>
+      <td>javax.servlet.*<br>
+      </td>
+      <td>Standard<br>
+      </td>
+      <td>JSR 53<br>
+      </td>
+      <td>Java Servlet 2.3<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><span style="color: rgb(0, 0, 0);">sun.misc.Service</span><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">J2SE<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3><a name="4.3"></a>4.3 Interfaces
+</h3>
+<div style="margin-left: 40px;">Define all component classes, methods, and inheritance.
+Full functional descriptions are required, including a
+description of the semantics of each class and function.
+If a link to a javadoc is specified, the javadoc must
+meet the requirement for full descriptions.</div>
+<br>
+<div style="margin-left: 40px;"><a href="https://woodstock.dev.java.net/source/browse/woodstock/webui/src/runtime/com/sun/webui/theme/ThemeContext.java">com.sun.webui.theme.ThemeContext.java</a><br>
+    <a href="https://woodstock.dev.java.net/source/browse/woodstock/webui/src/runtime/com/sun/webui/theme/ThemeFactory.java">com.sun.webui.theme.ThemeFactory.java</a><br>
+    <a href="https://woodstock.dev.java.net/source/browse/woodstock/webui/src/runtime/com/sun/webui/theme/ThemeServlet.java">com.sun.webui.theme.ThemeServlet.java</a><br>
+    <a href="https://woodstock.dev.java.net/source/browse/woodstock/webui/src/runtime/com/sun/webui/theme/Theme.java">com.sun.webui.theme.Theme.java</a><br>
+    <a name="themeResources.properties"></a>com.sun.webui.theme.themeResources.properties<br>
+    </div>
+<h3><a name="4.4"></a>4.4 Tag interfaces <br>
+</h3>
+<div style="margin-left: 40px;">Not Applicable</div>
+<h3><a name="4.4.1"></a>4.4.1 Individual tag attributes descriptions </h3>
+<div style="margin-left: 40px;">Not Applicable</div>
+<h3><a name="4.5"></a>4.5 Javascript interfaces <br>
+</h3>
+<div style="margin-left: 40px;">Not Applicable.
+</div>
+<h3><a name="4.6"></a>4.6 Theme resources keys <br>
+</h3>
+<div style="margin-left: 40px;">See <a href="#themeResources.properties">themeResources.properties</a>
+</div>
+<h3><a name="4.6.1"></a>4.6.1 Style selectors</h3>
+<div style="margin-left: 40px;">Not Applicable.</div>
+
+<h3><a name="4.6.2"></a>4.6.2 Image resources</h3>
+<div style="margin-left: 40px;">Not Applicable.</div>
+
+<h3><a name="4.6.3"></a>4.6.3 Javascript resources</h3>
+<div style="margin-left: 40px;">Not Applicable.
+</div>
+<h3><a name="4.6.4"></a>4.6.4 Other resources</h3>
+<div style="margin-left: 40px;">Not Applicable.
+</div>
+<h3><a name="4.6.5"></a>4.6.5 Localized message keys</h3>
+<div style="margin-left: 40px;"><a href="https://woodstock.dev.java.net/source/browse/woodstock/webui/src/runtime/com/sun/webui/theme/LogMessages.properties">com.sun.webui.theme.LogMessages.properties</a><br>
+</div>
+<h3>4.7 Component Extensibility</h3>
+<div style="margin-left: 40px;">Interfaces have been defined. All the Theme subsystem to be implemented as necessary.</div>
+<br>
+<h2><a name="5.0"></a>5.0 - Netbeans (VWP) Design Time Support <br>
+</h2>
+<h3>5.1 Design-time Behavior</h3>
+<div style="margin-left: 40px;">There has been no attempt to address a tool's requirements to identify theme resources required or referenced by an individual component. This is beyond the scope of this specification. However ThemeContext has been created to allow a framework that encapsulates the Theme subsystem to configure its runtime environment. In addition the ThemeService service provider interface formalizes a mechanism by which a framework can identify theme resources.<br>
+  </div>
+<h3>5.2 Design-time Classes and Interfaces</h3>
+<div style="margin-left: 40px;">Not Applicable.</div>
+<br>
+<div style="margin-left: 40px;">Explain any additional Customizer/PropertyEditor used.</div>
+<h3>5.3 Localized message keys</h3>
+<div style="margin-left: 40px;">Not Applicable. See <a href="#4.6.5">4.6.5</a></div>
+<h3>5.4 Dependencies </h3>
+<div style="margin-left: 40px;">None</div>
+<h2><a name="6.0"></a>6.0 Component Dependencies</h2>
+<h3><a name="6.1"></a>6.1 Component class dependencies</h3>
+<div style="margin-left: 40px;">Explicit dependencies on external classes - i.e. if the JSF jars are rev'd, which changed classes might break me?</div>
+<h3><a name="6.2"></a>6.2 Javascript dependencies</h3>
+<div style="margin-left: 40px;">Not Applicable.
+</div><h3><a name="6.3"></a>6.3 Infrastructure dependencies</h3>
+<div style="margin-left: 40px;">Not Applicable.</div>
+<h3><a name="6.4"></a>6.4 Design time dependencies</h3>
+<div style="margin-left: 40px;">Not Applicable.</div>
+
+<h2><a name="7.0"></a>7.0 - Accessibility, Internationalization, Compliance (required)</h2>
+<h3><a name="7.1"></a>7.1 Accessibility (A11Y)</h3>
+<div style="margin-left: 40px;">Not Applicable.</div>
+<h3><a name="7.2"></a>7.2 Internationalization (I18N)</h3>
+<ul>
+  <li>Themed resource internationalization support is effectively the locale support provided by the JDK for the resource bundles provided by the application developer to augment the theme.</li>
+  <li>With respect to Theme exception messages see <a href="#4.6.5">4.6.5</a></li>
+</ul>
+<h3><a name="7.3"></a>7.3 Level of XHTML Compliance</h3>
+
+<div style="margin-left: 40px;">Not Applicable.</div>
+    <h2><a name="8.0"></a>8.0 Theme Infrastructure High Level Design</h2>
+
+<h4><a name="motivation"></a>Motivation</h4>
+<ol>
+  <li>Allow web applications it override parts of a theme. </li>
+  <li>Allow a component developed outside the current development environment to "theme" it. </li>
+  <li>Allow Theme jars to cascade naturally among several theme definition sources. </li>
+</ol>
+<h4><a name="approach"></a>The approach</h4>
+<p style="margin-left: 40px; color: rgb(0, 0, 0);"> In general the approach is to treat themes as ResourceBundles. Currently there is a tendency to think of a Theme as a "jar". </p>
+<p style="margin-left: 40px; color: rgb(0, 0, 0);"> The term "ResourceBundle" refers to a compiled ResourceBundle or a properties file. </p>
+<ol>
+  <li> Allow web applications it override theme properties.
+      <p> By way of an example, currently there is no easy way for an application to display a different image for the "ALARM_MAJOR_SMALL" alarm. (Granted there other more component like ways to allow a developer to configure alarms but this is just a contrived example).
+      The theme infrastructure will allow the application developer to specify that theme property in a ResourceBundle with the image that is preferred. When an alarm of type "ALARM_MAJOR_SMALL" is rendered it will use the image defined by the application and not the component defined theme (i.e. webui-jsf-suntheme.jar).
+      The application will specify a basename to a ResourceBundle (or Properties file) that exists in the application's classpath (WEB-INF/classes) in the web.xml via the context-param <samp>com.sun.webui.theme.THEME_RESOURCES</samp></p>
+  </li>
+  <li> Allow a component developed outside the current development environment to be themed.
+      <p> "Add-on" components will be used to refer to components developed outside the current development environment and not delivered with the current Woodstock component jar. It is reasonable to expect that "Add-on" components will most likely be distributed in jars. The Jar must include an implementation of com.sun.webui.theme.ThemeService and located in the Jar as required to support the sun.misc.Service interface. This implementation will provide one or more basenames of ResourceBundles (or Properties files) located in the Jar. This Jar must be on the the application's classpath.</p>
+      </li>
+  <li>Allow Theme jars to "cascade" naturally among several theme definition sources.
+      <p>Given the first to conditions, the definitions of theme resources will appear to the theme subsystem in&nbsp; such a way that the application defined resources will appear before the resources that appear in jars. This occurs because the a Servlet container locates an application's classpath related resources such as WEB-INF/classes before resources in jars in WEB-INF/lib</p>
+  </li>
+</ol>
+<h2><a name="8.1"></a>8.1 Theme Infrastructure Implementation (optional)<br>
+</h2>
+
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">com.sun.webui.theme.SPIThemeFactory<br>
+      </td>
+      <td style="vertical-align: top;"><a href="https://woodstock.dev.java.net/source/browse/woodstock/webui/src/runtime/com/sun/webui/theme/SPIThemeFactory.java">Source</a><br>
+      </td>
+      <td style="vertical-align: top;">committed<br>
+      </td>
+      <td style="vertical-align: top;">Implements&nbsp; the ThemeFactory interface utilizing ThemeService&nbsp; service provider and providing instances of ResourceBundleTheme</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">com.sun.webui.theme.ResourceBundleTheme<br>
+      </td>
+      <td style="vertical-align: top;"><a href="https://woodstock.dev.java.net/source/browse/woodstock/webui/src/runtime/com/sun/webui/theme/ResourceBundleTheme.java">Source</a><br>
+      </td>
+      <td style="vertical-align: top;">committed<br>
+      </td>
+      <td style="vertical-align: top;">Implements a Theme interface and returns theme resources defined in ResourceBundles</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">com.sun.webui.theme.ThemeLogger<br>
+      </td>
+      <td style="vertical-align: top;"><a href="https://woodstock.dev.java.net/source/browse/woodstock/webui/src/runtime/com/sun/webui/theme/ThemeLogger.java">Source</a><br>
+      </td>
+      <td style="vertical-align: top;">committed<br>
+      </td>
+      <td style="vertical-align: top;">Convenience class utilizing java.util.logging interfaces for theme subsystem error logging</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">com.sun.webui.theme.ThemeConfigurationException<br>
+      </td>
+      <td style="vertical-align: top;"><a href="https://woodstock.dev.java.net/source/browse/woodstock/webui/src/runtime/com/sun/webui/theme/ThemeConfigurationException.java">Source</a><br>
+      </td>
+      <td style="vertical-align: top;">committed<br>
+      </td>
+      <td style="vertical-align: top;">A theme subsystem exception which is thrown when no themes are available</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">com.sun.webui.jsf.theme.JSFThemeContext<br>
+      </td>
+      <td style="vertical-align: top;"><a href="https://woodstock.dev.java.net/source/browse/woodstock/webui/src/runtime/com/sun/webui/jsf/theme/JSFThemeContext.java">Source</a><br>
+      </td>
+      <td style="vertical-align: top;">uncommitted<br>
+      </td>
+      <td style="vertical-align: top;">Implements ThemeContext for the Woodstock component set when there is no other ThemeContext defined in the environment.</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">com.sun.webui.jsf.suntheme.SunthemeThemeService<br>
+      </td>
+      <td style="vertical-align: top;"><a href="https://woodstock.dev.java.net/source/browse/woodstock/themes/src/suntheme/com/sun/webui/jsf/suntheme/SunthemeThemeService.java">Source</a><br>
+      </td>
+      <td style="vertical-align: top;">committed<br>
+      </td>
+      <td style="vertical-align: top;">Implements ThemeService for the Woodstock component theme jar webui-jsf-suntheme.jar</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">com.sun.webui.jsf.suntheme.suntheme<br>
+      </td>
+      <td style="vertical-align: top;"><a href="https://woodstock.dev.java.net/source/browse/woodstock/themes/src/suntheme/com/sun/webui/jsf/suntheme/suntheme.properties">Source</a><br>
+      </td>
+      <td style="vertical-align: top;">uncommitted<br>
+      </td>
+      <td style="vertical-align: top;">The ResourceBundle for webui-jsf-suntheme.jar returned by SunthemeThemeService.</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h4 style="margin-left: 40px;">Versioning</h4>
+<div style="margin-left: 40px;">Every release of a theme that embodies a change either in its content or structure requires that the theme version be incremented. If the change is structural then the specification version of that theme must be incremented. For example if a new Theme subsystem related key is added or removed; a "Theme.ajax.javascript"&nbsp; key is introduced for example. The change may be to the minor version or the major version, depending on the implementation's interpretation of the major and minor versions. Every release of a theme should have its version incremented. <br>
+  </div>
+<h2><a name="9.0"></a>9.0 Issues</h2>
+<ul>
+  <li>The viability of approaches expressed in this specification for use in resource contrained environments may not be sufficient or applicable.</li>
+  <li>Should value bindings be accepted as values in the resource bundle identified by the init-param com.sun.webui.jsf.THEME_RESOURCES? This requires the application is a JSF application and could influence the implementation forcing it to be dependent on JSF. It is possible that the interpretation of the value binding could occur in the platform specific implementation of some of the theme interface, but it is not clear at this point where that interface resides in the overall theme subsystem.</li>
+</ul></td>
+    </tr>
+  </tbody>
+</table>
+</BODY>
+</HTML>

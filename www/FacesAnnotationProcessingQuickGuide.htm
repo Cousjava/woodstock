@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <!--
+      The contents of this file are subject to the terms
+      of the Common Development and Distribution License
+      (the License).  You may not use this file except in
+      compliance with the License.
+      
+      You can obtain a copy of the license at
+      https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      See the License for the specific language governing
+      permissions and limitations under the License.
+      
+      When distributing Covered Code, include this CDDL
+      Header Notice in each file and include the License file
+      at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      If applicable, add the following below the CDDL Header,
+      with the fields enclosed by brackets [] replaced by
+      you own identifying information:
+      "Portions Copyrighted [year] [name of copyright owner]"
+      
+      Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+    -->
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>  FacesAnnotationProcessingQuickGuide &lt; Main &lt; TWiki</title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="824.42">
+  <style type="text/css">
+    body {background-color: #f8f8f8}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 15.0px; font: 12.0px Lucida Grande; background-color: #ffffff; min-height: 15.0px}
+    p.p2 {margin: 0.0px 0.0px 2.0px 0.0px; line-height: 15.0px; font: 14.5px Lucida Grande; color: #851313; background-color: #f2ede8}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 15.0px; font: 10.0px Lucida Grande; background-color: #ffffff; min-height: 12.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 13.0px; font: 9.5px Lucida Grande; color: #2e5eb6; background-color: #ffffff}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 13.0px; font: 9.5px Lucida Grande; color: #2e5eb6; background-color: #ffffff; min-height: 11.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 15.0px; font: 10.0px Lucida Grande; background-color: #ffffff}
+    p.p7 {margin: 0.0px 0.0px 1.0px 0.0px; line-height: 14.0px; font: 14.0px Lucida Grande; color: #851313; background-color: #ffffff}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 14.0px; font: 10.0px Courier; color: #714818; background-color: #ffffff}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 14.0px; font: 10.0px Courier; color: #714818; background-color: #ffffff; min-height: 12.0px}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: right; line-height: 15.0px; font: 9.5px Lucida Grande; color: #87909f; background-color: #ffffff}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.0px Lucida Grande; background-color: #ffffff; min-height: 12.0px}
+    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 12.0px; font: 9.0px Lucida Grande; color: #87909f}
+    span.s1 {text-decoration: underline ; color: #2e5eb6}
+    span.s2 {font: 10.0px Courier; color: #714818}
+    span.s3 {text-decoration: underline}
+  </style>
+</head>
+<body>
+<p class="p1"><br></p>
+<h2 style="margin: 0.0px 0.0px 2.0px 0.0px; line-height: 15.0px; font: 14.5px Lucida Grande; color: #851313; background-color: #f2ede8"><b>A Quick Guide to Annotating Woodstock JSF Components</b></h2>
+<p class="p3"><br></p>
+<ul>
+  <li style="margin: 0.0px 0.0px 0.0px 0.0px; line-height: 13.0px; font: 9.5px Lucida Grande; color: #2e5eb6; background-color: #ffffff"><a href="http://jupiter.czech.sun.com/wiki/view/Main/FacesAnnotationProcessingQuickGuide#A_Quick_Guide_to_Annotating_Wood">A Quick Guide to Annotating Woodstock JSF Components</a></li>
+  <ul>
+    <li style="margin: 0.0px 0.0px 0.0px 0.0px; line-height: 13.0px; font: 9.5px Lucida Grande; color: #2e5eb6; background-color: #ffffff"><a href="http://jupiter.czech.sun.com/wiki/view/Main/FacesAnnotationProcessingQuickGuide#Component_authoring">Component authoring</a></li>
+    <li style="margin: 0.0px 0.0px 0.0px 0.0px; line-height: 13.0px; font: 9.5px Lucida Grande; color: #2e5eb6; background-color: #ffffff"><a href="http://jupiter.czech.sun.com/wiki/view/Main/FacesAnnotationProcessingQuickGuide#Overview_of_the_build_process">Overview of the build process</a></li>
+    <li style="margin: 0.0px 0.0px 0.0px 0.0px; line-height: 13.0px; font: 9.5px Lucida Grande; color: #2e5eb6; background-color: #ffffff"><a href="http://jupiter.czech.sun.com/wiki/view/Main/FacesAnnotationProcessingQuickGuide#How_to_annotate_a_component">How to annotate a component</a></li>
+    <li style="margin: 0.0px 0.0px 0.0px 0.0px; line-height: 13.0px; font: 9.5px Lucida Grande; color: #2e5eb6; background-color: #ffffff"><a href="http://jupiter.czech.sun.com/wiki/view/Main/FacesAnnotationProcessingQuickGuide#How_to_annotate_component_proper">How to annotate component properties</a></li>
+    <li style="margin: 0.0px 0.0px 0.0px 0.0px; line-height: 13.0px; font: 9.5px Lucida Grande; color: #2e5eb6; background-color: #ffffff"><a href="http://jupiter.czech.sun.com/wiki/view/Main/FacesAnnotationProcessingQuickGuide#How_to_override_property_annotat">How to override property annotation values</a></li>
+    <li style="margin: 0.0px 0.0px 0.0px 0.0px; line-height: 13.0px; font: 9.5px Lucida Grande; color: #2e5eb6; background-color: #ffffff"><a href="http://jupiter.czech.sun.com/wiki/view/Main/FacesAnnotationProcessingQuickGuide#How_to_annotate_a_component_rend">How to annotate a component renderer</a></li>
+    <li style="margin: 0.0px 0.0px 0.0px 0.0px; line-height: 13.0px; font: 9.5px Lucida Grande; color: #2e5eb6; background-color: #ffffff"><a href="http://jupiter.czech.sun.com/wiki/view/Main/FacesAnnotationProcessingQuickGuide#Component_documentation">Component documentation</a></li>
+    <li style="margin: 0.0px 0.0px 0.0px 0.0px; line-height: 13.0px; font: 9.5px Lucida Grande; color: #2e5eb6; background-color: #ffffff; min-height: 11.0px"><br></li>
+  </ul>
+</ul>
+<p class="p6">The Faces annotation library is used to declare metadata about JSF components. The metadata is used during the build process, to generate auxillary source and configuration files. This document provides guidelines to annotating components, aimed at component developers and those responsible for documenting components.</p>
+<p class="p6">For more details about the annotations, please see the <a href="http://javaweb.sfbay/~gjmurphy/annotation/library"><span class="s1">library javadoc</span></a>. Reference to the javadoc will be made throughout.</p>
+<p class="p3"><br></p>
+<h3 style="margin: 0.0px 0.0px 1.0px 0.0px; line-height: 14.0px; font: 14.0px Lucida Grande; color: #851313; background-color: #ffffff"><b>Component authoring</b></h3>
+<p class="p3"><br></p>
+<p class="p6">Component developers are responsible for writing and annotating two classes. For every component, there must be a component class and a renderer class, identified via the <span class="s2">@Component</span> and <span class="s2">@Renderer</span> annotations, respectively. Within the component class, all properties that are not inherited must be identified via the <span class="s2">@Property</span> annotation.</p>
+<p class="p3"><br></p>
+<h3 style="margin: 0.0px 0.0px 1.0px 0.0px; line-height: 14.0px; font: 14.0px Lucida Grande; color: #851313; background-color: #ffffff"><b>Overview of the build process</b></h3>
+<p class="p3"><br></p>
+<p class="p6">During the build process, just before compilation, the annotation processor is invoked. The processor examines all source code in the current compilation unit (both run-time and design-time source), and introspects any classes in external libraries on which there are dependencies.</p>
+<p class="p6">Based on the source annotations found, the processor builds a model of the component library. This model includes a list of all components, a list of all renderers, and information about some auxillary artifacts, like hand-authored tag classes and resolvers. For each component, the model includes information about all properties and events, both those declared explicitly in the component, and those inherited.</p>
+<p class="p3"><br></p>
+<p class="p6">The processor then generates new source files and configuration files based on the information that it has gathered. If invoked with the <span class="s2">generate.designtime</span> option, it generates a <span class="s2">BeanInfo</span> class for each component class. If invoked with the "generate.runtime= option, it generates a tag class for each component class, a faces-config file describing the entire component library, and a taglib descriptor file describing the generated tag classes.</p>
+<p class="p3"><br></p>
+<p class="p6">If there are errors in the annotations, an error message will be generated, including in most cases line and column information. If you use <a href="http://jupiter.czech.sun.com/wiki/view/Main/NetBeans"><span class="s1">NetBeans</span></a> to build the component library, clicking on the error message will open up the file at the location of the error.</p>
+<p class="p3"><br></p>
+<h3 style="margin: 0.0px 0.0px 1.0px 0.0px; line-height: 14.0px; font: 14.0px Lucida Grande; color: #851313; background-color: #ffffff"><b>How to annotate a component</b></h3>
+<p class="p3"><br></p>
+<p class="p6">Please see the <a href="http://javaweb.sfbay/~gjmurphy/annotation/library/com/sun/faces/annotation/Component.html"><span class="s1">Component javadoc</span></a> for details about the <span class="s2">@Component</span> annotation.</p>
+<p class="p3"><br></p>
+<p class="p6">The <span class="s2">@Component</span> annotation is placed just before the component class declaration.</p>
+<p class="p6">In most cases, you will want to provide a display name, a type and a family for your component, e.g.</p>
+<p class="p8"><span class="Apple-converted-space">    </span>@Component(</p>
+<p class="p8"><span class="Apple-converted-space">        </span>displayName="My Component",</p>
+<p class="p8"><span class="Apple-converted-space">        </span>type="com.sun.webui.jsf.MyComponent",</p>
+<p class="p8"><span class="Apple-converted-space">        </span>family="com.sun.webui.jsf.MyComponent")</p>
+<p class="p8"><span class="Apple-converted-space">    </span>public class MyComponent extends UIComponent {</p>
+<p class="p8"><span class="Apple-converted-space">        </span>// ....</p>
+<p class="p8"><span class="Apple-converted-space">    </span>}</p>
+<p class="p6">Specify an instance name and a tag name only if the defaults result in a keyword conflict. The first sentence of the class javadoc comment will be used as the component's short description. If this is not suitable, you may provide a short description in the annotation.</p>
+<p class="p3"><br></p>
+<h3 style="margin: 0.0px 0.0px 1.0px 0.0px; line-height: 14.0px; font: 14.0px Lucida Grande; color: #851313; background-color: #ffffff"><b>How to annotate component properties</b></h3>
+<p class="p3"><br></p>
+<p class="p6">Please see the <a href="http://javaweb.sfbay/~gjmurphy/annotation/library/com/sun/faces/annotation/Property.html"><span class="s1">Property javadoc</span></a> for details about the <span class="s2">@Property</span> annotation.</p>
+<p class="p3"><br></p>
+<p class="p6">Every property that is not inherited must be annotated. The property annotation may be placed just before the private instance variable, the "getter" method, or the "setter" method. In general, it is preferred that the instance variable be annotated.</p>
+<p class="p3"><br></p>
+<p class="p6">All property annotation elements have default values, and in most cases, the default values should suffice. It is however a good idea to provide a display name and a reference to a property category. A basic Woodstock property should look something like this:</p>
+<p class="p8"><span class="Apple-converted-space">    </span>/**</p>
+<p class="p8"><span class="Apple-converted-space">     </span>* A property that is mine. I like to use it myself.</p>
+<p class="p8"><span class="Apple-converted-space">     </span>*/</p>
+<p class="p8"><span class="Apple-converted-space">    </span>@Property(displayName="My Property", category="Data")</p>
+<p class="p8"><span class="Apple-converted-space">    </span>private String myProperty;</p>
+<p class="p9"><span class="Apple-converted-space">    </span></p>
+<p class="p8"><span class="Apple-converted-space">    </span>public String getMyProperty();</p>
+<p class="p9"><br></p>
+<p class="p8"><span class="Apple-converted-space">    </span>public void setMyProperty(String myProperty);</p>
+<p class="p6">This is a property named "myProperty", of type <span class="s2">java.lang.String</span>, with read method name "getMyProperty", write method name "setMyProperty". It is visible in the IDE, and corresponds to the tag attribute "myProperty", which is bindable and optional. The short description for the property is the first line of the preceeding javadoc comment, ie. "A property that is mine".</p>
+<p class="p3"><br></p>
+<p class="p6">If a property does not correspond to a tag attribute, the annotation must assert this explicitly:</p>
+<p class="p8"><span class="Apple-converted-space">    </span>@Property(isAttribute=false)</p>
+<p class="p6">If non-default values are required for the tag attribute, they must be provided in an inner <span class="s2">@Attribute</span> annotation. For example, to assign a non-default name to the attribute, one would write something like this:</p>
+<p class="p8"><span class="Apple-converted-space">    </span>@Property(name="myProperty",attribute=@Attribute(name="my-property"))</p>
+<p class="p3"><br></p>
+<h3 style="margin: 0.0px 0.0px 1.0px 0.0px; line-height: 14.0px; font: 14.0px Lucida Grande; color: #851313; background-color: #ffffff"><b>How to override property annotation values</b></h3>
+<p class="p3"><br></p>
+<p class="p6">If your component extends a class (or implements an interface) that provides one or more properties, you may, if you wish, selectively override one or more annotation values. When a property overrides another, its default annotation values are the inherited values. Any values you specify in the child annotation will override inherited values.</p>
+<p class="p3"><br></p>
+<p class="p6">For example, assume a super class with the following property:</p>
+<p class="p8"><span class="Apple-converted-space">    </span>@Property(displayName="Parent Property")</p>
+<p class="p8"><span class="Apple-converted-space">    </span>private String myProperty;</p>
+<p class="p9"><br></p>
+<p class="p8"><span class="Apple-converted-space">    </span>public String getMyProperty() {</p>
+<p class="p8"><span class="Apple-converted-space">        </span>return this.myProperty;</p>
+<p class="p8"><span class="Apple-converted-space">    </span>}</p>
+<p class="p6">An extending class might override the property like this:</p>
+<p class="p8"><span class="Apple-converted-space">    </span>@Property(displayName="My Property", isAttribute=false)</p>
+<p class="p8"><span class="Apple-converted-space">    </span>public String getMyProperty() {</p>
+<p class="p8"><span class="Apple-converted-space">        </span>return super.getMyProperty();</p>
+<p class="p8"><span class="Apple-converted-space">    </span>}</p>
+<p class="p6">The property name, instance name, and other values are unchanged, but the display name has been changed to "My Property", and no tag attribute will be associated with the property.</p>
+<p class="p3"><br></p>
+<h3 style="margin: 0.0px 0.0px 1.0px 0.0px; line-height: 14.0px; font: 14.0px Lucida Grande; color: #851313; background-color: #ffffff"><b>How to annotate a component renderer</b></h3>
+<p class="p6">Please see the <a href="http://javaweb.sfbay/~gjmurphy/annotation/library/com/sun/faces/annotation/Renderer.html"><span class="s1">Property javadoc</span></a> for details about the <span class="s2">@Renderer</span> annotation.</p>
+<p class="p3"><br></p>
+<p class="p6">Most Woodstock components correspond to a single renderer, and vice versa. In other words, there is a one-to-one correspondance between component class and renderer class. In cases like this, you may use the simplest form of a renderer annotation, which requires that only the component's family be specified:</p>
+<p class="p8"><span class="Apple-converted-space">    </span>@Renderer(@Renders(componentFamily="com.sun.webui.MyComponentFamily"))</p>
+<p class="p3"><br></p>
+<h3 style="margin: 0.0px 0.0px 1.0px 0.0px; line-height: 14.0px; font: 14.0px Lucida Grande; color: #851313; background-color: #ffffff"><b>Component documentation</b></h3>
+<p class="p3"><br></p>
+<p class="p6">The JavaDoc for the component library can be generated using the ant <span class="s2">javadoc</span> target. Since component and renderer classes are hand-authored, standard javadoc commenting practices should be followed.</p>
+<p class="p3"><br></p>
+<p class="p6">Keep in mind that unless overridden in the annotations, the first sentence of the javadoc comment preceeding a component or property annotation will be used as the short description for the component or property.</p>
+<p class="p3"><br></p>
+<p class="p6">By default, the component javadoc comment is used as the description for the component's tag in the taglib configuration file, and the property javadoc comment is used as the attribute description. For the Woodstock build, the tag and attribute descriptions may be supplied in an external taglib file.</p>
+<p class="p3"><br></p>
+<p class="p6">The build is currently set up so that the original, hand-authored config files (in <span class="s2">runtime/conf</span>) are used to generate the final tag and attribute descriptions.</p>
+<p class="p3"><br></p>
+<p class="p1"><br></p>
+<p class="p1"><br></p>
+<p class="p10"><span class="s3"><a href="http://jupiter.czech.sun.com/wiki/view/Main/FacesAnnotationProcessingQuickGuide#PageTop"><b>to top</b></a></span></p>
+<p class="p11"><br></p>
+<p class="p1"><br></p>
+<p class="p12">Copyright © 1999-2007 by the contributing authors. All material on this collaboration platform is the property of the contributing authors.<span class="Apple-converted-space"> </span></p>
+<p class="p12">Ideas, requests, problems regarding TWiki? <a href="mailto:jupiter-admin@sun.com?subject=TWiki%20Feedback%20on%20TWiki.WebBottomBar"><span class="s3">Send feedback</span></a></p>
+</body>
+</html>

@@ -1,0 +1,2098 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <!--
+      The contents of this file are subject to the terms
+      of the Common Development and Distribution License
+      (the License).  You may not use this file except in
+      compliance with the License.
+      
+      You can obtain a copy of the license at
+      https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      See the License for the specific language governing
+      permissions and limitations under the License.
+      
+      When distributing Covered Code, include this CDDL
+      Header Notice in each file and include the License file
+      at https://woodstock.dev.java.net/public/CDDLv1.0.html.
+      If applicable, add the following below the CDDL Header,
+      with the fields enclosed by brackets [] replaced by
+      you own identifying information:
+      "Portions Copyrighted [year] [name of copyright owner]"
+      
+      Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+    -->
+<title>Project Woodstock - Client-Side Rendering Test Specification</title>
+<style type="text/css">
+/* <![CDATA[ */
+@import url(../../browser-uispec.css);
+.style2 {font-size: 18pt}
+  </style>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+</head>
+<body style="background-color: rgb(255, 255, 255);">
+<div style="font-family: serif;" class="MstDiv">
+<table class="MstTblBot" title="" border="0" cellpadding="0"
+ cellspacing="0" width="100%">
+  <tbody>
+    <tr>
+      <td class="MstTdTtl">
+      <div class="MstDivTtl">
+      <div class="Mst1TtlTxt">4.1 Project Woodstock</div>
+      </div>
+      <div class="Mst1SecDiv"><big><big>DRAFT: Client-side Rendering
+Test Specification</big></big><span class="Mst1SecTxt style2"><br>
+      </span></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<table title="" class="Mst2Tbl"
+ style="text-align: left; margin-left: auto; margin-right: auto; width: 100%; font-family: serif;"
+ border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td><br>
+      <br>
+      <h3><span style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;
+Document Revision History</span></h3>
+      <table
+ style="width: 95%; text-align: left; margin-left: auto; margin-right: auto;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Revision</span></td>
+            <td style="width: 15%; text-align: center;"><span
+ style="font-weight: bold;">Date</span></td>
+            <td style="width: 50%; text-align: center;"><span
+ style="font-weight: bold;">Synopsis</span></td>
+            <td style="width: 20%; text-align: center;"><span
+ style="font-weight: bold;">Author</span></td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">0.1</td>
+            <td style="text-align: center;">&nbsp;05/21/2007</td>
+            <td style="text-align: center;">Initial Draft</td>
+            <td style="text-align: center;">Khaja</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.2<br>
+            </td>
+            <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+06/29/2007<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Updated
+Draft<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Khaja<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <div style="margin-left: 40px;"><big><span
+ style="font-weight: bold;"><br>
+Table of Contents:</span></big><br>
+      <a href="#1.0">1.0
+Overview</a><br>
+      </div>
+      <div style="margin-left: 80px;"><a href="#1.1">1.1 Component
+Description</a><br>
+      <a href="#1.2">1.2
+Relevant Documents</a><br>
+      <a href="#1.3">1.3
+Definition of Terms</a><br>
+      </div>
+      <div style="margin-left: 40px;"><a href="#2.0">2.0 Test
+Requirements</a><br>
+      </div>
+      <div style="margin-left: 80px;"><a href="#2.1">2.1 Tools and
+Methods </a><br>
+      <a href="#2.2">2.2
+Issue Tracking</a><br>
+      </div>
+      <div style="margin-left: 40px;"><a href="#3.0">3.0 Test
+Matrix</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#3.1">3.1 Web
+Guidelines
+Compliancy Test</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#3.2">3.2 GUI
+Functional Tests</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#3.3">3.3 A11Y
+Tests</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#3.4">3.4 I18N
+Tests</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#3.5">3.5 XHTML
+Tests</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#3.6">3.6 JSP Tests</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#3.7">3.7 Design
+Time Tests</a> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#3.8">3.8 API Tests</a><br>
+      </div>
+      <div style="margin-left: 40px;"><a href="#4.0">4.0 Automation</a><br>
+      </div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#5.0">5.0 Approval</a>
+      <h2 style="font-weight: bold;"><br>
+      </h2>
+      <h2 style="font-weight: bold;"><a name="1.0"></a>1.0 Overview</h2>
+      <h3 style="font-weight: bold;"><a name="1.1"></a>1.1 Client-Side
+Rendering
+Description<br>
+      </h3>
+      <div style="margin-left: 40px;">Client-side rendering is a
+process where the requests are handled dynamically and the results are
+shown on the fly without interacting<br>
+with the server. All the processing takes place at client-side and the
+page is not submitted to the server. <br>
+      </div>
+      <h3 style="font-weight: bold;"><a name="1.2"></a>1.2 Relevant
+Documents</h3>
+      <ul>
+        <li><a href="https://woodstock.dev.java.net/Documentation.htm">Relevant
+Functional
+Specs</a></li>
+        <li><a href="https://woodstock.dev.java.net/ProjectRoadmap.htm">Project
+Woodstock Road Map</a></li>
+      </ul>
+      <div style="margin-left: 40px;">Links to related reference
+documents can be added in an Appendix at the
+end of the spec; that is, these links are important to understanding
+this specification or our supporting documents specific to this
+component, such as the UI design document and test specification.</div>
+      <h3><a name="1.3"></a>1.3 Definition of Terms</h3>
+      <div style="margin-left: 40px;">Define terminology specific to
+your component or framework.&nbsp;&nbsp;
+It is expected that most reviewers will be familiar with the basic
+technical and industry-wide defined terminology; such as Ajax, Dynamic
+Faces, etc.</div>
+      <div style="text-align: justify;"><br>
+      <br>
+      </div>
+      <span style="font-weight: bold;"></span>
+      <table style="text-align: left; width: 974px; height: 668px;"
+ border="0" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td
+ style="vertical-align: top; font-weight: bold; text-align: left; text-decoration: underline;">Term:<br>
+            </td>
+            <td
+ style="vertical-align: top; font-weight: bold; text-decoration: underline; text-align: left;">Definition:<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">A11Y</span><br>
+            </td>
+            <td style="vertical-align: top;">Accessibility<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">AJAX<br>
+            </td>
+            <td style="vertical-align: top;">Asynchronous JavaScript +
+XML</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">API<br>
+            </td>
+            <td style="vertical-align: top;">Application Programming
+Interface, such as methods of a Java class</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">AppServer
+            <br>
+            </td>
+            <td style="vertical-align: top;">Sun Java System
+Application Server</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">BUI</td>
+            <td style="vertical-align: top;">Browser user Interface</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">Component
+            <br>
+            </td>
+            <td style="vertical-align: top;">Entity consisting of a <span
+ style="font-style: italic;">JSP tag</span>, <span
+ style="font-style: italic;">JSF component</span>, <span
+ style="font-style: italic;">JSF renderer</span>, JavaScript, CSS, <span
+ style="font-style: italic;">Dojo Widget</span>, and <span
+ style="font-style: italic;">HTML Template<br>
+            </span><span style="font-weight: bold;"></span></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">CSS</td>
+            <td style="vertical-align: top;">Cascading Style Sheet<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">Design-time
+renderer </td>
+            <td style="vertical-align: top;">The <span
+ style="font-style: italic;">JSF renderer</span> used to output partial
+HTML for the Creator IDE</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Dojo</span></td>
+            <td style="vertical-align: top;">Open source JavaScript
+toolkit</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Dojo widget</span></td>
+            <td style="vertical-align: top;">A <span
+ style="font-style: italic;">widget</span> based on the Dojo toolkit,
+also consisting an <span style="font-style: italic;">HTML template</span>
+and <span style="font-style: italic;">event listener JavaScript</span></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Dynamic Faces, JSF Extensions</span><br>
+            </td>
+            <td style="vertical-align: top;">Framework to support AJAX
+in JSF<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Glassfish</span></td>
+            <td style="vertical-align: top;">Sun's Open Source System
+Application Server</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">HTML template</span></td>
+            <td style="vertical-align: top;">The file used to define
+HTML tags associated with a component</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">I18N</span></td>
+            <td style="vertical-align: top;">Internationalization</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">JCOV</span></td>
+            <td style="vertical-align: top;">Java Code Coverage Tool</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">JSF</span></td>
+            <td style="vertical-align: top;">JavaServer Faces</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">JSON</span><br>
+            </td>
+            <td style="vertical-align: top;">Javascript Object Notation</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Silk</span></td>
+            <td style="vertical-align: top;">Silk Test, BUI Automation
+Tool from Segue, Inc.</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">SWAED</span></td>
+            <td style="vertical-align: top;">Sun Web App Experience
+Design</td>
+          </tr>
+        </tbody>
+      </table>
+      <span style="font-weight: bold;"></span><br>
+      <h2><a name="2.0"></a></h2>
+      <h2>2.0 Test Requirements</h2>
+      <div style="margin-left: 40px;">The client-side rendering will be
+tested to meet the following requirements, standards,
+and tests:
+      <ul>
+        <li>SWAED Web App Guidelines compliant</li>
+        <li>Fully A11Y compliant by GA</li>
+        <li>I18N compliant by GA<br>
+        </li>
+        <li>XHTML transitional compliant by GA</li>
+        <li>GUI functional test requirements</li>
+        <li>JSP test requirements</li>
+        <li>API test requirements</li>
+      </ul>
+      </div>
+      <h3><a name="2.1"></a>2.1 Tools and Methods:</h3>
+      <div style="margin-left: 40px;">The client-side rendering will be
+tested using the the
+following tools and methods:
+      <ul>
+        <li>GUI tests will be performed on platform and browser
+configurations
+identified here:</li>
+        <ul>
+          <li>The table of supported <a
+ href="https://woodstock.dev.java.net/docs/SupportedBrowers.htm">Browsers</a>.</li>
+          <li>The table of supported <a
+ href="https://woodstock.dev.java.net/docs/SupportedContainers.htm">Containers</a>.</li>
+          <li>API tests will be written for
+each method in the
+classes of the component</li>
+          <li>Automated tests will be integrated into a test harness
+and
+run nightly as a regression suite</li>
+          <li>Automated code coverage goal of 80% (at GA) will be
+achieved as outlined in
+the project test plan </li>
+        </ul>
+        <a
+ href="https://woodstock.dev.java.net/docs/SupportedContainers.htm%3EContainers%3C/a%3E.%3C/li%3E%0A%20%20%20%20%20%20%20%20%3C/ul%3E%0A%20%20%20%20%20%20%20%20%3Cli%3EFunctional%20and%20BUI%20tests%20will%20be%20automated%3Cspan%0A%20style="
+ text-decoration="" underline=""> </a>
+      </ul>
+      </div>
+      <a
+ href="https://woodstock.dev.java.net/docs/SupportedContainers.htm%3EContainers%3C/a%3E.%3C/li%3E%0A%20%20%20%20%20%20%20%20%3C/ul%3E%0A%20%20%20%20%20%20%20%20%3Cli%3EFunctional%20and%20BUI%20tests%20will%20be%20automated%3Cspan%0A%20style="
+ text-decoration="" underline=""> </a>
+      <h3><a name="2.2"></a>2.2 Issue Tracking </h3>
+&nbsp; <br>
+      <div style="margin-left: 40px;">Bugs will be filed using
+Bug tracker (Issuezilla) and entered against
+the proper Project Woodstock Revision and component category.</div>
+      <br>
+      <br>
+      <table
+ style="text-align: left; margin-left: 40px; width: 607px; height: 116px;"
+ cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold; font-family: serif;">Category:</span> </td>
+            <td style="vertical-align: top;">Client-side rendering<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;"><span
+ style="font-weight: bold; font-family: serif;">Sub-Component:</span><br>
+            </td>
+            <td style="vertical-align: top;">Radio
+Button,Checkbox,Image, Label,Alert<big> </big></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold; font-family: serif;">Version:</span><big> </big></td>
+            <td style="vertical-align: top;">4.1<big><br>
+            </big></td>
+          </tr>
+        </tbody>
+      </table>
+      <h2><a name="3.0"></a></h2>
+      <h2>&nbsp;3.0 Test Matrix</h2>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The following are
+definitions of the fields used in the test case matrix:<br>
+      <br>
+      <div style="margin-left: 40px;">
+      <table style="text-align: left;" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;"><small><span
+ style="font-weight: bold;">Test Case ID</span></small></td>
+            <td style="vertical-align: top;"><small>Unique
+identifier for each test case<br>
+            </small></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Test Case Synopsis</span><br>
+            </small></td>
+            <td style="vertical-align: top;"><small>Description
+of the test case<br>
+            </small></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">User Defined Fields</span><br>
+            </small></td>
+            <td style="vertical-align: top;"><small>Defined by
+the test engineer to allow for flexibility in writing the test case<br>
+            </small></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      </div>
+      <h3><a name="3.1"></a>3.1 Web Guidelines Compliancy Tests<br>
+      </h3>
+      <br>
+      <table
+ style="margin-left: auto; margin-right: auto; background-color: rgb(255, 255, 255); text-align: left; width: 1162px; height: 105px;"
+ border="1" cellpadding="1" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: right;"><a
+ class="header">Test Case ID</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case Synopsis</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Comments</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);">WG-01<br>
+            </td>
+            <td style="vertical-align: top;">The SWAED-Core team
+reviewed the client-side renderers and provided feedback which have
+been entered as issues<br>
+A visual review has been
+conducted by a member of the &nbsp; xDesign SWAED team.&nbsp;
+Approval/sign off is complete.<br>
+            <br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-left: 40px;">
+      <div style="text-align: center;"> </div>
+      <br>
+      </div>
+      <h3><a name="3.2"></a>3.2 UI Functional Tests<br>
+      </h3>
+      <br>
+      <table
+ style="background-color: rgb(255, 255, 255); text-align: left;"
+ border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case ID</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case Synopsis</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Netscape</a><br>
+            </td>
+            <td style="vertical-align: top;">Solaris<br>
+Mozilla <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top;">Linux<br>
+Mozilla<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+IE</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top;">MAC Safari <br>
+Client-only <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Comments</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);">UI-01<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            <span style="font-weight: bold;">Updating Label's value
+client-side<br>
+            <br>
+&nbsp;To test:</span> <br>
+1.Launch the Component's client-side renderer page having label <small><br>
+            <br>
+http://&lt;host:port&gt;</small><host:port><small>/testapp/faces/clientsidelabel/labelLevel.jsp<br>
+            <br>
+            </small>2.Verify the inline help is accurate for the test
+and provides ample information to determine the type of test being
+conducted.
+3.Verify Label's value gets updated client-side <br>
+            <br>
+            </host:port>
+            <ul>
+              <li><host:port>Clicking level1 button should show label
+text in level1 fonts without submitting page to the server</host:port></li>
+              <li><host:port>Level2 button should show up label text in
+normal fonts without submitting page</host:port></li>
+            </ul>
+            <host:port> Testing has occurred across all browsers and
+platforms supported.<br>
+            <br>
+            </host:port></td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">QA must request the
+review. <br>
+Be sure to set review deadlines, <br>
+collect comments, files
+issues, etc.<br>
+            <br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">UI-02<br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Updating required
+indicator client-side</span><br>
+            <br style="font-weight: bold;">
+            <span style="font-weight: bold;">To test:</span><br>
+1.Launch the components client-side renderer page having a required
+field<br>
+            <br>
+            <small>http://&lt;host:port&gt;/testapp/faces/clientsidelabel/requiredIndicator.jsp<br>
+            <br>
+            </small>2.Verify the inline help is accurate for the test
+and provides ample
+information<br>
+3.Verify the required indicator is rendered client-side<br>
+            <ul>
+              <li>Required indicator should appear next to text field
+when required on button is clicked<br>
+              </li>
+              <li>Required indicator should disappear&nbsp; when
+required off&nbsp; is clicked </li>
+            </ul>
+&nbsp; <span style="font-weight: bold; text-decoration: underline;"><br>
+            <br>
+            </span> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">UI-03<br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Updating required image
+with error icon client-side</span><br>
+            <br>
+            <span style="font-weight: bold;">To test:</span><br>
+1.Launch the components client-side renderer page having a required
+indicator<br>
+            <br>
+            <small>http://&lt;host:port&gt;/testapp/faces/clientsidelabel/facetsclientSide.jsp</small><br>
+            <br>
+2.Verify the inline help is accurate for the test and provides ample
+information<br>
+3. Verify that required indicator changes to error icon<br>
+            <ul>
+              <li>Required indicator should appear next to label<br>
+              </li>
+              <li>Required indicator should change to error icon &nbsp;
+when change required button is clicked</li>
+              <li>Error icon is expected to be replaced by required
+indicator when default required indicator button is clicked<br>
+              </li>
+            </ul>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">UI-04<br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;"></span><span style="font-weight: bold;">Asynchrously
+refreshing</span> <span style="font-weight: bold;">label</span><br>
+            <br>
+            <span style="font-weight: bold;">To test:</span><br>
+1.Launch the components client-side renderer page <br>
+            <br>
+            <small>http://&lt;host:port&gt;</small><small>/testapp/faces/clientsidehiddenfield/hiddenField.jsp<br>
+            </small>&nbsp; <br>
+2.Verify the inline help is accurate for the test and provides ample
+information<br>
+3.Verify label gets refreshed<br>
+            <ul>
+              <li>Enter some value in text field click update value</li>
+              <li>Verify that value&nbsp; of hidden files changes to
+text entered <br>
+              </li>
+              <li>Enter some other value in second text box <br>
+              </li>
+              <li>Verify that the text entered refreshes asynchrously
+the value of hidden field</li>
+            </ul>
+            <br>
+            <span style="font-weight: bold; text-decoration: underline;"></span></td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">UI-05<br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Updating label value
+property
+client-side </span><br>
+            <br style="font-weight: bold;">
+            <span style="font-weight: bold;">To test:</span><br>
+1.Launch the components client-side renderer page having a required
+field<br>
+            <br>
+            <small>http://&lt;host:port&gt;</small><small>/testapp/faces/clientsidelabel/label.jsp</small><br>
+            <br>
+2.Verify the inline help is accurate for the test and provides ample
+information<br>
+3.Verify that label's value changes dynamically<br>
+&nbsp;&nbsp;&nbsp; <br>
+            <ul>
+              <li>Enter some value in text field click Change Label
+Text
+button<br>
+              </li>
+              <li>Verify that value&nbsp; label changes to text entered
+              </li>
+            </ul>
+            <span style="font-weight: bold; text-decoration: underline;"></span>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">UI-06<br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Updating image and label
+client-side</span><br>
+            <br>
+            <span style="font-weight: bold;">To test:</span><br>
+1.Launch the components client-side renderer page <br>
+            <br>
+            <small>http://&lt;host:port&gt;</small><small>/testapp/faces/clientsideCheckbox/checkbox.jsp</small><br>
+            <br>
+2.Verify the inline help is accurate for the test and provides ample
+information<br>
+3.Verify the image and label change&nbsp; client-side<br>
+            <ul>
+              <li>The page loads with default image for checkbox server<br>
+              </li>
+              <li>Click New image button the label and image for the
+check box should change appropriately</li>
+              <li>Clicking default image is supposed to load default
+image and label <br>
+check box without page getting submitted</li>
+            </ul>
+            <span style="font-weight: bold; text-decoration: underline;"></span>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">UI-07<br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Updating checkboxes
+client-side</span><br>
+            <br>
+            <span style="font-weight: bold;">To test:</span><br>
+1.Launch the components client-side renderer page <br>
+&nbsp; <small><br>
+            </small> <small>http://&lt;host:port&gt;</small><small>/example/faces/cbrb/clientsideCheckbox.jsp<br>
+            </small><small>http://&lt;host:port&gt;</small><small>/testapp/faces/clientsideCheckbox/checkbox.jsp</small><br>
+            <br>
+2.Verify the inline help is accurate for the test and provides ample
+information<br>
+3.Verify the check box can be enabled/disabled client-side<br>
+&nbsp;&nbsp;&nbsp; <br>
+            <ul>
+              <li>By default the checkbox will be in enabled state</li>
+              <li>The disable button should disable the check box
+without page gettting submitted to the server<br>
+              </li>
+              <li>Enable&nbsp; button is expected to&nbsp; enable&nbsp;
+checkbox status dynamically <br>
+              </li>
+            </ul>
+4.Verify that checkbox can be checked/unchecked client-side<br>
+            <ul>
+              <li>The default state of checkbox is&nbsp; deselected <br>
+              </li>
+              <li>Verify that select button allows to select checkbox
+dynamically</li>
+              <li>The deselect button is expected to make checkbox
+deselcted client-side</li>
+            </ul>
+            <span style="font-weight: bold; text-decoration: underline;"></span><span
+ style="font-weight: bold;"></span><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">UI-08<br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Updating Radiobuttons
+client-side</span><br>
+            <br>
+            <span style="font-weight: bold;">To test:</span><br>
+1.Launch the components client-side renderer page <br>
+            <small><br>
+&nbsp;</small><small>http://&lt;host:port&gt;</small><small>/example/faces/cbrb/clientsideRadioButton.jsp<br>
+&nbsp;</small><small>http://&lt;host:port&gt;</small><small>/testapp/faces/clientsideradiobutton/enableRadio.jsp</small><br>
+            <br>
+2.Verify the inline help is accurate for the test and provides ample
+information<br>
+3.Verify that radio button can be enabled disabled client-side<br>
+&nbsp;&nbsp; <br>
+            <ul>
+              <li>The default state of radio button is enabled<br>
+              </li>
+              <li>Clicking Disable button should change the state of
+radio button to disabled client-side</li>
+              <li>The enable button should bring back radio button to
+enabled state<br>
+              </li>
+            </ul>
+            <br>
+            <span style="font-weight: bold;"></span>4.Verify that radio
+button can be checked/unchecked&nbsp; client-side<br>
+&nbsp; Launch the components client-side renderer page <br>
+            <br>
+&nbsp;<small> http://&lt;host:port&gt;</small><small>/example/faces/cbrb/clientsideRadioButton.jsp<br>
+&nbsp; </small><small>http://&lt;host:port&gt;</small><small>/testapp/faces/clientsideradiobutton/checkRadio.jsp</small>
+            <ul>
+              <li>Default state of radio button is unchecked</li>
+              <li>Verify that clicking check button check radio button</li>
+              <li>Uncheck button should uncheck radio button client-side<br>
+              </li>
+            </ul>
+            <span style="font-weight: bold; text-decoration: underline;"></span><span
+ style="font-weight: bold;"></span> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">UI-09<br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">Updating Alerts client-side </span><br>
+            <br>
+            <span style="font-weight: bold;">To test:</span><br>
+1.Launch the components client-side renderer page <br>
+            <br>
+&nbsp;<small>http://&lt;host:port&gt;</small><small>/testapp/faces/alert/clientsidealerttest.jsp</small>
+            <br>
+            <br>
+2.Verify the inline help is accurate for the test and provides ample
+information<br>
+3.Verify that alert types can be changed client-side<br>
+&nbsp;&nbsp; <br>
+            <ul>
+              <li>Clicking change types in the button should change the
+types of alerts to info and error types<br>
+              </li>
+            </ul>
+4.Verify the summary text for the Alert&nbsp; changes client-side<br>
+            <br>
+            <ul>
+              <li>Enter some value in text field provided under example
+for updating alerts's summary value to the text field value</li>
+              <li>Click Change Summary Text button the value&nbsp;
+summary value of&nbsp; summry text is expected to change to the value
+provided in textfield</li>
+            </ul>
+            <span style="font-weight: bold; text-decoration: underline;"></span><span
+ style="font-weight: bold;"></span> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">UI-10<br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">client-side update
+tests&nbsp; for image</span><br>
+            <br>
+1.Launch the components client-side renderer page <br>
+&nbsp;<small><br>
+            </small><small>http://&lt;host:port&gt;</small><small>/testapp/faces/image/index.jsp<br>
+            </small><small>http://&lt;host:port&gt;</small><small>/example/faces/masthead/Images.jsp
+            <br>
+            <br>
+            </small>2.Verify the inline help is accurate for the test
+and provides ample
+information<br>
+3..Verify the image visibility is toggled client-side<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+            <ul>
+              <li>Click toggle visibility button the image should
+disppear from screen<br>
+              </li>
+              <li>Image&nbsp; should reappear when the same button is
+pressed again&nbsp;</li>
+            </ul>
+4.Verify image border is toggled&nbsp; client-side<br>
+            <ul>
+              <li>Click toggle border button the image should get
+border around it<br>
+              </li>
+              <li>pressing the same button again should take away the
+border<br>
+              </li>
+            </ul>
+5. Verify tooltip is toggled client-side<br>
+            <ul>
+              <li>move the mouse over image an appropiate&nbsp; tooltip
+is shown<br>
+              </li>
+              <li>pressing the toggle tooltip&nbsp; button is expected
+to cahnge the tooltip text for client-side</li>
+              <li>Clicking toggle tooltip button again should show
+original tooltip<br>
+              </li>
+            </ul>
+6.Verify image is changed client-side<br>
+            <ul>
+              <li>Click the toggle source button the image source is
+expected to change and new image specified at new source is loaded
+dynamically </li>
+            </ul>
+            <span style="font-weight: bold; text-decoration: underline;"></span><span
+ style="font-weight: bold;"></span> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-left: 40px;">
+      <div style="text-align: center;"> </div>
+      <br>
+      </div>
+      <h3><a name="3.3"></a>3.3 A11Y&nbsp; Tests</h3>
+&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+The Accordion component needs to comply with accessibility requirements
+set forth in the Solaris Section <a
+ href="http://solaris.eng/accessibility/508_friendly/index.html">508</a>
+Readiness Assessment <br>
+Form (See 1194.22 Web-based intranet and internet
+information and applications).<br>
+      <span style="font-weight: bold;"><br>
+      </span>Accessibility testing will involve utilizing an
+accessibility tool (<a
+ href="http://accessibility.eng/site.topics/ifd-download/index.html">InFocus</a>)
+as well as manual testing.&nbsp; For the InFocus testing, it is best
+to start out by saving the source of the Accordion Examples.&nbsp; This
+will speed up the overall test effort.&nbsp;&nbsp; There is also screen
+reader software
+(home Page Reader, Jaws, etc.) which is optional testing and will only
+be executed if time permits.&nbsp; <br>
+      <br>
+&nbsp;<br>
+      <br>
+      <table
+ style="background-color: rgb(255, 255, 255); text-align: left;"
+ border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case ID</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case Synopsis</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Netscape</a><br>
+            </td>
+            <td style="vertical-align: top;">Solaris<br>
+Mozilla <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Netscape</a><br>
+            </td>
+            <td style="vertical-align: top;">Linux<br>
+Mozilla<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+IE</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top;">MAC Safari <br>
+Client-only <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Comments</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);">A11Y-01<br>
+            </td>
+            <td style="vertical-align: top;">Image client-side renderer
+has been tested using the InFocus
+accessibility tool. <br>
+            <br>
+Each test will have its own test case with steps to review. </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">A11Y-02<br>
+            </td>
+            <td style="vertical-align: top;"> Radio
+Button client-side
+renderer has been tested using the InFocus
+accessibility tool. <span
+ style="font-weight: bold; text-decoration: underline;"><span
+ style="text-decoration: underline;"><span style="font-weight: bold;"><br>
+            </span></span></span> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;"></span>A11Y-03</td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold; text-decoration: underline;"></span>Check
+Box client-side
+renderer has been tested using the InFocus
+accessibility tool. Alert client-side renderer
+has been tested using the InFocus
+accessibility tool. <br>
+            <span style="font-weight: bold; text-decoration: underline;"></span>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;"><br>
+            </span> </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;"></span> <br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;"></span> <br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;"></span> <br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;"></span> <br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;"></span> <br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;"></span> <br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;"></span> <br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;"></span> <br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">A11Y-04 </td>
+            <td style="vertical-align: top;">Alert client-side renderer
+has been tested using the InFocus
+accessibility tool. <br>
+            <span style="font-weight: bold; text-decoration: underline;">
+            </span><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;"></span> <br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;"></span> <br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;"></span> <br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;"></span> <br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;"></span> <br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;"></span> <br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;"></span> <br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;"></span> <br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;"></span> <br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">A11Y-05<br>
+            </td>
+            <td style="vertical-align: top;">Label client-side renderer
+has been tested using the InFocus
+accessibility tool.<span
+ style="font-weight: bold; text-decoration: underline;"><br>
+            <br>
+            </span> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">A11Y-OPT-XX<br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-style: italic;">Optional Screen Reader
+Testing </span><br>
+            <br>
+            <span style="font-weight: bold; text-decoration: underline;">To
+Test:</span><br>
+            <br>
+            <br>
+            <span style="font-weight: bold; text-decoration: underline;">Verification:</span><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h3><a name="3.4"></a>3.4&nbsp; I18N Tests<br>
+      </h3>
+&nbsp;&nbsp;&nbsp; <span style="text-decoration: underline;">Assumptions:</span><br>
+      <div style="margin-left: 40px;">1. L10N has translated both the <span
+ style="font-weight: bold;">component</span> <span
+ style="font-weight: bold;">set</span> and <span
+ style="font-weight: bold;">example.war</span>.&nbsp;
+This delivery has been unjarred and resides locally on a
+mounted/shared&nbsp;&nbsp;&nbsp; drive<br>
+      </div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. The user has deployed the
+example.war and 4.1 component jars to a
+host and to the container as well.<br>
+      <br>
+      <div style="margin-left: 40px;"><span
+ style="text-decoration: underline;">Setup Instructions:</span><br>
+1. deploy the example webapp to your host.<br>
+2. deploy the localized jars to the example app and edit the
+faces-config.xml:<br>
+      </div>
+      <pre> -- on your host as root:<br> cd /usr/local/apps/example/WEB-INF/lib<br> cp &lt;path to unjarred i18n jar/lib/&gt;* .<br><br> -- edit faces-config.xml to include the supported locales:<br> cd /usr/local/apps/example/WEB-INF<br> vi faces-config.xml - add in supported-locale info:<br><br> &lt;application&gt;<br> &lt;locale-config&gt;<br> &lt;default-locale&gt;en&lt;/default-locale&gt;<br> &lt;supported-locale&gt;de&lt;/supported-locale&gt;<br> &lt;supported-locale&gt;fr&lt;/supported-locale&gt;<br> &lt;supported-locale&gt;es&lt;/supported-locale&gt;<br> &lt;supported-locale&gt;it&lt;/supported-locale&gt;<br> &lt;supported-locale&gt;ja&lt;/supported-locale&gt;<br> &lt;supported-locale&gt;ko&lt;/supported-locale&gt;<br> &lt;supported-locale&gt;sv&lt;/supported-locale&gt;<br> &lt;supported-locale&gt;pt_BR&lt;/supported-locale&gt;<br> &lt;supported-locale&gt;zh_CN&lt;/supported-locale&gt;<br> &lt;supported-locale&gt;zh_HK&lt;/supported-locale&gt;<br> &lt;supported-locale&gt;zh_TW&lt;/supported-locale&gt;<br> &lt;/locale-config&gt;<br> &lt;/application&gt;<br><br></pre>
+      <div style="margin-left: 40px;">3. Redeploy the example app in
+AppServer. <br>
+4. Set the Browser locale to one of the languages supported and start
+testing!<br>
+      </div>
+      <br>
+      <br>
+      <table
+ style="background-color: rgb(255, 255, 255); text-align: left;"
+ border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case ID</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case Synopsis</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Netscape</a><br>
+            </td>
+            <td style="vertical-align: top;">Solaris<br>
+Mozilla <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Netscape</a><br>
+            </td>
+            <td style="vertical-align: top;">Linux<br>
+Mozilla<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+IE</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top;">MAC Safari <br>
+Client-only <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Comments</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);">I18N-01<br>
+            </td>
+            <td style="vertical-align: top;"> Multi-byte Languages
+render properly (German (de) and Swedish(sv))<br>
+            <br>
+            <span style="font-weight: bold; text-decoration: underline;">To
+Test:</span><br>
+1. Launch a browser. Change the locale to German (de).<br>
+2. Launch the example app:<br>
+http://host:port/example/faces/index.jsp<br>
+visit the page rendering&nbsp; client-side <br>
+            <br>
+            <span style="font-weight: bold; text-decoration: underline;">Verification:<br>
+            </span>Review all Labels, messages and text, looking for
+proper translation.&nbsp; No invalid characters (??? in particular), no
+text scrolling off page, etc.<br>
+            <br>
+            <span style="font-weight: bold; font-style: italic;">*
+Repeat for the Swedish (switch browser locale and reload the page).</span><span
+ style="font-weight: bold; font-style: italic;"></span> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><a
+ class="header">I18N-02<br>
+            </a> </td>
+            <td style="vertical-align: top;">Latin based languages are
+okay (Italian(it), French(fr), Spanish(es), and Portuguese(pt_BR))<br>
+            <br>
+            <span style="font-weight: bold; text-decoration: underline;">To
+Test:</span><br>
+1. Launch a browser. Change the locale to French (fr). <br>
+2. Launch the example app:<br>
+http://host:port/example/faces/index.jsp<br>
+visit the page rendering&nbsp; client-side <br>
+            <br>
+            <span style="font-weight: bold; text-decoration: underline;">Verification:<br>
+            </span>Review all Labels, messages and text, looking for
+proper translation. No invalid characters (??? in particular), no text
+scrolling off page, etc.<br>
+            <br>
+            <span style="font-weight: bold; font-style: italic;">*
+Repeat for Italian, Spanish and finally Portuguese (switch browser
+locale and reload the page).</span><br>
+            <span style="font-weight: bold; font-style: italic;">*
+Repeat for Italian, Spanish and finally Portuguese (switch browser
+locale and reload the page).</span><br>
+            <span style="font-weight: bold; text-decoration: underline;"></span>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);"><a
+ class="header">I18N-03<br>
+            </a> </td>
+            <td style="vertical-align: top;">Special Characters are
+okay (Chinese (zh_CN, zh_HK or zh_TW), Japanese(ja), and Korean(ko))<br>
+            <br>
+            <span style="font-weight: bold; text-decoration: underline;">To
+Test:</span><br>
+1. Launch a browser. Change the locale to French (fr). <br>
+2. Launch the example app:<br>
+http://host:port/example/faces/index.jsp<br>
+visit the page rendering&nbsp; client-side <br>
+            <br>
+            <span style="font-weight: bold; text-decoration: underline;">Verification:<br>
+            </span>Review all Labels, messages and text, looking for
+proper translation.&nbsp; No invalid characters (??? in particular), no
+text scrolling off page, etc.<br>
+            <br>
+            <span style="font-weight: bold; font-style: italic;">*
+Repeat for Japanese and Korean&nbsp; (switch browser language, reload
+the page).</span><span style="font-weight: bold; font-style: italic;"></span>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <a class="header"> </a> <a class="header"> </a>
+      <h3><a name="3.5"></a>3.5 XHTML Tests</h3>
+      <div style="margin-left: 40px;"><a class="header"><span
+ style="font-weight: bold; text-decoration: underline;">Prep-work:</span></a><br>
+      <a class="header">1. <font size="3">Install the latest
+PWS Components on a server. Launch a browser and visit the Accordion
+tests (found in the example.war) saving each page's source to a file.</font></a><br>
+      </div>
+      <a class="header"><font size="3"> <br>
+      </font></a><a class="header"><br>
+      </a>
+      <table
+ style="background-color: rgb(255, 255, 255); text-align: left;"
+ border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case ID</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Test Case Synopsis</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Solaris<br>
+NS7</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Linux<br>
+NS7</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+IE</a><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Windows<br>
+Firefox</a><br>
+            </td>
+            <td style="vertical-align: top;">MAC Safari <br>
+Client-only <br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><a
+ class="header">Comments</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);">XHTML-01<br>
+            </td>
+            <td style="vertical-align: top;"> <a class="header"><font
+ size="3">Launch a browser and go
+to&nbsp;<b>
+http://crowroad.eng.sun.com/htmlcheck/</b></font> </a>
+            <ul>
+              <li> <font size="3">Towards
+the bottom
+of the page, there is a &#8220;upload files&#8221; link. Click this.</font> </li>
+            </ul>
+            <ul>
+              <li>
+                <p><font size="3">In the
+File field,
+or click browse, locate and select the page source of choice.</font></p>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <p><font size="3">Choose
+&#8220;XHTML 1.0
+Transitional&#8221; for the Document Type or even leave it blank (since you
+made the updates to the header, the tool will automatically select
+XHTML 1.0 Transitional). </font> </p>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <p><font size="3">Do not
+select any
+checkboxes.</font></p>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <p><font size="3">Click
+Validate
+this document. </font> </p>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <p
+ style="margin-bottom: 0cm; font-style: normal; text-decoration: none;"><font
+ color="#000000"><font size="3">Manually
+review the list for any compliance issues. File bugs where appropriate.</font></font></p>
+              </li>
+            </ul>
+            <a class="header"><br>
+            </a> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <a class="header"><br>
+      </a>
+      <h3><a name="3.6"></a>3.6 JSP Tests</h3>
+      <div style="margin-left: 40px;"><a class="header">This section
+identifies the automated BUI tests
+written against the Accordion JSP pages (example.war). </a><br>
+      </div>
+      <a class="header"> <br>
+      </a>
+      <div style="margin-left: 40px;">
+      <table
+ style="background-color: rgb(255, 255, 255); text-align: left;"
+ border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);">Test<br>
+            </td>
+            <td style="vertical-align: top;">&nbsp; API&nbsp; Approval
+and Integration Into Test Harness Complete <br>
+            </td>
+            <td style="vertical-align: top;"><a class="header">Solaris<br>
+Firefox</a></td>
+            <td style="vertical-align: top;"><a class="header">Solaris<br>
+NS7</a></td>
+            <td style="vertical-align: top;"><a class="header">Linux<br>
+Firefox</a></td>
+            <td style="vertical-align: top;"><a class="header">Linux<br>
+Firefox</a></td>
+            <td style="vertical-align: top;"><a class="header">Windows<br>
+IE</a></td>
+            <td style="vertical-align: top;">MAC Safari <br>
+Client-only</td>
+            <td style="vertical-align: top;"><a class="header">Comments</a></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">JSP-01<br>
+            </td>
+            <td style="vertical-align: top;">Label client-side examples
+            <br>
+            <br>
+            <small>http://&lt;host&gt;:&lt;port&gt;/testapp/faces/clientsidelabel/index.jsp</small>.<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">JSP-02<br>
+            </td>
+            <td style="vertical-align: top;">Image client-side examples
+            <br>
+            <br>
+            <small>http://&lt;host&gt;:&lt;port&gt;/testapp/faces/image/index.jsp<br>
+http://&lt;host&gt;:&lt;port&gt;/example/faces/masthead/Images.jsp</small>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">JSP-03<br>
+            </td>
+            <td style="vertical-align: top;">Hidden field client-side
+examples<br>
+            <br>
+            <small>http://&lt;host&gt;:&lt;port&gt;/testapp/faces/clientsidehiddenfield/hiddenField.jsp</small>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">JSP-04</td>
+            <td style="vertical-align: top;">StaticText client-side
+examples<br>
+            <br>
+            <small>http://&lt;host&gt;:&lt;port&gt;/testapp/faces/clientsidestaticText/index.jsp</small></td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">JSP-05</td>
+            <td style="vertical-align: top;">Radiobutton client-side
+examples<br>
+            <br>
+            <small>http://&lt;host&gt;:&lt;port&gt;/testapp/faces/clientsideradiobutton/index.jsp<br>
+http://&lt;host&gt;:&lt;port&gt;/example/faces/cbrb/clientsideRadioButton.jsp</small></td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">JSP-06</td>
+            <td style="vertical-align: top;">Checkbox client-side
+examples<br>
+            <br>
+            <small>http://&lt;host&gt;:&lt;port&gt;/testapp/faces/clientsideCheckbox/checkbox.jsp<br>
+http://&lt;host&gt;:&lt;port&gt;/example/faces/cbrb/clientsideCheckbox.jsp</small></td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">JSP-07</td>
+            <td style="vertical-align: top;">Alert client-side examples
+            <br>
+            <br>
+            <small>http://&lt;host&gt;:&lt;port&gt;/testapp/faces/alert/alertindex.jsp</small></td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <a class="header"><br>
+      </a>
+      <h3><a name="3.7"></a>&nbsp;&nbsp; 3.7 Design Time Tests</h3>
+      <a class="header"><br>
+      </a>
+      <div style="text-align: justify;">
+      <div style="text-align: justify;"> </div>
+      <div style="margin-left: 40px; text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; <a class="header">Design time
+behaviour&nbsp; for&nbsp; components rendering client-side is not
+expected to
+change.The client-side
+rendering </a><a class="header">components<br>
+will&nbsp; continue&nbsp; to use&nbsp; the&nbsp; existing&nbsp;
+html&nbsp;
+renderers&nbsp; present in runtime&nbsp; and&nbsp; designtime&nbsp;
+packages&nbsp; </a><a class="header">for</a><a class="header">
+design&nbsp; time
+behaviour.&nbsp;&nbsp; Hence <br>
+behaviour of&nbsp; components&nbsp; should not&nbsp; get&nbsp;
+affected by adding&nbsp; client-side&nbsp; rendering.</a><a
+ class="header"> The
+existing&nbsp; behaviour of
+component&nbsp; should be <br>
+tested&nbsp; to see nothing breaks after adding&nbsp;
+client-side behaviour, at&nbsp;&nbsp;</a><a class="header">run time
+component should always render
+client-side functionality.</a><br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp; <a class="header"> Any recent build of
+NetBeans 6.0&nbsp; will have
+Woodstock components incorporated.We just&nbsp; need
+to install&nbsp; latest Netbeans6.0<br>
+all the components listed in
+palette. Drag and drop any client-side&nbsp; renderer component ,change
+the
+attributes at designtime, behaviour <br>
+for component wont change,compile
+and run the </a><a class="header">client-side behaviour should be seen
+in the
+browser for respective components.</a><br>
+      <a class="header"> </a></div>
+      </div>
+      <a class="header"><br>
+      </a>
+      <div style="margin-left: 40px;">
+      <table
+ style="background-color: rgb(255, 255, 255); text-align: left;"
+ border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; text-align: center;">Test
+CaseID<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Test
+CaseSynopsis<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Creator
+Build<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Comments<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp; DT-01<br>
+            </td>
+            <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+N/A</td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      </div>
+      <h3><a name="3.8"></a>&nbsp;&nbsp; 3.8 API Tests</h3>
+      <a class="header"> </a>
+      <div style="margin-left: 40px;"><br>
+      </div>
+      <div style="margin-left: 40px;">&nbsp; API level unit tests
+will
+be written by QA, calling each method written
+for the component.&nbsp; These tests include both positive
+and negative<br>
+value arguments.&nbsp; The goal is to look for consistent
+and proper behavior, making sure range limits are met, and correct
+error reporting is<br>
+handed by the class. The API tests will be
+incorporated into the internal test&nbsp; harness and run nightly.
+&nbsp;
+Nightly test results will&nbsp; be&nbsp; posted <br>
+and available for review.&nbsp;
+JCOV, the java
+code coverage tool, will be used to ensure that we meet the code
+coverage goales for milestones<br>
+and GA in particular.&nbsp; <br>
+      </div>
+      <div style="margin-left: 40px;"> <br>
+      <br>
+      <table
+ style="background-color: rgb(255, 255, 255); text-align: left;"
+ border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 255);">Date
+            <br>
+            </td>
+            <td style="vertical-align: top;">&nbsp; API&nbsp; Approval
+and Integration into Test Harness complete <br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; text-align: left;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <br>
+      <h2><a name="4.0"></a> 4.0 Automation Implementation<br>
+      </h2>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; T<span>hese are
+the QA
+milestones for writing automated tests. The dates indicate when the
+corresponding milestones have been m</span>et.<br>
+      <br>
+      <div style="margin-left: 40px;">
+      <table
+ style="background-color: rgb(255, 255, 255); text-align: left;"
+ border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><a class="header">Category</a><br>
+            </td>
+            <td style="vertical-align: top;"><a class="header">Completion
+Date</a><br>
+            </td>
+            <td style="vertical-align: top;"><a class="header">Date
+Accepted</a><br>
+            </td>
+            <td style="vertical-align: top;"><a class="header">Comments</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><a class="header">API Tests</a>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><a class="header">Silk
+Tests</a> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">JavaScriptLint <br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <br>
+      <br>
+      <h2><a name="5.0"></a>5.0 Approval <br>
+      </h2>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>The
+following
+sign-offs
+are required for document acceptance</span>.<br>
+      <br>
+      <div style="margin-left: 40px;">
+      <table
+ style="background-color: rgb(255, 255, 255); text-align: left;"
+ border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"><a class="header">Approver
+Role</a><br>
+            </td>
+            <td style="vertical-align: top;"><a class="header">Approver
+Name</a><br>
+            </td>
+            <td style="vertical-align: top;"><a class="header">Date</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><a class="header">Quality
+Engineer (peer)</a><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><a class="header">Component
+Engineer</a> </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><a class="header">Manager</a>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <br>
+      <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
